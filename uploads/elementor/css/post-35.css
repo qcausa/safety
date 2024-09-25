@@ -3,20 +3,20 @@
 	font-style: normal;
 	font-weight: 900;
 	font-display: auto;
-	src: url('http://officeofsafety.abc/wp-content/uploads/2024/09/RiftTest-Bold-BF63bcd151c6377.ttf') format('truetype');
+	src: url('http://localhost:10018/wp-content/uploads/2024/09/RiftTest-Bold-BF63bcd151c6377.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'Rift';
 	font-style: normal;
 	font-weight: 500;
 	font-display: auto;
-	src: url('http://officeofsafety.abc/wp-content/uploads/2024/09/RiftTest-Medium-BF63bcd153a4e90.ttf') format('truetype');
+	src: url('http://localhost:10018/wp-content/uploads/2024/09/RiftTest-Medium-BF63bcd153a4e90.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'Rift';
 	font-style: normal;
 	font-weight: 400;
 	font-display: auto;
-	src: url('http://officeofsafety.abc/wp-content/uploads/2024/09/RiftTest-Regular-BF63bcd152a8e42.ttf') format('truetype');
+	src: url('http://localhost:10018/wp-content/uploads/2024/09/RiftTest-Regular-BF63bcd152a8e42.ttf') format('truetype');
 }
 /* End Custom Fonts CSS */
