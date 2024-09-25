@@ -1,0 +1,352 @@
+
+# 2024-09-11 02:26:46.754812
++this is a wordpress plugin that uses react to render a custom gutenburg block and render on the frontend. this article https://developer.wordpress.org/news/20 24/03/26/how-to-use-wordpress-react-components-for-plugin-pages/ talks about using a similar method to create an admin setting page using react. What is the best way to structure /src/index.js so that the plugin does not only create a new block, but also adds a settings page
+
+# 2024-09-11 02:28:06.872289
++src/index.js
+
+# 2024-09-11 02:28:52.442198
++/run touch src/settings-page.js
+
+# 2024-09-11 02:28:59.056247
++/run npm run build
+
+# 2024-09-11 02:29:14.136084
++/run wp-scripts build
+
+# 2024-09-11 02:57:43.484852
++src/settings-page.js contains the react js for my settings page. this plugin project also uses tailwind. How can i have an underline on the active tab and to make the font bold.
+
+# 2024-09-11 03:05:52.236434
++the change you made was in the tab content, not the tab style itself. read https://developer.wordpress.org/block-editor/reference-guides/components/tab-panel/ for documentation the the wordpress TabPanel
+
+# 2024-09-11 03:20:23.970682
++the tailwind style is not being called in the admin. It has something to do with the currently implementation where the plugin was just registering the block and and the in the block render at build/render.php outputs <div class="tailwind-update-me"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div> and then in src/frontend.js there is const divsToUpdate = document.querySelectorAll(".tailwind-update-me");
++
++divsToUpdate.forEach((div) => {
++  const data = JSON.parse(div.querySelector("pre").innerText);
++  const root = ReactDOM.createRoot(div);
++  root.render(<OurComponent {...data} />);
++  div.classList.remove("tailwind-update-me");
++});
+
+# 2024-09-11 03:22:19.355582
++/run npm run build
+
+# 2024-09-11 03:22:37.403667
++/revert
+
+# 2024-09-11 03:22:40.503595
++/undo
+
+# 2024-09-11 03:27:12.092914
++i am still not getting tailwind styles to override the @wordpress/components styles. The class is being applied to the actiove tab but the tailwind stile are not changing the styler
+
+# 2024-09-11 03:29:24.417947
++/undo
+
+# 2024-09-11 03:30:37.027898
++i do not want to have to cusotm define styles in a .css file to override @wordpress/component classes. I want a way on my custom setting page to have the defauly wordpress styles and the ability to override with tailwind classes if desired
+
+# 2024-09-11 15:43:04.361458
++on the settings page, now i want to define 3 tabs General Settings, Notifications, API and render different TabContent for each
+
+# 2024-09-11 15:47:21.042268
++{ per
+
+# 2024-09-11 15:47:21.886497
++https://developer.wordpress.org/block-editor/reference-guides/components/tab-panel/
+
+# 2024-09-11 15:47:33.482877
++i think we need to use the children function:
+
+# 2024-09-11 15:47:44.407723
++children
++A function which renders the tabviews given the selected tab. The function is passed the active tab object as an argument as defined the tabs prop.
++
++Type: (Object) => Element
++Required: Yes
+
+# 2024-09-11 15:47:51.022897
++}
+
+# 2024-09-11 16:27:56.467462
++in my settings page, i want to save settings button to be at the top right in alignment with the tabs
+
+# 2024-09-11 16:30:45.208216
++now in my index.php i want 'Custom React Framework' menu item to be its own wordpress admin menu item, with Orders as a submenu
+
+# 2024-09-11 16:31:19.761519
++/add index.php
+
+# 2024-09-11 16:31:28.001936
++its added
+
+# 2024-09-11 16:33:12.158112
++wih that change it is no longer loading my settings page at http://localhost:3000/wp-admin/admin.php?page=unadorned-announcement-bar, so i need to change unadorned_announcement_bar_settings_page_enqueue_style_script()?
+
+# 2024-09-11 18:00:59.594581
++in my settings page i am now importing <DataTableDemo />. that component is in file app/public/wp-content/plugins/brads-boilerplate-block-plugin-tailwind/src/components/table/order-table.tsx. at the top of that file i import { Button } from "@/components/ui/button" but i am getting an error Cannot find module '@/components/ui/button'. i have a app/public/wp-content/plugins/brads-boilerplate-block-plugin-tailwind/tsconfig.json with "paths" set. Why is it not picking up on the @ in the order-table file? give me an explanation and dont change anything.
+
+# 2024-09-11 18:01:54.930627
++in app/public/wp-content/plugins/brads-boilerplate-block-plugin-tailwind/src/components/table/order-table.tsx it is not picking up my @ in import { Button } from "@/components/ui/button";
+
+# 2024-09-11 18:02:09.856285
++in my settings page i am now importing <DataTableDemo />. that component is in file app/public/wp-content/plugins/brads-boilerplate-block-plugin-tailwind/src/components/table/order-table.tsx. at the top of that file i import { Button } from "@/components/ui/button" but i am getting an error Cannot find module '@/components/ui/button'. i have a app/public/wp-content/plugins/brads-boilerplate-block-plugin-tailwind/tsconfig.json with "paths" set. Why is it not picking up on the @ in the order-table file? give me an explanation and dont change anything.
+
+# 2024-09-11 18:03:59.794389
++i am using wp-scripts, how would i also include the alias at build time
+
+# 2024-09-11 18:15:19.282983
++now i want to render <DataTableDemo /> on my orders sub admin menu
+
+# 2024-09-11 18:23:03.164787
++in index.php, i want to replace 'Loading...' with an actual spinner. What is the best way to do this. Do not make any changes
+
+# 2024-09-11 18:23:20.497185
++make the changes
+
+# 2024-09-11 18:54:55.525971
++the wp-scripts webpack takes certain packages like @wordpress/api-fetch and maps them to the correct package. However i am getting typescript errors when developing. How can i ignore @wordpress packages like import apiFetch from "@wordpress/api-fetch";
+
+# 2024-09-11 18:56:02.260387
++/undo
+
+# 2024-09-12 12:23:58.936527
++on settings-page i want to add &tab={tab.name} to the url when clicking on a tab, so that if I refresh the page it will go back to that same tab
+
+# 2024-09-12 12:25:08.977744
++on settings-page i want to add &tab={tab.name} to the url when clicking on a tab, so that if I refresh the page it will go back to that same tab. the settings page is at src/settings-page.tsx
+
+# 2024-09-12 12:26:42.215314
++when clicking a tab it changes the url to http://localhost:3000/wp-admin/admin.php?tab=general and not http://localhost:3000/wp-admin/admin.php?page=unadorned-announcement-bar&tab=general
+
+# 2024-09-12 12:27:39.100505
++ok now when i click the notifications tab and refresh, it defaults back to the general tab
+
+# 2024-09-12 12:29:24.407384
++it is still not working as expected. WHen i am on the noticiations tab and refresh, it goes back to the default tab. I think we need to use TabPanel prop initialTabName The name of the tab to be selected upon mounting of component. If this prop is not set, the first tab will be selected by default.
++
++Type: String
++Required: No
++Default: none
+
+# 2024-09-12 12:42:15.833418
++it doesnt seem like the initialTabName can be a function, only a string of the tab name to make active on initial load. I need to use React.useEffect to get the active tab from the url, if available, and use that to set the initialTabName as a string before the TabPanel loads
+
+# 2024-09-12 12:59:04.478147
++on settings-page in NotificationsContent i need to dynamically populate the SelectItems with all wordpress pages
+
+# 2024-09-12 13:03:20.703344
++{
+
+# 2024-09-12 13:03:41.541508
++now i want to change the Select component to shadcn Combobox component
+
+# 2024-09-12 13:03:46.769840
++"use client"
++
++import * as React from "react"
++import { Check, ChevronsUpDown } from "lucide-react"
++
++import { cn } from "@/lib/utils"
++import { Button } from "@/components/ui/button"
++import {
++  Command,
++  CommandEmpty,
++  CommandGroup,
++  CommandInput,
++  CommandItem,
++  CommandList,
++} from "@/components/ui/command"
++import {
++  Popover,
++  PopoverContent,
++  PopoverTrigger,
++} from "@/components/ui/popover"
++
++const frameworks = [
++  {
++    value: "next.js",
++    label: "Next.js",
++  },
++  {
++    value: "sveltekit",
++    label: "SvelteKit",
++  },
++  {
++    value: "nuxt.js",
++    label: "Nuxt.js",
++  },
++  {
++    value: "remix",
++    label: "Remix",
++  },
++  {
++    value: "astro",
++    label: "Astro",
++  },
++]
++
++export function ComboboxDemo() {
++  const [open, setOpen] = React.useState(false)
++  const [value, setValue] = React.useState("")
++
++  return (
++    <Popover open={open} onOpenChange={setOpen}>
++      <PopoverTrigger asChild>
++        <Button
++          variant="outline"
++          role="combobox"
++          aria-expanded={open}
++          className="w-[200px] justify-between"
++        >
++          {value
++            ? frameworks.find((framework) => framework.value === value)?.label
++            : "Select framework..."}
++          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
++        </Button>
++      </PopoverTrigger>
++      <PopoverContent className="w-[200px] p-0">
++        <Command>
++          <CommandInput placeholder="Search framework..." />
++          <CommandList>
++            <CommandEmpty>No framework found.</CommandEmpty>
++            <CommandGroup>
++              {frameworks.map((framework) => (
++                <CommandItem
++                  key={framework.value}
++                  value={framework.value}
++                  onSelect={(currentValue) => {
++                    setValue(currentValue === value ? "" : currentValue)
++                    setOpen(false)
++                  }}
++                >
++                  <Check
++                    className={cn(
++                      "mr-2 h-4 w-4",
++                      value === framework.value ? "opacity-100" : "opacity-0"
++                    )}
++                  />
++                  {framework.label}
++                </CommandItem>
++              ))}
++            </CommandGroup>
++          </CommandList>
++        </Command>
++      </PopoverContent>
++    </Popover>
++  )
++}
++}
+
+# 2024-09-12 13:06:59.284913
++now in CommandEmpty instead of displaying no page found I want to be able to have a button called 'Create Page' that creates a page based off the text value in the search box, and then sets that page id as the value
+
+# 2024-09-12 13:09:05.537030
++the functionality works as far as being able to create a new page, but that value is not being set in the combobox.
+
+# 2024-09-12 13:22:45.299310
++it is still not selected in the combobox after creating
+
+# 2024-09-12 13:23:42.692423
++{logs show:
+
+# 2024-09-12 13:23:48.612321
++New page created: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}author: 1class_list: (5) ['post-22', 'page', 'type-page', 'status-publish', 'hentry']comment_status: "closed"content: {raw: '', rendered: '', protected: false, block_version: 0}date: "2024-09-12T17:23:14"date_gmt: "2024-09-12T17:23:14"excerpt: {raw: '', rendered: '', protected: false}featured_media: 0generated_slug: "test3"guid: {rendered: 'http://localhost:10003/test3/', raw: 'http://localhost:10003/test3/'}id: 22link: "http://localhost:10003/test3/"menu_order: 0meta: {page_structure: 'default', page_banner: 'inherit', page_container_source: 'inherit', page_container: 'container', hopeui_php_page_bg_color: 'false', …}modified: "2024-09-12T17:23:14"modified_gmt: "2024-09-12T17:23:14"parent: 0password: ""permalink_template: "http://localhost:10003/%pagename%/"ping_status: "closed"slug: "test3"status: "publish"template: ""title: {raw: 'test3', rendered: 'test3'}type: "page"_links: {self: Array(1), collection: Array(1), about: Array(1), author: Array(1), replies: Array(1), …}[[Prototype]]: Object
++settings-page.tsx:126 Updated pages: (11) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {id: 21, date: '2024-09-12T17:16:10', date_gmt: '2024-09-12T17:16:10', guid: {…}, modified: '2024-09-12T17:16:10', …}1: {id: 20, date: '2024-09-12T17:14:33', date_gmt: '2024-09-12T17:14:33', guid: {…}, modified: '2024-09-12T17:14:33', …}2: {id: 19, date: '2024-09-12T17:13:36', date_gmt: '2024-09-12T17:13:36', guid: {…}, modified: '2024-09-12T17:13:36', …}3: {id: 18, date: '2024-09-12T17:09:47', date_gmt: '2024-09-12T17:09:47', guid: {…}, modified: '2024-09-12T17:09:47', …}4: {id: 17, date: '2024-09-12T17:09:25', date_gmt: '2024-09-12T17:09:25', guid: {…}, modified: '2024-09-12T17:09:25', …}5: {id: 16, date: '2024-09-12T17:07:34', date_gmt: '2024-09-12T17:07:34', guid: {…}, modified: '2024-09-12T17:07:34', …}6: {id: 13, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}7: {id: 12, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}8: {id: 11, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}9: {id: 10, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}10: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}length: 11[[Prototype]]: Array(0)
++settings-page.tsx:135 Updated selected values: {Feature 1: '22'}
+
+# 2024-09-12 13:24:04.777180
++{logs show:
+
+# 2024-09-12 13:24:06.314024
++New page created: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}author: 1class_list: (5) ['post-22', 'page', 'type-page', 'status-publish', 'hentry']comment_status: "closed"content: {raw: '', rendered: '', protected: false, block_version: 0}date: "2024-09-12T17:23:14"date_gmt: "2024-09-12T17:23:14"excerpt: {raw: '', rendered: '', protected: false}featured_media: 0generated_slug: "test3"guid: {rendered: 'http://localhost:10003/test3/', raw: 'http://localhost:10003/test3/'}id: 22link: "http://localhost:10003/test3/"menu_order: 0meta: {page_structure: 'default', page_banner: 'inherit', page_container_source: 'inherit', page_container: 'container', hopeui_php_page_bg_color: 'false', …}modified: "2024-09-12T17:23:14"modified_gmt: "2024-09-12T17:23:14"parent: 0password: ""permalink_template: "http://localhost:10003/%pagename%/"ping_status: "closed"slug: "test3"status: "publish"template: ""title: {raw: 'test3', rendered: 'test3'}type: "page"_links: {self: Array(1), collection: Array(1), about: Array(1), author: Array(1), replies: Array(1), …}[[Prototype]]: Object
++settings-page.tsx:126 Updated pages: (11) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {id: 21, date: '2024-09-12T17:16:10', date_gmt: '2024-09-12T17:16:10', guid: {…}, modified: '2024-09-12T17:16:10', …}1: {id: 20, date: '2024-09-12T17:14:33', date_gmt: '2024-09-12T17:14:33', guid: {…}, modified: '2024-09-12T17:14:33', …}2: {id: 19, date: '2024-09-12T17:13:36', date_gmt: '2024-09-12T17:13:36', guid: {…}, modified: '2024-09-12T17:13:36', …}3: {id: 18, date: '2024-09-12T17:09:47', date_gmt: '2024-09-12T17:09:47', guid: {…}, modified: '2024-09-12T17:09:47', …}4: {id: 17, date: '2024-09-12T17:09:25', date_gmt: '2024-09-12T17:09:25', guid: {…}, modified: '2024-09-12T17:09:25', …}5: {id: 16, date: '2024-09-12T17:07:34', date_gmt: '2024-09-12T17:07:34', guid: {…}, modified: '2024-09-12T17:07:34', …}6: {id: 13, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}7: {id: 12, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}8: {id: 11, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}9: {id: 10, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}10: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}length: 11[[Prototype]]: Array(0)
++settings-page.tsx:135 Updated selected values: {Feature 1: '22'}
+
+# 2024-09-12 13:24:10.345532
++{
+
+# 2024-09-12 13:24:12.898064
++logs show:
+
+# 2024-09-12 13:24:16.378869
++New page created: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}author: 1class_list: (5) ['post-22', 'page', 'type-page', 'status-publish', 'hentry']comment_status: "closed"content: {raw: '', rendered: '', protected: false, block_version: 0}date: "2024-09-12T17:23:14"date_gmt: "2024-09-12T17:23:14"excerpt: {raw: '', rendered: '', protected: false}featured_media: 0generated_slug: "test3"guid: {rendered: 'http://localhost:10003/test3/', raw: 'http://localhost:10003/test3/'}id: 22link: "http://localhost:10003/test3/"menu_order: 0meta: {page_structure: 'default', page_banner: 'inherit', page_container_source: 'inherit', page_container: 'container', hopeui_php_page_bg_color: 'false', …}modified: "2024-09-12T17:23:14"modified_gmt: "2024-09-12T17:23:14"parent: 0password: ""permalink_template: "http://localhost:10003/%pagename%/"ping_status: "closed"slug: "test3"status: "publish"template: ""title: {raw: 'test3', rendered: 'test3'}type: "page"_links: {self: Array(1), collection: Array(1), about: Array(1), author: Array(1), replies: Array(1), …}[[Prototype]]: Object
++settings-page.tsx:126 Updated pages: (11) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {id: 21, date: '2024-09-12T17:16:10', date_gmt: '2024-09-12T17:16:10', guid: {…}, modified: '2024-09-12T17:16:10', …}1: {id: 20, date: '2024-09-12T17:14:33', date_gmt: '2024-09-12T17:14:33', guid: {…}, modified: '2024-09-12T17:14:33', …}2: {id: 19, date: '2024-09-12T17:13:36', date_gmt: '2024-09-12T17:13:36', guid: {…}, modified: '2024-09-12T17:13:36', …}3: {id: 18, date: '2024-09-12T17:09:47', date_gmt: '2024-09-12T17:09:47', guid: {…}, modified: '2024-09-12T17:09:47', …}4: {id: 17, date: '2024-09-12T17:09:25', date_gmt: '2024-09-12T17:09:25', guid: {…}, modified: '2024-09-12T17:09:25', …}5: {id: 16, date: '2024-09-12T17:07:34', date_gmt: '2024-09-12T17:07:34', guid: {…}, modified: '2024-09-12T17:07:34', …}6: {id: 13, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}7: {id: 12, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}8: {id: 11, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}9: {id: 10, date: '2024-09-12T16:01:02', date_gmt: '2024-09-12T16:01:02', guid: {…}, modified: '2024-09-12T16:01:02', …}10: {id: 22, date: '2024-09-12T17:23:14', date_gmt: '2024-09-12T17:23:14', guid: {…}, modified: '2024-09-12T17:23:14', …}length: 11[[Prototype]]: Array(0)
++settings-page.tsx:135 Updated selected values: {Feature 1: '22'
+
+# 2024-09-12 13:24:28.568732
++but it is not selecting the new page in the combobox
+
+# 2024-09-12 13:24:30.179206
++}
+
+# 2024-09-12 13:52:13.481209
++on settings-page, the popover search is not working. There is a page called testing and if i search 'testing' it says 'No Page Found'
+
+# 2024-09-12 15:47:51.420401
++in settings-page I am sucessfully setting a wordpress page_id for Feature 1. I now want to add logic to the plugin to load a react component on the frontend of whatever page is stored in settings
+
+# 2024-09-12 15:53:46.369640
++ok the component is loading on the frontend of that page, but it is below the footer. I want it placed between the header and the footer
+
+# 2024-09-12 16:50:12.642434
++in src/inventory/InventoryComponent.tsx i want to render a shadcn select and populate the options with available woocommerce products
+
+# 2024-09-12 16:51:44.872780
++/run npm install
+
+# 2024-09-12 16:52:00.402264
++/run npm run build
+
+# 2024-09-12 16:55:38.204781
++Error fetching products: ReferenceError: mypluginData is not defined
+
+# 2024-09-12 17:18:50.237497
++on my frontend react, i am currently rendering ComboboxForm in the div with id unadorned-announcement-bar-frontend-root. unadorned-announcement-bar-frontend-root is placed in the middle of the page on index.php. Now i need to add <Toaster /> to the page, but I want it to be at the very bottom so that toast notificaitons are at the bottom right of the page and not in the middle of the page content
+
+# 2024-09-13 15:35:10.133937
++{
+
+# 2024-09-13 15:38:43.697354
++in src/inventory/InventoryPage.tsx I am loading a component that displays products and there is an action button to add to order. Then under Your Order} i want to render a new component that displays the items that have been added to the order, with a button to submit the order. Just work on the functionality for passing the state between the 2 components and rendering "added to order" items
+
+# 2024-09-13 15:38:46.410922
++}
+
+# 2024-09-13 15:39:16.622033
++/add src/inventory/InventoryPage.tsx
+
+# 2024-09-13 15:39:20.540101
++its added
+
+# 2024-09-13 15:40:48.967152
++/add src/products/products-table.tsx
+
+# 2024-09-13 15:41:18.044853
++now in src/products/products-table.tsx i need to actually use addToOrder on the action button
+
+# 2024-09-13 15:43:17.490247
++now in OrderComponent i want to use a shadcn data table just like the ProductsTable
+
+# 2024-09-13 15:45:22.138296
++now make the quantity field on OrderComponent use a shadcn Input component that only allows for a number to be entered
+
+# 2024-09-13 15:48:01.076111
++now on the quantity input i want to have those little up/down icons to adjust the quantity
+
+# 2024-09-13 18:23:22.528515
++when an item is added to the order, add a shadcn toast notiification
+
+# 2024-09-13 18:31:52.792542
++ok now on the ordercomponent i want to add a action column similar to products component that allows me to remove from the order
+
+# 2024-09-13 18:38:14.830472
++on the product table for the image when you click on it it should bring up a modal with the full size image. use a shadcn Dialog component https://ui.shadcn.com/docs/components/dialog
+
+# 2024-09-13 18:40:40.035603
++everything works, but the dialog overlay that covers the screen behind the modal is not covering the header links
+
+# 2024-09-13 18:41:55.115606
++everything works, but the dialog overlay that covers the screen behind the modal is not covering the header links. make changes to the called Dialog component in product-table and not the primitive
