@@ -126,12 +126,12 @@ export const columns: ColumnDef<Product>[] = (
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="outline"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="px-0"
+          className="tw-px-0 tw-text-inherit"
         >
           Categories
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="tw-ml-2 tw-h-4 tw-w-4" />
         </Button>
       );
     },
@@ -199,8 +199,8 @@ export const columns: ColumnDef<Product>[] = (
 
       return (
         <Button
-          className="p-2 h-auto"
-          variant={"outline"}
+          className="tw-p-2 tw-h-auto tw-text-inherit"
+          variant="outline"
           onClick={() =>
             onAddToOrder({
               id: product.id,
@@ -312,8 +312,8 @@ export default function ProductsTable({
   }
 
   return (
-    <div className={cn("w-full my-unique-plugin-wrapper-class", className)}>
-      <div className="flex items-center py-2">
+    <div className={cn("tw-w-full my-unique-plugin-wrapper-class", className)}>
+      <div className="tw-flex tw-items-center tw-py-2">
         <Input
           placeholder="Filter all columns..."
           value={globalFilter ?? ""}
@@ -322,8 +322,8 @@ export default function ProductsTable({
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+            <Button variant="outline" className="tw-ml-auto tw-text-inherit">
+              Columns <ChevronDown className="tw-ml-2 tw-h-4 tw-w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -334,7 +334,7 @@ export default function ProductsTable({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className="tw-capitalize"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
@@ -347,8 +347,8 @@ export default function ProductsTable({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md">
-        <Table className="[&_*]:border-0">
+      <div className="tw-rounded-md">
+        <Table className="[&_*]:tw-border-0">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -373,12 +373,12 @@ export default function ProductsTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="text-left"
+                  className="tw-text-left"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="p-2 px-4 text-left text-xs"
+                      className="tw-p-2 tw-px-4 tw-text-left tw-text-xs"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -392,7 +392,7 @@ export default function ProductsTable({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="tw-h-24 tw-text-center"
                 >
                   No results.
                 </TableCell>
@@ -401,12 +401,12 @@ export default function ProductsTable({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+      <div className="tw-flex tw-items-center tw-justify-end tw-space-x-2 tw-py-4">
+        <div className="tw-flex-1 tw-text-sm tw-text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
-        <div className="space-x-2">
+        <div className="tw-space-x-2">
           <Button
             variant="outline"
             size="sm"

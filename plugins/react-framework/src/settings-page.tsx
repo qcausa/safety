@@ -172,18 +172,18 @@ const SettingsPage = () => {
 
     return (
       <div>
-        <Table className="w-[400px]">
+        <Table className="tw-w-[400px]">
           <TableCaption>A list of the plugin features.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Feature</TableHead>
+              <TableHead className="tw-w-[100px]">Feature</TableHead>
               <TableHead>Wordpress Page</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {features.map((feature) => (
               <TableRow key={feature.name}>
-                <TableCell className="font-medium">{feature.name}</TableCell>
+                <TableCell className="tw-font-medium">{feature.name}</TableCell>
                 <TableCell>
                   <Popover
                     open={openComboboxes[feature.name]}
@@ -196,16 +196,16 @@ const SettingsPage = () => {
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
-                        className="w-[200px] justify-between"
+                        className="tw-w-[200px] tw-justify-between"
                       >
                         {value
                           ? pages.find((page) => page.id.toString() === value)
                               ?.title.rendered
                           : "Select page..."}
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        <ChevronsUpDown className="tw-ml-2 tw-h-4 tw-w-4 tw-shrink-0 tw-opacity-50" />
                       </ShadcnButton>
                     </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
+                    <PopoverContent className="tw-w-[200px] tw-p-0">
                       <Command>
                         <CommandInput placeholder="Search pages..." />
                         <CommandList>
@@ -224,14 +224,14 @@ const SettingsPage = () => {
                               >
                                 <Check
                                   className={cn(
-                                    "mr-2 h-4 w-4",
+                                    "tw-mr-2 tw-h-4 tw-w-4",
                                     value === page.id.toString()
-                                      ? "opacity-100"
-                                      : "opacity-0"
+                                      ? "tw-opacity-100"
+                                      : "tw-opacity-0"
                                   )}
                                 />
                                 {page.title.rendered}
-                                <span className="text-[.6rem]">
+                                <span className="tw-text-[.6rem]">
                                   ( id: <strong>{page.id}</strong> )
                                 </span>
                               </CommandItem>
@@ -253,7 +253,7 @@ const SettingsPage = () => {
   const renderTabContent = (tab: { name: any }) => {
     switch (tab.name) {
       case "general":
-        return <DataTableDemo />;
+        return <DataTableDemo className="tw-bg-white tw-p-3 tw-shadow-md" />;
       case "notifications":
         return <NotificationsContent />;
       case "api":
@@ -264,15 +264,15 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="brads-boilerplate-settings">
+    <div className="brads-boilerplate-settings my-unique-plugin-wrapper-class">
       <h1>{__("React Admin Area", "brads-boilerplate")}</h1>
-      <div className="flex justify-between items-start mb-4">
+      <div className="tw-flex tw-justify-between tw-items-start tw-mb-4">
         {initialTab &&
           (console.log("initialTab", initialTab),
           (
             <TabPanel
-              className="my-tab-panel text-black flex-grow"
-              activeClass="active-tab bg-slate-300 !text-black"
+              className="my-tab-panel tw-text-black tw-flex-grow"
+              activeClass="active-tab tw-bg-slate-300 !tw-text-black"
               tabs={[
                 {
                   name: "general",
@@ -296,7 +296,7 @@ const SettingsPage = () => {
               {renderTabContent}
             </TabPanel>
           ))}
-        <WordpressButton isPrimary onClick={handleSave} className="ml-4">
+        <WordpressButton isPrimary onClick={handleSave} className="tw-ml-4">
           {__("Save All Settings", "brads-boilerplate")}
         </WordpressButton>
         <ShadcnButton>Save</ShadcnButton>
