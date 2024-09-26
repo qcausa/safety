@@ -2,7 +2,8 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  important: true, // Add !important to all Tailwind classes
+  prefix: "tw-",
+  // important: true, // Add !important to all Tailwind classes
   darkMode: ["class"],
   content: ["./src/**/*.php", "./src/**/*.{ts,tsx,js}"],
   theme: {

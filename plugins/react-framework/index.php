@@ -206,7 +206,7 @@ function unadorned_announcement_bar_frontend_container($content) {
 
     if (is_page($feature_1_page_id)) {
         $component = '<div id="unadorned-announcement-bar-frontend-root"></div>';
-        // $toaster = '<div id="unadorned-announcement-bar-toaster"></div>';
+        $toaster = '<div id="unadorned-announcement-bar-toaster"></div>';
         return $component . $content;
     }
 

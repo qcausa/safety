@@ -58,15 +58,15 @@ function InventoryPage() {
 
   return (
     <div className="my-unique-plugin-wrapper-class">
-      <span>InventoryPage</span>
-      <div className="flex flex-col md:flex-row  gap-5">
-        <div className="flex flex-col w-full md:w-2/3 rounded-sm gap-5">
+      <span className="tw-bg-blue-100">InventoryPage</span>
+      <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-5">
+        <div className="tw-flex tw-flex-col tw-w-full md:tw-w-2/3 tw-rounded-sm tw-gap-5">
           <ProductsTable
-            className="bg-white p-3 shadow-md"
+            className="tw-bg-white tw-p-3 tw-shadow-md"
             onAddToOrder={addToOrder}
           />
         </div>
-        <div className="w-full md:w-1/3 shadow-md p-3 bg-white rounded-sm">
+        <div className="tw-w-full md:tw-w-1/3 tw-shadow-md tw-p-3 tw-bg-white tw-rounded-sm">
           <OrderComponent
             items={orderItems}
             onSubmitOrder={submitOrder}

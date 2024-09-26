@@ -104,9 +104,9 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "name",
-    header: () => <div className="text-left w-full">Name</div>,
+    header: () => <div className="tw-text-left tw-w-full">Name</div>,
     cell: ({ row }) => (
-      <div className="capitalize flex-1">{row.getValue("name")}</div>
+      <div className="tw-capitalize tw-flex-1">{row.getValue("name")}</div>
     ),
   },
   {
@@ -118,15 +118,17 @@ export const columns: ColumnDef<Payment>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="tw-ml-2 tw-h-4 tw-w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => (
+      <div className="tw-lowercase">{row.getValue("email")}</div>
+    ),
   },
   {
     accessorKey: "user_registered",
-    header: () => <div className="text-right">Registration Date</div>,
+    header: () => <div className="tw-text-right">Registration Date</div>,
     cell: ({ row }) => {
       const date = new Date(row.getValue("user_registered"));
       console.log("amount:", date);
@@ -141,7 +143,7 @@ export const columns: ColumnDef<Payment>[] = [
         hour12: true, // 12-hour format with AM/PM
       }).format(date);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="tw-text-right tw-font-medium">{formatted}</div>;
     },
   },
   {
@@ -153,9 +155,9 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0 text-right">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
+            <Button variant="ghost" className="tw-h-8 tw-w-12 tw-p-0">
+              <span className="tw-sr-only">Open menu</span>
+              <MoreHorizontal className="" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -235,20 +237,20 @@ export default function DataTableDemo({ className }: { className?: string }) {
   }
 
   return (
-    <div className={cn("w-full my-unique-plugin-wrapper-class", className)}>
-      <div className="flex items-center py-2">
+    <div className={cn("tw-w-full my-unique-plugin-wrapper-class", className)}>
+      <div className="tw-flex tw-items-center tw-py-2">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="tw-max-w-sm"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+            <Button variant="outline" className="tw-ml-auto">
+              Columns <ChevronDown className="tw-ml-2 tw-h-4 tw-w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
