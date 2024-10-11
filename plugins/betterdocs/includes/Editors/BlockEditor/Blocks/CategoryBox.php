@@ -43,8 +43,8 @@ class CategoryBox extends Block {
             'titleTag'          => 'h2',
             'showCount'         => true,
             'prefix'            => '',
-            'suffix'            => __( 'articles', 'betterdocs' ),
-            'suffixSingular'    => __( 'article', 'betterdocs' ),
+            'suffix'            => __( 'Docs', 'betterdocs' ),
+            'suffixSingular'    => __( 'Doc', 'betterdocs' ),
             'colRange'          => 3,
             'TABcolRange'       => 2,
             'MOBcolRange'       => 1

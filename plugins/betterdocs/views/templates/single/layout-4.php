@@ -38,6 +38,7 @@
             <div class="betterdocs-content-inner-area">
                 <?php
                     while ( have_posts() ): the_post();
+                        $view_object->get( 'templates/parts/breadcrumbs' );
                         /**
                          * Headers
                          */

@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use WPDeveloper\BetterDocs\Editors\Elementor\BaseWidget;
+use Elementor\Group_Control_Border as Group_Control_Border;
 
 class ReadingTime extends BaseWidget {
 
@@ -131,6 +132,38 @@ class ReadingTime extends BaseWidget {
             ]
         );
 
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'reading_box_border',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .reading-time'
+            ]
+        );
+
+        $this->add_control(
+            'reading_box_border_radius',
+            [
+                'label'      => __( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ],
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .reading-time' => 'border-radius: {{SIZE}}px;'
+                ]
+            ]
+        );
+
         $this->add_responsive_control(
             'reading_padding',
             [
@@ -151,6 +184,40 @@ class ReadingTime extends BaseWidget {
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
                     '{{WRAPPER}} .reading-time' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'clock_icon_width',
+            [
+                'label'      => __( 'Clock Icon Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ],
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .reading-time p svg' => 'width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'clock_icon_color',
+            [
+                'label'     => esc_html__( 'Clock Icon Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .reading-time p svg path' => 'fill: {{VALUE}};'
                 ]
             ]
         );

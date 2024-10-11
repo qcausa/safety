@@ -101,7 +101,7 @@ class DocsArchive extends Archive {
         $config = parent::get_remote_library_config();
 
         $config['category'] = 'Docs Archive';
-
+        $config['urls']['thumbnail'] = plugins_url( '/assets/admin/images/customizer/customizer-preview.png', __FILE__ );
         return $config;
     }
 }

@@ -31,7 +31,7 @@ class ArchiveList extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome'];
+        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome', 'betterdocs-category-archive-doc-list'];
     }
 
     public function get_keywords() {
@@ -47,6 +47,9 @@ class ArchiveList extends BaseWidget {
         $this->container_wrapper_section();
         $this->list_settings();
         $this->subcat_list_settings();
+
+        $this->container_wrapper_section_layout_2();
+        $this->list_settings_layout_2();
     }
 
     public function section_content() {
@@ -54,6 +57,20 @@ class ArchiveList extends BaseWidget {
             'section_title',
             [
                 'label' => __( 'Controls', 'betterdocs' )
+            ]
+        );
+
+        $this->add_control(
+            'section_betterdocs_archive_list_layout',
+            [
+                'label'       => esc_html__( 'Select layout', 'betterdocs' ),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'layout-1',
+                'label_block' => false,
+                'options'     => [
+                    'layout-1' => esc_html__( 'Layout 1', 'betterdocs' ),
+                    'layout-2' => esc_html__( 'Layout 2', 'betterdocs' )
+                ]
             ]
         );
 
@@ -120,7 +137,10 @@ class ArchiveList extends BaseWidget {
             'archive_list_container_section',
             [
                 'label' => __( 'Container Section', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'section_betterdocs_archive_list_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -151,6 +171,45 @@ class ArchiveList extends BaseWidget {
         $this->end_controls_section();
     }
 
+    public function container_wrapper_section_layout_2() {
+        $this->start_controls_section(
+            'archive_list_container_section_layout_2',
+            [
+                'label' => __( 'Container Section', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'section_betterdocs_archive_list_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'archive_list_container_padding_layout_2',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'archive_list_container_margin_layout_2',
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     public function list_settings() {
         /**
          * ----------------------------------------------------------
@@ -161,7 +220,10 @@ class ArchiveList extends BaseWidget {
             'section_article_settings',
             [
                 'label' => __( 'Category List', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'section_betterdocs_archive_list_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -306,6 +368,249 @@ class ArchiveList extends BaseWidget {
         $this->end_controls_section(); # end of 'Column Settings'
     }
 
+    public function list_settings_layout_2() {
+         /**
+         * ----------------------------------------------------------
+         * Section: List Settinggs
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_article_settings_layout_2',
+            [
+                'label' => __( 'Category List', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'section_betterdocs_archive_list_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'list_color_layout_2',
+            [
+                'label'     => esc_html__( 'List Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_hover_color_layout_2',
+            [
+                'label'     => esc_html__( 'List Background Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list:hover' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'list_margin_layout_2',
+            [
+                'label'      => esc_html__( 'List Item Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_icon_layout_2',
+            [
+                'label'     => esc_html__( 'List Icon', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'list_icon_layout_2_size',
+            [
+                'label'      => __( 'Size', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 span' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_title_layout_2',
+            [
+                'label'     => esc_html__( 'List Title', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'list_title_typography_layout_2',
+                'selector' => '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a'
+            ]
+        );
+
+        $this->add_control(
+            'list_title_word_wrap_layout_2',
+            [
+                'label'     => __( 'Word Wrap', 'betterdocs' ),
+                'type'      => Controls_Manager::SELECT2,
+                'multiple'  => false,
+                'options'   => [
+                    'normal'     => 'normal',
+                    'break-word' => 'break-word',
+                    'initial'    => 'initial',
+                    'inherit'    => 'inherit'
+                ],
+                'default'   => 'normal',
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a' => 'word-wrap: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_title_color_layout_2',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+        $this->add_control(
+            'list_title_hover_color_layout_2',
+            [
+                'label'     => esc_html__( 'Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'list_excerpt_title',
+            [
+                'label'     => esc_html__( 'List Excerpt', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+
+        $this->add_control(
+            'list_excerpt_color',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_excerpt_color_hover',
+            [
+                'label'     => esc_html__( 'Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'list_excerpt_typography',
+                'selector' => '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p'
+            ]
+        );
+
+        $this->add_control(
+            'list_excerpt_last_update_time_title',
+            [
+                'label'     => esc_html__( 'List Updated Time', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'list_excerpt_last_update_time_color',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_excerpt_last_update_time_hover_color',
+            [
+                'label'     => esc_html__( 'Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'list_excerpt_last_update_time_background_color',
+            [
+                'label'     => esc_html__( 'Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'list_excerpt_last_update_time_background_color_hover',
+            [
+                'label'     => esc_html__( 'Background Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date:hover' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'list_excerpt_last_update_time_typography',
+                'selector' => '{{WRAPPER}} .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date'
+            ]
+        );
+
+        $this->end_controls_section(); # end of 'Column Settings'
+    }
+
     public function subcat_list_settings() {
         /**
          * ----------------------------------------------------------
@@ -313,10 +618,13 @@ class ArchiveList extends BaseWidget {
          * ----------------------------------------------------------
          */
         $this->start_controls_section(
-            'section_sub_category_settings',
+            'section_list_title_layout_2',
             [
-                'label' => __( 'Sub Category', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'label' => __( 'List Title', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'section_betterdocs_archive_list_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -544,7 +852,7 @@ class ArchiveList extends BaseWidget {
             'term_slug'      => isset( $term->slug ) ? $term->slug : ''
         ];
 
-        return [
+        $term_params = [
             'term'                   => $term,
             'list_icon_url'          => '',
             'nested_subcategory'     => (bool) $this->attributes['nested_subcategory'],
@@ -559,7 +867,20 @@ class ArchiveList extends BaseWidget {
                 'order'   => $this->attributes['order']
             ],
             'layout_type' => 'widget',
+            'archive_layout' => $this->attributes['section_betterdocs_archive_list_layout']
         ];
+
+        if( $this->attributes['section_betterdocs_archive_list_layout'] == 'layout-2' ){
+            $term_params = [
+                'current_category'  => $term,
+                'orderby'           => $this->attributes['alphabetic_order'],
+                'order'             => $this->attributes['order'],
+                'posts_per_page'    => -1,
+                'archive_layout'    => $this->attributes['section_betterdocs_archive_list_layout']
+            ];
+        }
+
+        return $term_params;
     }
 
     public function render_plain_content() {}

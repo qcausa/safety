@@ -54,7 +54,7 @@ class CategoryBox extends Shortcode {
     }
 
     public function view_params() {
-        $classes = [ 'betterdocs-category-box-inner-wrapper ash-bg layout-flex', $this->layout_class ];
+        $classes = [ 'betterdocs-category-box-inner-wrapper', $this->layout_class, ($this->layout_class != 'layout-4' ? 'layout-flex ash-bg' : '') ];
         $styles = '';
 
         if ( $this->isset( 'column' ) ) {
@@ -95,14 +95,14 @@ class CategoryBox extends Shortcode {
         $terms_query = $this->query->terms_query( $_query_args );
 
         $show_count    = (bool) $this->settings->get( 'post_count', false );
-        $singular_text = $this->settings->get( 'count_text_singular', __( 'article', 'betterdocs' ) );
-        $plural_text   = $this->settings->get( 'count_text', __( 'articles', 'betterdocs' ) );
+        $singular_text = $this->settings->get( 'count_text_singular' );
+        $plural_text   = $this->settings->get( 'count_text' );
 
         $inner_wrapper_attr = [
             'class' => $classes,
             'style' => $styles,
         ];
-        
+
 
         return [
             'wrapper_attr'          => ['class' => ['betterdocs-category-box-wrapper']],

@@ -13,7 +13,7 @@
     get_header();
 
     $view_object = betterdocs()->views;
-    $layout      = betterdocs()->customizer->defaults->get( 'betterdocs_archive_layout_select', 'layout-1' );
+    $layout      = betterdocs()->customizer->defaults->get( 'betterdocs_archive_layout_select', 'layout-7' );
     $title_tag   = betterdocs()->customizer->defaults->get( 'betterdocs_archive_title_tag', 'h2' );
     $title_tag   = betterdocs()->template_helper->is_valid_tag( $title_tag );
 

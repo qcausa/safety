@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\Sidebar;
+use WPDeveloper\BetterDocs\Admin\Customizer\Sections\SearchModal;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\DocsPage;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\SingleDoc;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\BreadCrumb;

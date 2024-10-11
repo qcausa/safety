@@ -13,6 +13,15 @@
             ] );
 
             echo do_shortcode( "[betterdocs_toc " . $attributes . "]" );
+
+            if ( isset( $social_share ) && $social_share ) {
+                echo betterdocs()->views->get( 'templates/parts/social-2' );
+            }
+
+            if ( isset( $feedback ) && $feedback ) {
+                $reaction_text = betterdocs()->customizer->defaults->get( 'betterdocs_post_reactions_text_2' );
+                echo do_shortcode( '[betterdocs_article_reactions text="'.$reaction_text.'" layout="layout-3"]' );
+            }
         ?>
     </div>
 </aside>

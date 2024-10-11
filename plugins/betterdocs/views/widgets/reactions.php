@@ -5,7 +5,7 @@
             echo '<div class="betterdocs-article-reactions-heading"><h5>' . esc_html__( $reactions_text ) . '</h5></div>';
         }
     ?>
-    <ul class="betterdocs-article-reaction-links">
+    <ul class="betterdocs-article-reaction-links layout-1">
         <li>
             <a class="betterdocs-feelings" data-feelings="happy" href="#">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">

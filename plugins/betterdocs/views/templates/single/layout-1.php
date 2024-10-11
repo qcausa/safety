@@ -30,6 +30,7 @@
         <div id="betterdocs-single-main" class="betterdocs-content-area">
             <?php
                 while ( have_posts() ): the_post();
+                    $view_object->get( 'templates/parts/breadcrumbs' );
                     $view_object->get( 'templates/headers/layout-1' );
                     $view_object->get( 'templates/contents/layout-1' );
                     $view_object->get( 'templates/footer' );

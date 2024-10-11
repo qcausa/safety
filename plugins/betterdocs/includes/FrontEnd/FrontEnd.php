@@ -188,7 +188,14 @@ class FrontEnd extends Base {
     }
 
     public function article_reactions() {
-        if ( $this->database->get_theme_mod( 'betterdocs_post_reactions', true ) ) {
+        $single_layout = $this->database->get_theme_mod( 'betterdocs_single_layout_select', true );
+        $reactions = $this->database->get_theme_mod( 'betterdocs_post_reactions', true );
+
+        if ( $single_layout == 'layout-8' && $reactions ) {
+            echo do_shortcode( '[betterdocs_article_reactions layout="layout-2"]' );
+        } else if ( $single_layout == 'layout-9' && $reactions ) {
+            echo '';
+        } else if ( $reactions ) {
             echo do_shortcode( '[betterdocs_article_reactions]' );
         }
     }
@@ -219,6 +226,12 @@ class FrontEnd extends Base {
 
         if ( is_post_type_archive( 'docs' ) || is_singular( 'docs' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) || is_tax( 'knowledge_base' ) ) {
             wp_enqueue_script( 'betterdocs' );
+        }
+
+        if(is_tax('glossaries')){
+            wp_enqueue_style('betterdocs-encyclopedia');
+            wp_enqueue_style('betterdocs-single');
+            wp_enqueue_style('betterdocs-glossaries');
         }
     }
 

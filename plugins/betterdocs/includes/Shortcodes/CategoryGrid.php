@@ -40,6 +40,7 @@ class CategoryGrid extends Shortcode {
             'sidebar_list'             => false,
             'taxonomy'                 => 'doc_category',
             'show_icon'                => true,
+            'category_icon'            => '',
             'masonry'                  => false,
             'posts_per_page'           => $this->settings->get( 'posts_number', 0 ),
             'orderby'                  => $this->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),

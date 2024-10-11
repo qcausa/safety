@@ -534,6 +534,106 @@ class Query extends Base {
         return apply_filters( 'betterdocs_breadcrumb_archive_lists', $_lists, $origin_term );
     }
 
+    /**
+     * Get all non-empty child term IDs recursively for a given taxonomy and parent term.
+     *
+     * This function retrieves all child terms for a specified taxonomy and parent term,
+     * recursively fetching child terms of child terms, and returns only those with a non-zero post count.
+     *
+     * @param string $taxonomy  The taxonomy name (e.g., 'doc_category').
+     * @param int    $parent_id The ID of the parent term to start retrieving children from.
+     *
+     * @return array An array of non-empty child term IDs.
+     */
+    public function get_all_child_term_ids( $taxonomy, $parent_id ) {
+        // Set up the arguments for retrieving child terms
+        $args = apply_filters('betterdocs_get_child_term_ids_args', [
+            'taxonomy'   => $taxonomy,
+            'parent'     => $parent_id,
+            'hide_empty' => true,
+            'fields'     => 'ids'
+        ]);
+
+        // Get the terms based on the arguments
+        $terms = get_terms( $args );
+
+        // Initialize an empty array to hold non-empty child term IDs
+        $non_empty_children = [];
+
+        // Check if terms were retrieved without errors and that the result isn't empty
+        if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+            $term_ids = [];
+
+            // Loop through each term ID
+            foreach ( $terms as $term_id ) {
+                // Add the current term ID to the term_ids array
+                $term_ids[] = $term_id;
+
+                // Recursively get child terms for the current term
+                $child_term_ids = $this->get_all_child_term_ids( $taxonomy, $term_id );
+
+                // If there are child terms, merge them into the term_ids array
+                if ( ! empty( $child_term_ids ) ) {
+                    $term_ids = array_merge( $term_ids, $child_term_ids );
+                }
+            }
+
+            // Loop through all retrieved term IDs to filter out empty ones
+            foreach ( $term_ids as $term_id ) {
+                // Get the term object for the current term ID
+                $child_term = get_term( $term_id, $taxonomy );
+
+                // Only include terms that have a non-zero post count
+                if ( $child_term && $child_term->count > 0 ) {
+                    $non_empty_children[] = $child_term->term_id;
+                }
+            }
+        }
+
+        // Return the final array of non-empty child term IDs
+        return $non_empty_children;
+    }
+
+    /**
+     * Get all nested child term IDs of a specific parent term in a taxonomy and return as a comma-separated string.
+     *
+     * @param string $taxonomy The taxonomy.
+     * @param int $parent_id The parent term ID.
+     * @return string The comma-separated term IDs.
+     */
+    public function get_child_term_ids_by_parent_id( $taxonomy, $parent_id ) {
+        $term_ids = $this->get_all_child_term_ids($taxonomy, $parent_id);
+        return implode(',', $term_ids);
+    }
+
+    public function get_terms_children( $taxonomy, $parent_id ) {
+        $children = get_term_children( $parent_id, $taxonomy );
+        $non_empty_children = [];
+        if ( ! is_wp_error( $children ) && ! empty( $children ) ) {
+            foreach ( $children as $child_id ) {
+                $child_term = get_term( $child_id, $taxonomy );
+
+                // Only include non-empty terms
+                if ( $child_term && $child_term->count > 0 ) {
+                    $non_empty_children[] = $child_term;
+                }
+            }
+        }
+
+        return $non_empty_children;
+    }
+
+    public function get_terms_children_ids( $taxonomy, $parent_id ) {
+        $children = $this->get_terms_children( $taxonomy, $parent_id );
+        $term_ids = wp_list_pluck( $children, 'term_id' );
+
+        return implode( ',', $term_ids );
+    }
+
+    public function count_terms_children( $taxonomy, $parent_id ) {
+        return count( $this->get_terms_children( $taxonomy, $parent_id ) );
+    }
+
     public function is_inner_templates() {
         if ( is_tax( 'knowledge_base' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) || is_singular( 'docs' ) ) {
             return true;
@@ -780,6 +880,24 @@ class Query extends Base {
         return $terms;
     }
 
+    public function get_doc_terms( $terms = [] ) {
+        $_terms = get_terms( [
+            'taxonomy'   => 'doc_category',
+            'hide_empty' => true,
+            'orderby'    => 'name',
+            'order'      => 'ASC',
+        ] );
+
+        if ( ! is_wp_error( $_terms ) ) {
+            foreach ( $_terms as $term ) {
+                $terms[$term->term_id] = $term->name;
+            }
+        }
+
+        return $terms;
+    }
+
+
     public function get_docs_count( $term, $nested_subcategory = false, $args = [] ) {
         $counts = isset( $term->count ) ? $term->count : 0;
 
@@ -826,5 +944,225 @@ class Query extends Base {
             $_status = get_post_status( $doc_id );
             return $_status == 'private' || is_post_publicly_viewable( $doc_id );
         } );
+    }
+
+    /**
+     * Get the common query arguments for WP_Query.
+     *
+     * @param string $terms The taxonomy.
+     * @param string $term_slug The taxonomy term slug.
+     * @param array $additional_args Additional arguments to merge with the common arguments.
+     * @return array The query arguments.
+     */
+    private function tax_query_args($terms, $term_slug, $additional_args = array()) {
+        $common_args = array(
+            'post_type' => 'docs',
+            'post_status' => 'publish',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $terms,
+                    'field' => 'slug',
+                    'terms' => $term_slug,
+                ),
+            ),
+        );
+        return array_merge($common_args, $additional_args);
+    }
+
+    /**
+     * Get the latest updated date for a specific taxonomy term.
+     *
+     * @param string $terms The taxonomy.
+     * @param string $term_slug The taxonomy term slug.
+     * @return string|null The latest modified date or null if no posts found.
+     */
+    public function latest_updated_date($terms, $term_slug) {
+        $args = $this->tax_query_args($terms, $term_slug, array(
+            'posts_per_page' => 1,
+            'orderby' => 'modified',
+            'order' => 'DESC',
+        ));
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $latest_post = get_the_modified_date();
+                wp_reset_postdata();
+                return $latest_post;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Check if there are any new posts within the last 7 days for a specific taxonomy term.
+     *
+     * @param string $terms The taxonomy.
+     * @param string $term_slug The taxonomy term slug.
+     * @return bool True if there are new posts, false otherwise.
+     */
+    public function check_new_posts($terms, $term_slug) {
+        $date_7_days_ago = date('Y-m-d H:i:s', strtotime('-7 days'));
+
+        $args = $this->tax_query_args($terms, $term_slug, array(
+            'posts_per_page' => 1,
+            'orderby' => 'modified',
+            'order' => 'DESC',
+            'date_query' => array(
+                array(
+                    'after' => $date_7_days_ago,
+                    'inclusive' => true,
+                ),
+            ),
+        ));
+
+        $query = new WP_Query($args);
+
+        $has_new_posts = $query->have_posts();
+
+        wp_reset_postdata();
+
+        return $has_new_posts;
+    }
+
+    public function insert_search_keyword( $search_input, $input_not_found ) {
+        if ( empty( $search_input ) ) {
+            return false;
+        }
+
+        global $wpdb;
+        $search = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT *
+                FROM {$wpdb->prefix}betterdocs_search_keyword
+                WHERE keyword = %s",
+                $search_input
+            )
+        );
+
+        if ( ! empty( $search ) ) {
+            $search_log = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT *
+                    FROM {$wpdb->prefix}betterdocs_search_log
+                    WHERE created_at = %s AND keyword_id = %d",
+                    date( 'Y-m-d' ), $search[0]->id
+                )
+            );
+
+            if ( ! empty( $search_log ) ) {
+                if ( ! empty( $input_not_found ) ) {
+                    $tbl_field = 'not_found_count';
+                    $count     = $search_log[0]->not_found_count + 1;
+                } else {
+                    $tbl_field = 'count';
+                    $count     = $search_log[0]->count + 1;
+                }
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "UPDATE {$wpdb->prefix}betterdocs_search_log
+                        SET " . $tbl_field . " = " . $count . "
+                        WHERE created_at = %s AND keyword_id = %d",
+                        $search_log[0]->created_at, $search_log[0]->keyword_id
+                    )
+                );
+            } else {
+                if ( ! empty( $input_not_found ) ) {
+                    $count           = 0;
+                    $not_found_count = 1;
+                } else {
+                    $count           = 1;
+                    $not_found_count = 0;
+                }
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "INSERT INTO {$wpdb->prefix}betterdocs_search_log
+                        ( keyword_id, count, not_found_count, created_at  )
+                        VALUES ( %d, %d, %d, %s )",
+                        [
+                            $search[0]->id,
+                            $count,
+                            $not_found_count,
+                            date( 'Y-m-d' )
+                        ]
+                    )
+                );
+            }
+        } else {
+            $insert = $wpdb->query(
+                $wpdb->prepare(
+                    "INSERT INTO {$wpdb->prefix}betterdocs_search_keyword
+                    ( keyword )
+                    VALUES ( %s )",
+                    [
+                        $search_input
+                    ]
+                )
+            );
+
+            if ( $insert ) {
+                if ( ! empty( $input_not_found ) ) {
+                    $count           = 0;
+                    $not_found_count = 1;
+                } else {
+                    $count           = 1;
+                    $not_found_count = 0;
+                }
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "INSERT INTO {$wpdb->prefix}betterdocs_search_log
+                        ( keyword_id, count, not_found_count, created_at )
+                        VALUES ( %d, %d, %d, %s )",
+                        [
+                            $wpdb->insert_id,
+                            $count,
+                            $not_found_count,
+                            date( 'Y-m-d' )
+                        ]
+                    )
+                );
+            }
+        }
+        return $insert;
+    }
+
+    /**
+     * Counts the number of 'doc_category' terms assigned to a specific 'knowledge_base' by slug.
+     *
+     * This method retrieves all terms in the 'doc_category' taxonomy and checks the term meta
+     * 'doc_category_knowledge_base' to determine how many 'doc_category' terms are associated
+     * with a given 'knowledge_base' slug.
+     *
+     * @param string $knowledge_base_slug The slug of the 'knowledge_base' to count the assignments for.
+     *
+     * @return int The count of 'doc_category' terms assigned to the specified 'knowledge_base'.
+     */
+    public function count_doc_categories_for_knowledge_base( $knowledge_base_slug ) {
+        $count = 0;
+
+        $doc_categories = get_terms( array(
+            'taxonomy' => 'doc_category',
+            'hide_empty' => true,
+        ) );
+
+        if ( ! empty( $doc_categories ) && ! is_wp_error( $doc_categories ) ) {
+            foreach ( $doc_categories as $term ) {
+                $meta_value = get_term_meta( $term->term_id, 'doc_category_knowledge_base', true );
+
+                if ( $meta_value ) {
+                    $knowledge_bases = maybe_unserialize( $meta_value );
+
+                    // Check if the specific knowledge base slug is present in the meta value array
+                    if ( is_array( $knowledge_bases ) && in_array( $knowledge_base_slug, $knowledge_bases ) ) {
+                        $count++;
+                    }
+                }
+            }
+        }
+
+        return $count;
     }
 }

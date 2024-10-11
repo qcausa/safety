@@ -37,15 +37,10 @@
             ], 'betterdocs_category_box', 'layout-2' );
 
             echo do_shortcode( '[betterdocs_category_box ' . $attributes . ']' );
+
+            betterdocs()->views->get( 'templates/faq' );
         ?>
     </div>
-
-    <?php
-        /**
-         * @todo faq views will here.
-         */
-        betterdocs()->views->get( 'templates/faq' );
-    ?>
 </div>
 
 <?php

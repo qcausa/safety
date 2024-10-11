@@ -7,7 +7,9 @@ use WPDeveloper\BetterDocs\Shortcodes\ToC;
 use WPDeveloper\BetterDocs\Shortcodes\FaqList;
 use WPDeveloper\BetterDocs\Shortcodes\Reactions;
 use WPDeveloper\BetterDocs\Shortcodes\FaqClassic;
+use WPDeveloper\BetterDocs\Shortcodes\FaqLayoutThree;
 use WPDeveloper\BetterDocs\Shortcodes\SearchForm;
+use WPDeveloper\BetterDocs\Shortcodes\SearchModal;
 use WPDeveloper\BetterDocs\Shortcodes\CategoryBox;
 use WPDeveloper\BetterDocs\Shortcodes\SocialShare;
 use WPDeveloper\BetterDocs\Shortcodes\CategoryGrid;
@@ -15,6 +17,7 @@ use WPDeveloper\BetterDocs\Shortcodes\CategoryList;
 use WPDeveloper\BetterDocs\Shortcodes\FeedbackForm;
 use WPDeveloper\BetterDocs\Shortcodes\ReadingTime;
 use WPDeveloper\BetterDocs\Dependencies\DI\Container;
+use WPDeveloper\BetterDocs\Shortcodes\CategoryBoxThree;
 
 class ShortcodeFactory extends Base {
     /**
@@ -37,13 +40,16 @@ class ShortcodeFactory extends Base {
     private function shortcode_list() {
         return apply_filters('betterdocs_shortcodes', [
             CategoryBox::class,
+            CategoryBoxThree::class,
             CategoryGrid::class,
             CategoryList::class,
             SearchForm::class,
+            SearchModal::class,
             ToC::class,
             SocialShare::class,
             FeedbackForm::class,
             FaqClassic::class,
+            FaqLayoutThree::class,
             FaqList::class,
             Reactions::class,
             ReadingTime::class

@@ -1,2 +1,6 @@
 # Ignore all node_modules folders recursively
+<<<<<<< HEAD
 node_modules/
+=======
+node_modules/
+>>>>>>> e2ef6fb418a39d1fd6af9731527171558faf11ee

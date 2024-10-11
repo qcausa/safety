@@ -1,4 +1,8 @@
 <?php
+    if ( $terms_query_args == false ) {
+        return;
+    }
+
     $terms = get_terms( apply_filters( 'betterdocs_base_terms_args', $terms_query_args ) );
     /**
      * Base Layout Before Wrapper
@@ -50,6 +54,8 @@
 
                 $docs_query_args = ! isset( $docs_query_args ) ? $_docs_query_args : wp_parse_args( $docs_query_args, $_docs_query_args );
 
+                $terms_count = count( $terms );
+                $terms_number = 1;
                 foreach ( $terms as $term ) {
                     $_counts = betterdocs()->query->get_docs_count( $term, $nested_subcategory, [
                         'multiple_knowledge_base' => isset( $_params['multiple_knowledge_base'] ) ? $_params['multiple_knowledge_base'] : false,
@@ -69,6 +75,16 @@
                         ];
                     }
 
+                    // Count Sub Terms
+                    $sub_terms_count = 0;
+                    if ( isset( $_params['taxonomy'] ) && $_params['taxonomy'] == 'doc_category' ) {
+                        $sub_terms_count = count( betterdocs()->query->get_all_child_term_ids( $_params['taxonomy'], $term->term_id ) );
+                    } else if ( isset( $_params['taxonomy'] ) && $_params['taxonomy'] == 'knowledge_base' ) {
+                        $count_doc_categories = betterdocs()->query->count_doc_categories_for_knowledge_base( $term->slug );
+                        $sub_terms_count = $count_doc_categories;
+                    }
+
+
                     $permalink = apply_filters(
                         'betterdocs_term_permalink',
                         get_term_link( $term->term_id, $term->taxonomy ), $term, 'doc_category', $_params
@@ -83,6 +99,9 @@
                         'wrapper_class'             => [$layout],
                         'term'                      => $term,
                         'counts'                    => $_counts,
+                        'terms_count'               => $terms_count,
+                        'terms_number'              => $terms_number,
+                        'sub_terms_count'           => $sub_terms_count,
                         'queried_object'            => $_current_queried_object,
                         'current_queried_object_id' => $_current_queried_object_id,
                         'ancestors'                 => $ancestors,
@@ -93,6 +112,8 @@
                     $layout_filename = apply_filters( 'betterdocs_layout_filename', $layout, $layout, $widget_type );
 
                     betterdocs()->views->get( 'layouts/' . $widget_type . '/' . $layout_filename, $template_params );
+                    $terms_number++;
+                    $terms_count--;
                 }
 
                 do_action_ref_array( 'betterdocs_layout_base_loop_end', [ & $terms, &$_defined_vars] );

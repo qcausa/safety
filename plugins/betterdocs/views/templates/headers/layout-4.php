@@ -1,9 +1,4 @@
 <?php
-    /**
-     * Breadcrumbs
-     */
-    $view_object->get( 'templates/parts/breadcrumbs' );
-
     if( ! betterdocs()->settings->get( 'enable_post_title' ) ) {
         return;
     }

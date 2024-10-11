@@ -24,6 +24,28 @@ class Views extends Base {
         $this->layout_directory = $this->path . $layout_directory;
     }
 
+    public function get_elementor_box_layouts() {
+        $layouts = $this->get_layouts( 'category-box' );
+
+        if( isset( $layouts['layout-4'] ) ) {
+            $layouts['layout-4'] = __( 'Sleek Layout', 'betterdocs' );
+        }
+
+        if( isset( $layouts['default'] ) ) {
+            $layouts['default'] =  __( 'Box Layout', 'betterdocs' );
+        }
+
+        if( isset( $layouts['layout-2'] ) ) {
+            $layouts['layout-2'] = __( 'Card Layout', 'betterdocs' );
+        }
+
+        if( isset( $layouts['layout-3'] ) ) {
+            $layouts['layout-3'] =  __( 'Classic Layout', 'betterdocs' );
+        }
+
+        return $layouts;
+    }
+
     public function get_layouts( $_local_dir = 'category-grid', $is_pro = false ) {
         if ( empty( $_local_dir ) ) {
             $_local_dir = 'category-grid';
@@ -85,6 +107,10 @@ class Views extends Base {
 
     public function get( $name, $params = [] ) {
         $_view_file_path = $this->path( $name );
+
+        // if ( ! $_view_file_path ) {
+        //     return __( 'View file path not available.', 'betterdocs' );
+        // }
 
         if ( file_exists( $_view_file_path ) ) {
             if ( isset( $params['_view_file_path'] ) ) {

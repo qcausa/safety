@@ -34,10 +34,12 @@ if ( $layout_type == 'template' && isset ( $list_icon_url ) && $list_icon_url) {
     );
 }
 
-$_page_id      = null;
-$_category_ids = [];
-$_is_single    = false;
-$_icon         = betterdocs()->template_helper->icon( isset( $list_icon_name ) ? $list_icon_name : 'list' );
+$_page_id              = null;
+$_category_ids         = [];
+$_is_single            = false;
+$_is_doc_category      = false;
+$_current_doc_category = null;
+$_icon                 = betterdocs()->template_helper->icon( isset( $list_icon_name ) ? $list_icon_name : 'list' );
 
 if ( is_single() ) {
     $_is_single    = true;
@@ -47,6 +49,15 @@ if ( is_single() ) {
         $ancestors = get_ancestors( $_category_ids[0], 'doc_category' );
         $_category_ids = array_merge( $_category_ids, $ancestors );
     }
+}
+
+if( is_tax('doc_category') ) {
+    $_is_doc_category       = true;
+    $_current_doc_category  = get_queried_object() != null ? get_queried_object()->term_id : '';
+    $parent_id              = Helper::get_the_top_most_parent($_current_doc_category);
+    $_category_ids          = get_term_children($parent_id, 'doc_category');
+    $current_category_index = array_search($_current_doc_category, $_category_ids);
+    $_category_ids          = ! is_bool( $current_category_index ) ? array_slice($_category_ids, 0, ($current_category_index + 1), true) : []; // get the range from start to current
 }
 
 $_multiple_kb = isset( $multiple_knowledge_base ) ? $multiple_knowledge_base : false;
@@ -64,7 +75,7 @@ $nested_docs_query_args = isset( $nested_docs_query_args ) ?
 $_nested_docs_args = apply_filters( 'betterdocs_nested_docs_args', $nested_docs_query_args );
 
 foreach ( $_nested_categories as $_nested_category ) :
-    $classes = $_is_single && in_array( $_nested_category->term_id, $_category_ids ) ? 'betterdocs-nested-category-list betterdocs-current-category active' : 'betterdocs-nested-category-list';
+    $classes = $_is_single && in_array( $_nested_category->term_id, $_category_ids ) || ( $_is_doc_category && in_array( $_nested_category->term_id, $_category_ids ) ) ? 'betterdocs-nested-category-list betterdocs-current-category active' : 'betterdocs-nested-category-list';
 
     $_counts = betterdocs()->query->get_docs_count( $_nested_category, $nested_subcategory, [
         'multiple_knowledge_base' => $_multiple_kb,
@@ -79,15 +90,21 @@ foreach ( $_nested_categories as $_nested_category ) :
     <li class="betterdocs-nested-category-wrapper">
         <span class="betterdocs-nested-category-title">
             <?php
+                if ( isset( $category_icon ) && $category_icon == 'folder' ) {
+                    betterdocs()->template_helper->icon( 'folder', true );
+                    betterdocs()->template_helper->icon( 'folder-open', true );
+                } else {
+                    betterdocs()->template_helper->icon( 'arrow-right', true );
+                    betterdocs()->template_helper->icon( 'arrow-down', true );
+                }
                 /**
                  * Icons
                  */
-                betterdocs()->template_helper->icon( 'arrow-right', true );
-                betterdocs()->template_helper->icon( 'arrow-down', true );
+
             ?>
             <a href="#"><?php _e( $_nested_category->name, 'betterdocs' );?></a>
         </span>
-        <ul class="<?php echo esc_attr( $classes );?>">
+        <ul class="<?php echo esc_attr( $classes );?>" style="<?php echo $_is_single && in_array( $_nested_category->term_id, $_category_ids ) || ( $_is_doc_category && in_array( $_nested_category->term_id, $_category_ids ) ) ? 'display:block;' : 'display:none;'; ?>">
             <?php
                 $_nested_docs_args['term_id'] = $_nested_category->term_id;
                 $_nested_docs_args['term_slug'] = $_nested_category->slug;

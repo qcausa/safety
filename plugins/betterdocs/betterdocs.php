@@ -4,7 +4,7 @@
  * Plugin Name:       BetterDocs
  * Plugin URI:        https://betterdocs.co/
  * Description:       Create stunning Knowledge base & FAQs for your WordPress website and reduce support pressure with the help of BetterDocs. Get access to amazing templates and create fully customizable KB with AI Write.
- * Version:           3.6.6
+ * Version:           3.7.0
  * Author:            WPDeveloper
  * Author URI:        https://wpdeveloper.com
  * License:           GPL-3.0+

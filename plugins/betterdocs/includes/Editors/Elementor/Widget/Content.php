@@ -99,7 +99,8 @@ class Content extends ContentBaseWidget {
                 'label'     => __( 'Doc Content Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-content' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .betterdocs-content' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .betterdocs-content p' => 'color: {{VALUE}}',
                 ]
             ]
         );

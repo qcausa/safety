@@ -14,6 +14,7 @@ use WPDeveloper\BetterDocs\Utils\Enqueue;
 use WPDeveloper\BetterDocs\Editors\Elementor\Helper;
 use WPDeveloper\BetterDocs\Editors\Elementor\SingleDocs;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\ToC;
+use WPDeveloper\BetterDocs\Editors\Elementor\Widget\DocAuthor;
 use WPDeveloper\BetterDocs\Editors\Elementor\DocsArchive;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Title;
 use WPDeveloper\BetterDocs\Editors\Elementor\Tags\TitleTag;
@@ -27,13 +28,15 @@ use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\FAQ;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Reactions;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Navigation;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\ArchiveList;
+use WPDeveloper\BetterDocs\Editors\Elementor\Widget\PrintButton;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Breadcrumbs;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\ReadingTime;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\SearchForm;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryBox;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryGrid;
-// use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\BetterdocsEncyclopedia;
 use WPDeveloper\BetterDocs\Editors\Elementor\Conditions\ArchiveCondition;
+// use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\BetterdocsEncyclopedia;
+use WPDeveloper\BetterDocs\Editors\Elementor\Widget\CategoryArchiveHeader;
 
 class Elementor extends BaseEditor {
     protected $is_elementor_active       = false;
@@ -582,7 +585,7 @@ class Elementor extends BaseEditor {
             'betterdocs-elementor-search-form'   => SearchForm::class,
             'betterdocs-elementor-category-grid' => CategoryGrid::class,
             'betterdocs-elementor-category-box'  => CategoryBox::class,
-            'betterdocs-faq-widget'              => FAQ::class,
+            'betterdocs-faq-widget'              => FAQ::class
             // 'betterdocs-encyclopedia-widget'     => BetterdocsEncyclopedia::class
         ];
 
@@ -651,12 +654,12 @@ class Elementor extends BaseEditor {
          */
         $assets->register( 'betterdocs-el-category-grid', 'elementor/js/category-grid.js', ['jquery', 'betterdocs-category-toggler'] );
 
-         /**
+        /**
          * Localize This In Order To Know If This Block Is Arriving From Betterdocs Templates Or Not
          */
-        betterdocs()->assets->localize('betterdocs-el-category-grid', 'betterdocsCategoryGridConfig', [
+        betterdocs()->assets->localize( 'betterdocs-el-category-grid', 'betterdocsCategoryGridConfig', [
             'is_betterdocs_templates' => betterdocs()->helper->is_templates() ? true : false
-        ]);
+        ] );
 
         if ( betterdocs()->helper->is_el_templates() == true ) {
             $assets->enqueue( 'betterdocs-elementor-editor', 'elementor/css/betterdocs-el-edit.css' );
@@ -685,18 +688,21 @@ class Elementor extends BaseEditor {
      */
     public function builder_widget_list() {
         return apply_filters( 'betterdocs_elementor_pro_widgets', [
-            'betterdocs-elementor-toc'                   => ToC::class,
-            'betterdocs-elementor-title'                 => Title::class,
-            'betterdocs-elementor-sidebar'               => Sidebar::class,
-            'betterdocs-elementor-content'               => Content::class,
-            'betterdocs-elementor-doc-date'              => DocDate::class,
-            'betterdocs-elementor-doc-share'             => DocShare::class,
-            'betterdocs-elementor-feedback'              => Feedback::class,
-            'betterdocs-elementor-reactions'             => Reactions::class,
-            'betterdocs-elementor-navigation'            => Navigation::class,
-            'betterdocs-elementor-breadcrumbs'           => Breadcrumbs::class,
-            'betterdocs-elementor-category-archive-list' => ArchiveList::class,
-            'betteredocs-elementor-reading-time'         => ReadingTime::class
+            'betterdocs-elementor-toc'                          => ToC::class,
+            'betterdocs-elementor-title'                        => Title::class,
+            'betterdocs-elementor-sidebar'                      => Sidebar::class,
+            'betterdocs-elementor-content'                      => Content::class,
+            'betterdocs-elementor-doc-date'                     => DocDate::class,
+            'betterdocs-elementor-doc-share'                    => DocShare::class,
+            'betterdocs-elementor-feedback'                     => Feedback::class,
+            'betterdocs-elementor-reactions'                    => Reactions::class,
+            'betterdocs-elementor-navigation'                   => Navigation::class,
+            'betterdocs-elementor-breadcrumbs'                  => Breadcrumbs::class,
+            'betterdocs-elementor-category-archive-list'        => ArchiveList::class,
+            'betteredocs-elementor-reading-time'                => ReadingTime::class,
+            'betterdocs-print-button'                           => PrintButton::class,
+            'betterdocs-elementor-doc-author'                   => DocAuthor::class,
+            'betteredocs-elementor-doc-category-archive-header' => CategoryArchiveHeader::class
         ] );
     }
 

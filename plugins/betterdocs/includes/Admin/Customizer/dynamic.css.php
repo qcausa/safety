@@ -531,6 +531,103 @@ $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .
     'color' => 'betterdocs_doc_page_article_list_hover_color'
 ] ) );
 
+//Doc Layout 7 Controls Start
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'background-color' => 'column_background_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box:hover', $css->properties( [
+    'background-color' => 'betterdocs_doc_page_column_hover_bg_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_page_column_padding_top_layout_7',
+    'padding-right'  => 'betterdocs_doc_page_column_padding_right_layout_7',
+    'padding-bottom' => 'betterdocs_doc_page_column_padding_bottom_layout_7',
+    'padding-left'   => 'betterdocs_doc_page_column_padding_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'border-color' => 'column_border_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon', $css->properties( [
+    'height' => 'betterdocs_doc_page_cat_icon_size_layout_7',
+    'width'  => 'betterdocs_doc_page_cat_icon_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'font-size' => 'betterdocs_doc_page_cat_title_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'color' => 'betterdocs_doc_page_cat_title_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title:hover', $css->properties( [
+    'color' => 'category_title_color_hover_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'color' => 'betterdocs_doc_page_item_count_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover', $css->properties( [
+    'color' => 'betterdocs_doc_page_item_count_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'font-size' => 'betterdocs_doc_page_item_count_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'font-size' => 'last_updated_time_layout_7_font_size'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'color' => 'last_updated_time_layout_7_color'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover', $css->properties( [
+    'color' => 'last_updated_time_layout_7_hover_color'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'background-color' => 'last_updated_time_layout_7_background_color'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover', $css->properties( [
+    'background-color' => 'last_updated_time_layout_7_background_hover_color'
+] ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .betterdocs-searchform-input-wrap .betterdocs-search-command', $css->properties( [
+    'color' => 'sidebar_search_field_placeholder_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform', $css->properties( [
+    'background-color' => 'sidebar_search_field_background_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .betterdocs-searchform-input-wrap svg', $css->properties( [
+    'height' => 'sidebar_search_field_icon_size_layout_7',
+    'width'  => 'sidebar_search_field_icon_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'margin-top'    => 'category_title_margin_top_layout_7',
+    'margin-right'  => 'category_title_margin_right_layout_7',
+    'margin-bottom' => 'category_title_margin_bottom_layout_7',
+    'margin-left'   => 'category_title_margin_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'margin-top'    => 'doc_page_item_count_margin_top_layout_7',
+    'margin-right'  => 'doc_page_item_count_margin_right_layout_7',
+    'margin-bottom' => 'doc_page_item_count_margin_bottom_layout_7',
+    'margin-left'   => 'doc_page_item_count_margin_left_layout_7'
+], 'px' ) );
+//Doc Layout 7 Controls End
+
 /** Single Doc Start **/
 
 //Single Doc Common Controllers Content Area Background Color
@@ -796,7 +893,6 @@ $css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-1 .betterdo
 $css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-1 .betterdocs-content', $css->properties( [
     'color' => 'betterdocs_single_content_font_color'
 ] ) );
-
 
 //Single Doc All Layouts Background color
 $css->add_rule( '.betterdocs-shortcode.betterdocs-article-reactions', $css->properties( [
@@ -2194,6 +2290,415 @@ $css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-6 .betterdo
     'color' => 'betterdocs_single_doc_powered_by_link_color'
 ] ) );
 
+/** Single Doc Layout 8, 9 Start **/
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-search-modal-layout-1, .betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-search-modal-layout-1', $css->properties( [
+    'width' => 'single_doc_layout_8_9_search_width'
+], '%' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-search-modal-layout-1, .betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-search-modal-layout-1', $css->properties( [
+    'max-width' => 'single_doc_layout_8_9_search_max_width'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-search-modal-layout-1, .betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-search-modal-layout-1', $css->properties( [
+    'margin-top'    => 'single_doc_layout_8_9_search_margin_top',
+    'margin-bottom' => 'single_doc_layout_8_9_search_margin_bottom'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-search-modal-layout-1, .betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-search-modal-layout-1', $css->properties( [
+    'margin-left'  => 'auto',
+    'margin-right' => 'auto'
+] ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-search-modal-layout-1, .betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-search-modal-layout-1', $css->properties( [
+    'padding-top'    => 'single_doc_layout_8_9_search_padding_top',
+    'padding-right'  => 'single_doc_layout_8_9_search_padding_right',
+    'padding-bottom' => 'single_doc_layout_8_9_search_padding_bottom',
+    'padding-left'   => 'single_doc_layout_8_9_search_padding_left'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title', $css->properties( [
+    'text-transform' => 'betterdocs_post_title_text_transform_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title', $css->properties( [
+    'font-size' => 'betterdocs_single_doc_title_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title', $css->properties( [
+    'color' => 'betterdocs_single_doc_title_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc', $css->properties( [
+    'background-color' => 'betterdocs_toc_bg_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_toc_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_toc_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_toc_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_toc_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_toc_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_toc_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_toc_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_toc_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title', $css->properties( [
+    'color' => 'betterdocs_toc_title_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title', $css->properties( [
+    'font-size' => 'betterdocs_toc_title_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a', $css->properties( [
+    'color' => 'betterdocs_toc_list_item_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a:hover, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a:hover', $css->properties( [
+    'color' => 'betterdocs_toc_list_item_hover_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a.active, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a:focus, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a.active, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a:focus', $css->properties( [
+    'color' => 'betterdocs_toc_active_item_color_layout_8_9'
+] ) );
+
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-sidebar.betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a.active::after, .betterdocs-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-sidebar.betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a.active::after', $css->properties( [
+    'background' => 'toc_active_item_border_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a', $css->properties( [
+    'font-size' => 'betterdocs_toc_list_item_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc ul li a', $css->properties( [
+    'margin-top'    => 'betterdocs_doc_single_toc_list_margin_top_layout_8_9',
+    'margin-right'  => 'betterdocs_doc_single_toc_list_margin_right_layout_8_9',
+    'margin-bottom' => 'betterdocs_doc_single_toc_list_margin_bottom_layout_8_9',
+    'margin-left'   => 'betterdocs_doc_single_toc_list_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-layout-8 .betterdocs-content-area .betterdocs.reading-time,.betterdocs-single-layout-9 .betterdocs-content-area .betterdocs.reading-time', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_content_est_reading_bg_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time', $css->properties( [
+    'border-radius' => 'betterdocs_doc_single_content_est_reading_border_radius'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content', $css->properties( [
+    'font-size' => 'betterdocs_single_content_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content', $css->properties( [
+    'color' => 'betterdocs_single_content_font_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-social-share .betterdocs-social-share-heading h5, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-social-share .betterdocs-social-share-heading h5', $css->properties( [
+    'color' => 'betterdocs_post_social_share_text_color_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a', $css->properties( [
+    'color' => 'betterdocs_single_doc_navigation_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a', $css->properties( [
+    'font-size' => 'betterdocs_single_doc_navigation_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a:hover, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a:hover', $css->properties( [
+    'color' => 'betterdocs_single_doc_navigation_hover_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a svg, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a svg', $css->properties( [
+    'fill' => 'betterdocs_single_doc_navigation_arrow_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a svg, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .docs-navigation a svg', $css->properties( [
+    'width' => 'betterdocs_single_doc_navigation_arrow_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-article-reactions .betterdocs-article-reactions-box', $css->properties( [
+    'background-color' => 'reactions_background_color_layout_8'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-article-reactions', $css->properties( [
+    'background-color' => 'reactions_background_color_layout_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-article-reactions .betterdocs-article-reactions-box p, .betterdocs-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-article-reactions .betterdocs-article-reactions-sidebar h5', $css->properties( [
+    'color' => 'betterdocs_post_reactions_text_color_layout_8_9'
+] ) );
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji, .betterdocs-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-article-reactions.layout-2 .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links li a', $css->properties( [
+    'background-color' => 'betterdocs_post_reactions_icon_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_attachment_content_bg_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_content_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_attachment_content_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_content_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_attachment_content_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_attachment_content_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_attachment_content_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_attachment_content_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_attachment_content_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_label_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_label_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_attachment_label_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_label_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_attachment_label_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_attachment_label_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_attachment_label_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_attachment_label_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_attachment_label_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'font-size' => 'betterdocs_doc_single_attachment_list_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'font-weight' => 'betterdocs_doc_single_attachment_list_font_weight_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_list_extension_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'font-size' => 'betterdocs_doc_single_attachment_list_extension_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'font-weight' => 'betterdocs_doc_single_attachment_list_extension_font_weight_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_list_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_attachment_list_background_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-wrapper .attachment-list .attachment-details', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_list_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_attachment_list_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_list_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_attachment_list_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_attachment_list_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_attachment_list_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_attachment_list_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_attachment_list_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_related_docs_content_bg_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front', $css->properties( [
+    'paddin-top'    => 'betterdocs_doc_single_related_docs_content_padding_top_layout_8_9',
+    'paddin-right'  => 'betterdocs_doc_single_related_docs_content_padding_right_layout_8_9',
+    'paddin-bottom' => 'betterdocs_doc_single_related_docs_content_padding_bottom_layout_8_9',
+    'paddin-left'   => 'betterdocs_doc_single_related_docs_content_padding_left_layout_8_9',
+    'margin-top'    => 'betterdocs_doc_single_related_docs_content_margin_top_layout_8_9',
+    'margin-right'  => 'betterdocs_doc_single_related_docs_content_margin_right_layout_8_9',
+    'margin-bottom' => 'betterdocs_doc_single_related_docs_content_margin_bottom_layout_8_9',
+    'margin-left'   => 'betterdocs_doc_single_related_docs_content_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading', $css->properties( [
+    'color' => 'betterdocs_doc_single_related_docs_label_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .related-articles-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-attachment-heading', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_related_docs_label_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_related_docs_label_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_related_docs_label_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_related_docs_label_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_related_docs_label_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_related_docs_label_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_related_docs_label_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_related_docs_label_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'font-size' => 'betterdocs_doc_related_docs_list_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'font-weight' => 'betterdocs_doc_related_docs_list_font_weight_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'color' => 'betterdocs_doc_single_related_docs_list_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_related_docs_list_background_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_related_docs_list_padding_top_layout_8_9',
+    'padding-right'  => 'betterdocs_doc_single_related_docs_list_padding_right_layout_8_9',
+    'padding-bottom' => 'betterdocs_doc_single_related_docs_list_padding_bottom_layout_8_9',
+    'padding-left'   => 'betterdocs_doc_single_related_docs_list_padding_left_layout_8_9',
+    'margin-top'     => 'betterdocs_doc_single_related_docs_list_margin_top_layout_8_9',
+    'margin-right'   => 'betterdocs_doc_single_related_docs_list_margin_right_layout_8_9',
+    'margin-bottom'  => 'betterdocs_doc_single_related_docs_list_margin_bottom_layout_8_9',
+    'margin-left'    => 'betterdocs_doc_single_related_docs_list_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-credit p', $css->properties( [
+    'font-size' => 'betterdocs_single_doc_powered_by_font_size'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-credit p', $css->properties( [
+    'font-size' => 'betterdocs_single_doc_powered_by_font_size'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-credit p', $css->properties( [
+    'color' => 'betterdocs_single_doc_powered_by_color'
+] ) );
+
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-credit p', $css->properties( [
+    'color' => 'betterdocs_single_doc_powered_by_color'
+] ) );
+
+//Single Doc Layout 6 Entry Footer Powered By Link Color
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-credit p a', $css->properties( [
+    'color' => 'betterdocs_single_doc_powered_by_link_color'
+] ) );
+
+//Single Doc Layout 6 Entry Footer Powered By Link Color
+$css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-credit p a', $css->properties( [
+    'color' => 'betterdocs_single_doc_powered_by_link_color'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-header .betterdocs-entry-title', $css->properties( [
+    'margin-top'    => 'single_doc_title_margin_top_layout_8_9',
+    'margin-right'  => 'single_doc_title_margin_right_layout_8_9',
+    'margin-bottom' => 'single_doc_title_margin_bottom_layout_8_9',
+    'margin-left'   => 'single_doc_title_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-toc .toc-title', $css->properties( [
+    'margin-top'    => 'toc_title_margin_top_layout_8_9',
+    'margin-right'  => 'toc_title_margin_right_layout_8_9',
+    'margin-bottom' => 'toc_title_margin_bottom_layout_8_9',
+    'margin-left'   => 'toc_title_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content, .betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content', $css->properties( [
+    'padding-top'    => 'single_content_padding_top_layout_8_9',
+    'padding-right'  => 'single_content_padding_right_layout_8_9',
+    'padding-bottom' => 'single_content_padding_bottom_layout_8_9',
+    'padding-left'   => 'single_content_padding_left_layout_8_9',
+    'margin-top'     => 'single_content_margin_top_layout_8_9',
+    'margin-right'   => 'single_content_margin_right_layout_8_9',
+    'margin-bottom'  => 'single_content_margin_bottom_layout_8_9',
+    'margin-left'    => 'single_content_margin_left_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-article-reactions .betterdocs-article-reactions-box', $css->properties( [
+    'margin-top'          => 'post_reactions_margin_top_layout_8',
+    'margin-right'        => 'post_reactions_margin_right_layout_8',
+    'margin-bottom'       => 'post_reactions_margin_bottom_layout_8',
+    'margin-left'         => 'post_reactions_margin_left_layout_8',
+    'padding-top'         => 'post_reactions_padding_top_layout_8',
+    'padding-right'       => 'post_reactions_padding_right_layout_8',
+    'padding-bottom'      => 'post_reactions_padding_bottom_layout_8',
+    'padding-left'        => 'post_reactions_padding_left_layout_8',
+    'border-top-width'    => 'post_reactions_border_top_layout_8',
+    'border-right-width'  => 'post_reactions_border_right_layout_8',
+    'border-bottom-width' => 'post_reactions_border_bottom_layout_8',
+    'border-left-width'   => 'post_reactions_border_left_layout_8'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .betterdocs-entry-footer .betterdocs-social-share .betterdocs-social-share-links', $css->properties( [
+    'margin-top'     => 'post_social_share_margin_top_layout_8',
+    'margin-right'   => 'post_social_share_margin_right_layout_8',
+    'margin-bottom'  => 'post_social_share_margin_bottom_layout_8',
+    'margin-left'    => 'post_social_share_margin_left_layout_8',
+    'padding-top'    => 'post_social_share_padding_top_layout_8',
+    'padding-right'  => 'post_social_share_padding_right_layout_8',
+    'padding-bottom' => 'post_social_share_padding_bottom_layout_8',
+    'padding-left'   => 'post_social_share_padding_left_layout_8'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .update-date', $css->properties( [
+    'color' => 'betterdocs_single_doc_lu_time_color_layout_8_9'
+] ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-layout-8 .betterdocs-content-wrapper .docs-content-full-main .betterdocs-content-inner-area .update-date', $css->properties( [
+    'font-size' => 'single_doc_lu_time_font_size_8_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-article-reactions', $css->properties( [
+    'margin-top'          => 'post_reactions_margin_top_layout_9',
+    'margin-right'        => 'post_reactions_margin_right_layout_9',
+    'margin-bottom'       => 'post_reactions_margin_bottom_layout_9',
+    'margin-left'         => 'post_reactions_margin_left_layout_9',
+    'padding-top'         => 'post_reactions_padding_top_layout_9',
+    'padding-right'       => 'post_reactions_padding_right_layout_9',
+    'padding-bottom'      => 'post_reactions_padding_bottom_layout_9',
+    'padding-left'        => 'post_reactions_padding_left_layout_9',
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single-layout-9 .betterdocs-content-wrapper .betterdocs-full-sidebar-right .right-sidebar-toc-container .simplebar-content .betterdocs-social-share', $css->properties( [
+    'margin-top'     => 'post_social_share_margin_top_layout_9',
+    'margin-right'   => 'post_social_share_margin_right_layout_9',
+    'margin-bottom'  => 'post_social_share_margin_bottom_layout_9',
+    'margin-left'    => 'post_social_share_margin_left_layout_9',
+    'padding-top'    => 'post_social_share_padding_top_layout_9',
+    'padding-right'  => 'post_social_share_padding_right_layout_9',
+    'padding-bottom' => 'post_social_share_padding_bottom_layout_9',
+    'padding-left'   => 'post_social_share_padding_left_layout_9'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform', $css->properties( [
+    'margin-top'     => 'sidebar_search_field_margin_top_layout_7',
+    'margin-right'   => 'sidebar_search_field_margin_right_layout_7',
+    'margin-bottom'  => 'sidebar_search_field_margin_bottom_layout_7',
+    'margin-left'    => 'sidebar_search_field_margin_left_layout_7',
+    'padding-top'    => 'sidebar_search_field_padding_top_layout_7',
+    'padding-right'  => 'sidebar_search_field_padding_right_layout_7',
+    'padding-bottom' => 'sidebar_search_field_padding_bottom_layout_7',
+    'padding-left'   => 'sidebar_search_field_padding_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .command-key', $css->properties( [
+    'padding-top'    => 'sidebar_search_field_command_key_padding_top_layout_7',
+    'padding-right'  => 'sidebar_search_field_command_key_padding_right_layout_7',
+    'padding-bottom' => 'sidebar_search_field_command_key_padding_bottom_layout_7',
+    'padding-left'   => 'sidebar_search_field_command_key_padding_left_layout_7'
+], 'px' ) );
+
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .command-key', $css->properties( [
+    'color'    => 'sidebar_search_field_command_key_color_layout_7',
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'padding-top'    => 'item_count_font_padding_top_layout_7',
+    'padding-right'  => 'item_count_font_padding_right_layout_7',
+    'padding-bottom' => 'item_count_font_padding_bottom_layout_7',
+    'padding-left'   => 'item_count_font_padding_left_layout_7'
+], 'px' ) );
+/** Single Doc Layout 8, 9 End **/
+
 /** Single Doc End **/
 
 /** SideBar Controls Start **/
@@ -3263,6 +3768,144 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sin
 // $css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-3 .betterdocs-sidebar .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li a.active', $css->properties( [
 //     'color' => 'betterdocs_sidebar_active_list_item_color'
 // ] ) );
+
+//Sidebar Layout 7 Controls Start
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content', $css->properties( [
+    'background-color' => 'betterdocs_sidebar_bg_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content', $css->properties( [
+    'padding-top'    => 'betterdocs_sidebar_padding_top_layout_7',
+    'padding-right'  => 'betterdocs_sidebar_padding_right_layout_7',
+    'padding-bottom' => 'betterdocs_sidebar_padding_bottom_layout_7',
+    'padding-left'   => 'betterdocs_sidebar_padding_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-folder-icon', $css->properties( [
+    'height' => 'betterdocs_sidebar_icon_size_layout_7'
+], 'px' ) );
+
+// $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header', $css->properties( [
+//     'background-color' => 'betterdocs_sidebar_title_bg_color_layout_7'
+// ] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.show .betterdocs-single-category-inner .betterdocs-category-header', $css->properties( [
+    'background-color' => 'betterdocs_sidebar_active_cat_background_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.active.default.show::before', $css->properties( [
+    'background' => 'betterdocs_sidebar_active_cat_border_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner', $css->properties( [
+    'background-color' => 'betterdocs_sidbebar_list_bg_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
+    'color' => 'betterdocs_sidebar_title_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:hover', $css->properties( [
+    'color' => 'betterdocs_sidebar_title_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.show .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
+    'color' => 'betterdocs_sidebar_active_title_color_layout_7'
+] ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
+    'font-size' => 'betterdocs_sidebar_title_font_size_layout_7'
+], 'px' ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header', $css->properties( [
+    'padding-top'    => 'betterdocs_sidebar_title_padding_top_layout_7',
+    'padding-right'  => 'betterdocs_sidebar_title_padding_right_layout_7',
+    'padding-bottom' => 'betterdocs_sidebar_title_padding_bottom_layout_7',
+    'padding-left'   => 'betterdocs_sidebar_title_padding_left_layout_7'
+], 'px' ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header', $css->properties( [
+    'margin-top'    => 'betterdocs_sidebar_title_margin_top_layout_7',
+    'margin-right'  => 'betterdocs_sidebar_title_margin_right_layout_7',
+    'margin-bottom' => 'betterdocs_sidebar_title_margin_bottom_layout_7',
+    'margin-left'   => 'betterdocs_sidebar_title_margin_left_layout_7'
+], 'px' ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'background-color' => 'betterdocs_sidbebar_item_count_bg_color_layout_7'
+] ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'height' => 'betterdocs_sidebar_item_counter_size_layout_7',
+    'width'  => 'betterdocs_sidebar_item_counter_size_layout_7'
+], 'px' ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'color' => 'betterdocs_sidebar_item_count_color_layout_7'
+] ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'font-size' => 'betterdocs_sidebat_item_count_font_size_layout_7'
+], 'px' ) );
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a', $css->properties( [
+    'background-color' => 'betterdocs_sidbebar_item_list_bg_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a.active:before', $css->properties( [
+    'background-color' => 'betterdocs_sidebar_list_item_active_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a', $css->properties( [
+    'color' => 'betterdocs_sidebar_list_item_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a:hover', $css->properties( [
+    'color' => 'betterdocs_sidebar_list_item_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a', $css->properties( [
+    'font-size' => 'betterdocs_sidebar_list_item_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body .betterdocs-articles-list li a', $css->properties( [
+    'margin-top'    => 'betterdocs_sidebar_list_item_margin_top_layout_7',
+    'margin-right'  => 'betterdocs_sidebar_list_item_margin_right_layout_7',
+    'margin-bottom' => 'betterdocs_sidebar_list_item_margin_bottom_layout_7',
+    'margin-left'   => 'betterdocs_sidebar_list_item_margin_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform', $css->properties( [
+    'margin-top'    => 'sidebar_search_field_margin_top_layout_7',
+    'margin-right'  => 'sidebar_search_field_margin_right_layout_7',
+    'margin-bottom' => 'sidebar_search_field_margin_bottom_layout_7',
+    'margin-left'   => 'sidebar_search_field_margin_left_layout_7',
+    'padding-top'  => 'sidebar_search_field_padding_top_layout_7',
+    'padding-right'  => 'sidebar_search_field_padding_right_layout_7',
+    'padding-bottom'  => 'sidebar_search_field_padding_bottom_layout_7',
+    'padding-left'  => 'sidebar_search_field_padding_left_layout_7',
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .command-key', $css->properties( [
+    'padding-top'  => 'sidebar_search_field_command_key_padding_top_layout_7',
+    'padding-right'  => 'sidebar_search_field_command_key_padding_right_layout_7',
+    'padding-bottom'  => 'sidebar_search_field_command_key_padding_bottom_layout_7',
+    'padding-left'  => 'sidebar_search_field_command_key_padding_left_layout_7',
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-live-search.betterdocs-search-popup .betterdocs-searchform .command-key', $css->properties( [
+    'color'  => 'sidebar_search_field_command_key_color_layout_7'
+] ) );
+
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-7 .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'padding-top'  => 'item_count_font_padding_top_layout_7',
+    'padding-right'  => 'item_count_font_padding_right_layout_7',
+    'padding-bottom'  => 'item_count_font_padding_bottom_layout_7',
+    'padding-left'  => 'item_count_font_padding_left_layout_7',
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-sidebar.betterdocs-full-sidebar-left .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner', $css->properties( [
+    'padding-top'  => 'betterdocs_sidebar_list_item_padding_top_layout_7',
+    'padding-right'  => 'betterdocs_sidebar_list_item_padding_right_layout_7',
+    'padding-bottom'  => 'betterdocs_sidebar_list_item_padding_bottom_layout_7',
+    'padding-left'  => 'betterdocs_sidebar_list_item_padding_left_layout_7',
+], 'px' ) );
+
+//Sidebar Layout 7 Controls End
+
 /** SideBar Controls End **/
 
 //Attachment Content Background Color (Single Doc)
@@ -3365,18 +4008,18 @@ $css->add_rule( '.betterdocs-related-articles-container-front', $css->properties
 
 //Related Docs Content Padding Top | Right | Bottom | Left (Single Doc)
 $css->add_rule( '.betterdocs-related-articles-container-front', $css->properties( [
-    'padding-top' => 'betterdocs_doc_single_related_docs_content_padding_top',
-    'padding-right' => 'betterdocs_doc_single_related_docs_content_padding_right',
+    'padding-top'    => 'betterdocs_doc_single_related_docs_content_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_related_docs_content_padding_right',
     'padding-bottom' => 'betterdocs_doc_single_related_docs_content_padding_bottom',
-    'padding-left' => 'betterdocs_doc_single_related_docs_content_padding_left'
+    'padding-left'   => 'betterdocs_doc_single_related_docs_content_padding_left'
 ], 'px' ) );
 
 //Related Docs Content Margin Top | Right | Bottom | Left (Single Doc)
 $css->add_rule( '.betterdocs-related-articles-container-front', $css->properties( [
-    'margin-top' => 'betterdocs_doc_single_related_docs_content_margin_top',
-    'margin-right' => 'betterdocs_doc_single_related_docs_content_margin_right',
+    'margin-top'    => 'betterdocs_doc_single_related_docs_content_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_related_docs_content_margin_right',
     'margin-bottom' => 'betterdocs_doc_single_related_docs_content_margin_bottom',
-    'margin-left' => 'betterdocs_doc_single_related_docs_content_margin_left'
+    'margin-left'   => 'betterdocs_doc_single_related_docs_content_margin_left'
 ], 'px' ) );
 
 //Related Docs Label Color (Single Doc)
@@ -3386,18 +4029,18 @@ $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-
 
 //Related Docs Label Padding Top | Right | Bottom | Left
 $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-title', $css->properties( [
-    'padding-top' => 'betterdocs_doc_single_related_docs_label_padding_top',
-    'padding-right' => 'betterdocs_doc_single_related_docs_label_padding_right',
+    'padding-top'    => 'betterdocs_doc_single_related_docs_label_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_related_docs_label_padding_right',
     'padding-bottom' => 'betterdocs_doc_single_related_docs_label_padding_bottom',
-    'padding-left' => 'betterdocs_doc_single_related_docs_label_padding_left',
+    'padding-left'   => 'betterdocs_doc_single_related_docs_label_padding_left'
 ], 'px' ) );
 
 //Related Docs Label Margin Top | Right | Bottom | Left
 $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-title', $css->properties( [
-    'margin-top' => 'betterdocs_doc_single_related_docs_label_margin_top',
-    'margin-right' => 'betterdocs_doc_single_related_docs_label_margin_right',
+    'margin-top'    => 'betterdocs_doc_single_related_docs_label_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_related_docs_label_margin_right',
     'margin-bottom' => 'betterdocs_doc_single_related_docs_label_margin_bottom',
-    'margin-left' => 'betterdocs_doc_single_related_docs_label_margin_left',
+    'margin-left'   => 'betterdocs_doc_single_related_docs_label_margin_left'
 ], 'px' ) );
 
 //Related Docs List Font Size
@@ -3422,20 +4065,19 @@ $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-
 
 //Related Docs List Padding Top | Right | Bottom | Left
 $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
-    'padding-top' => 'betterdocs_doc_single_related_docs_list_padding_top',
-    'padding-right' => 'betterdocs_doc_single_related_docs_list_padding_right',
+    'padding-top'    => 'betterdocs_doc_single_related_docs_list_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_related_docs_list_padding_right',
     'padding-bottom' => 'betterdocs_doc_single_related_docs_list_padding_bottom',
-    'padding-left' => 'betterdocs_doc_single_related_docs_list_padding_left'
+    'padding-left'   => 'betterdocs_doc_single_related_docs_list_padding_left'
 ], 'px' ) );
 
 //Related Docs List Margin Top | Right | Bottom | Left
 $css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
-    'margin-top' => 'betterdocs_doc_single_related_docs_list_margin_top',
-    'margin-right' => 'betterdocs_doc_single_related_docs_list_margin_right',
+    'margin-top'    => 'betterdocs_doc_single_related_docs_list_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_related_docs_list_margin_right',
     'margin-bottom' => 'betterdocs_doc_single_related_docs_list_margin_bottom',
-    'margin-left' => 'betterdocs_doc_single_related_docs_list_margin_left'
+    'margin-left'   => 'betterdocs_doc_single_related_docs_list_margin_left'
 ], 'px' ) );
-
 
 /** Archive Page Controls Start **/
 
@@ -3495,6 +4137,25 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-con
     'padding-bottom' => 'betterdocs_archive_content_padding_bottom',
     'padding-left'   => 'betterdocs_archive_content_padding_left'
 ], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper.betterdocs-archive-layout-7 .betterdocs-search-modal-layout-1', $css->properties( [
+    'max-width'      => 'archive_search_max_width',
+    'margin-top'     => 'archive_search_margin_top',
+    'margin-bottom'  => 'archive_search_margin_bottom',
+    'padding-top'    => 'archive_search_padding_top',
+    'padding-right'  => 'archive_search_padding_right',
+    'padding-bottom' => 'archive_search_padding_bottom',
+    'padding-left'   => 'archive_search_padding_left'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper.betterdocs-archive-layout-7 .betterdocs-search-modal-layout-1', $css->properties( [
+    'width' => 'archive_search_width'
+], '%' ) );
+
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper.betterdocs-archive-layout-7 .betterdocs-search-modal-layout-1', $css->properties( [
+    'margin-left'  => 'auto',
+    'margin-right' => 'auto'
+] ) );
 
 //Archive Content Border Radius
 $css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-content-area .betterdocs-content-inner-area', $css->properties( [
@@ -3616,11 +4277,205 @@ $css->add_rule( '', $css->properties( [
     'color' => ''
 ] ) );
 
+//Archive Layout 7 Controls Start
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder', $css->properties( [
+    'background-color' => 'content_header_background_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder:hover', $css->properties( [
+    'background-color' => 'content_header_background_hover_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder .betterdocs-category-header-inner .betterdocs-category-icon .betterdocs-folder-icon', $css->properties( [
+    'height' => 'content_header_background_image_size_layout_7',
+    'width'  => 'content_header_background_image_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
+    'font-size' => 'content_header_background_title_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
+    'color' => 'content_header_background_title_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder .betterdocs-category-header-inner .betterdocs-sub-category-items-counts', $css->properties( [
+    'font-size' => 'content_header_background_count_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-main-category-folder .betterdocs-category-header-inner .betterdocs-sub-category-items-counts', $css->properties( [
+    'color' => 'content_header_background_count_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'background-color' => 'archive_column_background_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box:hover, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box:hover', $css->properties( [
+    'background-color' => 'betterdocs_archive_column_hover_bg_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'padding-top'    => 'betterdocs_archive_page_column_padding_top_layout_7',
+    'padding-right'  => 'betterdocs_archive_page_column_padding_right_layout_7',
+    'padding-bottom' => 'betterdocs_archive_page_column_padding_bottom_layout_7',
+    'padding-left'   => 'betterdocs_archive_page_column_padding_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box', $css->properties( [
+    'border-color' => 'archive_column_border_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon', $css->properties( [
+    'height' => 'betterdocs_archive_page_cat_icon_size_layout_7',
+    'width'  => 'betterdocs_archive_page_cat_icon_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'font-size' => 'betterdocs_archive_page_cat_title_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'color' => 'betterdocs_archive_page_cat_title_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title:hover, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title:hover', $css->properties( [
+    'color' => 'archive_category_title_color_hover_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title', $css->properties( [
+    'margin-top'    => 'archive_category_margin_top_layout_7',
+    'margin-right'  => 'archive_category_margin_right_layout_7',
+    'margin-bottom' => 'archive_category_margin_bottom_layout_7',
+    'margin-left'   => 'archive_category_margin_bottom_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'font-size' => 'betterdocs_archive_page_item_count_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'color' => 'archive_betterdocs_doc_page_item_count_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover', $css->properties( [
+    'color' => 'betterdocs_archive_page_item_count_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'font-size' => 'archive_last_updated_time_layout_7_font_size'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'color' => 'archive_last_updated_time_layout_7_color'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover', $css->properties( [
+    'color' => 'archive_last_updated_time_layout_7_hover_color'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'background-color' => 'archive_last_updated_time_layout_7_background_color'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover', $css->properties( [
+    'background-color' => 'archive_last_updated_time_layout_7_background_hover_color'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a', $css->properties( [
+    'color' => 'archive_docs_list_title_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a:hover', $css->properties( [
+    'color' => 'archive_docs_list_title_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a', $css->properties( [
+    'font-size' => 'archive_docs_list_title_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 span', $css->properties( [
+    'height' => 'archive_docs_list_icon_size_layout_7',
+    'width'  => 'archive_docs_list_icon_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date', $css->properties( [
+    'font-size' => 'archive_docs_list_last_updated_time_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date', $css->properties( [
+    'color' => 'archive_docs_list_last_updated_time_font_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date:hover', $css->properties( [
+    'color' => 'archive_docs_list_last_updated_time_font_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date', $css->properties( [
+    'background-color' => 'archive_docs_list_last_updated_time_background_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list .update-date:hover', $css->properties( [
+    'background-color' => 'archive_docs_list_last_updated_time_background_hover_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p', $css->properties( [
+    'font-size' => 'archive_docs_list_excerpt_font_size_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p', $css->properties( [
+    'color' => 'archive_docs_list_excerpt_font_color_layout_7'
+] ) );
+
+$css->add_rule( '.betterdocs-content-wrapper.doc-category-layout-7 #main.betterdocs-content-area .betterdocs-content-inner-area', $css->properties( [
+    'padding-top'    => 'content_area_padding_top_layout_7',
+    'padding-right'  => 'content_area_padding_right_layout_7',
+    'padding-bottom' => 'content_area_padding_bottom_layout_7',
+    'padding-left'   => 'content_area_padding_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list h2 a', $css->properties( [
+    'padding-top'    => 'archive_docs_list_title_margin_top_layout_7',
+    'padding-right'  => 'archive_docs_list_title_margin_right_layout_7',
+    'padding-bottom' => 'archive_docs_list_title_margin_bottom_layout_7',
+    'padding-left'   => 'archive_docs_list_title_margin_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts', $css->properties( [
+    'margin-top'    => 'archive_page_item_count_margin_top_layout_7',
+    'margin-right'  => 'archive_page_item_count_margin_right_layout_7',
+    'margin-bottom' => 'archive_page_item_count_margin_bottom_layout_7',
+    'margin-left'   => 'archive_page_item_count_margin_left_layout_7'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'margin-top'    => 'archive_last_updated_time_layout_7_margin_top',
+    'margin-right'  => 'archive_last_updated_time_layout_7_margin_right',
+    'margin-bottom' => 'archive_last_updated_time_layout_7_margin_bottom',
+    'margin-left'   => 'archive_last_updated_time_layout_7_margin_left'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .betterdocs-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update, .betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-content-wrapper .betterdocs-shortcode .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update', $css->properties( [
+    'padding-top'    => 'archive_last_updated_time_layout_7_padding_top',
+    'padding-right'  => 'archive_last_updated_time_layout_7_padding_right',
+    'padding-bottom' => 'archive_last_updated_time_layout_7_padding_bottom',
+    'padding-left'   => 'archive_last_updated_time_layout_7_padding_left'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-category-archive-wrapper.betterdocs-wraper .doc-category-layout-7 .betterdocs-title-excerpt-lists .betterdocs-title-excerpt-list p', $css->properties( [
+    'margin-top'    => 'archive_docs_list_excerpt_margin_top_layout_7',
+    'margin-right'  => 'archive_docs_list_excerpt_margin_right_layout_7',
+    'margin-bottom' => 'archive_docs_list_excerpt_margin_bottom_layout_7',
+    'margin-left'   => 'archive_docs_list_excerpt_margin_left_layout_7'
+], 'px' ) );
+
+//Archive Layout 7 Controls End
+
 /** Archive Page Controls End **/
 
 $css->add_rule( '.betterdocs-category-box.single-kb .docs-single-cat-wrap .docs-cat-title:hover', $css->properties( [
     'color' => 'betterdocs_doc_page_cat_title_hover_color'
-], 'px' ) );
+], '' ) );
 
 $css->add_rule( '.betterdocs-category-grid-layout-6 .betterdocs-term-info .betterdocs-term-title', $css->properties( [
     'color' => 'betterdocs_doc_page_cat_title_color2'
@@ -4033,9 +4888,35 @@ $css->add_rule( '.betterdocs-docs-archive-wrapper .betterdocs-faq-wrapper .bette
     'color' => 'betterdocs_faq_title_color'
 ] ) );
 
-$css->add_rule( '.betterdocs-docs-archive-wrapper .betterdocs-faq-wrapper .betterdocs-faq-section-title', $css->properties( [
+$css->add_rule( '.betterdocs-docs-archive-wrapper .betterdocs-faq-wrapper .betterdocs-faq-section-title, .betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-section-title', $css->properties( [
     'margin' => 'betterdocs_faq_title_margin'
 ], 'px' ) );
+
+//Breadcrumb Layout 2 Controls Start
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 ul.betterdocs-breadcrumb-list .betterdocs-breadcrumb-item a', $css->properties( [
+    'font-size' => 'betterdocs_single_doc_breadcrumbs_font_size_layout_8_9'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 ul.betterdocs-breadcrumb-list .betterdocs-breadcrumb-item a', $css->properties( [
+    'color' => 'betterdocs_single_doc_breadcrumb_color_layout_8_9'
+] ) );
+
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 ul.betterdocs-breadcrumb-list .betterdocs-breadcrumb-item .icon-container svg path', $css->properties( [
+    'color' => 'betterdocs_single_doc_breadcrumb_speretor_color_layout_8_9'
+] ) );
+
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 ul.betterdocs-breadcrumb-list .betterdocs-breadcrumb-item a:hover', $css->properties( [
+    'color' => 'betterdocs_single_doc_breadcrumb_hover_color_layout_8_9'
+] ) );
+
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 .betterdocs-breadcrumb-list .betterdocs-breadcrumb-item.current span', $css->properties( [
+    'color' => 'betterdocs_single_doc_breadcrumb_active_item_color_layout_8_9'
+] ) );
+
+$css->add_rule( '#betterdocs-breadcrumb.betterdocs-breadcrumb.layout-2 .betterdocs-breadcrumb-list', $css->properties( [
+    'background' => 'betterdocs_single_doc_breadcrumb_background_color_layout_8_9'
+] ) );
+//Breadcrumb Layout 2 Controls End
 
 /**
  * FAQ Layout 1 Customizer CSS
@@ -4119,32 +5000,36 @@ $css->add_rule( '.betterdocs-docs-archive-wrapper .betterdocs-faq-wrapper.better
 ], 'px' ) );
 
 //est reading time bg color
-$css->add_rule( '.betterdocs.reading-time', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time', $css->properties( [
     'background-color' => 'betterdocs_doc_single_content_est_reading_bg_color'
 ] ) );
 
 //est reading time color
-$css->add_rule( '.betterdocs.reading-time p', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time p', $css->properties( [
     'color' => 'betterdocs_doc_single_content_est_reading_color'
 ] ) );
 
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time p svg path', $css->properties( [
+    'fill' => 'betterdocs_doc_single_content_est_reading_icon_color'
+] ) );
+
 //est reading font-size
-$css->add_rule( '.betterdocs.reading-time p', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time p', $css->properties( [
     'font-size' => 'betterdocs_doc_single_content_est_reading_font_size'
 ], 'px' ) );
 
-//est reading border-radius
-$css->add_rule( '.betterdocs.reading-time', $css->properties( [
-    'border-radius' => 'betterdocs_doc_single_content_est_reading_border_radius'
+//est reading font-size
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time p svg', $css->properties( [
+    'width' => 'betterdocs_doc_single_content_est_reading_icon_font_size'
 ], 'px' ) );
 
 //est reading time font-weight
-$css->add_rule( '.betterdocs.reading-time p', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time p', $css->properties( [
     'font-weight' => 'betterdocs_doc_single_content_est_reading_font_weight'
 ] ) );
 
 //est reading time margin top, right, bottom, left
-$css->add_rule( '.betterdocs.reading-time', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time', $css->properties( [
     'margin-top'    => 'betterdocs_doc_single_content_est_reading_margin_top',
     'margin-right'  => 'betterdocs_doc_single_content_est_reading_margin_right',
     'margin-bottom' => 'betterdocs_doc_single_content_est_reading_margin_bottom',
@@ -4152,9 +5037,244 @@ $css->add_rule( '.betterdocs.reading-time', $css->properties( [
 ], 'px' ) );
 
 //est reading time padding top, right, bottom, left
-$css->add_rule( '.betterdocs.reading-time', $css->properties( [
+$css->add_rule( '.betterdocs-content-area .betterdocs.reading-time', $css->properties( [
     'padding-top'    => 'betterdocs_doc_single_content_est_reading_padding_top',
     'padding-right'  => 'betterdocs_doc_single_content_est_reading_padding_right',
     'padding-bottom' => 'betterdocs_doc_single_content_est_reading_padding_bottom',
     'padding-left'   => 'betterdocs_doc_single_content_est_reading_padding_left'
 ], 'px' ) );
+
+//search modal customizer styles start
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details, .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list', $css->properties( [
+    'background-color' => 'modal_wrapper_background_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details', $css->properties( [
+    'padding' => 'modal_wrapper_padding',
+    'margin'  => 'modal_wrapper_margin'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header', $css->properties( [
+    'background-color' => 'search_field_modal_background_color',
+    'color'            => 'search_field_modal_text_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .betterdocs-searchform-input-wrap .betterdocs-search-field', $css->properties( [
+    'color' => 'search_field_modal_text_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .betterdocs-searchform-input-wrap .betterdocs-search-field', $css->properties( [
+    'padding'   => 'search_field_modal_padding',
+    'margin'    => 'search_field_modal_margin',
+    'font-size' => 'search_field_modal_text_font_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .betterdocs-select-option-wrapper', $css->properties( [
+    'background-color' => 'search_field_categories_background_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .betterdocs-select-option-wrapper .betterdocs-form-select', $css->properties( [
+    'color' => 'search_field_categories_text_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .betterdocs-select-option-wrapper .betterdocs-form-select', $css->properties( [
+    'font-size' => 'search_field_categories_font_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab .betterdocs-tab-items span', $css->properties( [
+    'color' => 'search_modal_content_tabs_text_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab', $css->properties( [
+    'background-color' => 'search_modal_content_tabs_background_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab .betterdocs-tab-items span', $css->properties( [
+    'font-size' => 'search_modal_content_tabs_text_font_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-header .doc-search-icon', $css->properties( [
+    'width' => 'search_field_modal_maginifier_icon_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab', $css->properties( [
+    'margin'       => 'search_modal_content_tabs_margin',
+    'padding'      => 'search_modal_content_tabs_padding',
+    'border-width' => 'search_modal_content_tabs_border'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab', $css->properties( [
+    'border-color' => 'search_modal_content_tabs_border_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-main h4', $css->properties( [
+    'font-size' => 'search_modal_content_tabs_docs_list_font_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-main h4', $css->properties( [
+    'color' => 'search_modal_content_tabs_docs_list_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list', $css->properties( [
+    'background-color' => 'search_modal_content_tabs_docs_list_background_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list', $css->properties( [
+    'padding' => 'search_modal_content_tabs_docs_list_padding',
+    'margin'  => 'search_modal_content_tabs_docs_list_margin'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-main svg', $css->properties( [
+    'width' => 'search_modal_content_tabs_docs_list_icon_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-sub h5', $css->properties( [
+    'font-size' => 'search_modal_content_tabs_docs_list_category_font_size'
+], 'px' ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-sub h5', $css->properties( [
+    'color' => 'search_modal_content_tabs_docs_list_category_color'
+] ) );
+
+$css->add_rule( '#betterdocs-search-modal .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-items-wrapper .betterdocs-search-item-content .betterdocs-search-item-list .content-sub svg', $css->properties( [
+    'height' => 'search_modal_content_tabs_docs_list_category_icon_size',
+    'width'  => 'search_modal_content_tabs_docs_list_category_icon_size'
+], 'px' ) );
+
+//search modal customizer styles end
+
+//search layout 2 styles
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header .search-heading', $css->properties( [
+    'color' => 'betterdocs_live_search_heading_font_color_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header .search-heading', $css->properties( [
+    'font-size' => 'betterdocs_live_search_heading_font_size_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header .search-heading', $css->properties( [
+    'margin-top'    => 'betterdocs_search_heading_margin_top_layout_2',
+    'margin-right'  => 'betterdocs_search_heading_margin_right_layout_2',
+    'margin-bottom' => 'betterdocs_search_heading_margin_bottom_layout_2',
+    'margin-left'   => 'betterdocs_search_heading_margin_left_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header search-subheading', $css->properties( [
+    'color' => 'betterdocs_live_search_subheading_font_color_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header search-subheading', $css->properties( [
+    'font-size' => 'betterdocs_live_search_subheading_font_size_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-header search-subheading', $css->properties( [
+    'margin-top'    => 'betterdocs_search_subheading_margin_top_layout_2',
+    'margin-right'  => 'betterdocs_search_subheading_margin_right_layout_2',
+    'margin-bottom' => 'betterdocs_search_subheading_margin_bottom_layout_2',
+    'margin-left'   => 'betterdocs_search_subheading_margin_left_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1', $css->properties( [
+    'background-color' => 'betterdocs_live_search_background_color_layout_2',
+    'background-image' => [
+        'id'         => 'background_live_search_image_layout_2',
+        'properties' => [
+            'background-size'       => 'betterdocs_live_search_background_size_layout_2',
+            'background-repeat'     => 'betterdocs_live_search_background_repeat_layout_2',
+            'background-attachment' => 'betterdocs_live_search_background_attachment_layout_2',
+            'background-position'   => 'betterdocs_live_search_background_position_layout_2'
+        ]
+    ]
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1', $css->properties( [
+    'margin-top'     => 'betterdocs_live_search_margin_top_layout_2',
+    'margin-bottom'  => 'betterdocs_live_search_margin_bottom_layout_2',
+    'padding-top'    => 'betterdocs_live_search_padding_top_layout_2',
+    'padding-right'  => 'betterdocs_live_search_padding_right_layout_2',
+    'padding-bottom' => 'betterdocs_live_search_padding_bottom_layout_2',
+    'padding-left'   => 'betterdocs_live_search_padding_left_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar', $css->properties( [
+    'background-color' => 'betterdocs_search_field_background_color_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-docs-archive-wrapper .betterdocs-search-layout-1 .search-bar .search-input-wrapper .search-input', $css->properties( [
+    'color' => 'betterdocs_search_placeholder_color_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar', $css->properties( [
+    'padding-top'    => 'betterdocs_search_field_padding_top_layout_2',
+    'padding-right'  => 'betterdocs_search_field_padding_right_layout_2',
+    'padding-bottom' => 'betterdocs_search_field_padding_bottom_layout_2',
+    'padding-left'   => 'betterdocs_search_field_padding_left_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar .search-button', $css->properties( [
+    'font-size' => 'betterdocs_new_search_button_font_size_layout_2'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar .search-button', $css->properties( [
+    'font-weight'      => 'betterdocs_new_search_button_font_weight_layout_2',
+    'text-transform'   => 'betterdocs_new_search_button_text_transform_layout_2',
+    'color'            => 'betterdocs_search_button_text_color_layout_2',
+    'background-color' => 'betterdocs_search_button_background_color_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar .search-button:hover', $css->properties( [
+    'background-color' => 'betterdocs_search_button_background_color_hover_layout_2'
+] ) );
+
+$css->add_rule( '.betterdocs-search-modal-layout-1 .betterdocs-search-layout-1 .search-bar .search-button', $css->properties( [
+    'border-top-left-radius'     => 'betterdocs_search_button_borderr_left_top_layout_2',
+    'border-top-right-radius'    => 'betterdocs_search_button_borderr_right_top_layout_2',
+    'border-bottom-right-radius' => 'betterdocs_search_button_borderr_right_bottom_layout_2',
+    'border-bottom-left-radius'  => 'betterdocs_search_button_borderr_left_bottom_layout_2',
+    'padding-top'                => 'betterdocs_search_button_padding_top_layout_2',
+    'padding-right'              => 'betterdocs_search_button_padding_right_layout_2',
+    'padding-bottom'             => 'betterdocs_search_button_padding_bottom_layout_2',
+    'padding-left'               => 'betterdocs_search_button_padding_left_layout_2'
+], 'px' ) );
+
+//FAQ LAYOUT 3 Controls Start
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-title h2', $css->properties( [
+    'color' => 'betterdocs_faq_category_title_color_layout_3'
+] ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-title h2', $css->properties( [
+    'font-size' => 'betterdocs_faq_category_name_font_size_layout_3'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-title h2', $css->properties( [
+    'padding' => 'betterdocs_faq_category_name_padding_layout_3'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-post-name', $css->properties( [
+    'color' => 'betterdocs_faq_list_color_layout_3'
+] ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group', $css->properties( [
+    'background-color' => 'betterdocs_faq_list_background_color_layout_3'
+] ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group .betterdocs-faq-main-content', $css->properties( [
+    'background-color' => 'betterdocs_faq_list_content_background_color_layout_3'
+] ) );
+
+$css->add_rule( ".betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group .betterdocs-faq-main-content", $css->properties( [
+    'color' => 'betterdocs_faq_list_content_color_layout_3'
+] ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group .betterdocs-faq-main-content', $css->properties( [
+    'font-size' => 'betterdocs_faq_list_content_font_size_layout_3'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-post-name', $css->properties( [
+    'font-size' => 'betterdocs_faq_list_font_size_layout_3'
+], 'px' ) );
+
+$css->add_rule( '.betterdocs-faq-wrapper.betterdocs-faq-layout-3.layout-layout-3 .betterdocs-faq-inner-wrapper .betterdocs-faq-list>li .betterdocs-faq-group', $css->properties( [
+    'padding' => 'betterdocs_faq_list_padding_layout_3'
+], 'px' ) );
+//FAQ LAYOUT 3 Controls End

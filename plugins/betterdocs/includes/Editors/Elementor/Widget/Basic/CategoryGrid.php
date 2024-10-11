@@ -1160,7 +1160,7 @@ class CategoryGrid extends BaseWidget {
                 'allowed_dimensions' => 'vertical',
                 'size_units'         => ['px', 'em', '%'],
                 'selectors'          => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body' => 'padding-top: {{TOP}}{{UNIT}}; padding-bottom: {{BOTTOM}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-body' => 'padding: {{TOP}}{{UNIT}} {{BOTTOM}}{{UNIT}};'
                 ]
             ]
         );
@@ -1605,8 +1605,8 @@ class CategoryGrid extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-footer a:hover'                                                                                => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.layout-2 .betterdocs-single-category-inner .betterdocs-footer a:hover' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-footer a:hover'                                                                                => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.layout-2 .betterdocs-single-category-inner .betterdocs-footer a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -1681,7 +1681,7 @@ class CategoryGrid extends BaseWidget {
         ];
 
         $inner_wrapper_attr = [
-            'class' => [
+            'class'                     => [
                 'betterdocs-category-grid-inner-wrapper',
                 'betterdocs-category-grid',
                 $settings['layout_mode'],
@@ -1750,10 +1750,9 @@ class CategoryGrid extends BaseWidget {
         /**
          * Add This Attribute When Using Outside Betterdocs Templates Only
          */
-        if( $default_multiple_kb == 1 && ( ! empty( $kb_slug ) ) && ( ! betterdocs()->helper->is_templates() ) ) {
+        if ( $default_multiple_kb == 1 && ( ! empty( $kb_slug ) ) && ( ! betterdocs()->helper->is_templates() ) ) {
             $inner_wrapper_attr['data-mkb-slug'] = $kb_slug;
         }
-
 
         $this->add_render_attribute(
             'bd_category_grid_wrapper',

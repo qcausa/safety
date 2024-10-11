@@ -1,6 +1,7 @@
 <?php
 namespace WPDeveloper\BetterDocs\FrontEnd;
 
+use WPDeveloper\BetterDocs\Utils\Helper;
 use WPDeveloper\BetterDocs\Core\Query;
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Utils\Views;
@@ -35,6 +36,34 @@ class TemplateTags extends Base {
         'div'    => [
             'class' => [],
             'style' => []
+        ],
+        'svg'    => [
+            'xmlns'   => [],
+            'width'   => [],
+            'height'  => [],
+            'viewBox' => [],
+            'fill'    => []
+        ],
+        'path'   => [
+            'd'    => [],
+            'fill' => []
+        ],
+        'rect'   => [
+            'width'  => [],
+            'height' => [],
+            'fill'   => []
+        ],
+        'mask'   => [
+            'id'        => [],
+            'mask-type' => [],
+            'maskUnits' => [],
+            'x'         => [],
+            'y'         => [],
+            'width'     => [],
+            'height'    => []
+        ],
+        'g'      => [
+            'mask' => []
         ]
     ];
 
@@ -249,38 +278,87 @@ class TemplateTags extends Base {
         return implode( ' ', $rendered_attributes );
     }
 
-    public function search() {
-        if ( ! $this->settings->get( 'live_search' ) ) {
-            return;
-        }
+    private function get_search_attributes( $layout_specific_attributes = [] ) {
+        $search_heading      = $search_subheading      = '';
+        $heading_tag         = 'h2';
+        $subheading_tag      = 'h3';
 
-        $search_heading = $search_subheading = '';
-        $heading_tag    = 'h2';
-        $subheading_tag = 'h3';
-
-        $search_placeholder = $this->settings->get( 'search_placeholder' );
-
-        if ( $this->defaults->get( 'betterdocs_live_search_heading_switch', false ) ) {
+        if ( $this->defaults->get( 'betterdocs_live_search_heading_switch', true ) ) {
             $search_heading    = $this->defaults->get( 'betterdocs_live_search_heading' );
             $search_subheading = $this->defaults->get( 'betterdocs_live_search_subheading' );
             $heading_tag       = $this->defaults->get( 'betterdocs_live_search_heading_tag' );
             $subheading_tag    = $this->defaults->get( 'betterdocs_live_search_subheading_tag' );
         }
 
-        $_shortcode_license = apply_filters( 'betterdocs_search_shortcode_attributes', [
-            'placeholder'    => $search_placeholder,
+        $default_attributes = [
+            'placeholder'    => $this->settings->get( 'search_placeholder' ),
             'heading'        => $search_heading,
             'subheading'     => $search_subheading,
             'heading_tag'    => $heading_tag,
             'subheading_tag' => $subheading_tag
-        ], $this->mods );
+        ];
+
+        $attributes = array_merge( $default_attributes, $layout_specific_attributes );
+
+        return apply_filters( 'betterdocs_search_shortcode_attributes', $attributes, $this->mods );
+    }
+
+
+    public function search() {
+        if ( ! $this->settings->get( 'live_search' ) ) {
+            return;
+        }
+
+        $layout = $this->defaults->get( 'betterdocs_search_layout_select' );
+        $layout = apply_filters( 'select_live_search_template', Helper::determine_search_layout( $layout ) );
+
+        $shortcode_attributes_new = [];
+        if ( $layout == 'layout-2' ) {
+            $shortcode_attributes_new = [
+                'number_of_faqs'     => $this->defaults->get( 'search_modal_query_initial_number_of_faqs' ),
+                'number_of_docs'     => $this->defaults->get( 'search_modal_query_initial_number_of_docs' ),
+                // 'faq_terms'          => $this->defaults->get( 'search_modal_query_select_specific_faq' ),
+                // 'doc_terms'          => $this->defaults->get( 'search_modal_query_select_specific_doc_category' ),
+                'search_button_text' => $this->defaults->get( 'search_button_text', __( 'Search', 'betterdocs' ) )
+            ];
+        }
+
+        $_shortcode_license = $this->get_search_attributes( $shortcode_attributes_new );
 
         ob_start();
-
-        betterdocs()->views->get( 'layout-parts/search', [
+        betterdocs()->views->get( $layout == 'layout-1' ? 'layout-parts/search' : 'layout-parts/search-2', [
             'attributes' => $this->get_html_attributes( $_shortcode_license )
         ] );
+        echo ob_get_clean();
+    }
 
+
+    public function search_2() {
+        if ( ! $this->settings->get( 'live_search' ) ) {
+            return;
+        }
+
+        $_shortcode_license = $this->get_search_attributes();
+
+        ob_start();
+        betterdocs()->views->get( 'layout-parts/search-2', [
+            'attributes' => $this->get_html_attributes( $_shortcode_license )
+        ] );
+        echo ob_get_clean();
+    }
+
+
+    public function sidebar_search() {
+        if ( ! $this->settings->get( 'live_search' ) ) {
+            return;
+        }
+
+        $_shortcode_license = $this->get_search_attributes();
+
+        ob_start();
+        betterdocs()->views->get( 'layout-parts/sidebar-search', [
+            'attributes'  => $this->get_html_attributes( $_shortcode_license )
+        ] );
         echo ob_get_clean();
     }
 
@@ -352,7 +430,7 @@ class TemplateTags extends Base {
         return '';
     }
 
-    public function sidebar( $layout, $layout_type = '' ) {
+    public function sidebar( $layout, $layout_type = '', $extra_params = [] ) {
         if ( ! $this->settings->get( 'enable_archive_sidebar' ) ) {
             return;
         }
@@ -362,6 +440,8 @@ class TemplateTags extends Base {
             $_template_path = 'templates/sidebars/sidebar-5';
         } else if ( $layout == 'layout-5' ) {
             $_template_path = 'templates/sidebars/sidebar-4';
+        } else if ( $layout == 'layout-7' ) {
+            $_template_path = 'templates/sidebars/sidebar-7';
         } else if ( $layout == 'layout-2' ) {
             $_template_path = 'templates/sidebars/sidebar-2';
         } else if ( $layout == 'layout-3' ) {
@@ -372,10 +452,14 @@ class TemplateTags extends Base {
 
         $_template_path = apply_filters( 'betterdocs_archive_sidebar_template', $_template_path, $layout );
 
-        betterdocs()->views->get( $_template_path, [
-            'force' => true,
+        $default_params = [
+            'force'       => true,
             'layout_type' => $layout_type
-        ] );
+        ];
+
+        $default_params = array_merge( $default_params, $extra_params );
+
+        betterdocs()->views->get( $_template_path, $default_params );
     }
 
     public function term_options( $taxonomy = 'doc_category', $current_term = '', $parent = false ) {
@@ -452,6 +536,37 @@ class TemplateTags extends Base {
         $this->views->get( 'template-parts/category-counter', [
             'show_count' => $params['show_count'],
             'counts'     => $params['counts']
+        ] );
+    }
+
+    public function sub_category_counts( $params ) {
+        if ( ! isset( $params['show_count'], $params['counts'] ) ) {
+            return;
+        }
+
+        $this->views->get( 'template-parts/sub-category-counter', [
+            'show_count' => $params['show_count'],
+            'counts'     => $params['counts']
+        ] );
+    }
+
+    public function new_post_tag( $params ) {
+        if ( ! isset( $params['new_post_tag'], $params['new_post_tag'] ) ) {
+            return;
+        }
+
+        $this->views->get( 'template-parts/new-tag', [
+            'new_post_tag' => $params['new_post_tag']
+        ] );
+    }
+
+    public function last_update( $params ) {
+        if ( ! isset( $params['last_update'], $params['last_update'] ) ) {
+            return;
+        }
+
+        $this->views->get( 'template-parts/last-update', [
+            'last_update' => $params['last_update']
         ] );
     }
 

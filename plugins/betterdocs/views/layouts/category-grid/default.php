@@ -8,7 +8,7 @@
 
     if ( is_single() && ( $term->term_id === $current_queried_object_id || ( (bool) $nested_subcategory && in_array( $term->term_id, $ancestors ) ) ) ) {
         $attributes['class'][] = 'active';
-    } elseif ( Helper::get_tax() == 'doc_category' && $term->term_id === $current_queried_object_id ) {
+    } elseif ( Helper::get_tax() == 'doc_category' && $term->term_id === $current_queried_object_id ||  ( (bool) $nested_subcategory && Helper::get_tax() == 'doc_category' && Helper::get_the_top_most_parent($current_queried_object_id) == $term->term_id ) ) {
         $attributes['class'][] = 'active';
     }
 
