@@ -497,6 +497,155 @@ class ToC extends BaseWidget {
             ]
         );
 
+
+        // $this->add_responsive_control(
+        //     'active_border_left_position',
+        //     [
+        //         'label'      => esc_html__( 'Active Left Border Position', 'betterdocs' ),
+        //         'type'       => Controls_Manager::DIMENSIONS,
+        //         'size_units' => ['px', 'em', '%'],
+        //         'selectors'  => [
+        //             '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'left:{{LEFT}}{{UNIT}};',
+        //             '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'right:{{RIGHT}}{{UNIT}};',
+        //             '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'bottom:{{BOTTOM}}{{UNIT}};',
+        //             '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'top:{{TOP}}{{UNIT}};'
+        //         ]
+        //     ]
+        // );
+
+        $this->add_responsive_control(
+            'active_border_left_position',
+            [
+                'label'      => __( 'Active List Left Border Position Left', 'betterodcs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 2
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'left:{{SIZE}}{{UNIT}}!important;',                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'active_border_right_position',
+            [
+                'label'      => __( 'Active List Left Border Position Right', 'betterodcs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 2
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'right:{{SIZE}}{{UNIT}}!important;',
+                    ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'active_border_bottom_position',
+            [
+                'label'      => __( 'Active List Left Border Position Bottom', 'betterodcs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 2
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'bottom:{{SIZE}}{{UNIT}}!important;',                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'active_border_top_position',
+            [
+                'label'      => __( 'Active List Left Border Position Top', 'betterodcs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 2
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'top:{{SIZE}}{{UNIT}}!important;',                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'active_border_left_border_radius',
+            [
+                'label'      => __( 'Active List Left Border Radius', 'betterodcs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 4
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-toc > .toc-list a.active:after' => 'border-radius:{{SIZE}}{{UNIT}}!important;',                ]
+            ]
+        );
+
+
+
         $this->add_control(
             'list_color',
             [

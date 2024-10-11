@@ -1,6 +1,4 @@
 <?php
-do_action( 'betterdocs_docs_before_social' );
-
 $mods = betterdocs()->customizer->defaults->generate_defaults();
 
 if ( ! $mods['betterdocs_post_social_share'] ) {

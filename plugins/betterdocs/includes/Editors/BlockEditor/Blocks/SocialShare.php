@@ -29,6 +29,7 @@ class SocialShare extends Block {
             'show_twitter_icon'   => true,
             'show_linkedin_icon'  => true,
             'show_pinterest_icon' => true,
+            'show_instagram_icon' => true,
             'share_title'         => __( 'Share This Article: ', 'betterdocs' )
         ];
     }

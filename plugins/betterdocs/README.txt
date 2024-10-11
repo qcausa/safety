@@ -5,7 +5,7 @@ Tags:  docs, documentation, knowledge base, faq, chatgpt ai writer
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 3.6.6
+Stable tag: 3.7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -218,6 +218,17 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.7.0 - 01/10/2024 =
+
+- Added: New Doc Layout | Sleek Layout
+- Added 2 New Single Docs Layout | Essence & Rustic Layout
+- Added: New Category Archive Layout | Sleek Layout
+- Added: New Search Layout | Modal 
+- Added: New FAQ Layout | Abstract Layout
+- Added: New Elementor Widget | Doc Category Archive Header
+- Added: New Layout options inside Elementor
+- Few minor bug fixes and improvements
 
 = 3.6.6 - 12/09/2024 =
 

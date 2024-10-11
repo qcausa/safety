@@ -19,6 +19,10 @@ class CategoryBox extends BaseWidget {
     use CategoryBoxTraits;
     use TemplateQuery;
 
+    public $attributes = [
+        'taxonomy' => 'doc_cateogry'
+    ];
+
     public function get_name() {
         return 'betterdocs-category-box';
     }
@@ -72,8 +76,8 @@ class CategoryBox extends BaseWidget {
             [
                 'label'       => __( 'Select Layout', 'betterdocs' ),
                 'type'        => Controls_Manager::SELECT2,
-                'options'     => betterdocs()->views->get_layouts( 'category-box' ),
-                'default'     => betterdocs()->views->get_default_layout( 'category-box' ),
+                'options'     => betterdocs()->views->get_elementor_box_layouts(),
+                'default'     => 'layout-4',
                 'label_block' => true
             ]
         );
@@ -83,14 +87,15 @@ class CategoryBox extends BaseWidget {
             [
                 'label'              => __( 'Box Column', 'betterdocs' ),
                 'type'               => Controls_Manager::SELECT,
-                'default'            => '3',
+                'default'            => '4',
                 'tablet_default'     => '2',
                 'mobile_default'     => '1',
                 'options'            => [
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
-                    '4' => '4'
+                    '4' => '4',
+                    '5' => '5',
                 ],
                 'prefix_class'       => 'elementor-grid%s-',
                 'frontend_available' => true,
@@ -103,6 +108,21 @@ class CategoryBox extends BaseWidget {
                 ]
             ]
         );
+
+        $this->add_control(
+			'box_column_layout_4',
+			[
+				'label'   => esc_html__( 'Box Column', 'textdomain' ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 2,
+				'max'     => 5,
+				'step'    => 1,
+				'default' => 4,
+                'condition'          => [
+                    'layout_template' => ['layout-4']
+                ],
+			]
+		);
 
         $this->add_control(
             'show_icon',
@@ -186,7 +206,7 @@ class CategoryBox extends BaseWidget {
                 'dynamic'   => ['active' => true],
                 'condition' => [
                     'show_count'      => 'true',
-                    'layout_template' => ['default', 'layout-3']
+                    'layout_template' => ['default', 'layout-4', 'layout-3']
                 ]
             ]
         );
@@ -197,10 +217,10 @@ class CategoryBox extends BaseWidget {
                 'label'     => __( 'Suffix', 'betterdocs' ),
                 'type'      => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
-                'default'   => __( 'articles', 'betterdocs' ),
+                'default'   => __( 'Docs', 'betterdocs' ),
                 'condition' => [
                     'show_count'      => 'true',
-                    'layout_template' => ['default', 'layout-3']
+                    'layout_template' => ['default', 'layout-4', 'layout-3']
                 ]
             ]
         );
@@ -211,10 +231,10 @@ class CategoryBox extends BaseWidget {
                 'label'     => __( 'Suffix Singular', 'betterdocs' ),
                 'type'      => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
-                'default'   => __( 'article', 'betterdocs' ),
+                'default'   => __( 'Doc', 'betterdocs' ),
                 'condition' => [
                     'show_count'      => 'true',
-                    'layout_template' => ['default', 'layout-3']
+                    'layout_template' => ['default', 'layout-4', 'layout-3']
                 ]
             ]
         );
@@ -226,8 +246,8 @@ class CategoryBox extends BaseWidget {
         $this->start_controls_section(
             'section_card_container_section',
             [
-                'label'     => __( 'Container Section', 'betterdocs' ),
-                'tab'       => Controls_Manager::TAB_STYLE,
+                'label' => __( 'Container Section', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE
             ]
         );
 
@@ -1041,7 +1061,7 @@ class CategoryBox extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-category-box-wrapper.betterdocs-elementor.el-layout-2 .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts:hover'
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.betterdocs-elementor.el-layout-2 .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts:hover' => "border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};"
                 ]
             ]
         );
@@ -1059,6 +1079,338 @@ class CategoryBox extends BaseWidget {
         $this->end_controls_tabs();
 
         $this->end_controls_section(); # end of 'Count Styles'
+    }
+
+    protected function count_style_layout_4() {
+        $this->start_controls_section(
+            'section_box_count_styles_layout_4',
+            [
+                'label'     => __( 'Count', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout_template' => [
+                        'layout-4'
+                    ]
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'count_typography_normal_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_spacing_layout_4',
+            [
+                'label'      => __( 'Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'count_box_bg_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts'
+            ]
+        );
+
+        $this->start_controls_tabs( 'box_count_styles_tab_layout_4' );
+
+        // Normal State Tab
+        $this->start_controls_tab(
+            'count_normal_layout_4',
+            ['label' => esc_html__( 'Normal', 'betterdocs' )]
+        );
+
+        $this->add_control(
+            'count_color_normal_layout_4',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'count_box_border_layout_4',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_box_border_radius_layout_4',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'count_box_box_shadow_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts'
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        // Hover State Tab
+        $this->start_controls_tab(
+            'count_hover_layout_4',
+            ['label' => esc_html__( 'Hover', 'betterdocs' )]
+        );
+
+        $this->add_control(
+            'category_count_transition_layout_4',
+            [
+                'label'      => __( 'Transition', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'default'    => [
+                    'size' => 300,
+                    'unit' => '%'
+                ],
+                'size_units' => ['%'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 2500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts' => 'transition: {{SIZE}}ms;'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'count_color_hover_layout_4',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'count_box_bg_hover_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'count_box_border_hover_layout_4',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_box_border_radius_hover_layout_4',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'count_box_box_shadow_hover_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-sub-category-items-counts:hover'
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section(); # end of 'Count Styles'
+    }
+
+    public function last_updated_style_layout_4() {
+        $this->start_controls_section(
+            'section_last_updated_time_styles_layout_4',
+            [
+                'label'     => __( 'Last Updated Time', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout_template' => [
+                        'layout-4'
+                    ]
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'last_updated_typography_normal_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'last_updated_padding_layout_4',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'last_updated_bg_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update'
+            ]
+        );
+
+        $this->start_controls_tabs( 'last_updated_styles_tab_layout_4' );
+
+        // Normal State Tab
+        $this->start_controls_tab(
+            'last_updated_normal_layout_4',
+            ['label' => esc_html__( 'Normal', 'betterdocs' )]
+        );
+
+        $this->add_control(
+            'last_updated_normal_layout_4_color',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'last_updated_border_layout_4',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'last_updated_border_radius_layout_4',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'last_updated_shadow_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update'
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        // Hover State Tab
+        $this->start_controls_tab(
+            'last_updated_hover_layout_4',
+            ['label' => esc_html__( 'Hover', 'betterdocs' )]
+        );
+
+        $this->add_control(
+            'last_updated_color_hover_layout_4',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'last_updated_bg_hover_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'last_updated_border_hover_layout_4',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'last_updated_border_radius_hover_layout_4',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'last_updated_shadow_hover_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover'
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section(); # end of 'Last Updated Time'
     }
 
     protected function register_controls() {
@@ -1118,24 +1470,30 @@ class CategoryBox extends BaseWidget {
         $this->icon_setting_style();
         $this->category_title_style();
         $this->category_article_count();
+
+        /**
+         * Layout 4 Controls
+         */
+        $this->layout4_wrapper();
+        $this->icon_setting_style_layout_4();
+        $this->category_title_style_layout_4();
+        $this->count_style_layout_4();
+        $this->last_updated_style_layout_4();
     }
 
     protected function render_callback() {
         $settings = &$this->attributes;
+        $settings['taxonomy'] = 'doc_category';
 
-        if ( $settings['layout_template'] == 'Layout_Default' ) {
-            $settings['layout_template'] = 'default';
+        if( is_tax('doc_category') && $settings['layout_template'] == 'layout-4') {
+            add_filter('betterdocs_base_terms_args', [$this, 'render_child_terms'], 10, 1);
         }
 
-        if ( $settings['layout_template'] == 'Layout_2' ) {
-            $settings['layout_template'] = 'layout-2';
+        if( $settings['layout_template'] == 'layout-4' ) {
+            add_filter('betterdocs_layout_filename', [$this, 'change_to_layout_four'], 15, 3);
         }
 
-        if ( $settings['layout_template'] == 'Layout_3' ) {
-            $settings['layout_template'] = 'layout-3';
-        }
-
-        $_filter_added = ( $this->attributes['layout_template'] === 'layout-2' || $this->attributes['layout_template'] === 'layout-3' );
+        $_filter_added = ( $this->attributes['layout_template'] === 'layout-2' || $this->attributes['layout_template'] === 'layout-3' || $this->attributes['layout_template'] === 'layout-4' );
 
         $this->add_filter( $_filter_added );
         $this->views( 'layouts/base' );
@@ -1145,12 +1503,18 @@ class CategoryBox extends BaseWidget {
     public function view_params() {
         $settings = &$this->attributes;
 
-        $wrapper_class = 'el-layout-defualt';
+
+        $wrapper_class       = 'el-layout-defualt';
+
+        $inner_wrapper_class = 'betterdocs-category-box-inner-wrapper';
 
         if ( $settings['layout_template'] == 'layout-2' ) {
             $wrapper_class = 'el-layout-2 layout-3';
         } else if ( $settings['layout_template'] == 'layout-3' ) {
             $wrapper_class = 'el-layout-3 layout-3 betterdocs-category-list-view-wrapper';
+        } else if ( $settings['layout_template'] == 'layout-4' ) {
+            $wrapper_class       = 'betterdocs-category-box-folder-wrapper el-layout-4';
+            $inner_wrapper_class = 'betterdocs-category-box-inner-wrapper betterdocs-categories-folder layout-4 docs-col-' . $settings['box_column_layout_4'];
         }
 
         $this->add_render_attribute(
@@ -1164,15 +1528,6 @@ class CategoryBox extends BaseWidget {
             ]
         );
 
-        $this->add_render_attribute(
-            'bd_category_box_inner',
-            [
-                'class' => [
-                    'betterdocs-category-box-inner-wrapper'
-                ]
-            ]
-        );
-
         $is_edit_mode = ElementorPlugin::instance()->editor->is_edit_mode();
 
         $show_description = $settings['layout_template'] == 'layout-3' ? (bool) $settings['listview-show-description'] : false;
@@ -1182,10 +1537,11 @@ class CategoryBox extends BaseWidget {
             'taxonomy'           => 'doc_category',
             'order'              => $settings['order'],
             'orderby'            => $settings['orderby'],
-            'offset'             => $settings['offset'],
-            'number'             => $settings['box_per_page'],
-            'nested_subcategory' => isset( $settings['nested_subcategory'] ) ? $settings['nested_subcategory'] : false
         ];
+
+        $terms_query['offset'] = $settings['offset'];
+        $terms_query['number'] = $settings['box_per_page'];
+        $terms_query['nested_subcategory'] = isset( $settings['nested_subcategory'] ) ? $settings['nested_subcategory'] : false;
 
         if ( $settings['include'] ) {
             $terms_query['include'] = array_diff( $settings['include'], (array) $settings['exclude'] );
@@ -1218,20 +1574,81 @@ class CategoryBox extends BaseWidget {
 
         $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
 
-        $params = wp_parse_args( [
+        $term_count = count( get_terms( $terms_query ) );
+
+        $terms_query_args = $this->betterdocs( 'query' )->terms_query( $terms_query );
+
+        if ( is_tax( 'doc_category' ) ) {
+            $current_category = get_queried_object();
+            $_nested_categories = betterdocs()->query->get_child_term_ids_by_parent_id( 'doc_category', $current_category->term_id );
+            if ( ! $_nested_categories ) {
+                $terms_query_args = false;
+            }
+            $term_count = count( explode( ',', $_nested_categories ) );
+        }
+
+        $box_column = $settings['layout_template'] != 'layout-4' ? $settings['box_column'] : $settings['box_column_layout_4'];
+
+        $styles = '';
+        if ( $settings['layout_template'] == 'layout-4' ) {
+            $reminder = $term_count % $settings['box_column_layout_4'];
+            $styles .= "--column: $box_column;";
+            $styles .= "--count: $term_count;";
+            $styles .= "--reminder: $reminder;";
+        } else {
+            $reminder = 0;
+        }
+
+        $this->add_render_attribute(
+            'bd_category_box_inner',
+            [
+                'class' => [
+                    $inner_wrapper_class
+                ],
+                'style' => $styles
+            ]
+        );
+
+        $default_params = [
             'wrapper_attr'            => $this->get_render_attributes( 'bd_category_box_wrapper' ),
             'inner_wrapper_attr'      => $this->get_render_attributes( 'bd_category_box_inner' ),
             'layout'                  => sanitize_file_name( $settings['layout_template'] ),
+            'total_terms'             => $term_count,
+            'reminder'                => $reminder,
+            'column'                  => $box_column,
             'widget_type'             => 'category-box',
             'multiple_knowledge_base' => $default_multiple_kb,
             'kb_slug'                 => $kb_slug,
             'is_edit_mode'            => $is_edit_mode,
             'term_icon_meta_key'      => 'doc_category_image-id',
-            'terms_query_args'        => $this->betterdocs( 'query' )->terms_query( $terms_query ),
+            'terms_query_args'        => $terms_query_args,
             'show_description'        => $show_description
-        ], $settings );
+        ];
+
+        if ( $settings['layout_template'] == 'layout-4' ) {
+            $default_params['show_description']      = false;
+            $default_params['last_update']           = true;
+            $default_params['category_icon']         = 'folder';
+            $default_params['count_suffix']          = 'Docs';
+            $default_params['count_suffix_singular'] = 'Doc';
+        }
+
+        $params = wp_parse_args( $default_params, $settings );
 
         return $params;
+    }
+
+    public function change_to_layout_four($layout, $layout_two, $widget_type){
+        return 'layout-4';
+    }
+
+    public function render_child_terms($args) {
+        $current_category_id = get_queried_object() != null ? get_queried_object()->term_id : '';
+        $_nested_categories  = betterdocs()->query->get_child_term_ids_by_parent_id( 'doc_category', $current_category_id );
+        if( ! empty( $_nested_categories ) ) {
+            $args['include'] = $_nested_categories;
+        }
+        return $args;
     }
 
     public function layout3_wrapper() {
@@ -1407,6 +1824,189 @@ class CategoryBox extends BaseWidget {
                 'name'     => 'box_shadow_hover',
                 'label'    => __( 'Box Shadow', 'betterdocs' ),
                 'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper .betterdocs-category-box-inner-wrapper:hover'
+            ]
+        );
+
+        $this->end_controls_tab();
+        /** Hover State Tab End **/
+
+        $this->end_controls_tabs();
+        $this->end_controls_section();
+    }
+
+    public function layout4_wrapper() {
+        /**
+         * ----------------------------------------------------------
+         * Section: Box Styles
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'listview_wrapper_secion_layout_5',
+            [
+                'label'     => __( 'Wrapper', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout_template' => 'layout-4'
+                ]
+            ]
+        );
+
+        $this->start_controls_tabs( 'box_background_color_tabs_layout_4' );
+
+        /** Normal State Tab Start **/
+        $this->start_controls_tab(
+            'box_background_color_normal_layout_4',
+            [
+                'label' => esc_html__( 'Normal', 'betterdocs' )
+            ]
+        );
+
+        $this->add_responsive_control(
+            'listview_wholebox_margin_normal_layout_4',
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'listview_wholebox_padding_normal_layout_4',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'box_background_color_normal_heading_layout_4',
+            [
+                'label'     => __( 'Background', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'box_background_color_1_layout_4',
+                'types'    => ['classic', 'gradient', 'video'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box'
+            ]
+        );
+
+        $this->add_control(
+            'box_border_color_normal_heading_layout_4',
+            [
+                'label'     => __( 'Border', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'box_border_normal_layout_4',
+                'label'    => __( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'box_shadow_normal_layout_4',
+                'label'    => __( 'Box Shadow', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box'
+            ]
+        );
+
+        $this->end_controls_tab();
+        /** Normal State Tab End **/
+
+        /** Hover State Tab Start **/
+        $this->start_controls_tab(
+            'box_background_color_hover_layout_4',
+            [
+                'label' => esc_html__( 'Hover', 'betterdocs' )
+            ]
+        );
+
+        $this->add_responsive_control(
+            'listview_wholebox_margin_hover_layout_4',
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'listview_wholebox_padding_hover_layout_4',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'box_background_color_hover_heading_layout_4',
+            [
+                'label'     => __( 'Background', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'box_background_color_2_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box:hover'
+            ]
+        );
+
+        $this->add_control(
+            'box_border_color_hover_heading_layout_4',
+            [
+                'label'     => __( 'Border', 'betterdocs' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'box_border_hover_layout_4',
+                'label'    => __( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box:hover'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'box_shadow_hover_layout_4',
+                'label'    => __( 'Box Shadow', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box:hover'
             ]
         );
 
@@ -1767,6 +2367,161 @@ class CategoryBox extends BaseWidget {
         $this->end_controls_section();
     }
 
+    public function icon_setting_style_layout_4() {
+
+        /**
+         * ----------------------------------------------------------
+         * Section: Icon Styles
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'cat_boxes_icon_style_layout_4',
+            [
+                'label'     => __( 'Category Icon', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout_template' => 'layout-4'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'cat_boxes_icon_height_layout_4',
+            [
+                'label'      => esc_html__( 'Size', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    'px' => [
+                        'max' => 500
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->start_controls_tabs( 'cat_boxes_icon_tabs_layout_4' );
+
+        /** Normal State Tab Start **/
+        $this->start_controls_tab(
+            'cat_boxes_icon_normal_layout_4',
+            ['label' => esc_html__( 'Normal', 'betterdocs' )]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'box_icon_background_colors_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon',
+                'exclude'  => [
+                    'image'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'box_icon_padding_layout_4',
+            [
+                'label'      => esc_html__( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ],
+                'condition'  => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'cat_boxes_icon_border_layout_4',
+                'label'    => __( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'icon_border_radius_normal_layout_3_layout_4',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+        /** Normal State Tab End **/
+
+        /** Hover State Tab Start **/
+        $this->start_controls_tab(
+            'cat_boxes_icon_hover_layout_4',
+            [
+                'label' => esc_html__( 'Hover', 'betterdocs' )
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'box_icon_background_colors_hover_layout_4',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon:hover',
+                'exclude'  => [
+                    'image'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'box_icon_padding_hover_layout_4',
+            [
+                'label'      => esc_html__( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ],
+                'condition'  => [
+                    'layout_template' => 'layout-4'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'cat_boxes_icon_border_hover_layout_4',
+                'label'    => __( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon:hover'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'cat_boxes_icon_border_radius_hover_layout_4',
+            [
+                'label'      => esc_html__( 'Icon Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-folder-icon:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        /** Hover State Tab End **/
+        $this->end_controls_tabs();
+        $this->end_controls_section();
+    }
+
     public function category_title_style() {
         /**
          * ----------------------------------------------------------
@@ -1855,6 +2610,105 @@ class CategoryBox extends BaseWidget {
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
                     '{{WRAPPER}} .betterdocs-category-box-wrapper .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-title:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+        /** Hover State Tab End **/
+
+        $this->end_controls_tabs();
+        $this->end_controls_section();
+    }
+
+    public function category_title_style_layout_4() {
+        /**
+         * ----------------------------------------------------------
+         * Section: Category Title Styles
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'cat_boxes_title_style_layout_4',
+            [
+                'label'     => __( 'Title', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout_template' => 'layout-4'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'cat_boxes_title_typo_normal_layout_4',
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title'
+            ]
+        );
+
+        $this->start_controls_tabs( 'cat_boxes_title_icon_tabs_layout_4' );
+
+        /** Normal State Tab Start **/
+        $this->start_controls_tab(
+            'cat_boxes_title_icon_normal_layout_4',
+            [
+                'label' => esc_html__( 'Normal', 'betterdocs' )
+            ]
+        );
+
+        $this->add_control(
+            'cat_boxes_title_color_layout_4',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'cat_boxes_title_spacing_normal_layout_4',
+            [
+                'label'      => __( 'Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+        /** Normal State Tab End **/
+
+        /** Hover State Tab Start **/
+        $this->start_controls_tab(
+            'cat_boxes_title_icon_hover_layout_4',
+            [
+                'label' => esc_html__( 'Hover', 'betterdocs' )
+            ]
+        );
+
+        $this->add_control(
+            'cat_boxes_title_color_hover_layout_4',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title:hover' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'cat_boxes_title_spacing_hover_layout_4',
+            [
+                'label'      => __( 'Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title:hover' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );

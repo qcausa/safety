@@ -7,6 +7,7 @@ use WP_Customize_Image_Control;
 use WPDeveloper\BetterDocs\Admin\Customizer\Customizer;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\TitleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\SelectControl;
+use WPDeveloper\BetterDocs\Admin\Customizer\Controls\ToggleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\DimensionControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\SeparatorControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\AlphaColorControl;
@@ -53,6 +54,10 @@ class ArchivePage extends Section {
                     'section'  => 'betterdocs_archive_page_settings',
                     'label'    => __( 'Select Category Archive Layout', 'betterdocs' ),
                     'choices'  => apply_filters( 'betterdocs_archive_layout_choices', [
+                        'layout-7' => [
+                            'label' => __( 'Sleek Layout', 'betterdocs' ),
+                            'image' => $this->assets->icon( 'customizer/archive/layout-7.png', true )
+                        ],
                         'layout-1' => [
                             'label' => __( 'Classic Layout', 'betterdocs' ),
                             'image' => $this->assets->icon( 'customizer/archive/layout-1.png', true )
@@ -82,7 +87,7 @@ class ArchivePage extends Section {
                             'image' => $this->assets->icon( 'customizer/archive/layout-6.png', true ),
                             'pro'   => true,
                             'url'   => 'https://betterdocs.co/upgrade'
-                        ]
+                        ],
                     ] )
                 ]
             )
@@ -416,6 +421,289 @@ class ArchivePage extends Section {
         );
     }
 
+    public function archive_search_wrapper() {
+        $this->customizer->add_setting( 'archive_search_wrapper', [
+            'default'           => $this->defaults['archive_search_wrapper'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'archive_search_wrapper', [
+                'label'    => __( 'Search', 'betterdocs' ),
+                'settings' => 'archive_search_wrapper',
+                'section'  => 'betterdocs_archive_page_settings'
+            ] )
+        );
+    }
+
+    public function archive_search_toogle() {
+        $this->customizer->add_setting( 'archive_search_toogle', [
+            'default'           => $this->defaults['archive_search_toogle'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'archive_search_toogle', [
+                'label'    => __( 'Enable', 'betterdocs' ),
+                'section'  => 'betterdocs_archive_page_settings',
+                'settings' => 'archive_search_toogle',
+                'type'     => 'light', // light, ios, flat
+            ]
+        ) );
+    }
+
+    public function archive_search_width() {
+        $this->customizer->add_setting( 'archive_search_width', [
+            'default'           => $this->defaults['archive_search_width'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_search_width', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_width',
+                'label'       => __( 'Archive Search Width', 'betterdocs' ), //Renamed From 'Content Area Width' to 'Category Archive Width' @since betterdocs revamp version
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => '%' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_search_max_width() {
+        $this->customizer->add_setting( 'archive_search_max_width', [
+            'default'           => $this->defaults['archive_search_max_width'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_search_max_width', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_max_width',
+                'label'       => __( 'Category Search Max Width', 'betterdocs' ), //Renamed From 'Content Area Width' to 'Category Archive Width' @since betterdocs revamp version
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 3000,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+
+    public function archive_search_margin() {
+        $this->customizer->add_setting( 'archive_search_margin', [
+            'default'           => $this->defaults['archive_search_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_search_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_margin',
+                'label'       => __( 'Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_search_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] ) );
+
+        $this->customizer->add_setting( 'archive_search_margin_top', [
+            'default'           => $this->defaults['archive_search_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        // $this->customizer->add_setting( 'archive_search_margin_right', [
+        //     'default'           => $this->defaults['archive_search_margin_right'],
+        //     'capability'        => 'edit_theme_options',
+        //     'transport'         => 'postMessage',
+        //     'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        // ] );
+
+        // $this->customizer->add_control( new DimensionControl(
+        //     $this->customizer, 'archive_search_margin_right', [
+        //         'type'        => 'betterdocs-dimension',
+        //         'section'     => 'betterdocs_archive_page_settings',
+        //         'settings'    => 'archive_search_margin_right',
+        //         'label'       => __( 'Right', 'betterdocs' ),
+        //         'input_attrs' => [
+        //             'class' => 'archive_search_margin betterdocs-dimension'
+        //         ]
+        //     ] )
+        // );
+
+        $this->customizer->add_setting( 'archive_search_margin_bottom', [
+            'default'           => $this->defaults['archive_search_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        // $this->customizer->add_setting( 'archive_search_margin_left', [
+        //     'default'           => $this->defaults['archive_search_margin_left'],
+        //     'capability'        => 'edit_theme_options',
+        //     'transport'         => 'postMessage',
+        //     'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        // ] );
+
+        // $this->customizer->add_control( new DimensionControl(
+        //     $this->customizer, 'archive_search_margin_left', [
+        //         'type'        => 'betterdocs-dimension',
+        //         'section'     => 'betterdocs_archive_page_settings',
+        //         'settings'    => 'archive_search_margin_left',
+        //         'label'       => __( 'Left', 'betterdocs' ),
+        //         'input_attrs' => [
+        //             'class' => 'archive_search_margin_left betterdocs-dimension'
+        //         ]
+        //     ] )
+        // );
+    }
+
+    public function archive_search_padding() {
+        $this->customizer->add_setting( 'archive_search_padding', [
+            'default'           => $this->defaults['archive_search_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_search_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_padding',
+                'label'       => __( 'Padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_search_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] ) );
+
+        $this->customizer->add_setting( 'archive_search_padding_top', [
+            'default'           => $this->defaults['archive_search_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_search_padding_right', [
+            'default'           => $this->defaults['archive_search_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_search_padding_bottom', [
+            'default'           => $this->defaults['archive_search_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_search_padding_left', [
+            'default'           => $this->defaults['archive_search_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_search_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_search_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_search_padding_left betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
     public function content_area_settings() {
         $this->customizer->add_setting( 'betterdocs_archive_content_area_settings', [
             'default'           => $this->defaults['betterdocs_archive_content_area_settings'],
@@ -653,6 +941,107 @@ class ArchivePage extends Section {
         );
     }
 
+
+    public function content_area_padding_layout_7() {
+        $this->customizer->add_setting( 'content_area_padding_layout_7', [
+            'default'           => $this->defaults['content_area_padding_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'content_area_padding_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_area_padding_layout_7',
+                'label'       => __( 'Content Area Padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'content_area_padding_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'content_area_padding_top_layout_7', [
+            'default'           => $this->defaults['content_area_padding_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'content_area_padding_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_area_padding_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'content_area_padding_layout_7 betterdocs-dimension'
+                ]
+            ] ) );
+
+        $this->customizer->add_setting( 'content_area_padding_right_layout_7', [
+            'default'           => $this->defaults['content_area_padding_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'content_area_padding_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_area_padding_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'content_area_padding_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'content_area_padding_bottom_layout_7', [
+            'default'           => $this->defaults['content_area_padding_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'content_area_padding_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_area_padding_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'content_area_padding_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'content_area_padding_left_layout_7', [
+            'default'           => $this->defaults['content_area_padding_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'content_area_padding_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_area_padding_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'content_area_padding_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
     public function content_border_radius() {
         $this->customizer->add_setting( 'betterdocs_archive_content_border_radius', [
             'default'           => $this->defaults['betterdocs_archive_content_border_radius'],
@@ -677,6 +1066,1509 @@ class ArchivePage extends Section {
             ] )
         );
     }
+
+    public function content_header_layout_7() {
+        $this->customizer->add_setting( 'content_header_layout_7', [
+            'default'           => $this->defaults['content_header_layout_7'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'content_header_layout_7', [
+                'label'    => __( 'Content Header', 'betterdocs' ),
+                'settings' => 'content_header_layout_7',
+                'section'  => 'betterdocs_archive_page_settings'
+            ] )
+        );
+    }
+
+    public function content_header_background_layout_7() {
+        $this->customizer->add_setting( 'content_header_background_layout_7', [
+            'default'           => $this->defaults['content_header_background_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'content_header_background_layout_7',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'content_header_background_layout_7'
+                ]
+            )
+        );
+    }
+
+    public function content_header_background_hover_layout_7() {
+        $this->customizer->add_setting( 'content_header_background_hover_layout_7', [
+            'default'           => $this->defaults['content_header_background_hover_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'content_header_background_hover_layout_7',
+                [
+                    'label'    => __( 'Background Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'content_header_background_hover_layout_7'
+                ]
+            )
+        );
+    }
+
+    public function content_header_background_image_size() {
+        $this->customizer->add_setting( 'content_header_background_image_size_layout_7', [
+            'default'           => $this->defaults['content_header_background_image_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'content_header_background_image_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_header_background_image_size_layout_7',
+                'label'       => __( 'Image Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px'
+                ]
+            ] )
+        );
+    }
+
+    public function content_header_background_title_font_size() {
+        $this->customizer->add_setting( 'content_header_background_title_font_size_layout_7', [
+            'default'           => $this->defaults['content_header_background_title_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'content_header_background_title_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_header_background_title_font_size_layout_7',
+                'label'       => __( 'Title Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px'
+                ]
+            ] )
+        );
+    }
+
+    public function content_header_background_title_color() {
+        $this->customizer->add_setting( 'content_header_background_title_color_layout_7', [
+            'default'           => $this->defaults['content_header_background_title_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'content_header_background_title_color_layout_7',
+                [
+                    'label'    => __( 'Title Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'content_header_background_title_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function content_header_background_count_font_size() {
+        $this->customizer->add_setting( 'content_header_background_count_font_size_layout_7', [
+            'default'           => $this->defaults['content_header_background_count_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'content_header_background_count_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'content_header_background_count_font_size_layout_7',
+                'label'       => __( 'Count Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px'
+                ]
+            ] )
+        );
+    }
+
+    public function content_header_background_count_color() {
+        $this->customizer->add_setting( 'content_header_background_count_color_layout_7', [
+            'default'           => $this->defaults['content_header_background_count_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'content_header_background_count_color_layout_7',
+                [
+                    'label'    => __( 'Count Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'content_header_background_count_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_category_column_settings() {
+        $this->customizer->add_setting( 'archive_category_column_settings_layout_7', [
+            'default'           => $this->defaults['archive_category_column_settings_layout_7'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'archive_category_column_settings_layout_7', [
+                'label'    => __( 'Category Column Settings', 'betterdocs' ),
+                'settings' => 'archive_category_column_settings_layout_7',
+                'section'  => 'betterdocs_archive_page_settings'
+            ]
+        ) );
+    }
+
+    public function archive_column_background_color_layout_7() {
+        $this->customizer->add_setting( 'archive_column_background_color_layout_7', [
+            'default'           => $this->defaults['archive_column_background_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_column_background_color_layout_7',
+                [
+                    'label'    => __( 'Column Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_column_background_color_layout_7',
+                ]
+            )
+        );
+    }
+
+
+    public function archive_column_background_color_hover_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_archive_column_hover_bg_color_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_column_hover_bg_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_archive_column_hover_bg_color_layout_7',
+                [
+                    'label'    => __( 'Column Hover Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'betterdocs_archive_column_hover_bg_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_column_padding_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_archive_page_column_padding_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_column_padding_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_archive_page_column_padding_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_column_padding_layout_7',
+                'label'       => __( 'Column Padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_archive_page_column_padding_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ]
+        ) );
+
+        $this->customizer->add_setting( 'betterdocs_archive_page_column_padding_top_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_column_padding_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_archive_page_column_padding_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_column_padding_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_archive_page_column_padding_layout_7 betterdocs-dimension'
+                ]
+            ]
+        ) );
+
+        $this->customizer->add_setting( 'betterdocs_archive_page_column_padding_right_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_column_padding_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_archive_page_column_padding_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_column_padding_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_archive_page_column_padding_layout_7 betterdocs-dimension'
+                ]
+            ]
+        ) );
+
+        $this->customizer->add_setting( 'betterdocs_archive_page_column_padding_bottom_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_column_padding_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_archive_page_column_padding_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_column_padding_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_archive_page_column_padding_layout_7 betterdocs-dimension'
+                ]
+            ]
+        ) );
+
+        $this->customizer->add_setting( 'betterdocs_archive_page_column_padding_left_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_column_padding_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_archive_page_column_padding_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_column_padding_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_archive_page_column_padding_layout_7 betterdocs-dimension'
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_column_border_color_layout_7() {
+        $this->customizer->add_setting( 'archive_column_border_color_layout_7', [
+            'default'           => $this->defaults['archive_column_border_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_column_border_color_layout_7',
+                [
+                    'label'    => __( 'Column Border Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_column_border_color_layout_7',
+                ]
+            )
+        );
+    }
+
+
+    public function archive_category_icon_size_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_archive_page_cat_icon_size_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_cat_icon_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_archive_page_cat_icon_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_cat_icon_size_layout_7',
+                'label'       => __( 'Icon Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 200,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+
+    public function archive_category_title_font_size_layout_7() {
+
+        $this->customizer->add_setting( 'betterdocs_archive_page_cat_title_font_size_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_cat_title_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_archive_page_cat_title_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_cat_title_font_size_layout_7',
+                'label'       => __( 'Category Title Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_category_title_color() {
+        $this->customizer->add_setting( 'betterdocs_archive_page_cat_title_color_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_cat_title_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_archive_page_cat_title_color_layout_7',
+                [
+                    'label'    => __( 'Category Title Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'betterdocs_archive_page_cat_title_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_category_title_color_hover_layout_7() {
+        $this->customizer->add_setting( 'archive_category_title_color_hover_layout_7', [
+            'default'           => $this->defaults['archive_category_title_color_hover_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_category_title_color_hover_layout_7',
+                [
+                    'label'    => __( 'Category Title Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_category_title_color_hover_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_category_margin_layout_7() {
+        $this->customizer->add_setting( 'archive_category_margin_layout_7', [
+            'default'           => $this->defaults['archive_category_margin_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_category_margin_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_category_margin_layout_7',
+                'label'       => __( 'Archive Title Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_category_margin_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_category_margin_top_layout_7', [
+            'default'           => $this->defaults['archive_category_margin_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_category_margin_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_category_margin_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_category_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_category_margin_right_layout_7', [
+            'default'           => $this->defaults['archive_category_margin_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_category_margin_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_category_margin_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_category_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_category_margin_bottom_layout_7', [
+            'default'           => $this->defaults['archive_category_margin_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_category_margin_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_category_margin_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_category_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_category_margin_left_layout_7', [
+            'default'           => $this->defaults['archive_category_margin_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_category_margin_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_category_margin_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_category_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function archive_page_item_count_font_size_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_archive_page_item_count_font_size_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_item_count_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_archive_page_item_count_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'betterdocs_archive_page_item_count_font_size_layout_7',
+                'label'       => __( 'Column Count Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] ) );
+    }
+
+
+    public function archive_doc_page_item_count_color_layout_7() {
+        $this->customizer->add_setting( 'archive_betterdocs_doc_page_item_count_color_layout_7', [
+            'default'           => $this->defaults['archive_betterdocs_doc_page_item_count_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_betterdocs_doc_page_item_count_color_layout_7',
+                [
+                    'label'    => __( 'Column Count Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_betterdocs_doc_page_item_count_color_layout_7',
+                ] )
+        );
+    }
+
+    public function archive_page_item_count_hover_color_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_archive_page_item_count_hover_color_layout_7', [
+            'default'           => $this->defaults['betterdocs_archive_page_item_count_hover_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_archive_page_item_count_hover_color_layout_7',
+                [
+                    'label'    => __( 'Column Count Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'betterdocs_archive_page_item_count_hover_color_layout_7',
+                ] )
+        );
+    }
+
+    public function archive_page_item_count_margin_layout_7() {
+        $this->customizer->add_setting( 'archive_page_item_count_margin_layout_7', [
+            'default'           => $this->defaults['archive_page_item_count_margin_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_page_item_count_margin_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_page_item_count_margin_layout_7',
+                'label'       => __( 'Column Count Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_page_item_count_margin_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_page_item_count_margin_top_layout_7', [
+            'default'           => $this->defaults['archive_page_item_count_margin_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_page_item_count_margin_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_page_item_count_margin_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_page_item_count_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_page_item_count_margin_right_layout_7', [
+            'default'           => $this->defaults['archive_page_item_count_margin_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_page_item_count_margin_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_page_item_count_margin_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_page_item_count_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_page_item_count_margin_bottom_layout_7', [
+            'default'           => $this->defaults['archive_page_item_count_margin_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_page_item_count_margin_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_page_item_count_margin_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_page_item_count_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_page_item_count_margin_left_layout_7', [
+            'default'           => $this->defaults['archive_page_item_count_margin_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_page_item_count_margin_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_page_item_count_margin_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_page_item_count_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer,
+            'archive_last_updated_time_layout_7',
+            [
+                'label'    => __( 'Last Updated Time', 'betterdocs' ),
+                'settings' => 'archive_last_updated_time_layout_7',
+                'section'  => 'betterdocs_archive_page_settings',
+            ]
+        ) );
+    }
+
+    public function archive_last_updated_time_layout_7_font_size() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_font_size', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] ) );
+    }
+
+    public function archive_last_updated_time_layout_7_color() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_color', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_last_updated_time_layout_7_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_last_updated_time_layout_7_color',
+                ] )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7_hover_color() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_hover_color', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_hover_color'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_last_updated_time_layout_7_hover_color',
+                [
+                    'label'    => __( 'Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_last_updated_time_layout_7_hover_color',
+                ] )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7_background_color() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_background_color', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_last_updated_time_layout_7_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_last_updated_time_layout_7_background_color',
+                ]
+            )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7_background_hover_color() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_background_hover_color', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_background_hover_color'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_last_updated_time_layout_7_background_hover_color',
+                [
+                    'label'    => __( 'Background Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_last_updated_time_layout_7_background_hover_color',
+                ]
+            )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7_margin() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_margin', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_margin',
+                'label'       => __( 'Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_last_updated_time_layout_7_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_margin_top', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_margin_right', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_margin_bottom', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_margin_left', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function archive_last_updated_time_layout_7_padding() {
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_padding', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_padding',
+                'label'       => __( 'Count padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_last_updated_time_layout_7_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_padding_top', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_padding_right', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_padding_bottom', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_last_updated_time_layout_7_padding_left', [
+            'default'           => $this->defaults['archive_last_updated_time_layout_7_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_last_updated_time_layout_7_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_last_updated_time_layout_7_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_last_updated_time_layout_7_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+
+    public function archive_docs_list_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_layout_7'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer,
+            'archive_docs_list_layout_7',
+            [
+                'label'    => __( 'Archive Docs List', 'betterdocs' ),
+                'settings' => 'archive_docs_list_layout_7',
+                'section'  => 'betterdocs_archive_page_settings',
+            ]
+        ) );
+    }
+
+    public function archive_docs_list_title_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_title_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_title_color_layout_7',
+                [
+                    'label'    => __( 'Title Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_title_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_title_hover_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_title_hover_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_hover_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_title_hover_color_layout_7',
+                [
+                    'label'    => __( 'Title Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_title_hover_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_title_font_size_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_title_font_size_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_list_title_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_font_size_layout_7',
+                'label'       => __( 'Title Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_docs_list_title_margin_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_title_margin_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_margin_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_docs_list_title_margin_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_margin_layout_7',
+                'label'       => __( 'Title Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_docs_list_title_margin_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_title_margin_top_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_margin_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_title_margin_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_margin_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_title_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_title_margin_right_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_margin_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_title_margin_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_margin_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_title_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_title_margin_bottom_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_margin_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_title_margin_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_margin_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_title_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_title_margin_left_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_title_margin_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_title_margin_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_title_margin_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_title_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+
+    public function archive_docs_list_icon_size_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_icon_size_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_icon_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_list_icon_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_icon_size_layout_7',
+                'label'       => __( 'List Icon Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_docs_list_last_updated_time_font_size_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_last_updated_time_font_size_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_last_updated_time_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_list_last_updated_time_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_last_updated_time_font_size_layout_7',
+                'label'       => __( 'List Updated Time Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_docs_list_last_updated_time_font_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_last_updated_time_font_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_last_updated_time_font_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_last_updated_time_font_color_layout_7',
+                [
+                    'label'    => __( 'List Updated Time Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_last_updated_time_font_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_last_updated_time_font_hover_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_last_updated_time_font_hover_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_last_updated_time_font_hover_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_last_updated_time_font_hover_color_layout_7',
+                [
+                    'label'    => __( 'List Updated Time Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_last_updated_time_font_hover_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_last_updated_time_background_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_last_updated_time_background_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_last_updated_time_background_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_last_updated_time_background_color_layout_7',
+                [
+                    'label'    => __( 'List Updated Time Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_last_updated_time_background_color_layout_7',
+                ]
+            )
+        );
+    }
+
+
+    public function archive_docs_list_last_updated_time_background_hover_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_last_updated_time_background_hover_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_last_updated_time_background_hover_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_last_updated_time_background_hover_color_layout_7',
+                [
+                    'label'    => __( 'List Updated Time Background Hover Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_last_updated_time_background_hover_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_excerpt_font_size_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_font_size_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_font_size_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_list_excerpt_font_size_layout_7', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_font_size_layout_7',
+                'label'       => __( 'List Excerpt Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ]
+        ) );
+    }
+
+    public function archive_docs_list_excerpt_font_color_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_font_color_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_font_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_list_excerpt_font_color_layout_7',
+                [
+                    'label'    => __( 'List Excerpt Font Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_list_excerpt_font_color_layout_7',
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_list_excerpt_margin_layout_7() {
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_margin_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_margin_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'archive_docs_list_excerpt_margin_layout_7', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_margin_layout_7',
+                'label'       => __( 'List Excerpt Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'archive_docs_list_excerpt_margin_layout_7',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_margin_top_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_margin_top_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_excerpt_margin_top_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_margin_top_layout_7',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_excerpt_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_margin_right_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_margin_right_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_excerpt_margin_right_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_margin_right_layout_7',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_excerpt_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_margin_bottom_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_margin_bottom_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_excerpt_margin_bottom_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_margin_bottom_layout_7',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_excerpt_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'archive_docs_list_excerpt_margin_left_layout_7', [
+            'default'           => $this->defaults['archive_docs_list_excerpt_margin_left_layout_7'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'archive_docs_list_excerpt_margin_left_layout_7', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_list_excerpt_margin_left_layout_7',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'archive_docs_list_excerpt_margin_layout_7 betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+
 
     public function title_tag() {
         $this->customizer->add_setting( 'betterdocs_archive_title_tag', [

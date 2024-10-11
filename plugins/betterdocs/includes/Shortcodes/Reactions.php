@@ -24,8 +24,19 @@ class Reactions extends Shortcode {
      */
     public function default_attributes() {
         return [
-            'text' => ''
+            'text'   => '',
+            'layout' => 'layout-1'
         ];
+    }
+
+    public function generate_attributes() {
+        $attributes = [
+            'class' => [
+                $this->attributes['layout']
+            ]
+        ];
+
+        return $attributes;
     }
 
     /**
@@ -36,15 +47,23 @@ class Reactions extends Shortcode {
      * @return mixed
      */
     public function render( $atts, $content = null ) {
-        $this->views( 'widgets/reactions' );
+        if ( isset( $atts['layout'] ) && $atts['layout'] == 'layout-2' ) {
+            $this->views( 'widgets/reactions-2' );
+        } else if ( isset( $atts['layout'] ) && $atts['layout'] == 'layout-3' ) {
+                $this->views( 'widgets/reactions-3' );
+        } else {
+            $this->views( 'widgets/reactions' );
+        }
     }
 
     public function view_params() {
+        $wrapper_attr = $this->generate_attributes();
         $reactions_text = ! empty( $this->attributes['text'] ) ? $this->attributes['text'] : $this->customizer->get(
             'betterdocs_post_reactions_text', __( 'What are your Feelings', 'betterdocs' )
         );
 
         return [
+            'wrapper_attr'   => $wrapper_attr,
             'reactions_text' => $reactions_text
         ];
     }

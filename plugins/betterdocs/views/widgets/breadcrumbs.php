@@ -2,7 +2,7 @@
     if ( is_front_page() ) {
         return;
     }
-
+    $breadcrumbs_layout = isset( $breadcrumbs_layout ) ? $breadcrumbs_layout : 'layout-1';
     $home_text                  = betterdocs()->settings->get( 'breadcrumb_home_text', 'Home' );
     $home_url                   = betterdocs()->settings->get( 'breadcrumb_home_url' );
     $enable_breadcrumb_category = betterdocs()->settings->get( 'enable_breadcrumb_category' );
@@ -91,14 +91,15 @@
         'id'    => ['betterdocs-breadcrumb']
     ];
 
-    if ( ! empty( $wrapper_attr_array ) && isset( $widget_type ) && $widget_type === 'betterdocs-breadcrumb' ) {
-        $wrapper_attr_array['class'][] = 'betterdocs-breadcrumb';
+    if ( isset( $breadcrumbs_layout ) && ! empty( $breadcrumbs_layout ) ) {
+        $wrapper_attr_array['class'][] = 'betterdocs-breadcrumb ' . $breadcrumbs_layout;
         $wrapper_attr_array['id'][]    = 'betterdocs-breadcrumb';
     } else {
         $wrapper_attr_array = $_wrapper_attr_array;
     }
 
-    if ( $widget instanceof \WPDeveloper\BetterDocs\Editors\BlockEditor\Block ) {
+
+    if ( isset($widget) && $widget instanceof \WPDeveloper\BetterDocs\Editors\BlockEditor\Block ) {
         $wrapper_attr_array['class'][] = $blockId;
     }
 
@@ -112,7 +113,7 @@
             foreach ( $breadcrumbs as $breadcrumb ):
                 $li_classes = ['betterdocs-breadcrumb-item'];
                 $li_classes = ! empty( $breadcrumb['li_classes'] ) ? array_merge( $li_classes, $breadcrumb['li_classes'] ) : $li_classes;
-            ?>
+                ?>
 	            <li class="<?php echo implode( ' ', $li_classes );?>">
 	                <?php
                             if ( empty( $breadcrumb['url'] ) ) {
@@ -127,15 +128,15 @@
                             }
                         ?>
 	            </li>
-	            <?php if ( next( $breadcrumbs ) ): ?>
-	                <li class="betterdocs-breadcrumb-item breadcrumb-delimiter">
-	                    <span class="icon-container">
-	                        <svg class="breadcrumb-delimiter-icon svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-	                            <path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
-	                        </svg>
-	                    </span>
-	                </li>
-	            <?php endif;?>
-<?php endforeach;?>
+	            <?php
+                if ( next( $breadcrumbs ) ):
+                    if ( $breadcrumbs_layout == 'layout-2' ) {
+                        $view_object->get( 'template-parts/breadcrumb-delimiter-2' );
+                    } else {
+                        $view_object->get( 'template-parts/breadcrumb-delimiter-1' );
+                    }
+                endif;
+                ?>
+        <?php endforeach;?>
     </ul>
 </nav>

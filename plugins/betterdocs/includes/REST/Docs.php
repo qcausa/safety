@@ -2,6 +2,9 @@
 
 namespace WPDeveloper\BetterDocs\REST;
 
+use Error;
+use WP_Query;
+use WP_REST_Response;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
 
 class Docs extends BaseAPI {
@@ -10,6 +13,9 @@ class Docs extends BaseAPI {
     }
 
     public function register() {
+        $this->get( 'search', [$this, 'search_posts'] );
+        $this->get( 'search-insert', [$this, 'search_insert'] );
+        $this->get( 'get-terms', [$this, 'get_terms_name_and_slug'] );
         $this->get( 'months-with-posts', [$this, 'get_months_with_posts'] );
         $this->register_field( 'docs', 'year_month', [
             'get_callback' => [$this, 'year_month']
@@ -122,4 +128,148 @@ class Docs extends BaseAPI {
             return '';
         }
     }
+
+    public function search_posts( $request ) {
+        $search_query   = sanitize_text_field($request->get_param('s'));
+        $doc_category   = sanitize_text_field($request->get_param('doc_category'));
+        $number         = (int) $request->get_param('per_page') ? (int) $request->get_param('per_page') : 5;
+        $posts          = array();
+
+        // Common query args
+        $common_args = [
+            'post_status'      => 'publish',
+            'suppress_filters' => true,
+            'orderby'          => 'relevance',
+        ];
+
+        if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+            $common_args['suppress_filters'] = false;
+            $common_args['lang']             = ICL_LANGUAGE_CODE;
+        }
+
+        if ( $search_query ) {
+            $common_args['s'] = $search_query;
+            $common_args['posts_per_page'] = -1;
+        } else {
+            $common_args['posts_per_page'] = $number;
+        }
+
+        // Docs-specific query
+        $docs_args = array_merge( $common_args, [
+            'post_type'       => 'docs'
+        ]);
+
+        if ( ! $search_query ) {
+            $docs_args['meta_key']       = '_betterdocs_meta_views';
+            $docs_args['orderby']        = 'meta_value_num';
+            $docs_args['order']          = 'DESC';
+        }
+
+        // Taxonomy filter for docs
+        if ( $doc_category ) {
+            $docs_args['tax_query'] = [
+                [
+                    'taxonomy'         => 'doc_category',
+                    'field'            => 'slug',
+                    'terms'            => $doc_category,
+                    'operator'         => 'AND',
+                    'include_children' => true,
+                ],
+            ];
+        }
+
+        // FAQ-specific query
+        $faq_args = array_merge( $common_args, [
+            'post_type'      => 'betterdocs_faq',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ]);
+
+        // Run individual queries
+        $docs_query = betterdocs()->query->get_posts( $docs_args );
+        $faq_query  = new WP_Query( $faq_args );
+
+        // Process docs posts
+        if ( $docs_query->have_posts() ) {
+            while ( $docs_query->have_posts() ) {
+                $docs_query->the_post();
+
+                $taxonomies = array();
+                $terms = get_the_terms(get_the_ID(), 'doc_category');
+                if ($terms && !is_wp_error($terms)) {
+                    $taxonomies = wp_list_pluck($terms, 'name');
+                }
+
+                $posts[] = array(
+                    'title'      => get_the_title(),
+                    'post_type'  => get_post_type(),
+                    'permalink'  => get_the_permalink(),
+                    'taxonomies' => implode(', ', $taxonomies),
+                );
+            }
+            wp_reset_postdata();
+        }
+
+        // Process FAQ posts with content
+        if ( $faq_query->have_posts() ) {
+            while ( $faq_query->have_posts() ) {
+                $faq_query->the_post();
+
+                $terms = get_the_terms(get_the_ID(), 'betterdocs_faq_category');
+                $taxonomies = array();
+                if ($terms && !is_wp_error($terms)) {
+                    $taxonomies = wp_list_pluck($terms, 'name');
+                }
+
+                $posts[] = array(
+                    'title'      => get_the_title(),
+                    'content'    => get_the_content(),  // Include post content for FAQ posts
+                    'post_type'  => get_post_type(),
+                    'permalink'  => get_the_permalink(),
+                    'taxonomies' => implode(', ', $taxonomies),
+                );
+            }
+            wp_reset_postdata();
+        }
+
+        return $posts;
+    }
+
+
+
+    public function search_insert( $request ) {
+        $search_input = sanitize_text_field($request->get_param('s'));
+        $no_result = sanitize_text_field($request->get_param('no_result'));
+
+        return betterdocs()->query->insert_search_keyword($search_input, $no_result);
+    }
+
+
+    public function get_terms_name_and_slug( $request ) {
+        // Retrieve all terms for the specified taxonomy, including empty ones
+        $terms = get_terms([
+            'taxonomy' => $request->get_param('taxonomy'),
+            'hide_empty' => false,
+            'fields' => 'all',
+        ]);
+
+        // Initialize an empty array to hold the term data
+        $term_data = [];
+
+        // Loop through each term and extract the name and slug
+        $term_data = array_map(function($term) {
+            return [
+                'name' => $term->name,
+                'slug' => $term->slug,
+                'parent' => $term->parent,
+            ];
+        }, $terms);
+
+
+        // Return the array of term data
+        return $term_data;
+    }
+
+    public function get_faq_categories( $request ) {}
+
 }

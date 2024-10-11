@@ -76,6 +76,10 @@ class Install extends Base {
             // Re-check if any setup needed.
             $this->check_db_updates();
 
+            if ( get_option( 'betterdocs_version' ) && str_replace( '.', '', $betterdocs_code_version ) >= 370 ) {
+                $this->migrate_customizer();
+            }
+
             // Re-check if any migration is needed.
             $this->container->get( Migration::class )->init( str_replace( '.', '', $betterdocs_code_version ) );
 
@@ -186,5 +190,53 @@ class Install extends Base {
 
         // Update DB Version
         update_option( 'betterdocs_db_version', $_db_code_version );
+    }
+
+    public function migrate_customizer() {
+        $search_layout = get_theme_mod( 'betterdocs_search_layout_select' );
+        if ( empty( $search_layout ) ) {
+            set_theme_mod( 'betterdocs_search_layout_select', 'layout-1' );
+        }
+
+        $search_heading = get_theme_mod( 'betterdocs_live_search_heading_switch' );
+        if ( empty( $search_heading ) ) {
+            set_theme_mod( 'betterdocs_live_search_heading_switch', false );
+        }
+
+        $docs_layout = get_theme_mod( 'betterdocs_docs_layout_select' );
+        if ( empty( $docs_layout ) ) {
+            set_theme_mod( 'betterdocs_docs_layout_select', 'layout-1' );
+        }
+
+        $single_layout = get_theme_mod( 'betterdocs_single_layout_select' );
+        if ( empty( $single_layout ) ) {
+            set_theme_mod( 'betterdocs_single_layout_select', 'layout-1' );
+        }
+
+        $category_archive_layout = get_theme_mod( 'betterdocs_archive_layout_select' );
+        if ( empty( $category_archive_layout ) ) {
+            set_theme_mod( 'betterdocs_archive_layout_select', 'layout-1' );
+        }
+
+        $search_layout_select = get_theme_mod( 'betterdocs_search_layout_select' );
+        if ( empty( $search_layout_select ) ) {
+            set_theme_mod( 'betterdocs_search_layout_select', 'layout-1' );
+        }
+
+        $docs_faq = get_theme_mod( 'betterdocs_select_faq_template' );
+        if ( empty( $docs_faq ) ) {
+            set_theme_mod( 'betterdocs_select_faq_template', 'layout-1' );
+        }
+
+        if ( function_exists( 'betterdocs_pro' ) ) {
+            $mkb_layout = get_theme_mod( 'betterdocs_multikb_layout_select' );
+            if ( empty( $mkb_layout ) ) {
+                set_theme_mod( 'betterdocs_multikb_layout_select', 'layout-1' );
+            }
+            $mkb_faq = get_theme_mod( 'betterdocs_select_faq_template_mkb' );
+            if ( empty( $mkb_faq ) ) {
+                set_theme_mod( 'betterdocs_select_faq_template_mkb', 'layout-1' );
+            }
+        }
     }
 }

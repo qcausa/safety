@@ -8,11 +8,6 @@
     <div class="docs-single-title">
         <?php
             /**
-             * Breadcrumbs
-             */
-            $view_object->get( 'templates/parts/breadcrumbs' );
-
-            /**
              * Title
              */
             if ( betterdocs()->settings->get( 'enable_post_title' ) ) {

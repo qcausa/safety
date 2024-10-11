@@ -5,6 +5,7 @@
          */
         $view_object->get( 'templates/parts/tags' );
 
+        do_action( 'betterdocs_docs_before_social' );
         /**
          * Social Share
          */

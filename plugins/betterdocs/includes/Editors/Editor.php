@@ -37,6 +37,9 @@ class Editor extends Base {
 
         // add_action( 'admin_enqueue_scripts', [$this, 'admin_enqueue'] );
         // add_action( 'wp_enqueue_scripts', [$this, 'public_enqueue'] );
+
+        //Add placeholder image for elementor theme builder (All Parts) Tab
+        add_filter('elementor-pro/site-editor/data/template', [$this, 'replace_all_parts_betterdocs_urls'], 10, 1);
     }
 
     public function admin_enqueue( $hook ) {
@@ -99,5 +102,14 @@ class Editor extends Base {
         }
 
         return $term_count;
+    }
+
+    public function replace_all_parts_betterdocs_urls( $data ) {
+        if(isset( $data['type'] ) && $data['type'] == 'docs' ){
+            $data['placeholderUrl'] = 'https://demo.betterdocs.co/wp-content/uploads/2024/09/Single-doc.svg';
+        } else if(isset( $data['type'] ) && $data['type'] == 'doc-archive' ){
+            $data['placeholderUrl'] = 'https://demo.betterdocs.co/wp-content/uploads/2024/09/Docs-Archive.svg';
+        }
+        return $data;
     }
 }

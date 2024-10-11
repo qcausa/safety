@@ -40,6 +40,7 @@
                     <div class="doc-single-content-wrapper">
                         <?php
                             while ( have_posts() ): the_post();
+                                $view_object->get( 'templates/parts/breadcrumbs' );
                                 /**
                                  * Headers
                                  */

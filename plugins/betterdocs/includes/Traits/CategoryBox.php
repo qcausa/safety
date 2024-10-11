@@ -15,11 +15,18 @@ trait CategoryBox {
             ]];
         }
 
+        if( $layout === 'layout-4' ) {
+            $_layout_sequence = ['category_icon', [
+                'class'    => 'betterdocs-category-title-counts',
+                'sequence' => ['new_post_tag', 'category_title', 'category_description', 'sub_category_counts', 'last_update']
+            ]];
+        }
+
         return $_layout_sequence;
     }
 
     public function layout_filename( $filename, $origin_layout ) {
-        return $origin_layout === 'layout-3' || $origin_layout === 'layout-2' ? 'default' : $filename;
+        return $origin_layout == 'layout-4' || $origin_layout === 'layout-3' || $origin_layout === 'layout-2' ? 'default' : $filename;
     }
 
     public function add_filter( $eligible ){

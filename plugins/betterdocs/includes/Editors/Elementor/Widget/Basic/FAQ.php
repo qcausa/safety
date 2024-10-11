@@ -59,6 +59,7 @@ class FAQ extends Widget_Base {
                 'label'       => __( 'Select Layout', 'betterdocs' ),
                 'type'        => Controls_Manager::SELECT2,
                 'options'     => [
+                    'layout-3' => __( 'Abstract Layout', 'betterdocs' ),
                     'layout-1' => __( 'Modern Layout', 'betterdocs' ),
                     'layout-2' => __( 'Classic Layout', 'betterdocs' )
                 ],

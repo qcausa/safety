@@ -200,15 +200,15 @@ class Settings extends Base {
             'column_number'                 => 3,
             'posts_number'                  => 10,
             'post_count'                    => true,
-            'count_text'                    => __( 'docs', 'betterdocs' ),
-            'count_text_singular'           => __( 'doc', 'betterdocs' ),
+            'count_text'                    => __( 'Docs', 'betterdocs' ),
+            'count_text_singular'           => __( 'Doc', 'betterdocs' ),
             'exploremore_btn'               => true,
             'exploremore_btn_txt'           => __( 'Explore More', 'betterdocs' ),
             'doc_single'                    => 1,
             'enable_toc'                    => true,
             'toc_title'                     => __( 'Table of Contents', 'betterdocs' ),
             'toc_hierarchy'                 => true,
-            'toc_list_number'               => true,
+            'toc_list_number'               => false,
             'toc_dynamic_title'             => false,
             'enable_sticky_toc'             => true,
             'sticky_toc_offset'             => 100,
@@ -245,7 +245,7 @@ class Settings extends Base {
             'enable_faq_write_with_ai'      => true,
             'ai_autowrite_api_key'          => '',
             'ai_autowrite_max_token'        => 1500,
-            'enable_estimated_reading_time' => false,
+            'enable_estimated_reading_time' => true,
             'enable_encyclopedia'           => false,
             'enable_glossaries'             => false,
             'show_glossary_suggestions'     => true,
@@ -855,6 +855,7 @@ class Settings extends Base {
                                                                     'name'     => 'column_number',
                                                                     'type'     => 'number',
                                                                     'label'    => __( 'Number Of Columns', 'betterdocs' ),
+                                                                    'label_subtitle' => __( 'This setting is not applicable for sleek layout.', 'betterdocs' ),
                                                                     'default'  => 3,
                                                                     'priority' => 3
                                                                 ],
@@ -878,14 +879,14 @@ class Settings extends Base {
                                                                     'name'     => 'count_text',
                                                                     'type'     => 'text',
                                                                     'label'    => __( 'Count Text', 'betterdocs' ),
-                                                                    'default'  => __( 'docs', 'betterdocs' ),
+                                                                    'default'  => __( 'Docs', 'betterdocs' ),
                                                                     'priority' => 6
                                                                 ],
                                                                 'count_text_singular'            => [
                                                                     'name'     => 'count_text_singular',
                                                                     'type'     => 'text',
                                                                     'label'    => __( 'Count Text Singular', 'betterdocs' ),
-                                                                    'default'  => __( 'doc', 'betterdocs' ),
+                                                                    'default'  => __( 'Doc', 'betterdocs' ),
                                                                     'priority' => 7
                                                                 ],
                                                                 'exploremore_btn'                => [
@@ -1189,20 +1190,20 @@ class Settings extends Base {
                                                                     'default'                    => '',
                                                                     'priority'                   => 8
                                                                 ],
+                                                                'reaction_feedback_text'        => [
+                                                                    'name'     => 'reaction_feedback_text',
+                                                                    'type'     => 'text',
+                                                                    'label'    => __( 'Reaction Feedback Text', 'betterdocs' ),
+                                                                    'default'  => __( 'Thanks for your feedback.', 'betterdocs' ),
+                                                                    'priority' => 9
+                                                                ],
                                                                 'enable_estimated_reading_time' => [
                                                                     'name'                       => 'enable_estimated_reading_time',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Estimated Reading Time', 'betterdocs' ),
                                                                     'enable_disable_text_active' => true,
                                                                     'default'                    => 0,
-                                                                    'priority'                   => 9
-                                                                ],
-                                                                'reaction_feedback_text'        => [
-                                                                    'name'     => 'reaction_feedback_text',
-                                                                    'type'     => 'text',
-                                                                    'label'    => __( 'Reaction Feedback Text', 'betterdocs' ),
-                                                                    'default'  => __( 'Thanks for your feedback', 'betterdocs' ),
-                                                                    'priority' => 10
+                                                                    'priority'                   => 10
                                                                 ],
                                                                 'estimated_reading_time_title'  => [
                                                                     'name'     => 'estimated_reading_time_title',

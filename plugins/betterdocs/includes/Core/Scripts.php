@@ -2,7 +2,7 @@
 
 namespace WPDeveloper\BetterDocs\Core;
 use WPDeveloper\BetterDocs\Utils\Base;
-use  WPDeveloper\BetterDocs\Utils\Helper;
+use WPDeveloper\BetterDocs\Utils\Helper;
 
 class Scripts extends Base {
     protected $settings;
@@ -25,6 +25,7 @@ class Scripts extends Base {
 
         // Shortcodes Styles Registrations
         $assets->register( 'betterdocs-search', 'public/css/search.css' );
+        $assets->register( 'betterdocs-search-modal', 'public/css/search-modal.css' );
         $assets->register( 'betterdocs-social-share', 'public/css/social-share.css' );
         $assets->register( 'betterdocs-feedback-form', 'public/css/feedback-form.css' );
         $assets->register( 'betterdocs-reactions', 'public/css/reactions.css' );
@@ -38,7 +39,10 @@ class Scripts extends Base {
         $assets->register( 'betterdocs-breadcrumb', 'public/css/breadcrumb.css' );
         $assets->register( 'betterdocs-single', 'public/css/single.css' );
         $assets->register( 'betterdocs-docs', 'public/css/docs.css' );
+        $assets->register( 'betterdocs-category-archive-header', 'public/css/archive-header.css' );
+        $assets->register( 'betterdocs-category-archive-doc-list', 'public/css/archive-doc-list.css' );
         $assets->register( 'betterdocs-doc_category', 'public/css/tax-doc_category.css', ['betterdocs-breadcrumb'] );
+        $assets->register( 'betterdocs-author', 'public/css/author.css' );
 
         $assets->register( 'betterdocs-category-grid', 'public/css/category-grid.css', ['simplebar'] );
         $assets->register( 'betterdocs-category-box', 'public/css/category-box.css' );
@@ -54,6 +58,7 @@ class Scripts extends Base {
         $assets->register( 'betterdocs-faq', 'shortcodes/js/faq.js', ['jquery'] );
         $assets->register( 'betterdocs-reactions', 'shortcodes/js/reactions.js', ['jquery'] );
         $assets->register( 'betterdocs-search', 'shortcodes/js/search.js', ['jquery'] );
+        $assets->register( 'betterdocs-search-modal', 'shortcodes/js/search-modal.js', ['jquery'] );
 
         $assets->localize( 'betterdocs', 'betterdocsConfig', [
             'ajax_url'          => admin_url( 'admin-ajax.php' ),
@@ -66,13 +71,25 @@ class Scripts extends Base {
             'search_letter_limit' => $this->settings->get( 'search_letter_limit' )
         ] );
 
-         /**
+        $assets->localize( 'betterdocs-search-modal', 'betterdocsSearchModalConfig', [
+            'ajax_url'               => admin_url( 'admin-ajax.php' ),
+            'advance_search'         => $this->settings->get( 'advance_search' ),
+            'child_category_exclude' => $this->settings->get( 'child_category_exclude' ),
+            'popular_keyword_limit'  => $this->settings->get( 'popular_keyword_limit' ),
+            'search_letter_limit'    => $this->settings->get( 'search_letter_limit' ),
+            'search_placeholder'     => $this->settings->get( 'search_placeholder' ),
+            'search_button_text'     => $this->settings->get( 'search_button_text' ),
+            'search_not_found_text'  => $this->settings->get( 'search_not_found_text' ),
+            'kb_based_search'        => $this->settings->get( 'kb_based_search' )
+        ] );
+
+        /**
          * Localize This In Order To Know If This Shortcode Is Arriving From Betterdocs Templates Or Not
          */
-        betterdocs()->assets->localize('betterdocs-category-grid', 'betterdocsCategoryGridConfig', [
+        betterdocs()->assets->localize( 'betterdocs-category-grid', 'betterdocsCategoryGridConfig', [
             'is_betterdocs_templates' => betterdocs()->helper->is_templates() ? true : false
-        ]);
-        
+        ] );
+
         $this->blocks( $assets );
 
         return $assets;

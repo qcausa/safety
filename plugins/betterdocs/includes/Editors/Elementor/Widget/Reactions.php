@@ -49,12 +49,52 @@ class Reactions extends BaseWidget {
     }
 
     protected function register_controls() {
+        $this->start_controls_section(
+            'reactions_layout_options',
+            [
+                'label' => __( 'Layout Options', 'betterdocs' )
+            ]
+        );
 
+        $this->add_control(
+            'reactions_layout_template',
+            [
+                'label'       => __( 'Select Layout', 'betterdocs' ),
+                'type'        => Controls_Manager::SELECT2,
+                'options'     => [
+                    'layout-1' => esc_html__( 'Layout 1', 'betterdocs' ),
+                    'layout-2' => esc_html__( 'Layout 2', 'betterdocs' ),
+                    'layout-3' => esc_html__( 'Layout 3', 'betterdocs' )
+                ],
+                'default'     => 'layout-1',
+                'label_block' => true
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->box_style_layout_1();
+        $this->title_style_layout_1();
+        $this->icon_style_layout_1();
+
+        $this->box_style_layout_2();
+        $this->title_style_layout_2();
+        $this->icon_style_layout_2();
+
+        $this->box_style_layout_3();
+        $this->title_style_layout_3();
+        $this->icon_style_layout_3();
+    }
+
+    public function box_style_layout_1() {
         $this->start_controls_section(
             'section_column_settings',
             [
                 'label' => __( 'Box Style', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-1']
+                ]
             ]
         );
 
@@ -157,12 +197,243 @@ class Reactions extends BaseWidget {
         );
 
         $this->end_controls_section();
+    }
 
+    public function box_style_layout_2() {
+        $this->start_controls_section(
+            'section_column_settings_layout_2',
+            [
+                'label' => __( 'Box Style', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_width_layout_2',
+            [
+                'label'      => __( 'Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 2500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions' => 'width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_height_layout_2',
+            [
+                'label'      => __( 'Height', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions' => 'height: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'reaction_box_background_layout_2',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_space_layout_2', // Legacy control id but new control
+            [
+                'label'      => __( 'Box Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_padding_layout_2',
+            [
+                'label'      => __( 'Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'reaction_box_border_normal_layout_2',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions .betterdocs-article-reactions-box'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_radius_normal_layout_2',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}}  .betterdocs-elementor.betterdocs-article-reactions .betterdocs-article-reactions-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'reaction_box_shadow_normal_layout_2',
+                'selector' => '{{WRAPPER}} .betterdocs-elementor.betterdocs-article-reactions'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function box_style_layout_3() {
+        $this->start_controls_section(
+            'section_column_settings_layout_3',
+            [
+                'label' => __( 'Box Style', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_width_layout_3',
+            [
+                'label'      => __( 'Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 2500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions' => 'width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_height_layout_3',
+            [
+                'label'      => __( 'Height', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions' => 'height: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'reaction_box_background_layout_3',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_space_layout_3', // Legacy control id but new control
+            [
+                'label'      => __( 'Box Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_padding_layout_3',
+            [
+                'label'      => __( 'Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'reaction_box_border_normal_layout_3',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions-box'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_radius_normal_layout_3',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}}  .betterdocs-article-reactions-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'reaction_box_shadow_normal_layout_3',
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions-box'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function title_style_layout_1() {
         $this->start_controls_section(
             'section_title_settings',
             [
                 'label' => __( 'Title', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-1']
+                ]
             ]
         );
 
@@ -195,12 +466,104 @@ class Reactions extends BaseWidget {
         );
 
         $this->end_controls_section();
+    }
 
+    public function title_style_layout_2() {
+        $this->start_controls_section(
+            'section_title_settings_layout_2',
+            [
+                'label' => __( 'Title', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_text_layout_2',
+            [
+                'label'   => __( 'Text', 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'default' => esc_html__( 'What are your feelings', 'betterdocs-pro' )
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_title_color_layout_2',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box p' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'reaction_box_title_typography_layout_2',
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box p'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function title_style_layout_3() {
+        $this->start_controls_section(
+            'section_title_settings_layout_3',
+            [
+                'label' => __( 'Title', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_text_layout_3',
+            [
+                'label'   => __( 'Text', 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Was it helpful ?', 'betterdocs-pro' )
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_title_color_layout_3',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar h5' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'reaction_box_title_typography_layout_3',
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar h5'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+
+    public function icon_style_layout_1() {
         $this->start_controls_section(
             'section_icon_settings',
             [
                 'label' => __( 'Icon', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-1']
+                ]
             ]
         );
 
@@ -287,13 +650,222 @@ class Reactions extends BaseWidget {
         $this->end_controls_section();
     }
 
+    public function icon_style_layout_2() {
+        $this->start_controls_section(
+            'section_icon_settings_layout_2',
+            [
+                'label' => __( 'Icon', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_area_layout_2',
+            [
+                'label'      => __( 'Area', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji' => 'height: {{SIZE}}px;width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'reaction_box_icon_background_layout_2',
+            [
+                'label'     => esc_html__( 'Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_hover_background_layout_2',
+            [
+                'label'     => esc_html__( 'Hover Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji:hover' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_color_layout_2',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji svg path' => 'fill: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_hover_color_layout_2',
+            [
+                'label'     => esc_html__( 'Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-box .layout-2 li a.betterdocs-emoji svg path:hover' => 'fill: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function icon_style_layout_3() {
+        $this->start_controls_section(
+            'section_icon_settings_layout_3',
+            [
+                'label' => __( 'Icon', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'reactions_layout_template' => ['layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_area_layout_3',
+            [
+                'label'      => __( 'Area', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .layout-3 li a.betterdocs-emoji svg' => 'height: {{SIZE}}px;width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'reaction_box_icon_background_layout_3',
+            [
+                'label'     => esc_html__( 'Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .layout-3 li a.betterdocs-emoji' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_hover_background_layout_3',
+            [
+                'label'     => esc_html__( 'Hover Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .layout-3 li a.betterdocs-emoji:hover' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_color_layout_3',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links li a svg path' => 'fill: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'reaction_box_icon_hover_color_layout_3',
+            [
+                'label'     => esc_html__( 'Hover Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links li a svg:hover path' => 'fill: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'reaction_box_icon_text_layout_3',
+                'selector' => '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links.layout-3 li .betterdocs-tooltip'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_icon_main_wrapper_padding_layout_3', // Legacy control id but new control
+            [
+                'label'      => __( 'List Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links.layout-3 li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'reaction_box_icon_main_wrapper_margin_layout_3', // Legacy control id but new control
+            [
+                'label'      => __( 'List Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-article-reactions .betterdocs-article-reactions-sidebar .betterdocs-article-reaction-links.layout-3 li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+
+        $this->end_controls_section();
+    }
+
+    public function generate_attributes() {
+        $attributes = [
+            'class' => [
+                $this->attributes['reactions_layout_template']
+            ]
+        ];
+
+        return $attributes;
+    }
+
     protected function render_callback() {
-        $this->views( 'widgets/reactions' );
+        $layout = &$this->attributes['reactions_layout_template'];
+        if( $layout == 'layout-1' ) {
+            $this->views( 'widgets/reactions' );
+        } else if( $layout == 'layout-2' ) {
+            $this->views( 'widgets/reactions-2' );
+        } else {
+            $this->views( 'widgets/reactions-3' );
+        }
     }
 
     public function view_params(){
+        $settings = &$this->attributes;
+        $wrapper_attr = $this->generate_attributes();
         return [
-            'reactions_text' => $this->attributes['reaction_text']
+            'wrapper_attr'   => $wrapper_attr,
+            'reactions_text' => $settings['reactions_layout_template'] == 'layout-1' ? $this->attributes['reaction_text'] : ( $settings['reactions_layout_template'] == 'layout-2' ? $this->attributes['reaction_text_layout_2'] :  $this->attributes['reaction_text_layout_3'] ),
         ];
     }
 }

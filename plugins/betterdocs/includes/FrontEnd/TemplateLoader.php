@@ -91,11 +91,16 @@ class TemplateLoader extends Base {
         }
 
         $_default_template = 'templates/archives/layout-1';
-        $layout            = $this->database->get_theme_mod( 'betterdocs_docs_layout_select', 'layout-1' );
+        $layout            = $this->database->get_theme_mod( 'betterdocs_docs_layout_select', 'layout-7' );
         $_template         = 'templates/archives/' . $layout;
 
         if ( is_tax( 'doc_category' ) ) {
-            $_template         = 'templates/taxonomy-doc_category';
+            $category_layout = $this->database->get_theme_mod( 'betterdocs_archive_layout_select', 'layout-7' );
+            if ( $category_layout == 'layout-7' ) {
+                $_template       = 'templates/archives/categories/' . $category_layout;
+            } else {
+                $_template         = 'templates/taxonomy-doc_category';
+            }
             $_default_template = $_template;
         } elseif ( is_tax( 'doc_tag' ) ) {
             $_template         = 'templates/taxonomy-doc_tag';
@@ -176,7 +181,7 @@ class TemplateLoader extends Base {
         }
 
         $_default_template = 'templates/single/layout-1';
-        $layout            = $this->database->get_theme_mod( 'betterdocs_single_layout_select', 'layout-1' );
+        $layout            = $this->database->get_theme_mod( 'betterdocs_single_layout_select', 'layout-8' );
         $layout            = 'templates/single/' . $layout;
 
         $eligible_template = $this->views->path( $layout, $_default_template );

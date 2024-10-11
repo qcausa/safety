@@ -110,6 +110,10 @@ class FaqBuilder extends Section {
                     'label'    => __( 'Select FAQ Layout', 'betterdocs' ),
                     'priority' => 627,
                     'choices'  => [
+                        'layout-3' => [
+                            'label' => __( 'Abstract Layout', 'betterdocs' ),
+                            'image' => $this->assets->icon( 'customizer/faq/layout-3.png', true )
+                        ],
                         'layout-1' => [
                             'label' => __( 'Modern Layout', 'betterdocs' ),
                             'image' => $this->assets->icon( 'customizer/faq/layout-1.png', true )
@@ -117,7 +121,7 @@ class FaqBuilder extends Section {
                         'layout-2' => [
                             'label' => __( 'Classic Layout', 'betterdocs' ),
                             'image' => $this->assets->icon( 'customizer/faq/layout-2.png', true )
-                        ]
+                        ],
                     ]
                 ]
             )
@@ -739,6 +743,263 @@ class FaqBuilder extends Section {
                         'input2' => 20,
                         'input3' => 20,
                         'input4' => 20
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function faq_category_title_color_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_category_title_color_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_category_title_color_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_faq_category_title_color_layout_3',
+                [
+                    'label'    => __( 'Group Title Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_faq_section',
+                    'priority' => 652,
+                    'settings' => 'betterdocs_faq_category_title_color_layout_3'
+                ]
+            )
+        );
+    }
+
+    public function faq_category_name_font_size_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_category_name_font_size_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_category_name_font_size_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_faq_category_name_font_size_layout_3', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_faq_section',
+                'settings'    => 'betterdocs_faq_category_name_font_size_layout_3',
+                'label'       => __( 'Group Title Font Size', 'betterdocs' ),
+                'priority'    => 653,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function faq_category_name_padding_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_category_name_padding_layout_3', [
+            'default'    => $this->defaults['betterdocs_faq_category_name_padding_layout_3'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'betterdocs_faq_category_name_padding_layout_3',
+                [
+                    'label'        => __( 'Group Title Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_faq_section',
+                    'settings'     => 'betterdocs_faq_category_name_padding_layout_3',
+                    'priority'     => 654,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 20,
+                        'input2' => 20,
+                        'input3' => 20,
+                        'input4' => 20
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function faq_list_color_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_color_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_color_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_faq_list_color_layout_3',
+                [
+                    'label'    => __( 'FAQ List Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_faq_section',
+                    'settings' => 'betterdocs_faq_list_color_layout_3',
+                    'priority' => 655
+                ]
+            )
+        );
+    }
+
+    public function faq_list_background_color_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_background_color_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_background_color_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_faq_list_background_color_layout_3',
+                [
+                    'label'    => __( 'FAQ List Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_faq_section',
+                    'settings' => 'betterdocs_faq_list_background_color_layout_3',
+                    'priority' => 656
+                ]
+            )
+        );
+    }
+
+    public function faq_list_content_background_color_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_content_background_color_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_content_background_color_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_faq_list_content_background_color_layout_3',
+                [
+                    'label'    => __( 'FAQ List Content Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_faq_section',
+                    'settings' => 'betterdocs_faq_list_content_background_color_layout_3',
+                    'priority' => 657
+                ]
+            )
+        );
+    }
+
+    public function faq_list_content_color_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_content_color_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_content_color_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_faq_list_content_color_layout_3',
+                [
+                    'label'    => __( 'FAQ List Content Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_faq_section',
+                    'settings' => 'betterdocs_faq_list_content_color_layout_3',
+                    'priority' => 658
+                ]
+            )
+        );
+    }
+
+    public function faq_list_content_font_size_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_content_font_size_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_content_font_size_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_faq_list_content_font_size_layout_3', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_faq_section',
+                'settings'    => 'betterdocs_faq_list_content_font_size_layout_3',
+                'label'       => __( 'FAQ Content Font Size', 'betterdocs' ),
+                'priority'    => 659,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function faq_list_font_size_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_font_size_layout_3', [
+            'default'           => $this->defaults['betterdocs_faq_list_font_size_layout_3'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_faq_list_font_size_layout_3', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_faq_section',
+                'settings'    => 'betterdocs_faq_list_font_size_layout_3',
+                'label'       => __( 'FAQ List Font Size', 'betterdocs' ),
+                'priority'    => 660,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function faq_list_padding_layout_3() {
+        $this->customizer->add_setting( 'betterdocs_faq_list_padding_layout_3', [
+            'default'    => $this->defaults['betterdocs_faq_list_padding_layout_3'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'betterdocs_faq_list_padding_layout_3',
+                [
+                    'label'        => __( 'FAQ List Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_faq_section',
+                    'settings'     => 'betterdocs_faq_list_padding_layout_3',
+                    'priority'     => 661,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 24,
+                        'input2' => 14,
+                        'input3' => 24,
+                        'input4' => 14
                     ]
                 ]
             )

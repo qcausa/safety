@@ -51,11 +51,26 @@ class DocShare extends BaseWidget {
     protected function register_controls() {
         $this->share_controls();
 
+        $this->box_style_layout_1();
+        $this->box_container_wrapper();
+        $this->box_style_layout_2();
+
+        $this->box_title_layout_1();
+        $this->box_title_layout_2();
+
+        $this->icon_style();
+        $this->icon_style_layout_2();
+    }
+
+    public function box_style_layout_1() {
         $this->start_controls_section(
             'section_column_settings',
             [
                 'label' => __( 'Box Style', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -173,12 +188,194 @@ class DocShare extends BaseWidget {
         );
 
         $this->end_controls_section();
+    }
 
+    public function box_container_wrapper(){
+        $this->start_controls_section(
+            'section_box_container_layout_2',
+            [
+                'label' => __( 'Wrapper Container', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_box_container_layout_2_padding',
+            [
+                'label'      => __( 'Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_box_container_layout_2_margin',
+            [
+                'label'      => __( 'Box Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'section_box_container_layout_2_background_color',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-social-share.layout-2'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function box_style_layout_2() {
+        $this->start_controls_section(
+            'section_column_settings_layout_2',
+            [
+                'label' => __( 'Box Style', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'share_box_width_layout_2',
+            [
+                'label'      => __( 'Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 2000,
+                        'step' => 1
+                    ],
+                    '%'  => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1
+                    ],
+                    'em' => [
+                        'min'  => 100,
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'default'    => [
+                    'unit' => '%',
+                    'size' => 100
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2' => 'width: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'share_box_height_layout_2',
+            [
+                'label'      => __( 'Height', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2' => 'height: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'share_box_background_layout_2',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'share_box_space_layout_2', // Legacy control id but new control
+            [
+                'label'      => __( 'Box Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'share_box_padding_layout_2',
+            [
+                'label'      => __( 'Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'share_box_border_normal_layout_2',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'share_box_radius_normal_layout_2',
+            [
+                'label'      => esc_html__( 'Border Radius', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'share_box_shadow_normal_layout_2',
+                'selector' => '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function box_title_layout_1() {
         $this->start_controls_section(
             'section_title_settings',
             [
                 'label' => __( 'Title', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -202,8 +399,64 @@ class DocShare extends BaseWidget {
         );
 
         $this->end_controls_section();
+    }
 
-        $this->icon_style();
+    public function box_title_layout_2() {
+        $this->start_controls_section(
+            'section_title_settings_layout_2',
+            [
+                'label' => __( 'Title', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'share_box_title_color_layout_2',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-heading.layout-2 h5' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'share_box_title_typography_layout_2',
+                'selector' => '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-heading.layout-2 h5'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_title_layout_2_padding',
+            [
+                'label'      => __( 'Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} betterdocs-social-share.layout-2 .betterdocs-social-share-heading.layout-2 h5' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_title_layout_2_margin',
+            [
+                'label'      => __( 'Box Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} betterdocs-social-share.layout-2 .betterdocs-social-share-heading.layout-2 h5' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     public function share_controls() {
@@ -211,6 +464,20 @@ class DocShare extends BaseWidget {
             'section_options',
             [
                 'label' => __( 'Controls', 'betterdocs' )
+            ]
+        );
+
+        $this->add_control(
+            'share_title_select_layout_layout',
+            [
+                'label'       => esc_html__( 'Select layout', 'betterdocs' ),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'layout-1',
+                'label_block' => false,
+                'options'     => [
+                    'layout-1' => esc_html__( 'Layout 1', 'betterdocs' ),
+                    'layout-2' => esc_html__( 'Layout 2', 'betterdocs' )
+                ]
             ]
         );
 
@@ -280,7 +547,10 @@ class DocShare extends BaseWidget {
             'section_icon_settings',
             [
                 'label' => __( 'Icon', 'betterdocs' ),
-                'tab'   => Controls_Manager::TAB_STYLE
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-1']
+                ]
             ]
         );
 
@@ -329,7 +599,87 @@ class DocShare extends BaseWidget {
         $this->end_controls_section();
     }
 
+    public function icon_style_layout_2() {
+        $this->start_controls_section(
+            'section_icon_settings_layout_2',
+            [
+                'label' => __( 'Icon', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+                'condition'       => [
+                    'share_title_select_layout_layout' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'share_icon_space_layout_2', // Legacy control id but new control
+            [
+                'label'      => __( 'Spacing', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2 li a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'share_icon_padding_layout_2',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2 li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'share_share_icon_area_layout_2',
+            [
+                'label'      => __( 'Size', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2 li a, {{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2 li img' => 'height: {{SIZE}}px;width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'share_share_icon_inner_area_layout_2',
+            [
+                'label'      => __( 'Inner Size', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'max'  => 500,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-social-share.layout-2 .betterdocs-social-share-links.layout-2 li a img' => 'height: {{SIZE}}px;width: {{SIZE}}px;'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     protected function render_callback() {
-        $this->views( 'widgets/social' );
+        $settings = $this->attributes;
+        if( $settings['share_title_select_layout_layout'] == 'layout-1' ){
+            $this->views( 'widgets/social' );
+        } else {
+            $this->views( 'widgets/social-2' );
+        }
     }
 }

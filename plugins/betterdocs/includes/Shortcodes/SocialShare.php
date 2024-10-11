@@ -29,15 +29,21 @@ class SocialShare extends Shortcode {
      */
     public function default_attributes() {
         return [
+            'layout'    => 'layout-1',
             'title'     => __( 'Share This Article :', 'betterdocs' ),
             'facebook'  => '1',
             'twitter'   => '1',
             'linkedin'  => '1',
-            'pinterest' => '1'
+            'pinterest' => '1',
+            'instagram' => '1',
         ];
     }
 
     public function render( $atts, $content = null ) {
-        $this->views( 'widgets/social' );
+        if ( isset( $atts['layout'] ) && $atts['layout'] == 'layout-2' ) {
+            $this->views( 'widgets/social-2' );
+        } else {
+            $this->views( 'widgets/social' );
+        }
     }
 }

@@ -40,9 +40,10 @@
             ], 'betterdocs_category_grid', 'layout-1' );
 
             echo do_shortcode( '[betterdocs_category_grid ' . $attributes . ']' );
+
+            betterdocs()->views->get( 'templates/faq' );
         ?>
     </div>
-    <?php betterdocs()->views->get( 'templates/faq' );?>
 </div>
 
 <?php

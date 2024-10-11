@@ -11,6 +11,8 @@ use WPDeveloper\BetterDocs\Admin\Customizer\Controls\DimensionControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\SeparatorControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\AlphaColorControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\RangeValueControl;
+use WPDeveloper\BetterDocs\Admin\Customizer\Controls\RadioImageControl;
+use WPDeveloper\BetterDocs\Admin\Customizer\Controls\MultiDimensionControl;
 
 class LiveSearch extends Section {
     /**
@@ -33,6 +35,39 @@ class LiveSearch extends Section {
      */
     public function get_title() {
         return __( 'Live Search', 'betterdocs' );
+    }
+
+    public function betterdocs_search_layout_select() {
+        $this->customizer->add_setting( 'betterdocs_search_layout_select', [
+            'default'           => $this->defaults['betterdocs_search_layout_select'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+        ] );
+
+        $this->customizer->add_control(
+            new RadioImageControl(
+                $this->customizer,
+                'betterdocs_search_layout_select',
+                [
+                    'type'     => 'betterdocs-radio-image',
+                    'settings' => 'betterdocs_search_layout_select',
+                    'section'  => 'betterdocs_live_search_settings',
+                    'label'    => __( 'Select Search Layout', 'betterdocs' ),
+                    'choices'  => [
+                        'layout-2' => [
+                            'label' => __( 'Modal Layout', 'betterdocs' ),
+                            'image' => $this->assets->icon( 'customizer/search/layout-2.png', true ),
+                            'url'   => 'https://betterdocs.co/upgrade'
+                        ],
+                        'layout-1' => [
+                            'label' => __( 'Classic Layout', 'betterdocs' ),
+                            'image' => $this->assets->icon( 'customizer/search/layout-1.png', true )
+                        ]
+                    ],
+                    'priority' => 499
+                ]
+            )
+        );
     }
 
     public function search_heading_switch() {
@@ -133,6 +168,33 @@ class LiveSearch extends Section {
         );
     }
 
+    public function betterdocs_live_search_heading_font_size_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_heading_font_size_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_heading_font_size_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_live_search_heading_font_size_layout_2', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_heading_font_size_layout_2',
+                'label'       => __( 'Heading Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ],
+                'priority'    => 503
+            ] )
+        );
+    }
+
     public function heading_font_color() {
         $this->customizer->add_setting( 'betterdocs_live_search_heading_font_color', [
             'default'           => $this->defaults['betterdocs_live_search_heading_font_color'],
@@ -149,6 +211,28 @@ class LiveSearch extends Section {
                     'label'    => __( 'Heading Color', 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'betterdocs_live_search_heading_font_color',
+                    'priority' => 504
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_live_search_heading_font_color_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_heading_font_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_heading_font_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_live_search_heading_font_color_layout_2',
+                [
+                    'label'    => __( 'Heading Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_live_search_heading_font_color_layout_2',
                     'priority' => 504
                 ]
             )
@@ -262,6 +346,113 @@ class LiveSearch extends Section {
         );
     }
 
+    public function heading_margin_layout_2() {
+        $this->customizer->add_setting( 'heading_margin_layout_2', [
+            'default'           => $this->defaults['heading_margin_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'heading_margin_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'heading_margin_layout_2',
+                'label'       => __( 'Heading Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'heading_margin_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 505
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_heading_margin_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_heading_margin_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_heading_margin_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_heading_margin_top_layout_2',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'heading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 505
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_heading_margin_right_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_heading_margin_right_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_heading_margin_right_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_heading_margin_right_layout_2',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'heading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 505
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_heading_margin_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_heading_margin_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_heading_margin_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_heading_margin_bottom_layout_2',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'heading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 505
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_heading_margin_left_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_heading_margin_left_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_heading_margin_left_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_heading_margin_left_layout_2',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'heading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 505
+            ] )
+        );
+    }
+
+
     public function search_subheading() {
         $this->customizer->add_setting( 'betterdocs_live_search_subheading', [
             'default'           => $this->defaults['betterdocs_live_search_subheading'],
@@ -342,6 +533,33 @@ class LiveSearch extends Section {
         );
     }
 
+    public function betterdocs_live_search_subheading_font_size_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_subheading_font_size_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_subheading_font_size_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_live_search_subheading_font_size_layout_2', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_subheading_font_size_layout_2',
+                'label'       => __( 'Sub Heading Font Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ],
+                'priority'    => 507
+            ] )
+        );
+    }
+
     public function subheading_font_color() {
         $this->customizer->add_setting( 'betterdocs_live_search_subheading_font_color', [
             'default'           => $this->defaults['betterdocs_live_search_subheading_font_color'],
@@ -358,6 +576,28 @@ class LiveSearch extends Section {
                     'label'    => __( 'Sub Heading Color', 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'betterdocs_live_search_subheading_font_color',
+                    'priority' => 508
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_live_search_subheading_font_color_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_subheading_font_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_subheading_font_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_live_search_subheading_font_color_layout_2',
+                [
+                    'label'    => __( 'Sub Heading Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_live_search_subheading_font_color_layout_2',
                     'priority' => 508
                 ]
             )
@@ -471,6 +711,114 @@ class LiveSearch extends Section {
         );
     }
 
+    public function betterdocs_search_subheading_margin_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_subheading_margin_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_subheading_margin_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_search_subheading_margin_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_subheading_margin_layout_2',
+                'label'       => __( 'Sub Heading Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_search_subheading_margin_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 509
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_subheading_margin_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_subheading_margin_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_subheading_margin_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_subheading_margin_top_layout_2',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_subheading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 509
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_subheading_margin_right_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_subheading_margin_right_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_subheading_margin_right_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_subheading_margin_right_layout_2',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_subheading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 509
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_subheading_margin_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_subheading_margin_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_subheading_margin_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_subheading_margin_bottom_layout_2',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_subheading_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 509
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_subheading_margin_left_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_subheading_margin_left_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_subheading_margin_left_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_subheading_margin_left_layout_2',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_subheading_margin betterdocs-dimension'
+                ],
+                'priority'    => 509
+            ] )
+        );
+    }
+
+
     public function background_color() {
         $this->customizer->add_setting( 'betterdocs_live_search_background_color', [
             'default'           => $this->defaults['betterdocs_live_search_background_color'],
@@ -493,6 +841,28 @@ class LiveSearch extends Section {
         );
     }
 
+    public function betterdocs_live_search_background_color_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_background_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_live_search_background_color_layout_2',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_live_search_background_color_layout_2',
+                    'priority' => 510
+                ]
+            )
+        );
+    }
+
     public function background_image() {
         $this->customizer->add_setting( 'betterdocs_live_search_background_image', [
             'default'    => $this->defaults['betterdocs_live_search_background_image'],
@@ -505,6 +875,24 @@ class LiveSearch extends Section {
             $this->customizer, 'betterdocs_live_search_background_image', [
                 'section'  => 'betterdocs_live_search_settings',
                 'settings' => 'betterdocs_live_search_background_image',
+                'label'    => __( 'Background Image', 'betterdocs' ),
+                'priority' => 511
+            ] )
+        );
+    }
+
+    public function background_live_search_image_layout_2() {
+        $this->customizer->add_setting( 'background_live_search_image_layout_2', [
+            'default'    => $this->defaults['background_live_search_image_layout_2'],
+            'capability' => 'edit_theme_options',
+            'transport'  => 'postMessage'
+
+        ] );
+
+        $this->customizer->add_control( new WP_Customize_Image_Control(
+            $this->customizer, 'background_live_search_image_layout_2', [
+                'section'  => 'betterdocs_live_search_settings',
+                'settings' => 'background_live_search_image_layout_2',
                 'label'    => __( 'Background Image', 'betterdocs' ),
                 'priority' => 511
             ] )
@@ -635,6 +1023,147 @@ class LiveSearch extends Section {
                 'label'       => __( 'Position', 'betterdocs' ),
                 'input_attrs' => [
                     'class' => 'betterdocs_live_search_background_property betterdocs-select'
+                ],
+                'choices'     => [
+                    'left top'      => __( 'left top', 'betterdocs' ),
+                    'left center'   => __( 'left center', 'betterdocs' ),
+                    'left bottom'   => __( 'left bottom', 'betterdocs' ),
+                    'right top'     => __( 'right top', 'betterdocs' ),
+                    'right center'  => __( 'right center', 'betterdocs' ),
+                    'right bottom'  => __( 'right bottom', 'betterdocs' ),
+                    'center top'    => __( 'center top', 'betterdocs' ),
+                    'center center' => __( 'center center', 'betterdocs' ),
+                    'center bottom' => __( 'center bottom', 'betterdocs' )
+                ],
+                'priority'    => 513
+            ] )
+        );
+    }
+
+    public function background_property_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_background_property_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_property_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_live_search_background_property_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_background_property_layout_2',
+                'label'       => __( 'Background Property', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_live_search_background_property_layout_2',
+                    'class' => 'betterdocs-select'
+                ],
+                'priority'    => 512
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_background_size_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_size_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+
+        ] );
+
+        $this->customizer->add_control( new SelectControl(
+            $this->customizer, 'betterdocs_live_search_background_size_layout_2', [
+                'type'        => 'betterdocs-select',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_background_size_layout_2',
+                'label'       => __( 'Size', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_background_property betterdocs-select'
+                ],
+                'choices'     => [
+                    'auto'    => __( 'auto', 'betterdocs' ),
+                    'length'  => __( 'length', 'betterdocs' ),
+                    'cover'   => __( 'cover', 'betterdocs' ),
+                    'contain' => __( 'contain', 'betterdocs' ),
+                    'initial' => __( 'initial', 'betterdocs' ),
+                    'inherit' => __( 'inherit', 'betterdocs' )
+                ],
+                'priority'    => 513
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_background_repeat_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_repeat_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+
+        ] );
+
+        $this->customizer->add_control( new SelectControl(
+            $this->customizer, 'betterdocs_live_search_background_repeat_layout_2', [
+                'type'        => 'betterdocs-select',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_background_repeat_layout_2',
+                'label'       => __( 'Repeat', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_background_property_layout_2 betterdocs-select'
+                ],
+                'choices'     => [
+                    'no-repeat' => __( 'no-repeat', 'betterdocs' ),
+                    'initial'   => __( 'initial', 'betterdocs' ),
+                    'inherit'   => __( 'inherit', 'betterdocs' ),
+                    'repeat'    => __( 'repeat', 'betterdocs' ),
+                    'repeat-x'  => __( 'repeat-x', 'betterdocs' ),
+                    'repeat-y'  => __( 'repeat-y', 'betterdocs' )
+                ],
+                'priority'    => 513
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_background_attachment_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_attachment_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+
+        ] );
+
+        $this->customizer->add_control( new SelectControl(
+            $this->customizer, 'betterdocs_live_search_background_attachment_layout_2', [
+                'type'        => 'betterdocs-select',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_background_attachment',
+                'label'       => __( 'Attachment', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_background_property_layout_2 betterdocs-select'
+                ],
+                'choices'     => [
+                    'initial' => __( 'initial', 'betterdocs' ),
+                    'inherit' => __( 'inherit', 'betterdocs' ),
+                    'scroll'  => __( 'scroll', 'betterdocs' ),
+                    'fixed'   => __( 'fixed', 'betterdocs' ),
+                    'local'   => __( 'local', 'betterdocs' )
+                ],
+                'priority'    => 513
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_background_position_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_background_position_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => 'esc_html'
+
+        ] );
+
+        $this->customizer->add_control( new SelectControl(
+            $this->customizer, 'betterdocs_live_search_background_position_layout_2', [
+                'type'        => 'betterdocs-select',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_background_position_layout_2',
+                'label'       => __( 'Position', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_background_property_layout_2 betterdocs-select'
                 ],
                 'choices'     => [
                     'left top'      => __( 'left top', 'betterdocs' ),
@@ -825,6 +1354,71 @@ class LiveSearch extends Section {
         );
     }
 
+    public function search_margin_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_margin_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_margin_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_live_search_margin_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_margin_layout_2',
+                'label'       => __( 'Margin', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_live_search_margin_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 518
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_margin_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_margin_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_margin_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_margin_top_layout_2',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 518
+            ] )
+        );
+
+
+        $this->customizer->add_setting( 'betterdocs_live_search_margin_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_margin_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_margin_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_margin_bottom_layout_2',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_margin_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 518
+            ] )
+        );
+    }
+
     public function search_padding() {
         $this->customizer->add_setting( 'betterdocs_live_search_padding', [
             'default'           => $this->defaults['betterdocs_live_search_padding'],
@@ -930,6 +1524,111 @@ class LiveSearch extends Section {
         );
     }
 
+    public function search_padding_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_live_search_padding_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_padding_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_live_search_padding_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_padding_layout_2',
+                'label'       => __( 'Padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_live_search_padding_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 519
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_padding_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_padding_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_padding_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_padding_top_layout_2',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 519
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_padding_right_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_padding_right_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_padding_right_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_padding_right_layout_2',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 519
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_padding_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_padding_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_padding_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_padding_bottom_layout_2',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 519
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_live_search_padding_left_layout_2', [
+            'default'           => $this->defaults['betterdocs_live_search_padding_left_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_live_search_padding_left_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_live_search_padding_left_layout_2',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_live_search_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 519
+            ] )
+        );
+    }
+
     public function field_settings() {
         $this->customizer->add_setting( 'betterdocs_search_field_settings', [
             'default'           => $this->defaults['betterdocs_search_field_settings'],
@@ -945,6 +1644,23 @@ class LiveSearch extends Section {
             ] )
         );
     }
+
+    public function field_settings_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_field_settings_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_settings_layout_2'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'betterdocs_search_field_settings_layout_2', [
+                'label'    => __( 'Search Field Settings', 'betterdocs' ),
+                'settings' => 'betterdocs_search_field_settings_layout_2',
+                'section'  => 'betterdocs_live_search_settings',
+                'priority' => 530
+            ] )
+        );
+    }
+
 
     public function field_background_color() {
         $this->customizer->add_setting( 'betterdocs_search_field_background_color', [
@@ -962,6 +1678,28 @@ class LiveSearch extends Section {
                     'label'    => __( 'Search Field Background Color', 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'betterdocs_search_field_background_color',
+                    'priority' => 531
+                ]
+            )
+        );
+    }
+
+    public function field_background_color_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_field_background_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_background_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_search_field_background_color_layout_2',
+                [
+                    'label'    => __( 'Search Field Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_search_field_background_color_layout_2',
                     'priority' => 531
                 ]
             )
@@ -1032,6 +1770,28 @@ class LiveSearch extends Section {
                     'label'    => __( 'Search Placeholder Color', 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'betterdocs_search_placeholder_color',
+                    'priority' => 533
+                ]
+            )
+        );
+    }
+
+    public function placeholder_color_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_placeholder_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_placeholder_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_search_placeholder_color_layout_2',
+                [
+                    'label'    => __( 'Search Placeholder Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_search_placeholder_color_layout_2',
                     'priority' => 533
                 ]
             )
@@ -1144,6 +1904,507 @@ class LiveSearch extends Section {
             ] )
         );
     }
+
+    public function field_padding_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_field_padding_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_padding_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_search_field_padding_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_field_padding_layout_2',
+                'label'       => __( 'Search Field Padding', 'betterdocs' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_search_field_padding_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 534
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_field_padding_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_padding_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_field_padding_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_field_padding_top_layout_2',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_field_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 534
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_field_padding_right_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_padding_right_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_field_padding_right_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_field_padding_right_layout_2',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_field_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 534
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_field_padding_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_padding_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_field_padding_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_field_padding_bottom_layout_2',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_field_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 534
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_search_field_padding_left_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_field_padding_left_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_field_padding_left_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_field_padding_left_layout_2',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_field_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 534
+            ] )
+        );
+    }
+
+    // public function search_button_settings_layout_2() {
+    //     $this->customizer->add_setting( 'betterdocs_search_button_section_layout_2', [
+    //         'default'           => $this->defaults['betterdocs_search_button_section_layout_2'],
+    //         'sanitize_callback' => 'esc_html'
+    //     ] );
+
+    //     $this->customizer->add_control( new SeparatorControl(
+    //         $this->customizer, 'betterdocs_search_button_section_layout_2', [
+    //             'label'    => esc_html__( 'Search Button Settings', 'betterdocs-pro' ),
+    //             'settings' => 'betterdocs_search_button_section_layout_2',
+    //             'section'  => 'betterdocs_live_search_settings',
+    //             'priority' => 576
+    //         ]
+    //     ) );
+    // }
+
+    public function search_button_font_size_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_new_search_button_font_size_layout_2', [
+            'default'           => $this->defaults['betterdocs_new_search_button_font_size_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_new_search_button_font_size_layout_2', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_new_search_button_font_size_layout_2',
+                'label'       => esc_html__( 'Font Size', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 200,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ],
+                'priority'    => 578
+            ] ) );
+    }
+
+    public function search_button_font_weight_layout_2() {
+        //Search Button Font Weight
+        $this->customizer->add_setting( 'betterdocs_new_search_button_font_weight_layout_2', [
+            'default'           => $this->defaults['betterdocs_new_search_button_font_weight_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'choices']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_new_search_button_font_weight_layout_2',
+                [
+                    'label'    => esc_html__( 'Font Weight', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_new_search_button_font_weight_layout_2',
+                    'type'     => 'select',
+                    'choices'  => [
+                        '100' => '100',
+                        '200' => '200',
+                        '300' => '300',
+                        '400' => '400',
+                        '500' => '500',
+                        '600' => '600',
+                        '700' => '700',
+                        '800' => '800',
+                        '900' => '900'
+                    ],
+                    'priority' => 579
+                ] )
+        );
+    }
+
+    public function search_button_text_transform_layout_2() {
+        //Search Button Text Transform
+        $this->customizer->add_setting( 'betterdocs_new_search_button_text_transform_layout_2', [
+            'default'           => $this->defaults['betterdocs_new_search_button_text_transform_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'choices']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_new_search_button_text_transform_layout_2',
+                [
+                    'label'    => esc_html__( 'Font Text Transform', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_new_search_button_text_transform_layout_2',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'none'       => 'none',
+                        'capitalize' => 'capitalize',
+                        'uppercase'  => 'uppercase',
+                        'lowercase'  => 'lowercase',
+                        'initial'    => 'initial',
+                        'inherit'    => 'inherit'
+                    ],
+                    'priority' => 580
+                ] )
+        );
+    }
+
+    public function search_button_text_color_layout_2() {
+        // Search Button Text Color
+        $this->customizer->add_setting( 'betterdocs_search_button_text_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_text_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_search_button_text_color_layout_2',
+                [
+                    'label'    => esc_html__( 'Text Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_search_button_text_color_layout_2',
+                    'priority' => 582
+                ] )
+        );
+    }
+
+    public function search_button_background_color_layout_2() {
+        // Search Button Background Color
+        $this->customizer->add_setting( 'betterdocs_search_button_background_color_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_background_color_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_search_button_background_color_layout_2',
+                [
+                    'label'    => esc_html__( 'Background Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_search_button_background_color_layout_2',
+                    'priority' => 583
+                ] )
+        );
+    }
+
+    public function search_button_background_color_hover_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_background_color_hover_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_background_color_hover_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_search_button_background_color_hover_layout_2',
+                [
+                    'label'    => esc_html__( 'Background Hover Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'betterdocs_search_button_background_color_hover_layout_2',
+                    'priority' => 583
+                ] )
+        );
+    }
+
+    public function search_button_border_radius_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_borderr_radius_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_borderr_radius_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_search_button_borderr_radius_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_borderr_radius_layout_2',
+                'label'       => esc_html__( 'Border Radius', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_search_button_borderr_radius_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 584
+            ] ) );
+    }
+
+    public function border_radius_top_left_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_borderr_left_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_borderr_left_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_borderr_left_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_borderr_left_top_layout_2',
+                'label'       => esc_html__( 'Left Top', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_borderr_radius_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 584
+            ] ) );
+    }
+
+    public function border_radius_top_right_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_borderr_right_top_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_borderr_right_top_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_borderr_right_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_borderr_right_top_layout_2',
+                'label'       => esc_html__( 'Right Top', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_borderr_radius_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 584
+            ] ) );
+    }
+
+    public function border_radius_bottom_left_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_borderr_left_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_borderr_left_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_borderr_left_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_borderr_left_bottom_layout_2',
+                'label'       => esc_html__( 'Left Bottom', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_borderr_radius_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 584
+            ] ) );
+    }
+
+    public function border_radius_bottom_right_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_borderr_right_bottom_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_borderr_right_bottom_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_borderr_right_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_borderr_right_bottom_layout_2',
+                'label'       => esc_html__( 'Right Bottom', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_borderr_radius_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 584
+            ] ) );
+    }
+
+    public function button_padding_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_padding_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_padding_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_search_button_padding_layout_2', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_padding_layout_2',
+                'label'       => esc_html__( 'Padding', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'id'    => 'betterdocs_search_button_padding_layout_2',
+                    'class' => 'betterdocs-dimension'
+                ],
+                'priority'    => 589
+            ] ) );
+    }
+
+    public function button_padding_top_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_padding_top_layout_2',
+            apply_filters( 'betterdocs_search_button_padding_top_layout_2', [
+                'default'           => $this->defaults['betterdocs_search_button_padding_top_layout_2'],
+                'capability'        => 'edit_theme_options',
+                'transport'         => 'postMessage',
+                'sanitize_callback' => [$this->sanitizer, 'integer']
+            ] )
+        );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_padding_top_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_padding_top_layout_2',
+                'label'       => esc_html__( 'Top', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_padding betterdocs-dimension'
+                ],
+                'priority'    => 589
+            ] ) );
+    }
+
+    public function button_padding_right_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_padding_right_layout_2',
+            apply_filters( 'betterdocs_search_button_padding_right_layout_2', [
+                'default'           => $this->defaults['betterdocs_search_button_padding_right_layout_2'],
+                'capability'        => 'edit_theme_options',
+                'transport'         => 'postMessage',
+                'sanitize_callback' => [$this->sanitizer, 'integer']
+            ] )
+        );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_padding_right_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_padding_right_layout_2',
+                'label'       => esc_html__( 'Right', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 589
+            ] ) );
+    }
+
+    public function button_padding_bottom_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_padding_bottom_layout_2',
+            apply_filters( 'betterdocs_search_button_padding_bottom_layout_2', [
+                'default'           => $this->defaults['betterdocs_search_button_padding_bottom_layout_2'],
+                'capability'        => 'edit_theme_options',
+                'transport'         => 'postMessage',
+                'sanitize_callback' => [$this->sanitizer, 'integer']
+            ] )
+        );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_padding_bottom_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_padding_bottom_layout_2',
+                'label'       => esc_html__( 'Bottom', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_padding betterdocs-dimension'
+                ],
+                'priority'    => 589
+            ] )
+        );
+    }
+
+    public function button_padding_left_layout_2() {
+        $this->customizer->add_setting( 'betterdocs_search_button_padding_left_layout_2', [
+            'default'           => $this->defaults['betterdocs_search_button_padding_left_layout_2'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_search_button_padding_left_layout_2', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'betterdocs_search_button_padding_left_layout_2',
+                'label'       => esc_html__( 'Left', 'betterdocs-pro' ),
+                'input_attrs' => [
+                    'class' => 'betterdocs_search_button_padding_layout_2 betterdocs-dimension'
+                ],
+                'priority'    => 589
+            ] )
+        );
+    }
+
 
     public function field_border_radius() {
         $this->customizer->add_setting( 'betterdocs_search_field_border_radius', [
@@ -1637,4 +2898,946 @@ class LiveSearch extends Section {
             )
         );
     }
+
+    public function modal_wrapper_section() {
+        $this->customizer->add_setting( 'modal_wrapper_section', [
+            'default'           => $this->defaults['modal_wrapper_section'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'modal_wrapper_section', [
+                'label'    => __( 'Modal Wrapper', 'betterdocs' ),
+                'priority' => 617,
+                'settings' => 'modal_wrapper_section',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+    public function modal_wrapper_background_color() {
+        $this->customizer->add_setting( 'modal_wrapper_background_color', [
+            'default'           => $this->defaults['modal_wrapper_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'modal_wrapper_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'priority' => 618,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'modal_wrapper_background_color',
+                ]
+            )
+        );
+    }
+
+    public function modal_wrapper_padding() {
+        $this->customizer->add_setting( 'modal_wrapper_padding', [
+            'default'    => $this->defaults['modal_wrapper_padding'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'modal_wrapper_padding',
+                [
+                    'label'        => __( 'Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'modal_wrapper_padding',
+                    'priority'     => 619,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 0,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function modal_wrapper_margin() {
+        $this->customizer->add_setting( 'modal_wrapper_margin', [
+            'default'    => $this->defaults['modal_wrapper_margin'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'modal_wrapper_margin',
+                [
+                    'label'        => __( 'Margin (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'modal_wrapper_margin',
+                    'priority'     => 620,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 0,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_field_wrapper() {
+        $this->customizer->add_setting( 'search_field_wrapper', [
+            'default'           => $this->defaults['search_field_wrapper'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'search_field_wrapper', [
+                'label'    => __( 'Modal Search Field', 'betterdocs' ),
+                'priority' => 621,
+                'settings' => 'search_field_wrapper',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+
+    public function search_field_modal_background_color() {
+        $this->customizer->add_setting( 'search_field_modal_background_color', [
+            'default'           => $this->defaults['search_field_modal_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_field_modal_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'priority' => 622,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_field_modal_background_color',
+                ]
+            )
+        );
+    }
+
+    public function search_field_modal_padding() {
+        $this->customizer->add_setting( 'search_field_modal_padding', [
+            'default'    => $this->defaults['search_field_modal_padding'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_field_modal_padding',
+                [
+                    'label'        => __( 'Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_field_modal_padding',
+                    'priority'     => 623,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 5,
+                        'input2' => 5,
+                        'input3' => 5,
+                        'input4' => 5
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_field_modal_margin() {
+        $this->customizer->add_setting( 'search_field_modal_margin', [
+            'default'    => $this->defaults['search_field_modal_margin'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_field_modal_margin',
+                [
+                    'label'        => __( 'Margin (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_field_modal_margin',
+                    'priority'     => 624,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 0,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+
+    public function search_field_modal_text_color() {
+        $this->customizer->add_setting( 'search_field_modal_text_color', [
+            'default'           => $this->defaults['search_field_modal_text_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_field_modal_text_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'priority' => 625,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_field_modal_text_color',
+                ]
+            )
+        );
+    }
+
+    public function search_field_modal_text_font_size() {
+        $this->customizer->add_setting( 'search_field_modal_text_font_size', [
+            'default'           => $this->defaults['search_field_modal_text_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_field_modal_text_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_field_modal_text_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'priority'    => 626,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_field_modal_maginifier_icon_size(){
+        $this->customizer->add_setting( 'search_field_modal_maginifier_icon_size', [
+            'default'           => $this->defaults['search_field_modal_maginifier_icon_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_field_modal_maginifier_icon_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_field_modal_maginifier_icon_size',
+                'label'       => __( 'Maginifier Icon Size', 'betterdocs' ),
+                'priority'    => 627,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+
+    public function search_field_categories_wrapper() {
+        $this->customizer->add_setting( 'search_field_categories_wrapper', [
+            'default'           => $this->defaults['search_field_categories_wrapper'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'search_field_categories_wrapper', [
+                'label'    => __( 'Modal Search Categories', 'betterdocs' ),
+                'priority' => 628,
+                'settings' => 'search_field_categories_wrapper',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+    public function search_field_categories_text_color() {
+        $this->customizer->add_setting( 'search_field_categories_text_color', [
+            'default'           => $this->defaults['search_field_categories_text_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_field_categories_text_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'priority' => 629,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_field_categories_text_color',
+                ]
+            )
+        );
+    }
+
+    public function search_field_categories_background_color() {
+        $this->customizer->add_setting( 'search_field_categories_background_color', [
+            'default'           => $this->defaults['search_field_categories_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_field_categories_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'priority' => 630,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_field_categories_background_color',
+                ]
+            )
+        );
+    }
+
+
+    public function search_field_categories_font_size(){
+        $this->customizer->add_setting( 'search_field_categories_font_size', [
+            'default'           => $this->defaults['search_field_categories_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_field_categories_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_field_categories_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'priority'    => 631,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_modal_content_tabs() {
+        $this->customizer->add_setting( 'search_modal_content_tabs', [
+            'default'           => $this->defaults['search_modal_content_tabs'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'search_modal_content_tabs', [
+                'label'    => __( 'Modal Content Tabs', 'betterdocs' ),
+                'priority' => 632,
+                'settings' => 'search_modal_content_tabs',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+
+    public function search_modal_content_tabs_text_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_text_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_text_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_text_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'priority' => 633,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_text_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_background_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_background_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'priority' => 634,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_background_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_text_font_size() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_text_font_size', [
+            'default'           => $this->defaults['search_modal_content_tabs_text_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_modal_content_tabs_text_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_modal_content_tabs_text_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'priority'    => 635,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_modal_content_tabs_margin() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_margin', [
+            'default'    => $this->defaults['search_modal_content_tabs_margin'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_modal_content_tabs_margin',
+                [
+                    'label'        => __( 'Margin (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_modal_content_tabs_margin',
+                    'priority'     => 636,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 0,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_padding() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_padding', [
+            'default'    => $this->defaults['search_modal_content_tabs_padding'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_modal_content_tabs_padding',
+                [
+                    'label'        => __( 'Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_modal_content_tabs_padding',
+                    'priority'     => 637,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 28,
+                        'input3' => 0,
+                        'input4' => 28
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_border() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_border', [
+            'default'    => $this->defaults['search_modal_content_tabs_border'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_modal_content_tabs_border',
+                [
+                    'label'        => __( 'Border', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_modal_content_tabs_border',
+                    'priority'     => 638,
+                    'input_fields' => [
+                        'input1' => __( 'border top', 'betterdocs' ),
+                        'input2' => __( 'border right', 'betterdocs' ),
+                        'input3' => __( 'border bottom', 'betterdocs' ),
+                        'input4' => __( 'border left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 1,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_border_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_border_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_border_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_border_color',
+                [
+                    'label'    => __( 'Border Color', 'betterdocs' ),
+                    'priority' => 639,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_border_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'search_modal_content_tabs_docs_list', [
+                'label'    => __( 'Modal Content Docs List', 'betterdocs' ),
+                'priority' => 640,
+                'settings' => 'search_modal_content_tabs_docs_list',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+    public function search_modal_content_tabs_docs_list_font_size() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_font_size', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_modal_content_tabs_docs_list_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_modal_content_tabs_docs_list_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'priority'    => 641,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'priority' => 642,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_docs_list_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_background_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_background_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'priority' => 643,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_docs_list_background_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_padding() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_padding', [
+            'default'    => $this->defaults['search_modal_content_tabs_docs_list_padding'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_padding',
+                [
+                    'label'        => __( 'Padding (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_modal_content_tabs_docs_list_padding',
+                    'priority'     => 644,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 16,
+                        'input2' => 24,
+                        'input3' => 16,
+                        'input4' => 24
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_margin() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_margin', [
+            'default'    => $this->defaults['search_modal_content_tabs_docs_list_margin'],
+            'transport'  => 'postMessage',
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new MultiDimensionControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_margin',
+                [
+                    'label'        => __( 'Margin (PX)', 'betterdocs' ),
+                    'section'      => 'betterdocs_live_search_settings',
+                    'settings'     => 'search_modal_content_tabs_docs_list_margin',
+                    'priority'     => 645,
+                    'input_fields' => [
+                        'input1' => __( 'top', 'betterdocs' ),
+                        'input2' => __( 'right', 'betterdocs' ),
+                        'input3' => __( 'bottom', 'betterdocs' ),
+                        'input4' => __( 'left', 'betterdocs' )
+                    ],
+                    'defaults'     => [
+                        'input1' => 0,
+                        'input2' => 0,
+                        'input3' => 0,
+                        'input4' => 0
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_icon_size() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_icon_size', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_icon_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_modal_content_tabs_docs_list_icon_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_modal_content_tabs_docs_list_icon_size',
+                'label'       => __( 'Icon Size', 'betterdocs' ),
+                'priority'    => 646,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_category_font_size() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_category_font_size', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_category_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_modal_content_tabs_docs_list_category_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_modal_content_tabs_docs_list_category_font_size',
+                'label'       => __( 'List Category Font Size', 'betterdocs' ),
+                'priority'    => 647,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_category_color() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_category_color', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_category_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_category_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'priority' => 648,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_docs_list_category_color',
+                ]
+            )
+        );
+    }
+
+    public function search_modal_content_tabs_docs_list_category_icon_size() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_category_icon_size', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_category_icon_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'search_modal_content_tabs_docs_list_category_icon_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_live_search_settings',
+                'settings'    => 'search_modal_content_tabs_docs_list_category_icon_size',
+                'label'       => __( 'List Category Font Size', 'betterdocs' ),
+                'priority'    => 649,
+                'input_attrs' => [
+                    'class'  => '',
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' // optional suffix
+                ]
+            ] )
+        );
+    }
+
+
+    public function search_modal_query_section() {
+        $this->customizer->add_setting( 'search_modal_query_section', [
+            'default'           => $this->defaults['search_modal_query_section'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'search_modal_query_section', [
+                'label'    => __( 'Search Modal Query', 'betterdocs' ),
+                'priority' => 700,
+                'settings' => 'search_modal_query_section',
+                'section'  => 'betterdocs_live_search_settings'
+            ]
+        ) );
+    }
+
+
+    public function search_modal_query_initial_number_of_docs() {
+        $this->customizer->add_setting( 'search_modal_query_initial_number_of_docs', [
+            'default'           => $this->defaults['search_modal_query_initial_number_of_docs'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control(
+            new SelectControl(
+                $this->customizer,
+                'search_modal_query_initial_number_of_docs',
+                [
+                    'label'    => __( 'Initial Number Of Docs', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_initial_number_of_docs',
+                    'type'     => 'number',
+                    'priority' => 701
+                ]
+            )
+        );
+    }
+
+    public function search_modal_query_initial_number_of_faqs() {
+        $this->customizer->add_setting( 'search_modal_query_initial_number_of_faqs', [
+            'default'           => $this->defaults['search_modal_query_initial_number_of_faqs'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control(
+            new SelectControl(
+                $this->customizer,
+                'search_modal_query_initial_number_of_faqs',
+                [
+                    'label'    => __( "Initial Number Of FAQ's", 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_initial_number_of_faqs',
+                    'type'     => 'number',
+                    'priority' => 701
+                ]
+            )
+        );
+    }
+
+    // public function search_modal_query_select_specific_doc_category() {
+    //     $this->customizer->add_setting( 'search_modal_query_select_specific_doc_category', [
+    //         'default'    => $this->defaults['search_modal_query_select_specific_doc_category'],
+    //         'capability' => 'edit_theme_options'
+    //     ] );
+
+    //     $this->customizer->add_control(
+    //         new WP_Customize_Control(
+    //             $this->customizer,
+    //             'search_modal_query_select_specific_doc_category',
+    //             [
+    //                 'label'    => __( 'Select Doc Category Initial Posts', 'betterdocs' ),
+    //                 'section'  => 'betterdocs_live_search_settings',
+    //                 'settings' => 'search_modal_query_select_specific_doc_category',
+    //                 'type'     => 'select',
+    //                 'choices'  => betterdocs()->query->get_doc_terms( [
+    //                     '' => __( 'Select Doc Term', 'betterdocs' )
+    //                 ] ),
+    //                 'priority' => 702
+    //             ]
+    //         )
+    //     );
+    // }
+
+    // public function search_modal_query_select_specific_faq() {
+    //     $this->customizer->add_setting( 'search_modal_query_select_specific_faq', [
+    //         'default'    => $this->defaults['search_modal_query_select_specific_faq'],
+    //         'capability' => 'edit_theme_options'
+    //     ] );
+
+    //     $this->customizer->add_control(
+    //         new WP_Customize_Control(
+    //             $this->customizer,
+    //             'search_modal_query_select_specific_faq',
+    //             [
+    //                 'label'    => __( 'Select FAQ Initial Posts', 'betterdocs' ),
+    //                 'section'  => 'betterdocs_live_search_settings',
+    //                 'settings' => 'search_modal_query_select_specific_faq',
+    //                 'type'     => 'select',
+    //                 'choices'  => betterdocs()->query->get_faq_terms( [
+    //                     '' => __( 'Select FAQ Term', 'betterdocs' )
+    //                 ] ),
+    //                 'priority' => 703
+    //             ]
+    //         )
+    //     );
+    // }
 }
