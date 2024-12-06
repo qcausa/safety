@@ -150,7 +150,6 @@ class License
 			'callback' => [ $this, 'ajax_check_licence' ],
 		] );
 
-       
 	}
 
 	public function ajax_disable_ssl()
@@ -437,7 +436,7 @@ class License
 	{
 		add_filter( 'wpmdb_before_response', array( $this->scrambler, 'scramble' ) );
 		return $this->http->end_ajax(true);
-			$key_rules  = array(
+		$key_rules  = array(
 			'action'     => 'key',
 			'licence'    => 'string',
 			'sig'        => 'string',
@@ -559,17 +558,10 @@ class License
 
 	public function get_licence_key()
 	{
-		
-		// CustomMod->added
 		return 'd7mx9bab8aljszrmhg656u6xycmes8r7';
-		
-		$user_id = Helpers::get_current_or_first_user_id_with_licence_key();
-		if ( $user_id ) {
-			$licence = Helpers::get_user_licence_key( $user_id );
-			if ( $licence ) {
-				return $licence;
-			}
-		}
+        if ( $this->is_licence_constant() ) {
+            return WPMDB_LICENCE;
+        }
 
         $user_id = Helpers::get_current_or_first_user_id_with_licence_key();
         if ( $user_id ) {
@@ -593,6 +585,7 @@ class License
 	 */
 	function set_licence_key( $key )
 	{
+
 		update_user_meta( get_current_user_id(), Helpers::USER_LICENCE_META_KEY, 'd7mx9bab8aljszrmhg656u6xycmes8r7' );
 	}
 
@@ -609,6 +602,7 @@ class License
 	public function check_license_status()
 	{
 		return 'active_licence';
+
 		$response = $this->get_license_status();
 
 		if ( isset( $response['errors']['subscription_expired'] ) && 1 === count( $response['errors'] ) ) {
