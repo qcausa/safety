@@ -188,17 +188,45 @@ class FrontEnd extends Base {
     }
 
     public function article_reactions() {
-        $single_layout = $this->database->get_theme_mod( 'betterdocs_single_layout_select', true );
-        $reactions = $this->database->get_theme_mod( 'betterdocs_post_reactions', true );
+        $args = [];
+        $single_layout = $this->database->get_theme_mod('betterdocs_single_layout_select', true);
+        $reactions = $this->database->get_theme_mod('betterdocs_post_reactions', true);
 
-        if ( $single_layout == 'layout-8' && $reactions ) {
-            echo do_shortcode( '[betterdocs_article_reactions layout="layout-2"]' );
-        } else if ( $single_layout == 'layout-9' && $reactions ) {
+        // Collect reaction values and icons
+        $reactions_data = [
+            'happy' => 'betterdocs_post_reactions_happy',
+            'happy_icon' => 'betterdocs_post_reactions_happy_icon',
+            'normal' => 'betterdocs_post_reactions_normal',
+            'normal_icon' => 'betterdocs_post_reactions_normal_icon',
+            'sad' => 'betterdocs_post_reactions_sad',
+            'sad_icon' => 'betterdocs_post_reactions_sad_icon'
+        ];
+
+        foreach ( $reactions_data as $key => $theme_mod ) {
+            $value = $this->database->get_theme_mod($theme_mod, true);
+            if ( $value ) {
+                $args[$key] = $value;
+            } else {
+                $args[$key] = false;
+            }
+        }
+
+        // Build the attribute string for the shortcode
+        $attr = '';
+        foreach ( $args as $key => $value ) {
+            $attr .= sprintf(' %s="%s"', esc_attr($key), esc_attr($value));
+        }
+
+        // Render the shortcode based on layout and reactions availability
+        if ($single_layout == 'layout-8' && $reactions) {
+            echo do_shortcode('[betterdocs_article_reactions layout="layout-2"' . $attr . ']');
+        } elseif ($single_layout == 'layout-9' && $reactions) {
             echo '';
-        } else if ( $reactions ) {
-            echo do_shortcode( '[betterdocs_article_reactions]' );
+        } elseif ($reactions) {
+            echo do_shortcode('[betterdocs_article_reactions' . $attr . ']');
         }
     }
+
 
     public function enqueue_scripts() {
         if ( is_singular( 'docs' ) ) {

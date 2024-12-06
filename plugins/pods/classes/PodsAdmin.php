@@ -757,6 +757,15 @@ class PodsAdmin {
 
 		$pod = pods_get_instance( $pod_name );
 
+		if ( empty( $pod->pod_data ) ) {
+			printf(
+				'<div class="wrap"><p>%s</p></div>',
+				esc_html__( 'This content type is not configured correctly. There could be an issue in your configuration storagae. Please contact support.', 'pods' )
+			);
+
+			return;
+		}
+
 		if ( 'custom' !== pods_v( 'ui_style', $pod->pod_data['options'], 'settings', true ) ) {
 			$actions_disabled = array(
 				'manage'    => 'manage',
@@ -4817,7 +4826,16 @@ class PodsAdmin {
 					$value = $setting_field['site_health_data'][ $value ];
 				} elseif ( $has_value && isset( $setting_field['data'] ) && isset( $setting_field['data'][ $value ] ) ) {
 					$value = $setting_field['data'][ $value ];
-				} elseif ( 'boolean' === $setting_field['data'] || '1' === $value || '0' === $value ) {
+				} elseif (
+					(
+						isset( $setting_field['data'] )
+						&& 'boolean' === $setting_field['data']
+					)
+					&& (
+						'1' === $value
+						|| '0' === $value
+					)
+				) {
 					$value = '1' === $value ? __( 'Yes', 'pods' ) : __( 'No', 'pods' );
 				}
 			}

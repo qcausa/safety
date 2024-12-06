@@ -95,7 +95,7 @@ class CategoryBox extends BaseWidget {
                     '2' => '2',
                     '3' => '3',
                     '4' => '4',
-                    '5' => '5',
+                    '5' => '5'
                 ],
                 'prefix_class'       => 'elementor-grid%s-',
                 'frontend_available' => true,
@@ -110,19 +110,19 @@ class CategoryBox extends BaseWidget {
         );
 
         $this->add_control(
-			'box_column_layout_4',
-			[
-				'label'   => esc_html__( 'Box Column', 'textdomain' ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 2,
-				'max'     => 5,
-				'step'    => 1,
-				'default' => 4,
-                'condition'          => [
+            'box_column_layout_4',
+            [
+                'label'     => esc_html__( 'Box Column', 'textdomain' ),
+                'type'      => Controls_Manager::NUMBER,
+                'min'       => 2,
+                'max'       => 5,
+                'step'      => 1,
+                'default'   => 4,
+                'condition' => [
                     'layout_template' => ['layout-4']
-                ],
-			]
-		);
+                ]
+            ]
+        );
 
         $this->add_control(
             'show_icon',
@@ -235,6 +235,45 @@ class CategoryBox extends BaseWidget {
                 'condition' => [
                     'show_count'      => 'true',
                     'layout_template' => ['default', 'layout-4', 'layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'subcategory_text',
+            [
+                'label'     => __( 'SubCategory Text', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default'   => __( 'Sub Category', 'betterdocs' ),
+                'condition' => [
+                    'layout_template' => ['layout-4']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'subcategories_text',
+            [
+                'label'     => __( 'SubCategories Text', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default'   => __( 'Sub Categories', 'betterdocs' ),
+                'condition' => [
+                    'layout_template' => ['layout-4']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'last_updated_time_text',
+            [
+                'label'     => __( 'Updated Time Text', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default'   => __( 'Last Updated', 'betterdocs' ),
+                'condition' => [
+                    'layout_template' => ['layout-4']
                 ]
             ]
         );
@@ -1393,7 +1432,7 @@ class CategoryBox extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-category-box-wrapper.el-layout-4 .betterdocs-categories-folder.layout-4 .category-box .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-last-update:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -1482,15 +1521,15 @@ class CategoryBox extends BaseWidget {
     }
 
     protected function render_callback() {
-        $settings = &$this->attributes;
+        $settings             = &$this->attributes;
         $settings['taxonomy'] = 'doc_category';
 
-        if( is_tax('doc_category') && $settings['layout_template'] == 'layout-4') {
-            add_filter('betterdocs_base_terms_args', [$this, 'render_child_terms'], 10, 1);
+        if ( is_tax( 'doc_category' ) && $settings['layout_template'] == 'layout-4' ) {
+            add_filter( 'betterdocs_base_terms_args', [$this, 'render_child_terms'], 10, 1 );
         }
 
-        if( $settings['layout_template'] == 'layout-4' ) {
-            add_filter('betterdocs_layout_filename', [$this, 'change_to_layout_four'], 15, 3);
+        if ( $settings['layout_template'] == 'layout-4' ) {
+            add_filter( 'betterdocs_layout_filename', [$this, 'change_to_layout_four'], 15, 3 );
         }
 
         $_filter_added = ( $this->attributes['layout_template'] === 'layout-2' || $this->attributes['layout_template'] === 'layout-3' || $this->attributes['layout_template'] === 'layout-4' );
@@ -1503,8 +1542,7 @@ class CategoryBox extends BaseWidget {
     public function view_params() {
         $settings = &$this->attributes;
 
-
-        $wrapper_class       = 'el-layout-defualt';
+        $wrapper_class = 'el-layout-defualt';
 
         $inner_wrapper_class = 'betterdocs-category-box-inner-wrapper';
 
@@ -1533,14 +1571,14 @@ class CategoryBox extends BaseWidget {
         $show_description = $settings['layout_template'] == 'layout-3' ? (bool) $settings['listview-show-description'] : false;
 
         $terms_query = [
-            'hide_empty'         => true,
-            'taxonomy'           => 'doc_category',
-            'order'              => $settings['order'],
-            'orderby'            => $settings['orderby'],
+            'hide_empty' => true,
+            'taxonomy'   => 'doc_category',
+            'order'      => $settings['order'],
+            'orderby'    => $settings['orderby']
         ];
 
-        $terms_query['offset'] = $settings['offset'];
-        $terms_query['number'] = $settings['box_per_page'];
+        $terms_query['offset']             = $settings['offset'];
+        $terms_query['number']             = $settings['box_per_page'];
         $terms_query['nested_subcategory'] = isset( $settings['nested_subcategory'] ) ? $settings['nested_subcategory'] : false;
 
         if ( $settings['include'] ) {
@@ -1579,7 +1617,7 @@ class CategoryBox extends BaseWidget {
         $terms_query_args = $this->betterdocs( 'query' )->terms_query( $terms_query );
 
         if ( is_tax( 'doc_category' ) ) {
-            $current_category = get_queried_object();
+            $current_category   = get_queried_object();
             $_nested_categories = betterdocs()->query->get_child_term_ids_by_parent_id( 'doc_category', $current_category->term_id );
             if ( ! $_nested_categories ) {
                 $terms_query_args = false;
@@ -1629,8 +1667,11 @@ class CategoryBox extends BaseWidget {
             $default_params['show_description']      = false;
             $default_params['last_update']           = true;
             $default_params['category_icon']         = 'folder';
-            $default_params['count_suffix']          = 'Docs';
-            $default_params['count_suffix_singular'] = 'Doc';
+            $default_params['count_suffix']          = $settings['count_suffix'];
+            $default_params['count_suffix_singular'] = $settings['count_suffix_singular'];
+            $default_params['subcategory_text']      = $settings['subcategory_text'];
+            $default_params['subcategories_text']    = $settings['subcategories_text'];
+            $default_params['last_updated_time_text'] = $settings['last_updated_time_text'];
         }
 
         $params = wp_parse_args( $default_params, $settings );
@@ -1638,14 +1679,14 @@ class CategoryBox extends BaseWidget {
         return $params;
     }
 
-    public function change_to_layout_four($layout, $layout_two, $widget_type){
+    public function change_to_layout_four( $layout, $layout_two, $widget_type ) {
         return 'layout-4';
     }
 
-    public function render_child_terms($args) {
+    public function render_child_terms( $args ) {
         $current_category_id = get_queried_object() != null ? get_queried_object()->term_id : '';
         $_nested_categories  = betterdocs()->query->get_child_term_ids_by_parent_id( 'doc_category', $current_category_id );
-        if( ! empty( $_nested_categories ) ) {
+        if ( ! empty( $_nested_categories ) ) {
             $args['include'] = $_nested_categories;
         }
         return $args;

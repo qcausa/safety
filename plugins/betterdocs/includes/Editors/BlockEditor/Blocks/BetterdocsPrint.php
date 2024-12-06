@@ -15,7 +15,7 @@ class BetterdocsPrint extends Block {
     ];
 
     protected $frontend_scripts = [
-        'betterdocs',
+        'betterdocs'
     ];
 
     public function get_name() {
@@ -24,11 +24,18 @@ class BetterdocsPrint extends Block {
 
     public function get_default_attributes() {
         return [
-            'blockId' => ''
+            'blockId' => '',
+            'layout'  => 'layout-1',
+            'enable'  => true
         ];
     }
 
-    public function render($attributes, $content) {
-        $this->views('widgets/print-icon');
+    public function render( $attributes, $content ) {
+        $layout = $attributes['layout'];
+        if ( $layout == 'layout-1' ) {
+            $this->views( 'widgets/print-icon' );
+        } else {
+            $this->views('templates/parts/print-icon-2');
+        }
     }
 }

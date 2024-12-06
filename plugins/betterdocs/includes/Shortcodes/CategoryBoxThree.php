@@ -33,7 +33,6 @@ class CategoryBoxThree extends CategoryBox {
             'show_description'         => false,
             'show_icon'                => true,
             'category_icon'            => 'folder',
-            'new_post_tag'             => true,
             'last_update'              => '',
         ];
     }
@@ -41,7 +40,7 @@ class CategoryBoxThree extends CategoryBox {
     public function header_sequence( $_layout_sequence, $layout, $widget_type, $_defined_vars ) {
         $_new_layout_sequence = ['category_icon', [
             'class'    => 'betterdocs-category-title-counts',
-            'sequence' => ['new_post_tag', 'category_title', 'category_description', 'sub_category_counts', 'last_update']
+            'sequence' => ['category_title', 'category_description', 'sub_category_counts', 'last_update']
         ]];
 
         return $_new_layout_sequence;

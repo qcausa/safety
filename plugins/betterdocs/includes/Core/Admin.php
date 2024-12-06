@@ -110,6 +110,15 @@ class Admin extends Base {
         add_filter( 'manage_docs_posts_columns', [$this, 'set_custom_edit_action_columns'] );
         add_filter( 'manage_docs_posts_custom_column', [$this, 'manage_custom_columns'], 10, 2 );
 
+        /**
+         * Add New Column
+         */
+        add_filter( 'manage_users_columns', [$this, 'add_users_total_docs_column'], 10, 1 );
+        add_filter( 'manage_users_custom_column', [$this, 'popular_users_docs_data'], 10, 3 );
+        if ( is_plugin_active('betterdocs-pro/betterdocs-pro.php') ) {
+            add_action( 'admin_footer-plugins.php', array( $this, 'disable_deactivation' ) );
+        }
+
         if ( $this->settings->get( 'enable_estimated_reading_time' ) ) {
             add_action( 'add_meta_boxes', [$this, 'reading_meta_box_'], 10 );
         }
@@ -124,6 +133,66 @@ class Admin extends Base {
         } catch ( Exception $e ) {
             unset( $e );
         }
+    }
+
+    public function disable_deactivation() {
+        $tooltip_text = esc_html__('Deactivate BetterDocs Pro First', 'betterdocs');
+        ?>
+        <style type="text/css">
+            #deactivate-betterdocs {
+                color: #cccccc;
+                position: relative;
+            }
+
+            /* Tooltip styling */
+            #deactivate-betterdocs[title]:hover::after {
+                content: attr(title);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #333;
+                color: #fff;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+            }
+            #deactivate-betterdocs:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        </style>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                // Disable the default action and add class with tooltip by default
+                const tooltipText = "<?php echo $tooltip_text; ?>";
+                $("#deactivate-betterdocs")
+                    .addClass("disabled-tooltip")
+                    .attr("title", tooltipText)
+                    .on("click", function(e) {
+                        e.preventDefault(); // Prevent any action on click
+                    });
+            });
+        </script>
+    <?php }
+
+    public function add_users_total_docs_column( $columns ) {
+        $new_column = [
+            'docs' => __( 'Docs', 'betterdocs' )
+        ];
+        $columns = array_merge( $columns, $new_column );
+        return $columns;
+    }
+
+    public function popular_users_docs_data( $output, $column_name, $user_id ) {
+        if ( $column_name == 'docs' ) {
+            $total_count = count_user_posts( $user_id, 'docs', true );
+            return '<a href="edit.php?post_type=docs&author=' . $user_id . '" class="edit"><span aria-hidden="true">' . $total_count . '</span></a>';
+        }
+        return $output;
     }
 
     public function reading_meta_box_() {
@@ -283,37 +352,41 @@ class Admin extends Base {
             $notices->add( 'migration', $_migration_notice, [
                 'start'       => $notices->time(),
                 'recurrence'  => false,
-                'dismissible' => true,
-                //'display_if'  => current_user_can( 'delete_users' )
+                'dismissible' => true
             ] );
         }
 
         /**
          * Opt-In Notice
          */
-        if ( $this->insights != null ) {
+        $allow_tracking = get_option( 'wpins_allow_tracking' );
+        if ( $this->insights != null && ! isset( $allow_tracking[ 'betterdocs' ] )  ) {
             $notices->add( 'opt_in', [$this->insights, 'notice'], [
                 'classes'     => 'updated put-dismiss-notice',
                 'start'       => $notices->time(),
-                // 'start'       => $notices->strtotime( '+20 days' ),
+                'refresh'     => BETTERDOCS_VERSION,
                 'dismissible' => true,
                 'do_action'   => 'wpdeveloper_notice_clicked_for_betterdocs',
-                'display_if'  => ! function_exists( 'betterdocs_pro' )
+                'display_if'  => ! function_exists( 'betterdocs_pro' ),
+                'screens' => ['dashboard']
             ] );
         }
 
-        $b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Enjoy 40% off & unlock <strong>premium features to streamline customer support</strong> & knowledge base 🎁</p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/betterdocs-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button>';
-        $_black_friday_notice = [
+        $blackfriday_message            = '<div class="betterdocs-notice-body"><p style="margin-top: 0; margin-bottom: 0;"><strong>🛍️ Black Friday Specials:</strong> Save up to 35% OFF on BetterDocs PRO plans & manage docs/FAQs seamlessly.</p><a class="button button-primary" href="https://betterdocs.co/bfcm24-pricing" target="_blank"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.7431 10.9381L15.904 9.35966C15.9898 8.5175 16.0464 7.9614 16.002 7.61102L16.0175 7.61112C16.7442 7.61112 17.3333 6.98929 17.3333 6.22223C17.3333 5.45517 16.7442 4.83334 16.0175 4.83334C15.2908 4.83334 14.7017 5.45517 14.7017 6.22223C14.7017 6.56914 14.8222 6.88634 15.0214 7.12975C14.7354 7.31608 14.3615 7.70926 13.7987 8.30106L13.7986 8.30107L13.7986 8.30108C13.365 8.75699 13.1482 8.98495 12.9064 9.02025C12.7724 9.03981 12.6358 9.01971 12.5121 8.96219C12.2887 8.85838 12.1398 8.57656 11.842 8.01293L10.2723 5.04204C10.0886 4.69433 9.9348 4.40331 9.79616 4.16913C10.3649 3.86285 10.7543 3.23869 10.7543 2.51852C10.7543 1.49577 9.96888 0.666672 8.99996 0.666672C8.03104 0.666672 7.24557 1.49577 7.24557 2.51852C7.24557 3.23869 7.63503 3.86285 8.20376 4.16913C8.06511 4.40333 7.91137 4.6943 7.72763 5.04204L6.1579 8.01293C5.8601 8.57656 5.71119 8.85838 5.48786 8.96219C5.36411 9.01971 5.22757 9.03981 5.09355 9.02025C4.85169 8.98495 4.63488 8.75699 4.20127 8.30107C3.63844 7.70928 3.26449 7.31608 2.97849 7.12975C3.17771 6.88634 3.29821 6.56914 3.29821 6.22223C3.29821 5.45517 2.70911 4.83334 1.98242 4.83334C1.25572 4.83334 0.666626 5.45517 0.666626 6.22223C0.666626 6.98929 1.25572 7.61112 1.98242 7.61112L1.99795 7.61102C1.95348 7.96139 2.01015 8.51749 2.09596 9.35965L2.2568 10.938C2.34608 11.8142 2.42032 12.6478 2.51125 13.3982H15.4887C15.5796 12.6478 15.6538 11.8142 15.7431 10.9381Z" fill="white"/>
+<path d="M8.04563 17.3333H9.95429C12.4419 17.3333 13.6858 17.3333 14.5157 16.5492C14.8779 16.207 15.1073 15.59 15.2728 14.787H2.72711C2.89263 15.59 3.12201 16.207 3.48424 16.5492C4.31414 17.3333 5.55797 17.3333 8.04563 17.3333Z" fill="white"/>
+</svg> Upgrade To PRO</a></div>';
+        $_blackfriday_notice = [
             'thumbnail' => $this->assets->icon( 'betterdocs-logo.svg', true ),
-            'html'      => $b_message
+            'html'      => $blackfriday_message
         ];
 
-        $notices->add( 'black_friday_notice', $_black_friday_notice, [
+        $notices->add( 'blackfriday24', $_blackfriday_notice, [
             'start'       => $notices->time(),
             'recurrence'  => false,
             'dismissible' => true,
             'refresh'     => BETTERDOCS_VERSION,
-            "expire"      => strtotime( '11:59:59pm 2nd December, 2023' ),
+            "expire"      => strtotime('11:59:59pm December 5, 2024'),
             'display_if'  => ! is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' )
         ] );
 
@@ -484,14 +557,16 @@ class Admin extends Base {
             ] );
 
             $this->assets->localize( 'betterdocs-switcher', 'betterdocsSwitcher', [
-                'menu_title'            => __( 'Switch to BetterDocs UI', 'betterdocs' ),
-                'site_address'          => get_bloginfo( 'url' ),
-                'betterdocs_pro_plugin' => betterdocs()->is_pro_active(),
+                'menu_title'             => __( 'Switch to BetterDocs UI', 'betterdocs' ),
+                'site_address'           => get_bloginfo( 'url' ),
+                'betterdocs_pro_plugin'  => betterdocs()->is_pro_active(),
                 'betterdocs_pro_version' => betterdocs()->pro_version()
             ] );
 
             return;
         }
+
+        wp_enqueue_script('wp-editor'); // enqueue this for yoast related issue
 
         if ( ! betterdocs()->is_betterdocs_screen( $hook ) ) {
             return;
@@ -522,7 +597,7 @@ class Admin extends Base {
             'ia_preview'                 => betterdocs()->settings->get( 'ia_enable_preview', false ),
             'multiple_kb'                => betterdocs()->settings->get( 'multiple_kb' ),
             'previewMode'                => betterdocs()->settings->get( 'ia_enable_preview', false ),
-            'dashboard_mode'             => get_option('dashboard_mode'),
+            'dashboard_mode'             => get_option( 'dashboard_mode' ),
             'betterdocs_pro_plugin'      => betterdocs()->is_pro_active(),
             'betterdocs_pro_version'     => betterdocs()->pro_version(),
             'analytics_older'            => version_compare( betterdocs()->pro_version(), '3.3.4', '<=' )

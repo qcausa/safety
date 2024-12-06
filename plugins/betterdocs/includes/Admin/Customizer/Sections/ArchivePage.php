@@ -3311,4 +3311,211 @@ class ArchivePage extends Section {
             )
         );
     }
+
+    public function archive_docs_pagination() {
+        $this->customizer->add_setting( 'archive_docs_pagination', [
+            'default'           => $this->defaults['archive_docs_pagination'],
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer,
+            'archive_docs_pagination',
+            [
+                'label'    => __( 'Archive Docs Pagination', 'betterdocs' ),
+                'settings' => 'archive_docs_pagination',
+                'section'  => 'betterdocs_archive_page_settings',
+                'priority' => 45
+            ]
+        ) );
+    }
+
+    public function archive_docs_pagination_wrapper_height() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_height', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_height'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_pagination_wrapper_height', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_pagination_wrapper_height',
+                'label'       => __( 'Height', 'betterdocs' ),
+                'priority' => 45,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_width() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_width', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_width'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_pagination_wrapper_width', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_pagination_wrapper_width',
+                'label'       => __( 'Width', 'betterdocs' ),
+                'priority' => 45,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_font_size() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_font_size', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'archive_docs_pagination_wrapper_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_archive_page_settings',
+                'settings'    => 'archive_docs_pagination_wrapper_font_size',
+                'label'       => __( 'Font Size', 'betterdocs' ),
+                'priority' => 45,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 100,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_color() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_color', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_pagination_wrapper_color',
+                [
+                    'label'    => __( 'Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_pagination_wrapper_color',
+                    'priority' => 45
+                ]
+            )
+        );
+    }
+
+
+    public function archive_docs_pagination_wrapper_active_color() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_active_color', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_active_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_pagination_wrapper_active_color',
+                [
+                    'label'    => __( 'Active Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_pagination_wrapper_active_color',
+                    'priority' => 45,
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_active_border_color() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_active_border_color', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_active_border_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_pagination_wrapper_active_border_color',
+                [
+                    'label'    => __( 'Active Border Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_pagination_wrapper_active_border_color',
+                    'priority' => 45
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_background_color_sleek() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_background_color_sleek', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_background_color_sleek'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_pagination_wrapper_background_color_sleek',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_pagination_wrapper_background_color_sleek',
+                    'priority' => 45
+                ]
+            )
+        );
+    }
+
+    public function archive_docs_pagination_wrapper_background_color() {
+        $this->customizer->add_setting( 'archive_docs_pagination_wrapper_background_color', [
+            'default'           => $this->defaults['archive_docs_pagination_wrapper_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'archive_docs_pagination_wrapper_background_color',
+                [
+                    'label'    => __( 'Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'archive_docs_pagination_wrapper_background_color',
+                    'priority' => 45
+                ]
+            )
+        );
+    }
+
 }

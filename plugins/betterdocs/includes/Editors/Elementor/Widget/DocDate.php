@@ -39,6 +39,26 @@ class DocDate extends BaseWidget {
     protected function register_controls() {
 
         $this->start_controls_section(
+            'doc_date_general_section',
+            [
+                'label'     => __( 'General', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_CONTENT
+            ]
+        );
+
+        $this->add_control(
+            'doc_date_general_updated_text',
+            [
+                'label' => __( 'Text', 'betterdocs' ),
+                'type'  => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Updated on', 'betterdocs' )
+            ]
+        );
+
+        $this->end_controls_section();
+
+
+        $this->start_controls_section(
             'section_column_settings',
             [
                 'label' => __( 'Style', 'betterdocs' ),
@@ -100,5 +120,11 @@ class DocDate extends BaseWidget {
 
     protected function render_callback() {
         $this->views( 'widgets/date' );
+    }
+
+    public function view_params() {
+        return [
+            'doc_date_text' => $this->attributes['doc_date_general_updated_text']
+        ];
     }
 }

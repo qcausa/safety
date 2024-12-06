@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+use Elementor\Plugin as ElementorPlugin;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use ElementorPro\Base\Base_Widget_Trait;
@@ -31,7 +32,7 @@ class ArchiveList extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome', 'betterdocs-category-archive-doc-list'];
+        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome', 'betterdocs-category-archive-doc-list', 'betterdocs-pagination'];
     }
 
     public function get_keywords() {
@@ -50,6 +51,8 @@ class ArchiveList extends BaseWidget {
 
         $this->container_wrapper_section_layout_2();
         $this->list_settings_layout_2();
+
+        $this->pagination_controls();
     }
 
     public function section_content() {
@@ -117,6 +120,18 @@ class ArchiveList extends BaseWidget {
                 'label_off'    => __( 'Hide', 'betterdocs' ),
                 'return_value' => '1',
                 'default'      => '1'
+            ]
+        );
+
+        $this->add_control(
+            'enable_pagination',
+            [
+                'label'        => __( 'Enable Pagination', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'betterdocs' ),
+                'label_off'    => __( 'Hide', 'betterdocs' ),
+                'return_value' => 'true',
+                'default'      => false
             ]
         );
 
@@ -611,6 +626,145 @@ class ArchiveList extends BaseWidget {
         $this->end_controls_section(); # end of 'Column Settings'
     }
 
+    public function pagination_controls() {
+        $this->start_controls_section(
+            'section_common_pagination',
+            [
+                'label' => __( 'Pagination', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'pagination_margin',
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-pagination' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'pagination_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-pagination' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'pagination_alignment',
+            [
+                'label'     => __( 'Pagination Alignment', 'betterdocs' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'start'   => [
+                        'title' => __( 'Left', 'betterdocs' ),
+                        'icon'  => 'fa fa-align-left'
+                    ],
+                    'center' => [
+                        'title' => __( 'Center', 'betterdocs' ),
+                        'icon'  => 'fa fa-align-center'
+                    ],
+                    'end'  => [
+                        'title' => __( 'Right', 'betterdocs' ),
+                        'icon'  => 'fa fa-align-right'
+                    ]
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-pagination ul' => 'justify-content: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'pagination_height',
+            [
+                'label'      => __( 'Height', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-pagination ul li a' => 'height: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'pagination_width',
+            [
+                'label'      => __( 'Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-pagination ul li a' => 'width: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'pagination_background_color',
+            [
+                'label'     => esc_html__( 'Background Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-pagination ul li a' => 'background-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'pagination_color',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-pagination ul li a' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'pagination_border_color',
+            [
+                'label'     => esc_html__( 'Active Border Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-pagination ul li.active a' => 'border-color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'pagination_typography',
+                'selector' => '{{WRAPPER}} .betterdocs-pagination ul li a'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     public function subcat_list_settings() {
         /**
          * ----------------------------------------------------------
@@ -873,12 +1027,24 @@ class ArchiveList extends BaseWidget {
         if( $this->attributes['section_betterdocs_archive_list_layout'] == 'layout-2' ){
             $term_params = [
                 'current_category'  => $term,
+                'term'              => $term,
                 'orderby'           => $this->attributes['alphabetic_order'],
                 'order'             => $this->attributes['order'],
                 'posts_per_page'    => -1,
-                'archive_layout'    => $this->attributes['section_betterdocs_archive_list_layout']
+                'archive_layout'    => $this->attributes['section_betterdocs_archive_list_layout'],
+                'query_args'        => betterdocs()->query->docs_query_args( $_docs_query ),
             ];
         }
+
+        if( $this->attributes['enable_pagination'] ) { //pass page variable in query args if pagination is enabled
+            $page                                        = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1;
+            $term_params['query_args']['paged']          = $page;
+            $term_params['query_args']['posts_per_page'] = 10;
+            $term_params['page']                         = $page;
+            $term_params['pagination']                   = $this->attributes['enable_pagination'];
+        }
+
+        $term_params['edit_mode'] = ElementorPlugin::instance()->editor->is_edit_mode();
 
         return $term_params;
     }

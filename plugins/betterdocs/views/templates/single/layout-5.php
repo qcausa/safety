@@ -36,6 +36,9 @@
                 ] );
             ?>
             <div id="betterdocs-single-main" class="betterdocs-content-area">
+                <?php
+
+                ?>
                 <div class="betterdocs-content-inner-area">
                     <div class="doc-single-content-wrapper">
                         <?php
@@ -44,7 +47,16 @@
                                 /**
                                  * Headers
                                  */
+                                $view_object->get( 'templates/parts/mobile-nav', [
+                                    'mobile_sidebar' => true,
+                                    'mobile_toc' => true
+                                ] );
                                 $view_object->get( 'templates/headers/layout-4' );
+                                $author = betterdocs()->customizer->defaults->get( 'betterdocs_doc_author_enable' );
+                                $updated_date = betterdocs()->customizer->defaults->get( 'betterdocs_doc_author_date' );
+                                if ( $author ) {
+                                    $view_object->get( 'templates/parts/author', [ 'updated_date' => $updated_date ] );
+                                }
                                 $view_object->get( 'templates/contents/layout-2' );
                                 $view_object->get( 'templates/footer' );
                             endwhile;

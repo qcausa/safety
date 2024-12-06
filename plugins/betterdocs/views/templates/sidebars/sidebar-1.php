@@ -1,6 +1,6 @@
 <?php
     if ( ( isset( $force ) && $force == null ) || ! isset( $force ) ) {
-        if( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) ) {
+        if( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) && isset( $layout_type ) && $layout_type == 'template' ) {
             return;
         }
     }

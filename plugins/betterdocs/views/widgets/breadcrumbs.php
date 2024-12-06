@@ -92,18 +92,18 @@
     ];
 
     if ( isset( $breadcrumbs_layout ) && ! empty( $breadcrumbs_layout ) ) {
-        $wrapper_attr_array['class'][] = 'betterdocs-breadcrumb ' . $breadcrumbs_layout;
-        $wrapper_attr_array['id'][]    = 'betterdocs-breadcrumb';
+        $br_wrapper_attr_array['class'][] = 'betterdocs-breadcrumb ' . $breadcrumbs_layout;
+        $br_wrapper_attr_array['id'][]    = 'betterdocs-breadcrumb';
     } else {
-        $wrapper_attr_array = $_wrapper_attr_array;
+        $br_wrapper_attr_array = $_wrapper_attr_array;
     }
 
 
-    if ( isset($widget) && $widget instanceof \WPDeveloper\BetterDocs\Editors\BlockEditor\Block ) {
-        $wrapper_attr_array['class'][] = $blockId;
+    if ( isset( $widget ) && $widget instanceof \WPDeveloper\BetterDocs\Editors\BlockEditor\Block ) {
+        $br_wrapper_attr_array['class'][] = $blockId;
     }
 
-    $wrapper_attr = betterdocs()->template_helper->get_html_attributes( $wrapper_attr_array );
+    $wrapper_attr = betterdocs()->template_helper->get_html_attributes( $br_wrapper_attr_array );
 ?>
 
 <nav

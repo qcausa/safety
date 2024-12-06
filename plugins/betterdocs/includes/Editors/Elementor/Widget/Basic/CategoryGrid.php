@@ -231,6 +231,45 @@ class CategoryGrid extends BaseWidget {
         );
 
         $this->add_control(
+            'count_prefix',
+            [
+                'label'     => __( 'Prefix', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'condition' => [
+                    'show_count'      => 'true',
+                    'layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'count_suffix',
+            [
+                'label'     => __( 'Suffix', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'condition' => [
+                    'show_count'      => 'true',
+                    'layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'count_suffix_singular',
+            [
+                'label'     => __( 'Suffix Singular', 'betterdocs' ),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'condition' => [
+                    'show_count'      => 'true',
+                    'layout_template' => ['layout-2']
+                ]
+            ]
+        );
+
+        $this->add_control(
             'show_list',
             [
                 'label'        => __( 'Show List', 'betterdocs' ),
@@ -887,6 +926,78 @@ class CategoryGrid extends BaseWidget {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-single-category-wrapper.layout-2 .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts:after' => 'border-top-color: {{VALUE}};'
+                ],
+                'condition' => [
+                    'layout_template' => 'layout-2'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_padding',
+            [
+                'label'      => esc_html__( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-single-category-wrapper.layout-2 .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ],
+                'condition' => [
+                    'layout_template' => 'layout-2'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_margin',
+            [
+                'label'      => esc_html__( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-single-category-wrapper.layout-2 .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ],
+                'condition' => [
+                    'layout_template' => 'layout-2'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_height',
+            [
+                'label'      => __( 'Height', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper.layout-2 .betterdocs-category-items-counts' => 'height: {{SIZE}}{{UNIT}};'
+                ],
+                'condition' => [
+                    'layout_template' => 'layout-2'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'count_width',
+            [
+                'label'      => __( 'Width', 'betterdocs' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range'      => [
+                    '%' => [
+                        'max'  => 300,
+                        'step' => 1
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-elementor.betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper.layout-2 .betterdocs-category-items-counts' => 'width: {{SIZE}}{{UNIT}};'
                 ],
                 'condition' => [
                     'layout_template' => 'layout-2'
@@ -1764,7 +1875,7 @@ class CategoryGrid extends BaseWidget {
             $inner_wrapper_attr
         );
 
-        $params = wp_parse_args( [
+        $default_params = [
             'wrapper_attr'            => $this->get_render_attributes( 'bd_category_grid_wrapper' ),
             'inner_wrapper_attr'      => $this->get_render_attributes( 'bd_category_grid_inner' ),
             'widget_type'             => 'category-grid',
@@ -1793,7 +1904,15 @@ class CategoryGrid extends BaseWidget {
             'category_title_link'     => $settings['category_link'],
             'layout_type'             => 'widget',
             'list_icon_url'           => ''
-        ], $settings );
+        ];
+
+        if ( $settings['layout_template'] == 'layout-2' ) {
+            $default_params['count_prefix']          = $settings['count_prefix'];
+            $default_params['count_suffix']          = $settings['count_suffix'];
+            $default_params['count_suffix_singular'] = $settings['count_suffix_singular'];
+        }
+
+        $params = wp_parse_args( $default_params, $settings );
 
         return $params;
     }

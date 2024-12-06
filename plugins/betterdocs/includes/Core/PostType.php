@@ -506,7 +506,14 @@ class PostType extends Base {
             wp_remove_object_terms( $object_id, $prev_term_id, 'doc_category' );
         }
 
-        $terms_added = wp_set_object_terms( $object_id, $term_id, 'doc_category' );
+        //check if the doc has more than 0 terms assgined to it, after unassignment above. So that other terms except the current term, does not lose the current doc assignment
+        $extra_terms_of_doc = wp_get_post_terms($object_id, 'doc_category', ['fields' => 'ids']);
+
+        if( count( $extra_terms_of_doc ) > 0 ) {
+            $term_id .= ','.implode(',', $extra_terms_of_doc);
+        }
+
+        $terms_added = wp_set_post_terms( $object_id, $term_id, 'doc_category' );
 
         if ( ! is_wp_error( $terms_added ) ) {
             wp_send_json_success( __( 'Successfully updated.', 'betterdocs' ) );
@@ -687,17 +694,19 @@ class PostType extends Base {
     }
 
     public function register_glossaries_taxonomy() {
+        $encyclopedia_root_slug = betterdocs()->settings->get('encyclopedia_root_slug', 'encyclopedia');
+
         $labels = [
-            'name'              => __( 'Glossaries Terms', 'betterdocs' ),
-            'singular_name'     => __( 'Glossaries Term', 'betterdocs' ),
-            'all_items'         => __( 'Glossaries Terms', 'betterdocs' ),
-            'parent_item'       => __( 'Parent Glossaries Term', 'betterdocs' ),
-            'parent_item_colon' => __( 'Parent Glossaries Term:', 'betterdocs' ),
-            'edit_item'         => __( 'Edit Term', 'betterdocs' ),
-            'update_item'       => __( 'Update Glossary', 'betterdocs' ),
-            'add_new_item'      => __( 'Add New Glossaries Term', 'betterdocs' ),
-            'new_item_name'     => __( 'New Glossaries Term Name', 'betterdocs' ),
-            'menu_name'         => __( 'Glossaries', 'betterdocs' )
+            'name'              => __('Glossaries Terms', 'betterdocs'),
+            'singular_name'     => __('Glossaries Term', 'betterdocs'),
+            'all_items'         => __('Glossaries Terms', 'betterdocs'),
+            'parent_item'       => __('Parent Glossaries Term', 'betterdocs'),
+            'parent_item_colon' => __('Parent Glossaries Term:', 'betterdocs'),
+            'edit_item'         => __('Edit Term', 'betterdocs'),
+            'update_item'       => __('Update Glossary', 'betterdocs'),
+            'add_new_item'      => __('Add New Glossaries Term', 'betterdocs'),
+            'new_item_name'     => __('New Glossaries Term Name', 'betterdocs'),
+            'menu_name'         => __('Glossaries', 'betterdocs')
         ];
 
         $args = [
@@ -710,10 +719,10 @@ class PostType extends Base {
             'query_var'         => true,
             'show_in_rest'      => true,
             'has_archive'       => true,
-            'rewrite'           => array(
-                'slug'       => $this->glossaries,
+            'rewrite'           => [
+                'slug'       => $encyclopedia_root_slug,
                 'with_front' => false,
-            ),
+            ],
             'capabilities'      => [
                 'manage_terms' => 'manage_doc_terms',
                 'edit_terms'   => 'edit_doc_terms',
@@ -722,12 +731,17 @@ class PostType extends Base {
             ]
         ];
 
-        register_taxonomy( $this->glossaries, [$this->post_type], $args );
+        // Register the custom taxonomy
+        register_taxonomy($this->glossaries, [$this->post_type], $args);
 
-        // Change the rewrite rules for the custom taxonomy
+        // Customize rewrite rules for the custom taxonomy
         global $wp_rewrite;
-        $wp_rewrite->extra_permastructs[$this->glossaries]['struct'] = '/'.$this->glossaries.'/%glossaries%';
+        $wp_rewrite->extra_permastructs[$this->glossaries]['struct'] = '/'.$encyclopedia_root_slug.'/%'.$this->glossaries.'%';
+
+        // Flush rewrite rules to ensure the new structure takes effect
+        add_action('init', 'flush_rewrite_rules', 999);
     }
+
     public function add_glossary_term_fields($taxonomy) {
         ?>
         <div class="form-field term-custom-field-wrap">
@@ -745,7 +759,7 @@ class PostType extends Base {
         </div>
         <?php
     }
-    
+
     public function edit_glossary_term_fields($term) {
         $glossary_term_description = get_term_meta($term->term_id, 'glossary_term_description', true);
         ?>
@@ -766,7 +780,7 @@ class PostType extends Base {
         </tr>
         <?php
     }
-    
+
 
     public function save_glossary_term_fields($term_id) {
         if (isset($_POST['glossary_term_description'])) {

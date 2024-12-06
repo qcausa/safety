@@ -20,7 +20,7 @@ class Sidebar extends BaseWidget {
     }
 
     public function get_title() {
-        return __( 'Doc Sidebar', 'betterdocs' );
+        return __( 'BetterDocs Sidebar', 'betterdocs' );
     }
 
     public function get_icon() {
@@ -40,7 +40,7 @@ class Sidebar extends BaseWidget {
     }
 
     public function get_script_depends() {
-        return ['betterdocs-category-grid'];
+        return ['betterdocs-category-grid', 'betterdocs-search-modal'];
     }
 
     public function get_custom_help_url() {
@@ -124,44 +124,97 @@ class Sidebar extends BaseWidget {
         );
 
         $this->add_control(
-            'include_doc_categories',
+            'search_modal_doc_query_type',
             [
-                'label'       => __( 'Doc Categories', 'betterdocs' ),
+                'label'       => __( 'Select Docs Type', 'betterdocs' ),
                 'label_block' => true,
                 'type'        => Controls_Manager::SELECT2,
-                'options'     => array_reduce( get_terms( ['taxonomy' => 'doc_category'] ), [$this, 'return_mod_terms'] ),
-                'multiple'    => true,
-                'default'     => []
-            ]
-        );
-
-        $this->add_control(
-            'include_faq',
-            [
-                'label'       => __( 'FAQ', 'betterdocs' ),
-                'label_block' => true,
-                'type'        => Controls_Manager::SELECT2,
-                'options'     => array_reduce( get_terms( ['taxonomy' => 'betterdocs_faq_category'] ), [$this, 'return_mod_terms'] ),
-                'multiple'    => true,
-                'default'     => []
+                'options'     => [
+                    'popular_docs'          => __('Popular Docs', 'betterdocs'),
+                    'specific_doc_ids'      => __("Doc Id's", 'betterdocs'),
+                    'specific_doc_term_ids' => __("Doc Category Id's", "betterdocs")
+                ],
+                'multiple'    => false,
+                'default'     => 'popular_docs'
             ]
         );
 
         $this->add_control(
             'initial_docs_number',
             [
-                'label'   => __( 'Initial Docs Number', 'betterdocs' ),
+                'label'   => __( 'Number of Docs', 'betterdocs' ),
                 'type'    => Controls_Manager::NUMBER,
-                'default' => '5'
+                'default' => '5',
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'popular_docs'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'search_modal_query_term_ids',
+            [
+                'label'   => __( "Doc Term ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 8, 9'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'specific_doc_term_ids'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_query_doc_ids',
+            [
+                'label'   => __( "Doc ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 15, 16'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'specific_doc_ids'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_faq_query_type',
+            [
+                'label'       => __( 'Select FAQ Type', 'betterdocs' ),
+                'label_block' => true,
+                'type'        => Controls_Manager::SELECT2,
+                'default'     => 'default',
+                'options'     => [
+                    'default'                 => __('Default', 'betterdocs'),
+                    'specific_faq_term_ids'   => __("Specific FAQ Term Id's", 'betterdocs'),
+                ],
+                'multiple'    => false,
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_query_faq_term_ids',
+            [
+                'label'   => __( "FAQ Term ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 8, 9'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_faq_query_type' => 'specific_faq_term_ids'
+                ]
             ]
         );
 
         $this->add_control(
             'initial_faqs_number',
             [
-                'label'   => __( "Initial FAQ's Number", 'betterdocs' ),
+                'label'   => __( "Number of FAQ's", 'betterdocs' ),
                 'type'    => Controls_Manager::NUMBER,
-                'default' => '5'
+                'default' => '5',
+                'condition'  => [
+                    'search_modal_faq_query_type' => 'default'
+                ]
             ]
         );
 
@@ -2742,13 +2795,13 @@ class Sidebar extends BaseWidget {
         }
 
         if ( $settings['betterdocs_sidebar_layout'] == 'layout-5' ) {
-            $params['number_of_docs'] = $settings['initial_docs_number'];
-            $params['number_of_faqs'] = $settings['initial_faqs_number'];
-            $params['faq_terms']      = implode( ',', $settings['include_faq'] );
-            $params['doc_terms']      = implode( ',', $settings['include_doc_categories'] );
-            $params['sidebar_search'] = $settings['sidebar_search_toggle'];
+            $params['number_of_docs']                  = $settings['initial_docs_number'];
+            $params['number_of_faqs']                  = $settings['initial_faqs_number'];
+            $params['doc_ids']                         = $settings['search_modal_query_doc_ids'];
+            $params['doc_term_ids']                    = $settings['search_modal_query_term_ids'] ;
+            $params['faq_term_ids']                    = $settings['search_modal_query_faq_term_ids'];
+            $params['sidebar_search']                  = $settings['sidebar_search_toggle'];
         }
-
         return $params;
     }
 

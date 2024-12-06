@@ -66,7 +66,7 @@
                         continue;
                     }
 
-                    if ( $widget_type == 'category-box' ) {
+                    if ( $widget_type == 'category-box' || ( $widget_type == 'category-grid' && $layout == 'layout-2' ) ) {
                         $_counts = [
                             'counts'          => $_counts,
                             'prefix'          => ! empty( $count_prefix ) ? $count_prefix : '',

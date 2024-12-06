@@ -1123,6 +1123,27 @@ class Sidebar extends Section {
         );
     }
 
+    public function sidebar_border_color_layout_7() {
+        $this->customizer->add_setting( 'betterdocs_sidebar_border_color_layout_7', [
+            'default'           => $this->defaults['betterdocs_sidebar_border_color_layout_7'],
+            'capability'        => 'edit_theme_options',
+            // 'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_sidebar_border_color_layout_7',
+                [
+                    'label'    => __( 'Border Right Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidebar_border_color_layout_7'
+                ]
+            )
+        );
+    }
+
     public function sidebar_padding_layout_7() {
         $this->customizer->add_setting( 'betterdocs_sidebar_padding_layout_7', [
             'default'           => $this->defaults['betterdocs_sidebar_padding_layout_7'],

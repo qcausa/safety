@@ -102,7 +102,7 @@ class FAQ extends Block {
                 'faq_group_title_typography'  => $attributes['faqGroupTitleTypography'],
                 'faq_per_page'                => $attributes['faqPerPage'],
                 'show_button_icon'            => $attributes['showButtonIcon'],
-                'button_icon_position'        => $attributes['faqLayout'] == 'layout-1' ? 'after' : 'before',
+                'button_icon_position'        => $attributes['faqLayout'] == 'layout-1' || $attributes['faqLayout'] == 'layout-3' ? 'after' : 'before',
                 'button_color'                => $attributes['buttonColor']
             ]
 

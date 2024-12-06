@@ -62,112 +62,169 @@ class CSVExporter {
 
 
     public function run(): array {
-        $post_args = [
-            'post_type' => 'docs',
-            'posts_per_page' => -1
-        ];
+        $allowed_post_types = ['docs', 'betterdocs_faq'];
 
-        if( $this->args['include_faq'] ) { //include betterdocs_faq when 'all' are selected from 'docs' or 'doc categories'
-            $post_args['post_type'] = ['docs', 'betterdocs_faq'];
+        if ($this->args['content'] === 'glossaries') {
+            return $this->handle_glossaries_export();
         }
 
-        if ( isset($this->args['post__in']) ) {
-            if( $this->args['include_faq'] ){ //include betterdocs_faq 'ids' when specific id's are selected from 'docs'
-                $faq_posts_ids = get_posts([
-                    'numberposts' => -1,
-                    'post_type'   => 'betterdocs_faq',
-                    'fields'      => 'ids'
-                ]);
-                $this->args['post__in'] =  array_merge( isset( $this->args['post__in'] ) ? $this->args['post__in'] : [] , $faq_posts_ids );
-            }
-
-            $post_args['post__in'] = $this->args['post__in'];
+        if (!in_array($this->args['content'], $allowed_post_types)) {
+            return [];
         }
 
-        if ( isset($this->args['category_terms']) ) {
-            $post_args['tax_query'] = [
-                [
-                    'taxonomy' => 'doc_category',
-                    'field' => 'slug',
-                    'terms' => $this->args['category_terms'],
-                ],
-            ];
+        $where = $this->wpdb->prepare(
+            "{$this->wpdb->posts}.post_type = %s",
+            $this->args['content']
+        );
 
-            if( $this->args['include_faq'] ) { //include betterdocs_faq when specific 'doc categories' are selected
-                $post_args['tax_query']['relation'] = 'OR';
-                $faq_category_slugs = get_terms([
-                    'taxonomy' => 'betterdocs_faq_category',
-                    'fields'   => 'slugs',
-                ]);
-                $post_args['tax_query'][] = [
-                    'taxonomy' => 'betterdocs_faq_category',
-                    'field'    => 'slug',
-                    'terms'     => $faq_category_slugs,
-                    'operator' => 'IN',
-                ];
-            }
-        }
-
-        if ( isset($this->args['kb_terms']) ) {
-            $post_args['tax_query'] = [
-                [
-                    'taxonomy' => 'knowledge_base',
-                    'field' => 'slug',
-                    'terms' => $this->args['kb_terms'],
-                ],
-            ];
-        }
-
-        if( $this->args['content'] == 'glossaries') { //for glossaries terms
-            $posts = get_terms( [
-                'taxonomy' => 'glossaries',
-                'hide_empty' => false,
-            ] );
+        if ($this->args['status']) {
+            $where .= $this->wpdb->prepare(
+                " AND {$this->wpdb->posts}.post_status = %s",
+                $this->args['status']
+            );
         } else {
-            $posts = get_posts($post_args);
+            $where .= " AND {$this->wpdb->posts}.post_status != 'auto-draft'";
         }
 
-        $post_ids = array_map(function ($post) {
-            if( $this->args['content'] == 'glossaries' ) { //for glossaries terms
-                return $post->term_id;
+        if (!empty($this->args['post__in'])) {
+            $post_in = $this->args['post__in'];
+            $ids_placeholder = implode(', ', array_fill(0, count($post_in), '%d'));
+            $where .= $this->wpdb->prepare(
+                " AND {$this->wpdb->posts}.ID IN ($ids_placeholder)",
+                $post_in
+            );
+        }
+
+        $join = '';
+
+        if (isset($this->args['category_terms'])) {
+            $join = "INNER JOIN {$this->wpdb->term_relationships} ON ({$this->wpdb->posts}.ID = {$this->wpdb->term_relationships}.object_id)";
+            $tax_terms = [];
+
+            // Handle doc categories
+            foreach ($this->args['category_terms'] as $term_slug) {
+                $term = get_term_by('slug', $term_slug, 'doc_category');
+                if ($term) {
+                    $tax_terms[] = $term->term_taxonomy_id;
+                }
             }
-            return $post->ID;
-        }, $posts);
 
+            if (!empty($tax_terms)) {
+                $tax_placeholder = implode(', ', array_fill(0, count($tax_terms), '%d'));
+                $where .= $this->wpdb->prepare(
+                    " AND {$this->wpdb->term_relationships}.term_taxonomy_id IN ($tax_placeholder)",
+                    $tax_terms
+                );
+            }
+        } elseif (isset($this->args['kb_terms'])) {
+            $join = "INNER JOIN {$this->wpdb->term_relationships} ON ({$this->wpdb->posts}.ID = {$this->wpdb->term_relationships}.object_id)";
+            foreach ($this->args['kb_terms'] as $term_slug) {
+                $term = get_term_by('slug', $term_slug, 'knowledge_base');
+                if ($term) {
+                    $where .= $this->wpdb->prepare(
+                        " AND {$this->wpdb->term_relationships}.term_taxonomy_id = %d",
+                        $term->term_taxonomy_id
+                    );
+                }
+            }
+        }
+
+        if ($this->args['author']) {
+            $where .= $this->wpdb->prepare(
+                " AND {$this->wpdb->posts}.post_author = %d",
+                $this->args['author']
+            );
+        }
+
+        if ($this->args['start_date']) {
+            $where .= $this->wpdb->prepare(
+                " AND {$this->wpdb->posts}.post_date >= %s",
+                gmdate('Y-m-d', strtotime($this->args['start_date']))
+            );
+        }
+
+        if ($this->args['end_date']) {
+            $where .= $this->wpdb->prepare(
+                " AND {$this->wpdb->posts}.post_date < %s",
+                gmdate('Y-m-d', strtotime('+1 month', strtotime($this->args['end_date'])))
+            );
+        }
+
+        if (!empty($this->args['meta_query'])) {
+            $meta_query = new \WP_Meta_Query($this->args['meta_query']);
+            $query_clauses = $meta_query->get_sql('post', $this->wpdb->posts, 'ID');
+
+            $join .= ' ' . $query_clauses['join'];
+            $where .= ' ' . $query_clauses['where'];
+        }
+
+        // Get post IDs
+        $post_ids = $this->wpdb->get_col("SELECT ID FROM {$this->wpdb->posts} $join WHERE $where");
+
+        // Add FAQ post IDs if include_faq is true
+        if (!empty($this->args['include_faq'])) {
+            $faq_ids = get_posts([
+                'post_type'      => 'betterdocs_faq',
+                'posts_per_page' => -1,
+                'fields'         => 'ids',
+                'post_status'    => 'publish'
+            ]);
+            $post_ids = array_merge($post_ids, $faq_ids);
+        }
+
+        if (empty($post_ids)) {
+            return [
+                'success' => false,
+                'message' => 'No posts found matching the criteria.'
+            ];
+        }
+
+        // Get posts data
+        $posts = array_map('get_post', $post_ids);
+
+        // Prepare CSV data
         $csv_data_terms = $this->get_terms_csv_data($post_ids);
-
         $csv_data_author = $this->authors_list($post_ids);
-
         $csv_data_posts = $this->get_posts_csv_data($posts);
 
-
         // Combine headers
-        $headers_combined = array_merge($csv_data_posts[0], array_slice($csv_data_author[0], 1), array_slice($csv_data_terms[0], 1));
+        $headers_combined = array_merge(
+            $csv_data_posts[0],
+            array_slice($csv_data_author[0], 1),
+            array_slice($csv_data_terms[0], 1)
+        );
 
         // Initialize the combined array with headers
         $csv_data_combined = [$headers_combined];
 
-        // Combine term data with existing combined array
+        // Combine posts data
         for ($i = 1; $i < count($csv_data_posts); $i++) {
-            $combined_row = array_merge($csv_data_posts[$i], array_fill(0, count($headers_combined) - count($csv_data_posts[$i]), ''));
+            $combined_row = array_merge(
+                $csv_data_posts[$i],
+                array_fill(0, count($headers_combined) - count($csv_data_posts[$i]), '')
+            );
             $csv_data_combined[] = $combined_row;
         }
 
-        // Calculate the starting index for author data
+        // Combine author data
         $author_start_index = count($csv_data_posts[0]);
-
-        // Combine author data with existing combined array
         for ($i = 1; $i < count($csv_data_author); $i++) {
-            $combined_row = array_merge([$csv_data_author[$i][0]], array_fill(1, $author_start_index - 1, ''), array_slice($csv_data_author[$i], 1));
+            $combined_row = array_merge(
+                [$csv_data_author[$i][0]],
+                array_fill(1, $author_start_index - 1, ''),
+                array_slice($csv_data_author[$i], 1)
+            );
             $csv_data_combined[] = $combined_row;
         }
 
-        // Calculate the starting index for post data
+        // Combine terms data
         $terms_start_index = $author_start_index + count($csv_data_author[0]) - 1;
-
-        // Combine post data with existing combined array
         for ($i = 1; $i < count($csv_data_terms); $i++) {
-            $combined_row = array_merge([$csv_data_terms[$i][0]], array_fill(1, $terms_start_index - 1, ''), array_slice($csv_data_terms[$i], 1));
+            $combined_row = array_merge(
+                [$csv_data_terms[$i][0]],
+                array_fill(1, $terms_start_index - 1, ''),
+                array_slice($csv_data_terms[$i], 1)
+            );
             $csv_data_combined[] = $combined_row;
         }
 
@@ -180,7 +237,7 @@ class CSVExporter {
                 'filename' => $filename,
                 'filetype' => 'text/csv',
                 'download' => $csv_content,
-            ],
+            ]
         ];
     }
 
@@ -339,6 +396,69 @@ class CSVExporter {
                 isset($term_meta['doc_category_knowledge_base']) ? $term_meta['doc_category_knowledge_base'] : '',
                 isset($term_meta['doc_category_order']) ? $term_meta['doc_category_order'] : '',
                 isset($term_meta['kb_order']) ? $term_meta['kb_order'] : '',
+            ];
+        }
+
+        return $csv_data_terms;
+    }
+
+    private function handle_glossaries_export(): array {
+        if ( isset( $this->args['glossary_terms'] ) && ( count( $this->args['glossary_terms'] ) > 0 ) ) {
+            $glossary_term_ids = [];
+            foreach( $this->args['glossary_terms'] as $glossary_slug ) {
+                $term_object = get_term_by('slug', $glossary_slug , 'glossaries');
+                if( isset( $term_object->term_id ) && ! empty( $term_object->term_id ) ){
+                    array_push($glossary_term_ids, $term_object->term_id);
+                }
+            }
+        } else {
+            $glossary_term_ids = $this->wpdb->get_col( "SELECT term_id from {$this->wpdb->term_taxonomy} where taxonomy='{$this->args['content']}';" );
+        }
+
+        $filename = 'betterdocs.' . date('Y-m-d') . '.csv';
+        $csv_data_combined = $this->get_glossaries_csv_data($glossary_term_ids);
+        $csv_content = $this->generate_csv($csv_data_combined);
+
+        return [
+            'success' => true,
+            'data' => [
+                'filename' => $filename,
+                'filetype' => 'text/csv',
+                'download' => $csv_content,
+            ],
+        ];
+    }
+
+    private function get_glossaries_csv_data( $post_ids ) {
+        $csv_data_terms = [];
+
+        // Add CSV headers for terms
+        $csv_data_terms[] = [
+            'Taxonomy',
+            'Term ID',
+            'Term name',
+            'Term slug',
+            'Term group',
+            'Term description'
+        ];
+
+        if( $this->args['content'] == 'glossaries' ) {
+            $terms = get_terms([
+                'taxonomy'   => 'glossaries',
+                'hide_empty' => false,
+            ]);
+        } else{
+            $terms = $this->get_terms( $post_ids, $this->args['include_faq'] );
+        }
+        foreach ( $terms as $term ) {
+            // Add CSV row for term
+            $csv_data_terms[] = [
+                $term->taxonomy,
+                $term->term_id,
+                $term->name,
+                $term->slug,
+                $term->term_group,
+                $term->description
             ];
         }
 

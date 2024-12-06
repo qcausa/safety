@@ -108,7 +108,7 @@ foreach ( $_nested_categories as $_nested_category ) :
             <?php
                 $_nested_docs_args['term_id'] = $_nested_category->term_id;
                 $_nested_docs_args['term_slug'] = $_nested_category->slug;
-
+            
                 $_docs_query = betterdocs()->query->docs_query_args( $_nested_docs_args );
 
                 $_docs_query = new WP_Query( $_docs_query );

@@ -2623,79 +2623,81 @@ class SingleDoc extends Section {
         );
     }
 
-    // public function toc_list_number_color_layout_8_9() {
-    //     $this->customizer->add_setting( 'betterdocs_toc_list_number_color_layout_8_9', [
-    //         'default'           => $this->defaults['betterdocs_toc_list_number_color_layout_8_9'],
-    //         'capability'        => 'edit_theme_options',
-    //         'sanitize_callback' => [$this->sanitizer, 'rgba']
-    //     ] );
+    public function doc_author_section() {
+        $this->customizer->add_setting( 'betterdocs_doc_author_section', [
+            'default'           => $this->defaults['betterdocs_doc_author_section'],
+            'sanitize_callback' => 'esc_html'
+        ] );
 
-    //     $this->customizer->add_control(
-    //         new AlphaColorControl(
-    //             $this->customizer,
-    //             'betterdocs_toc_list_number_color_layout_8_9',
-    //             [
-    //                 'label'    => __( 'List Number Color', 'betterdocs' ),
-    //                 'priority' => 153,
-    //                 'section'  => 'betterdocs_single_docs_settings_layout_8_9',
-    //                 'settings' => 'betterdocs_toc_list_number_color'
-    //             ]
-    //         )
-    //     );
-    // }
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'betterdocs_doc_author_section', [
+                'label'    => __( 'Author', 'betterdocs' ),
+                'priority' => 155,
+                'settings' => 'betterdocs_doc_author_section',
+                'section'  => 'betterdocs_single_docs_settings'
+            ] )
+        );
+    }
 
-    // public function toc_list_number_font_size_layout_8_9() {
-    //     $this->customizer->add_setting( 'betterdocs_toc_list_number_font_size_layout_8_9', [
-    //         'default'           => $this->defaults['betterdocs_toc_list_number_font_size_layout_8_9'],
-    //         'capability'        => 'edit_theme_options',
-    //         'sanitize_callback' => [$this->sanitizer, 'integer']
+    public function doc_author_enable() {
+        $this->customizer->add_setting( 'betterdocs_doc_author_enable', [
+            'default'           => $this->defaults['betterdocs_doc_author_enable'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
 
-    //     ] );
+        $this->customizer->add_control(
+            new ToggleControl(
+                $this->customizer, 'betterdocs_doc_author_enable', [
+                    'label'    => __( 'Enable Author Info', 'betterdocs' ),
+                    'priority' => 155,
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_author_enable',
+                    'type'     => 'light' // light, ios, flat
+                ]
+            )
+        );
+    }
 
-    //     $this->customizer->add_control( new RangeValueControl(
-    //         $this->customizer, 'betterdocs_toc_list_number_font_size_layout_8_9', [
-    //             'type'        => 'betterdocs-range-value',
-    //             'section'     => 'betterdocs_single_docs_settings',
-    //             'settings'    => 'betterdocs_toc_list_number_font_size_layout_8_9',
-    //             'label'       => __( 'List Number Font Size', 'betterdocs' ),
-    //             'priority'    => 154,
-    //             'input_attrs' => [
-    //                 'class'  => '',
-    //                 'min'    => 0,
-    //                 'max'    => 50,
-    //                 'step'   => 1,
-    //                 'suffix' => 'px' //optional suffix
-    //             ]
-    //         ] )
-    //     );
-    // }
+    public function doc_author_enable_layout_9() {
+        $this->customizer->add_setting( 'betterdocs_doc_author_enable_layout_9', [
+            'default'           => $this->defaults['betterdocs_doc_author_enable_layout_9'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
 
-    // public function toc_margin_bottom_layout_8_9() {
-    //     $this->customizer->add_setting( 'betterdocs_toc_margin_bottom_layout_8_9', [
-    //         'default'           => $this->defaults['betterdocs_toc_margin_bottom_layout_8_9'],
-    //         'capability'        => 'edit_theme_options',
-    //         'transport'         => 'postMessage',
-    //         'sanitize_callback' => [$this->sanitizer, 'integer']
+        $this->customizer->add_control(
+            new ToggleControl(
+                $this->customizer, 'betterdocs_doc_author_enable_layout_9', [
+                    'label'    => __( 'Enable Author Info', 'betterdocs' ),
+                    'priority' => 155,
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_author_enable_layout_9',
+                    'type'     => 'light' // light, ios, flat
+                ]
+            )
+        );
+    }
 
-    //     ] );
+    public function doc_author_date() {
+        $this->customizer->add_setting( 'betterdocs_doc_author_date', [
+            'default'           => $this->defaults['betterdocs_doc_author_date'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
 
-    //     $this->customizer->add_control( new RangeValueControl(
-    //         $this->customizer, 'betterdocs_toc_margin_bottom_layout_8_9', [
-    //             'type'        => 'betterdocs-range-value',
-    //             'section'     => 'betterdocs_single_docs_settings',
-    //             'settings'    => 'betterdocs_toc_margin_bottom_layout_8_9',
-    //             'label'       => __( 'TOC Margin Bottom', 'betterdocs' ),
-    //             'priority'    => 155,
-    //             'input_attrs' => [
-    //                 'class'  => '',
-    //                 'min'    => 0,
-    //                 'max'    => 500,
-    //                 'step'   => 1,
-    //                 'suffix' => 'px' // optional suffix
-    //             ]
-    //         ] )
-    //     );
-    // }
+        $this->customizer->add_control(
+            new ToggleControl(
+                $this->customizer, 'betterdocs_doc_author_date', [
+                    'label'    => __( 'Updated Date', 'betterdocs' ),
+                    'priority' => 155,
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_author_date',
+                    'type'     => 'light' // light, ios, flat
+                ]
+            )
+        );
+    }
 
 
     public function doc_estimate_reading_time_section() {
@@ -4542,54 +4544,7 @@ class SingleDoc extends Section {
         );
     }
 
-    public function betterdocs_single_doc_lu_time_color_layout_8_9() {
-        $this->customizer->add_setting( 'betterdocs_single_doc_lu_time_color_layout_8_9', [
-            'default'           => $this->defaults['betterdocs_single_doc_lu_time_color_layout_8_9'],
-            'capability'        => 'edit_theme_options',
-            'transport'         => 'postMessage',
-            'sanitize_callback' => [$this->sanitizer, 'rgba']
-        ] );
 
-        $this->customizer->add_control(
-            new AlphaColorControl(
-                $this->customizer,
-                'betterdocs_single_doc_lu_time_color_layout_8_9',
-                [
-                    'label'    => __( 'Last Updated Time Color', 'betterdocs' ),
-                    'priority' => 182,
-                    'section'  => 'betterdocs_single_docs_settings',
-                    'settings' => 'betterdocs_single_doc_lu_time_color_layout_8_9'
-                ]
-            )
-        );
-    }
-
-    public function single_doc_lu_time_font_size_8_9() {
-        $this->customizer->add_setting( 'single_doc_lu_time_font_size_8_9', [
-            'default'           => $this->defaults['single_doc_lu_time_font_size_8_9'],
-            'capability'        => 'edit_theme_options',
-            'transport'         => 'postMessage',
-            'sanitize_callback' => [$this->sanitizer, 'integer']
-
-        ] );
-
-        $this->customizer->add_control( new RangeValueControl(
-            $this->customizer, 'single_doc_lu_time_font_size_8_9', [
-                'type'        => 'betterdocs-range-value',
-                'section'     => 'betterdocs_single_docs_settings',
-                'settings'    => 'single_doc_lu_time_font_size_8_9',
-                'label'       => __( 'Last Updated Time Font Size', 'betterdocs' ),
-                'priority'    => 183,
-                'input_attrs' => [
-                    'class'  => '',
-                    'min'    => 0,
-                    'max'    => 50,
-                    'step'   => 1,
-                    'suffix' => 'px' //optional suffix
-                ]
-            ] )
-        );
-    }
 
     public function single_doc_powered_by_color() {
         $this->customizer->add_setting( 'betterdocs_single_doc_powered_by_color', [
@@ -4693,6 +4648,117 @@ class SingleDoc extends Section {
                 'settings' => 'betterdocs_post_reactions',
                 'type'     => 'light' // light, ios, flat
             ] )
+        );
+    }
+
+    public function post_reactions_happy() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_happy', [
+            'default'           => $this->defaults['betterdocs_post_reactions_happy'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'betterdocs_post_reactions_happy', [
+                'label'    => __( 'Enable Happy?', 'betterdocs' ),
+                'priority' => 160,
+                'section'  => 'betterdocs_single_docs_settings',
+                'settings' => 'betterdocs_post_reactions_happy',
+                'type'     => 'light' // light, ios, flat
+            ] )
+        );
+    }
+
+    public function post_reactions_happy_icon() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_happy_icon', [
+            'default'    => $this->defaults['betterdocs_post_reactions_happy_icon'],
+            'capability' => 'edit_theme_options'
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_post_reactions_happy_icon', [
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_post_reactions_happy_icon',
+                    'label'    => __( 'Happy Icon', 'betterdocs' ),
+                    'priority' => 160
+                ]
+            )
+        );
+    }
+
+    public function post_reactions_normal() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_normal', [
+            'default'           => $this->defaults['betterdocs_post_reactions_normal'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'betterdocs_post_reactions_normal', [
+                'label'    => __( 'Enable Normal?', 'betterdocs' ),
+                'priority' => 160,
+                'section'  => 'betterdocs_single_docs_settings',
+                'settings' => 'betterdocs_post_reactions_normal',
+                'type'     => 'light' // light, ios, flat
+            ] )
+        );
+    }
+
+    public function post_reactions_normal_icon() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_normal_icon', [
+            'default'    => $this->defaults['betterdocs_post_reactions_normal_icon'],
+            'capability' => 'edit_theme_options'
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_post_reactions_normal_icon', [
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_post_reactions_normal_icon',
+                    'label'    => __( 'Normal Icon', 'betterdocs' ),
+                    'priority' => 160
+                ]
+            )
+        );
+    }
+
+    public function post_reactions_sad() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_sad', [
+            'default'           => $this->defaults['betterdocs_post_reactions_sad'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'betterdocs_post_reactions_sad', [
+                'label'    => __( 'Enable Sad?', 'betterdocs' ),
+                'priority' => 160,
+                'section'  => 'betterdocs_single_docs_settings',
+                'settings' => 'betterdocs_post_reactions_sad',
+                'type'     => 'light' // light, ios, flat
+            ] )
+        );
+    }
+
+    public function post_reactions_sad_icon() {
+        $this->customizer->add_setting( 'betterdocs_post_reactions_sad_icon', [
+            'default'    => $this->defaults['betterdocs_post_reactions_sad_icon'],
+            'capability' => 'edit_theme_options'
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_post_reactions_sad_icon', [
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_post_reactions_sad_icon',
+                    'label'    => __( 'Sad Icon', 'betterdocs' ),
+                    'priority' => 160
+                ]
+            )
         );
     }
 

@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\FAQ;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\ToC;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\DocDate;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\Sidebar;
@@ -14,12 +15,14 @@ use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\SearchForm;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\ArchiveList;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\Breadcrumbs;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\CategoryBox;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\ReadingTime;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\SocialShare;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\CategoryGrid;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\FeedbackForm;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\ArchiveHeader;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\BetterdocsPrint;
-use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\FAQ;
-
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\DocAuthor;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\DocsTag;
 
 return [
     'categorygrid'      => [
@@ -51,6 +54,14 @@ return [
         'value'      => 'breadcrumbs',
         'visibility' => true,
         'object'     => Breadcrumbs::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
+    'archive-header'    => [
+        'label'      => __( 'BetterDocs Archive Header', 'betterdocs' ),
+        'value'      => 'archive-header',
+        'visibility' => true,
+        'object'     => ArchiveHeader::class,
         'demo'       => '',
         'docs'       => ''
     ],
@@ -134,12 +145,36 @@ return [
         'demo'       => '',
         'docs'       => ''
     ],
-    'faq'       => [
-        'label'      => __( 'BetterDocs FAQ', 'betterdocs-pro' ),
+    'faq'               => [
+        'label'      => __( 'BetterDocs FAQ', 'betterdocs' ),
         'value'      => 'faq',
         'visibility' => true,
         'object'     => FAQ::class,
         'demo'       => '',
         'docs'       => ''
     ],
+    'reading-time'      => [
+        'label'      => __( 'Reading Time', 'betterdocs' ),
+        'value'      => 'reading-time',
+        'visibility' => true,
+        'object'     => ReadingTime::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
+    'doc-author' => [
+        'label'      => __( 'Doc Author', 'betterdocs' ),
+        'value'      => 'doc-author',
+        'visibility' => true,
+        'object'     => DocAuthor::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
+    'docs-tag' => [
+        'label'      => __( 'Docs Tag', 'betterdocs' ),
+        'value'      => 'docs-tag',
+        'visibility' => true,
+        'object'     => DocsTag::class,
+        'demo'       => '',
+        'docs'       => ''
+    ]
 ];

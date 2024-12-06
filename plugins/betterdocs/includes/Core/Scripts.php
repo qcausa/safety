@@ -39,9 +39,10 @@ class Scripts extends Base {
         $assets->register( 'betterdocs-breadcrumb', 'public/css/breadcrumb.css' );
         $assets->register( 'betterdocs-single', 'public/css/single.css' );
         $assets->register( 'betterdocs-docs', 'public/css/docs.css' );
+        $assets->register( 'betterdocs-pagination', 'public/css/pagination.css' );
+        $assets->register( 'betterdocs-doc_category', 'public/css/tax-doc_category.css', ['betterdocs-breadcrumb', 'betterdocs-pagination'] );
         $assets->register( 'betterdocs-category-archive-header', 'public/css/archive-header.css' );
         $assets->register( 'betterdocs-category-archive-doc-list', 'public/css/archive-doc-list.css' );
-        $assets->register( 'betterdocs-doc_category', 'public/css/tax-doc_category.css', ['betterdocs-breadcrumb'] );
         $assets->register( 'betterdocs-author', 'public/css/author.css' );
 
         $assets->register( 'betterdocs-category-grid', 'public/css/category-grid.css', ['simplebar'] );

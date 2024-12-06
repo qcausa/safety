@@ -108,9 +108,9 @@ class Views extends Base {
     public function get( $name, $params = [] ) {
         $_view_file_path = $this->path( $name );
 
-        // if ( ! $_view_file_path ) {
-        //     return __( 'View file path not available.', 'betterdocs' );
-        // }
+        if ( ! $_view_file_path ) {
+            return __( 'View file path not available.', 'betterdocs' );
+        }
 
         if ( file_exists( $_view_file_path ) ) {
             if ( isset( $params['_view_file_path'] ) ) {

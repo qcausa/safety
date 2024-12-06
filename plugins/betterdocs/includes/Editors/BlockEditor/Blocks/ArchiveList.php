@@ -16,13 +16,17 @@ class ArchiveList extends Block {
         'betterdocs-fontawesome',
         'betterdocs-blocks-editor',
         'betterdocs-doc-archive-list',
-        'betterdocs-doc_category'
+        'betterdocs-doc_category',
+        'betterdocs-category-archive-doc-list',
+        'betterdocs-pagination'
     ];
 
     protected $frontend_styles = [
         'betterdocs-fontawesome',
         'betterdocs-doc-archive-list',
-        'betterdocs-doc_category'
+        'betterdocs-doc_category',
+        'betterdocs-category-archive-doc-list',
+        'betterdocs-pagination'
     ];
 
     public function get_default_attributes() {
@@ -34,7 +38,8 @@ class ArchiveList extends Block {
             'layout'                => 'layout-1',
             'list_icon'             => 'far fa-file-alt',
             'postsPerPageLayoutTwo' => -1,
-            'listIconImageUrl'      => ''
+            'listIconImageUrl'      => '',
+            'pagination'            => false
         ];
     }
 
@@ -79,16 +84,27 @@ class ArchiveList extends Block {
             'term_slug'      => isset( $term->slug ) ? $term->slug : ''
         ];
 
-        return [
+        $default_params = [
             'term'               => $term,
             'nested_subcategory' => (bool) $this->attributes['nested_subcategory'],
-            'list_icon_name'     =>! empty( $this->attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $this->attributes['listIconImageUrl'] )]] : ( ! empty( $this->attributes['list_icon'] ) ? ['value' => ['url' => $this->attributes['list_icon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : [] ) ),
+            'list_icon_name'     => ! empty( $this->attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $this->attributes['listIconImageUrl'] )]] : ( ! empty( $this->attributes['list_icon'] ) ? ['value' => ['url' => $this->attributes['list_icon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : [] ) ),
             'query_args'         => betterdocs()->query->docs_query_args( $_docs_query ),
             'title_tag'          => 'h2',
-            'layout'             => betterdocs()->is_pro_active() ? $this->attributes['layout'] : 'layout-1',
+            'layout'             => $this->attributes['layout'],
             'posts_per_page'     => $this->attributes['postsPerPageLayoutTwo'],
             'list_icon_url'      => '',
-            'layout_type'        => 'block'
+            'layout_type'        => 'block',
+            'archive_layout'     => 'layout-1'
         ];
+
+        if( $this->attributes['pagination'] && $this->attributes['layout'] == 'layout-1' || $this->attributes['pagination'] && $this->attributes['layout'] == 'layout-3' ) {
+            $page                                           = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1;
+            $default_params['query_args']['paged']          = $page;
+            $default_params['query_args']['posts_per_page'] = 10;
+            $default_params['page']                         = $page;
+            $default_params['pagination']                   = $this->attributes['pagination'];
+        }
+
+        return $default_params;
     }
 }

@@ -133,6 +133,9 @@ class Docs extends BaseAPI {
         $search_query   = sanitize_text_field($request->get_param('s'));
         $doc_category   = sanitize_text_field($request->get_param('doc_category'));
         $number         = (int) $request->get_param('per_page') ? (int) $request->get_param('per_page') : 5;
+        $docs_ids       = ! empty( $request->get_param('doc_ids') ) ? explode( ',', $request->get_param('doc_ids') ) : [];
+        $doc_term_ids   = ! empty( $request->get_param('doc_categories_ids') ) ? explode(',', $request->get_param('doc_categories_ids')) : [];
+        $faq_term_ids   = ! empty( $request->get_param('faq_categories_ids') ) ? explode(',',$request->get_param('faq_categories_ids')) : [];
         $posts          = array();
 
         // Common query args
@@ -165,6 +168,25 @@ class Docs extends BaseAPI {
             $docs_args['order']          = 'DESC';
         }
 
+        if( ! empty( $docs_ids ) ) {
+            unset($docs_args['meta_key']);
+            $docs_args['posts_per_page'] = -1;
+            $docs_args['post__in'] = $docs_ids;
+        }
+
+        if( ! empty( $doc_term_ids ) ) {
+            unset($docs_args['meta_key']);
+            $docs_args['posts_per_page'] = -1;
+            $docs_args['tax_query'] = [
+                [
+                    'taxonomy' => 'doc_category',
+                    'field'    => 'term_id',
+                    'terms'    =>  $doc_term_ids,
+                    'operator' => 'IN',
+                ]
+            ];
+        }
+
         // Taxonomy filter for docs
         if ( $doc_category ) {
             $docs_args['tax_query'] = [
@@ -184,6 +206,18 @@ class Docs extends BaseAPI {
             'orderby'        => 'date',
             'order'          => 'DESC',
         ]);
+
+        if( ! empty( $faq_term_ids ) ) {
+            $faq_args['posts_per_page'] = -1;
+            $faq_args['tax_query'] = [
+                [
+                    'taxonomy' => 'betterdocs_faq_category',
+                    'field'    => 'term_id',
+                    'terms'    =>  $faq_term_ids,
+                    'operator' => 'IN',
+                ]
+            ];
+        }
 
         // Run individual queries
         $docs_query = betterdocs()->query->get_posts( $docs_args );

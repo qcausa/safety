@@ -3565,6 +3565,27 @@ class LiveSearch extends Section {
         );
     }
 
+    public function search_modal_content_tabs_docs_list_background_color_hover() {
+        $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_background_color_hover', [
+            'default'           => $this->defaults['search_modal_content_tabs_docs_list_background_color_hover'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'search_modal_content_tabs_docs_list_background_color_hover',
+                [
+                    'label'    => __( 'Hover Background Color', 'betterdocs' ),
+                    'priority' => 644,
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_content_tabs_docs_list_background_color_hover',
+                ]
+            )
+        );
+    }
+
     public function search_modal_content_tabs_docs_list_padding() {
         $this->customizer->add_setting( 'search_modal_content_tabs_docs_list_padding', [
             'default'    => $this->defaults['search_modal_content_tabs_docs_list_padding'],
@@ -3748,6 +3769,31 @@ class LiveSearch extends Section {
         ) );
     }
 
+    public function search_modal_query_type() {
+        $this->customizer->add_setting( 'search_modal_query_type', [
+            'default'    => $this->defaults['search_modal_query_type'],
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'search_modal_query_type',
+                [
+                    'label'    => __( 'Select Docs Type', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_type',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'popular_docs'          => __('Popular Docs', 'betterdocs'),
+                        'specific_doc_ids'      => __("Doc Id's", 'betterdocs'),
+                        'specific_doc_term_ids' => __("Doc Category Id's", "betterdocs")
+                    ],
+                    'priority' => 701
+                ]
+            )
+        );
+    }
 
     public function search_modal_query_initial_number_of_docs() {
         $this->customizer->add_setting( 'search_modal_query_initial_number_of_docs', [
@@ -3761,11 +3807,81 @@ class LiveSearch extends Section {
                 $this->customizer,
                 'search_modal_query_initial_number_of_docs',
                 [
-                    'label'    => __( 'Initial Number Of Docs', 'betterdocs' ),
+                    'label'    => __( 'Number of Docs', 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'search_modal_query_initial_number_of_docs',
                     'type'     => 'number',
                     'priority' => 701
+                ]
+            )
+        );
+    }
+
+    public function search_modal_query_doc_ids() {
+        $this->customizer->add_setting( 'search_modal_query_doc_ids', [
+            'default'           => $this->defaults['search_modal_query_doc_ids'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control(
+            new SelectControl(
+                $this->customizer,
+                'search_modal_query_doc_ids',
+                [
+                    'label'    => __( "Doc Id's", 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_doc_ids',
+                    'type'     => 'text',
+                    'priority' => 702
+                ]
+            )
+        );
+    }
+
+
+    public function search_modal_query_doc_term_ids() {
+        $this->customizer->add_setting( 'search_modal_query_doc_term_ids', [
+            'default'           => $this->defaults['search_modal_query_doc_term_ids'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control(
+            new SelectControl(
+                $this->customizer,
+                'search_modal_query_doc_term_ids',
+                [
+                    'label'    => __( "Doc Category Id's", 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_doc_term_ids',
+                    'type'     => 'text',
+                    'priority' => 702
+                ]
+            )
+        );
+    }
+
+    public function search_modal_faq_query_type() {
+        $this->customizer->add_setting( 'search_modal_faq_query_type', [
+            'default'    => $this->defaults['search_modal_faq_query_type'],
+            'capability' => 'edit_theme_options'
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'search_modal_faq_query_type',
+                [
+                    'label'    => __( 'Select FAQ Type', 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_faq_query_type',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'default'              => __('Default', 'betterdocs'),
+                        'specific_faq_term_ids' => __("FAQ Group Id's", 'betterdocs'),
+                    ],
+                    'priority' => 703
                 ]
             )
         );
@@ -3783,15 +3899,38 @@ class LiveSearch extends Section {
                 $this->customizer,
                 'search_modal_query_initial_number_of_faqs',
                 [
-                    'label'    => __( "Initial Number Of FAQ's", 'betterdocs' ),
+                    'label'    => __( "Number of FAQ's", 'betterdocs' ),
                     'section'  => 'betterdocs_live_search_settings',
                     'settings' => 'search_modal_query_initial_number_of_faqs',
                     'type'     => 'number',
-                    'priority' => 701
+                    'priority' => 703
                 ]
             )
         );
     }
+
+    public function search_modal_query_faq_term_ids() {
+        $this->customizer->add_setting( 'search_modal_query_faq_term_ids', [
+            'default'           => $this->defaults['search_modal_query_faq_term_ids'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control(
+            new SelectControl(
+                $this->customizer,
+                'search_modal_query_faq_term_ids',
+                [
+                    'label'    => __( "FAQ Group Id's", 'betterdocs' ),
+                    'section'  => 'betterdocs_live_search_settings',
+                    'settings' => 'search_modal_query_faq_term_ids',
+                    'type'     => 'text',
+                    'priority' => 703
+                ]
+            )
+        );
+    }
+
 
     // public function search_modal_query_select_specific_doc_category() {
     //     $this->customizer->add_setting( 'search_modal_query_select_specific_doc_category', [

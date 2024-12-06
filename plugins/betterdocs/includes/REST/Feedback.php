@@ -52,9 +52,9 @@ class Feedback extends BaseAPI {
             'get_callback' => [$this, 'get_doc_tag_info']
         ] );
 
-        $this->register_field( 'docs', 'author_list', [
-            'get_callback' => [$this, 'get_author_list']
-        ] );
+        // $this->register_field( 'docs', 'author_list', [
+        //     'get_callback' => [$this, 'get_author_list']
+        // ] );
     }
 
     public function get_author_list( $object, $field_name, $request ) {
@@ -173,6 +173,7 @@ class Feedback extends BaseAPI {
         $author_id = isset( $object['author'] ) ? $object['author'] : '';
         if ( ! empty( $author_id ) ) {
             return [
+                'name'            => get_the_author_meta( 'display_name', $author_id ),
                 'author_nicename' => get_the_author_meta( 'nicename', $author_id ),
                 'author_url'      => get_author_posts_url( $author_id )
             ];

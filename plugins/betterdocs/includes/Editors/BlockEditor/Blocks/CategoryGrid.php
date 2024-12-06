@@ -35,16 +35,16 @@ class CategoryGrid extends Block {
     public function register_scripts() {
         //when thrive editor mode is active, do not enqueue this script, this causes an issue with thrive edit mode
         $check_for_thrive = isset( $_GET['action'] ) ? $_GET['action'] : '';
-        
+
         //when thrive editor mode is active, do not enqueue this script, this causes an issue with thrive edit mode
-        if( $check_for_thrive == 'architect' )  {
+        if ( $check_for_thrive == 'architect' ) {
             return;
         }
 
         $this->assets_manager->enqueue(
             'betterdocs-categorygrid',
             'blocks/categorygrid/frontend.js',
-            ['moment', 'masonry']
+            ['masonry']
         );
     }
 
@@ -86,7 +86,10 @@ class CategoryGrid extends Block {
             'buttonText'              => __( 'Explore More', 'betterdocs' ),
             'categoryTitleLink'       => false,
             'selectKB'                => '',
-            'listIconImageUrl'        => ''
+            'listIconImageUrl'        => '',
+            'prefix'                  => '',
+            'suffix'                  => '',
+            'suffixSingular'          => ''
         ];
     }
 
@@ -192,7 +195,7 @@ class CategoryGrid extends Block {
         /**
          * Add This Attribute When Using Outside Betterdocs Templates Only
          */
-        if( $default_multiple_kb == 1 && ( ! empty( $kb_slug ) ) && ( ! betterdocs()->helper->is_templates() ) ) {
+        if ( $default_multiple_kb == 1 && ( ! empty( $kb_slug ) ) && ( ! betterdocs()->helper->is_templates() ) ) {
             $inner_wrapper_attr['data-mkb-slug'] = $kb_slug;
         }
 
@@ -218,6 +221,9 @@ class CategoryGrid extends Block {
                 'value' => $attributes['buttonIcon']
             ],
             'category_title_link'     => $attributes['categoryTitleLink'],
+            'count_prefix'            => $attributes['prefix'],
+            'count_suffix'            => $attributes['suffix'],
+            'count_suffix_singular'   => $attributes['suffixSingular']
         ];
     }
 }

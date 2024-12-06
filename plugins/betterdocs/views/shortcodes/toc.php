@@ -8,7 +8,7 @@
     } else {
         return;
     }
-    
+
 
     $collapsible_arrow = '';
     $wrapper_classes   = ['betterdocs-toc'];

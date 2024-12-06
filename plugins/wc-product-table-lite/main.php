@@ -5,10 +5,10 @@
  * Description: Display your WooCommerce products in a beautiful table or list layouts that is mobile responsive and fully customizable.
  * Author: WC Product Table
  * Author URI: https://profiles.wordpress.org/wcproducttable/
- * Version: 3.8.6
+ * Version: 3.8.7
  * 
  * WC requires at least: 3.4.4
- * WC tested up to: 9.2.3
+ * WC tested up to: 9.4.1
  *
  * Text Domain: wc-product-table
  * Domain Path: /languages/
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 
 // define('WCPT_DEV', TRUE);
 
-define('WCPT_VERSION', '3.8.6');
+define('WCPT_VERSION', '3.8.7');
 define('WCPT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('WCPT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -1775,7 +1775,13 @@ function wcpt_ajax()
         }
       }
     }
-    echo do_shortcode('[product_table id="' . $_REQUEST['id'] . '" ' . $sc_attrs . ' ]');
+
+    $id = (int) $_REQUEST['id'];
+    if (is_numeric($id)) {
+      // remove any characters that could break the shortcode to execute arbitrary code
+      $sc_attrs = preg_replace('/[^a-zA-Z0-9\s=\-_"\']/', '', $sc_attrs);
+      echo do_shortcode('[product_table id="' . $id . '" ' . $sc_attrs . ' ]');
+    }
   }
   die();
 }

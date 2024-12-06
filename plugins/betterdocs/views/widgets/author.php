@@ -2,7 +2,7 @@
     <div class="betterdocs-author">
         <?php
             // Get the author's ID
-            $author_id = get_the_author_meta(get_the_ID());
+            $author_id = get_post_field( 'post_author', get_the_ID() );
 
             // Get the author's avatar with a specified size
             $avatar_size = 40;

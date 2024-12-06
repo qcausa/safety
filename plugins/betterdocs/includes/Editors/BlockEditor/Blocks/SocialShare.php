@@ -30,7 +30,8 @@ class SocialShare extends Block {
             'show_linkedin_icon'  => true,
             'show_pinterest_icon' => true,
             'show_instagram_icon' => true,
-            'share_title'         => __( 'Share This Article: ', 'betterdocs' )
+            'share_title'         => __( 'Share This Article: ', 'betterdocs' ),
+            'layout'              => 'layout-1'
         ];
     }
 
@@ -42,6 +43,11 @@ class SocialShare extends Block {
     ];
 
     public function render( $attributes, $content ) {
-        $this->views( 'widgets/social' );
+        $layout = $attributes['layout'];
+        if( $layout == 'layout-1' ) {
+            $this->views( 'widgets/social' );
+        } else {
+            $this->views( 'widgets/social-2' );
+        }
     }
 }

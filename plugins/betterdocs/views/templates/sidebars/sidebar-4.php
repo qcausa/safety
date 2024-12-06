@@ -1,13 +1,13 @@
 <?php
     if ( ( isset( $force ) && $force == null ) || ! isset( $force ) ) {
-        if( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) ) {
+        if( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) && isset( $layout_type ) && $layout_type == 'template' ) {
             return;
         }
     }
 
     $wrapper_attributes = [
         'class' => ['betterdocs-sidebar betterdocs-full-sidebar-left betterdocs-sidebar-layout-4 betterdocs-background'],
-        'id'    => 'betterdocs-sidebar betterdocs-sidebar-left betterdocs-height'
+        'id'    => 'betterdocs-sidebar-left'
     ];
 
     /**

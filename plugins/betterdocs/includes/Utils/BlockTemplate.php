@@ -97,88 +97,131 @@ class BlockTemplate {
     }
 
     /**
-     * Build a unified template object based a post Object.
-     * Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
-     *
-     * @param \WP_Post $post Template post.
-     *
-     * @return \WP_Block_Template|\WP_Error Template.
-     */
-    public function build_template_result_from_post( $post ) {
-        $terms = get_the_terms( $post, 'wp_theme' );
+	 * Build a unified template object based a post Object.
+	 * Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
+	 *
+	 * @param \WP_Post $post Template post.
+	 *
+	 * @return \WP_Block_Template|\WP_Error Template.
+	 */
+	public static function build_template_result_from_post( $post ) {
+		$terms = get_the_terms( $post, 'wp_theme' );
 
-        if ( is_wp_error( $terms ) ) {
-            return $terms;
-        }
+		if ( is_wp_error( $terms ) ) {
+			return $terms;
+		}
 
-        if ( ! $terms ) {
-            return new \WP_Error( 'template_missing_theme', __( 'No theme is defined for this template.', 'betterdocs' ) );
-        }
+		if ( ! $terms ) {
+			return new \WP_Error( 'template_missing_theme', __( 'No theme is defined for this template.', 'woocommerce' ) );
+		}
 
-        $theme          = $terms[0]->name;
-        $has_theme_file = true;
+		$theme          = $terms[0]->name;
+		$has_theme_file = true;
 
-        $template                 = new \WP_Block_Template();
-        $template->wp_id          = $post->ID;
-        $template->id             = $theme . '//' . $post->post_name;
-        $template->theme          = $theme;
-        $template->content        = $post->post_content;
-        $template->slug           = $post->post_name;
-        $template->source         = 'custom';
-        $template->type           = $post->post_type;
-        $template->description    = $post->post_excerpt;
-        $template->title          = $post->post_title;
-        $template->status         = $post->post_status;
-        $template->has_theme_file = $has_theme_file;
-        $template->is_custom      = false;
-        $template->post_types     = []; // Don't appear in any Edit Post template selector dropdown.
+		$template                 = new \WP_Block_Template();
+		$template->wp_id          = $post->ID;
+		$template->id             = $theme . '//' . $post->post_name;
+		$template->theme          = $theme;
+		$template->content        = $post->post_content;
+		$template->slug           = $post->post_name;
+		$template->source         = 'custom';
+		$template->type           = $post->post_type;
+		$template->description    = $post->post_excerpt;
+		$template->title          = $post->post_title;
+		$template->status         = $post->post_status;
+		$template->has_theme_file = $has_theme_file;
+		$template->is_custom      = false;
+		$template->post_types     = array(); // Don't appear in any Edit Post template selector dropdown.
 
-        if ( 'wp_template_part' === $post->post_type ) {
-            $type_terms = get_the_terms( $post, 'wp_template_part_area' );
-            if ( ! is_wp_error( $type_terms ) && false !== $type_terms ) {
-                $template->area = $type_terms[0]->name;
-            }
-        }
+		if ( 'wp_template_part' === $post->post_type ) {
+			$type_terms = get_the_terms( $post, 'wp_template_part_area' );
+			if ( ! is_wp_error( $type_terms ) && false !== $type_terms ) {
+				$template->area = $type_terms[0]->name;
+			}
+		}
 
-        return $template;
-    }
+		// We are checking 'woocommerce' to maintain classic templates which are saved to the DB,
+		// prior to updating to use the correct slug.
+		// More information found here: https://github.com/woocommerce/woocommerce-gutenberg-products-block/issues/5423.
+		if ( self::PLUGIN_SLUG === $theme ) {
+			$template->origin = 'plugin';
+		}
+
+		/*
+		* Run the block hooks algorithm introduced in WP 6.4 on the template content.
+		*/
+		if ( function_exists( 'inject_ignored_hooked_blocks_metadata_attributes' ) ) {
+			$hooked_blocks = get_hooked_blocks();
+			if ( ! empty( $hooked_blocks ) || has_filter( 'hooked_block_types' ) ) {
+				$before_block_visitor = make_before_block_visitor( $hooked_blocks, $template );
+				$after_block_visitor  = make_after_block_visitor( $hooked_blocks, $template );
+				$blocks               = parse_blocks( $template->content );
+				$template->content    = traverse_and_serialize_blocks( $blocks, $before_block_visitor, $after_block_visitor );
+			}
+		}
+
+		return $template;
+	}
 
     /**
-     * Build a unified template object based on a theme file.
-     * Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
-     *
-     * @param array|object $template_file Theme file.
-     * @param string       $template_type wp_template or wp_template_part.
-     *
-     * @return \WP_Block_Template Template.
-     */
-    public function build_template_result_from_file( $template_file, $template_type ) {
-        $template_file = (object) $template_file;
+	 * Build a unified template object based on a theme file.
+	 *
+	 * @internal Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
+	 *
+	 * @param array|object $template_file Theme file.
+	 * @param string       $template_type wp_template or wp_template_part.
+	 *
+	 * @return \WP_Block_Template Template.
+	 */
+	public function build_template_result_from_file( $template_file, $template_type ) {
+		$template_file = (object) $template_file;
 
-        // If the theme has an archive-docs.html template but does not have docs taxonomy templates
-        // then we will load in the archive-docs.html template from the theme to use for docs taxonomies on the frontend.
-        $template_is_from_theme = 'theme' === $template_file->source;
-        $theme_name             = wp_get_theme()->get( 'TextDomain' );
+		// If the theme has an archive-products.html template but does not have product taxonomy templates
+		// then we will load in the archive-product.html template from the theme to use for product taxonomies on the frontend.
+		$template_is_from_theme = 'theme' === $template_file->source;
+		$theme_name             = wp_get_theme()->get( 'TextDomain' );
 
-        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-        $template_content  = file_get_contents( $template_file->path );
-        $template          = new \WP_Block_Template();
-        $template->id      = $template_is_from_theme ? $theme_name . '//' . $template_file->slug : self::PLUGIN_SLUG . '//' . $template_file->slug;
-        $template->theme   = $template_is_from_theme ? $theme_name : self::PLUGIN_SLUG;
-        $template->content = $this->inject_theme_attribute_in_content( $template_content );
-        // Plugin was agreed as a valid source value despite existing inline docs at the time of creating: https://github.com/WordPress/gutenberg/issues/36597#issuecomment-976232909.
-        $template->source         = $template_file->source ? $template_file->source : 'plugin';
-        $template->slug           = $template_file->slug;
-        $template->type           = $template_type;
-        $template->title          = ! empty( $template_file->title ) ? $template_file->title : $this->convert_slug_to_title( $template_file->slug );
-        $template->status         = 'publish';
-        $template->has_theme_file = true;
-        $template->origin         = $template_file->source;
-        $template->is_custom      = false; // Templates loaded from the filesystem aren't custom, ones that have been edited and loaded from the DB are.
-        $template->post_types     = []; // Don't appear in any Edit Post template selector dropdown.
-        $template->area           = 'uncategorized';
-        return $template;
-    }
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$template_content  = file_get_contents( $template_file->path );
+		$template          = new \WP_Block_Template();
+		$template->id      = $template_is_from_theme ? $theme_name . '//' . $template_file->slug : self::PLUGIN_SLUG . '//' . $template_file->slug;
+		$template->theme   = $template_is_from_theme ? $theme_name : self::PLUGIN_SLUG;
+		$template->content = self::inject_theme_attribute_in_content( $template_content );
+		// Remove the term description block from the archive-product template
+		// as the Product Catalog/Shop page doesn't have a description.
+		if ( 'archive-docs' === $template_file->slug ) {
+			$template->content = str_replace( '<!-- wp:term-description {"align":"wide"} /-->', '', $template->content );
+		}
+		// Plugin was agreed as a valid source value despite existing inline docs at the time of creating: https://github.com/WordPress/gutenberg/issues/36597#issuecomment-976232909.
+		$template->source         = $template_file->source ? $template_file->source : 'plugin';
+		$template->slug           = $template_file->slug;
+		$template->type           = $template_type;
+		$template->title          = ! empty( $template_file->title ) ? $template_file->title : self::get_block_template_title( $template_file->slug );
+		$template->description    = ! empty( $template_file->description ) ? $template_file->description : self::get_block_template_description( $template_file->slug );
+		$template->status         = 'publish';
+		$template->has_theme_file = true;
+		$template->origin         = $template_file->source;
+		$template->is_custom      = false; // Templates loaded from the filesystem aren't custom, ones that have been edited and loaded from the DB are.
+		$template->post_types     = array(); // Don't appear in any Edit Post template selector dropdown.
+		$template->area           = 'uncategorized';
+
+		/*
+		* Run the block hooks algorithm introduced in WP 6.4 on the template content.
+		*/
+		if ( function_exists( 'inject_ignored_hooked_blocks_metadata_attributes' ) ) {
+			$before_block_visitor = '_inject_theme_attribute_in_template_part_block';
+			$after_block_visitor  = null;
+			$hooked_blocks        = get_hooked_blocks();
+			if ( ! empty( $hooked_blocks ) || has_filter( 'hooked_block_types' ) ) {
+				$before_block_visitor = make_before_block_visitor( $hooked_blocks, $template );
+				$after_block_visitor  = make_after_block_visitor( $hooked_blocks, $template );
+			}
+			$blocks            = parse_blocks( $template->content );
+			$template->content = traverse_and_serialize_blocks( $blocks, $before_block_visitor, $after_block_visitor );
+		}
+
+		return $template;
+	}
 
     /**
      * Build a new template object so that we can make BetterDocs Blocks default templates available in the current theme should they not have any.
@@ -276,6 +319,17 @@ class BlockTemplate {
 
         $template_files = $this->get_templates_fils_from_betterdocs( $template_type );
         $templates = [];
+
+        // Check if BetterDocs Pro is not installed
+        if ( ! betterdocs()->is_pro_active() || ( betterdocs()->is_pro_active() && betterdocs()->settings->get( 'multiple_kb' ) == false ) ) {
+            // Remove the 'taxonomy-knowledge_base.html' file
+            $template_files = array_filter(
+                $template_files,
+                function( $file ) {
+                    return strpos( $file, 'taxonomy-knowledge_base.html' ) === false;
+                }
+            );
+        }
 
         foreach ( $template_files as $template_file ) {
             $template_slug = $this->generate_template_slug_from_path( $template_file );

@@ -1,6 +1,6 @@
 <?php
     if ( ( isset( $force ) && $force == null ) || ! isset( $force ) ) {
-        if ( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) ) {
+        if ( ! betterdocs()->settings->get( 'enable_sidebar_cat_list' ) && isset( $layout_type ) && $layout_type == 'template' ) {
             return;
         }
     }
@@ -19,6 +19,9 @@
 
     $wrapper_attributes = betterdocs()->template_helper->get_html_attributes( $wrapper_attributes );
     $enable_sidebar_search = isset( $sidebar_search ) ?  $sidebar_search : true;
+    $doc_ids               = isset( $doc_ids ) ?  $doc_ids : '';
+    $faq_categories_ids    = isset( $faq_term_ids ) ? $faq_term_ids : '';
+    $doc_categories_ids    = isset( $doc_term_ids ) ? $doc_term_ids : '';
 ?>
 <aside
     <?php echo $wrapper_attributes; ?>>
@@ -28,9 +31,7 @@
                 $search_placeholder = betterdocs()->settings->get( 'search_placeholder' );
                 $number_of_docs     = isset( $number_of_docs ) ? $number_of_docs : '';
                 $number_of_faqs     = isset( $number_of_faqs ) ? $number_of_faqs : '';
-                // $faq_terms          = isset( $faq_terms ) ? $faq_terms : '';
-                // $doc_terms          = isset( $doc_terms ) ? $doc_terms : '';
-                echo do_shortcode( '[betterdocs_search_modal number_of_docs="' . $number_of_docs . '" number_of_faqs="' . $number_of_faqs . '" layout="sidebar" placeholder="' . esc_html( $search_placeholder ) . '"]' );
+                echo do_shortcode( '[betterdocs_search_modal faq_categories_ids="'.$faq_categories_ids.'" doc_ids="'.$doc_ids.'" doc_categories_ids="'.$doc_categories_ids.'" number_of_docs="' . $number_of_docs . '" number_of_faqs="' . $number_of_faqs . '" layout="sidebar" placeholder="' . esc_html( $search_placeholder ) . '"]' );
             }
 
             $terms_orderby = betterdocs()->settings->get( 'terms_orderby' );

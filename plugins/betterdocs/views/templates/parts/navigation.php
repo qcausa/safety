@@ -29,6 +29,9 @@
         if( isset( $wraper_class ) ) {
             $wrapper_attr_array['class'][] = $wraper_class;
         }
+        if( isset( $widget_type ) && $widget_type == 'blocks' ) {
+            $wrapper_attr_array['class'][] = $blockId;
+        }
     }
     $wrapper_attr = betterdocs()->template_helper->get_html_attributes( $wrapper_attr_array );
 

@@ -18,7 +18,7 @@ trait CategoryBox {
         if( $layout === 'layout-4' ) {
             $_layout_sequence = ['category_icon', [
                 'class'    => 'betterdocs-category-title-counts',
-                'sequence' => ['new_post_tag', 'category_title', 'category_description', 'sub_category_counts', 'last_update']
+                'sequence' => ['category_title', 'category_description', 'sub_category_counts', 'last_update']
             ]];
         }
 

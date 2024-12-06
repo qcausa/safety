@@ -76,7 +76,7 @@ class SetupWizard extends Base {
             'is_pro_active' => betterdocs()->is_pro_active(),
             'logoURL'       => betterdocs()->assets->icon( 'betterdocs-icon.svg', true ),
             'layout'        => 'vertical',
-            'values'        => array_merge(betterdocs()->settings->get_all(), ['enable_credit' => true]),
+            'values'        => betterdocs()->is_pro_active() ? array_merge( betterdocs()->settings->get_all(), ['enable_credit' => true] ) : array_merge( betterdocs()->settings->get_all(), ['enable_credit' => true], $this->pro_settings_default_values() ),
             'config'        => [
                 'save_locally'    => true,
                 'save'            => true,
@@ -91,22 +91,31 @@ class SetupWizard extends Base {
                     'show'    => true,
                     'buttons' => [
                         'skip'                  => __( 'Skip This Step', 'betterdocs' ),
-                        'prev'                  => __( 'Previous', 'betterdocs' ),
+                        'prev'                  => [
+                            'name'       => __( 'Previous', 'betterdocs' ),
+                            'type'       => 'customize',
+                            'customName' => __( 'Previous', 'betterdocs' ),
+                            'condition'  => 'getting-started',
+                        ],
+                        'start'                  => [
+                            'name'       => 'Start',
+                            'type'       => 'customize',
+                            'customName' => __( 'Proceed to Next Step', 'betterdocs' ),
+                            'condition'  => 'getting-started',
+                            'ajax'       => [
+                                'on'       => 'click',
+                                'api'      => "/betterdocs/v1/plugin_insights",
+                                'data'     => [
+                                    'product_list'  => "betterdocs"
+                                ],
+                                'hideSwal' => true
+                            ]
+                        ],
                         'next'                  => [
                             'name'       => 'Next',
                             'type'       => 'customize',
-                            'customName' => 'Proceed to Next Step',
+                            'customName' => __( 'Next', 'betterdocs' ),
                             'condition'  => 'getting-started',
-                            // 'ajax'       => [
-                            //     'api'      => "/betterdocs/v1/plugin_insights",
-                            //     'data'     => [
-                            //         'type'   => "@type",
-                            //         'source' => "@source",
-                            //         'field'  => "product_list"
-                            //     ],
-                            //     'rules'    => Rules::is( 'config.active', 'getting-started', false ),
-                            //     'hideSwal' => true
-                            // ]
                         ],
                         'quick-builder-publish' => [
                             'name'   => 'quick-builder-publish',
@@ -268,15 +277,15 @@ class SetupWizard extends Base {
                                     'priority'                   => 9,
                                     'is_pro'                     => true
                                 ] ),
-                                'enable_disable'       => [
+                                'enable_disable'       => apply_filters( 'betterdocs_setup_wizard_instant_answer', [
                                     'name'                       => 'enable_disable',
                                     'type'                       => 'toggle',
                                     'priority'                   => 10,
                                     'label'                      => __( 'Instant Answer', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
-                                    'default'                    => true,
+                                    'default'                    => false,
                                     'is_pro'                     => true
-                                ]
+                                ] ),
                             ]
                         ]
                     ]
@@ -417,5 +426,28 @@ class SetupWizard extends Base {
 
     public function docs_page_url() {
         return esc_url( site_url( '/' . $this->settings->get( 'docs_slug', 'docs' ) ) );
+    }
+
+     /**
+     * Call This Function As Helper, When Pro Is Deactivated, To Be Used As Settings Default Values, When Betterdocs Pro Is Deactivated
+     *
+     * @return array
+     */
+    public function pro_settings_default_values() {
+        return [
+            'multiple_kb'                  => false,
+            'enable_glossaries'            => false,
+            'enable_encyclopedia'          => false,
+            'analytics_from'               => false,
+            'unique_visitor_count'         => false,
+            'exclude_bot_analytics'        => false,
+            'show_attachment'              => false,
+            'show_related_docs'            => false,
+            'advance_search'               => false,
+            'child_category_exclude'       => false,
+            'kb_based_search'              => false,
+            'enable_disable'               => false,
+            'enable_content_restriction'   => false
+        ];
     }
 }

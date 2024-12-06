@@ -16,6 +16,7 @@
     $layout      = betterdocs()->customizer->defaults->get( 'betterdocs_archive_layout_select', 'layout-7' );
     $title_tag   = betterdocs()->customizer->defaults->get( 'betterdocs_archive_title_tag', 'h2' );
     $title_tag   = betterdocs()->template_helper->is_valid_tag( $title_tag );
+    $enable_pagintion = betterdocs()->settings->get('archive_enable_pagination');
 
     $content_area_classes = [
         'betterdocs-content-wrapper betterdocs-display-flex',
@@ -23,6 +24,7 @@
     ];
 
     $current_category = get_queried_object();
+    $term_link        = isset( $current_category->term_id ) ? get_term_link( $current_category->term_id ) : '';
 ?>
 
 <div class="betterdocs-wrapper betterdocs-taxonomy-wrapper betterdocs-category-archive-wrapper betterdocs-wraper">
@@ -34,6 +36,10 @@
         <div id="main" class="betterdocs-content-area">
             <div class="betterdocs-content-inner-area">
                 <?php
+                    $view_object->get( 'templates/parts/mobile-nav', [
+                        'mobile_sidebar' => true,
+                        'mobile_toc' => false
+                    ] );
                     /**
                      * Breadcrumbs
                      */
@@ -54,23 +60,30 @@
                 <div class="betterdocs-entry-body betterdocs-taxonomy-doc-category">
                     <ul>
                         <?php
+                            $page = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1;
                             $args = betterdocs()->query->docs_query_args( [
                                 'term_id'        => $current_category->term_id,
                                 'term_slug'      => $current_category->slug,
-                                'posts_per_page' => -1,
+                                'posts_per_page' => 10,
+                                'paged'          => $page,
                                 'orderby'        => betterdocs()->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
                                 'order'          => betterdocs()->settings->get( 'docs_order', 'ASC' )
                             ] );
 
-
-                            $custom_icon = betterdocs()->customizer->defaults->get( 'betterdocs_archive_list_icon' );
+                            $custom_icon        = betterdocs()->customizer->defaults->get( 'betterdocs_archive_list_icon' );
                             $settings_list_icon = betterdocs()->settings->get( 'docs_list_icon' );
+
                             if ( ! $custom_icon && $settings_list_icon ) {
                                 $custom_icon = $settings_list_icon["url"];
                             }
 
-                            $post_query = new WP_Query( $args );
+                            if( ! $enable_pagintion ) {
+                                $args['posts_per_page'] = -1;
+                                unset( $args['paged'] );
+                            }
 
+                            $post_query  = new WP_Query( $args );
+                            $total_pages = ceil( ( isset( $post_query->found_posts ) ? $post_query->found_posts : 0 ) / 10 );
                             if ( $post_query->have_posts() ):
                                 while ( $post_query->have_posts() ): $post_query->the_post();
                                     if ( $custom_icon ) {
@@ -107,6 +120,17 @@
                     </ul>
                 </div>
             </div>
+            <?php
+                if( $enable_pagintion ) {
+                    $page = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1; //applicable for parent category only
+                    $view_object->get( 'template-parts/pagination', [
+                        'total_pages'  => $total_pages,
+                        'link'         => $term_link,
+                        'current_page' => $page,
+                        'template'     => 'doc_category'
+                    ] );
+                }
+            ?>
         </div>
     </div>
 </div>

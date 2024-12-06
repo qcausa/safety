@@ -194,6 +194,7 @@ class Helper extends Base {
 
         $encyclopeia_suorce = betterdocs()->settings->get( 'encyclopedia_source', 'docs' );
         $enable_glossaries  = betterdocs()->settings->get( 'enable_glossaries', false );
+        $encyclopedia_root_slug  = betterdocs()->settings->get( 'encyclopedia_root_slug', 'encyclopdia' );
 
         // if($enable_glossaries && $encyclopeia_suorce === 'glossaries'){
         if ( $enable_glossaries && $encyclopeia_suorce === 'glossaries' ) {
@@ -203,7 +204,7 @@ class Helper extends Base {
                     t.name AS post_title,
                     t.slug as slug,
                     '' AS post_excerpt,
-                    CONCAT('" . get_home_url() . "/glossaries/', t.slug) AS permalink,
+                    CONCAT('" . get_home_url() . "/$encyclopedia_root_slug/', t.slug) AS permalink,
                     tt.description AS post_content,
                     JSON_OBJECT(
                         'status', COALESCE(MAX(CASE WHEN m.meta_key = 'status' THEN m.meta_value END), ''),
@@ -390,10 +391,21 @@ class Helper extends Base {
             if( $parent_id == 0 ) {
                 break;
             }
-            
+
             $term_id = $parent_id;
         }
         return $term_id;
+    }
+
+    public static function get_highest_docs_term() {
+        $terms = get_terms([
+            'taxonomy'   => 'doc_category', // Change to your desired taxonomy
+            'hide_empty' => true,       // Only show terms with posts
+            'orderby'    => 'count',    // Order by post count
+            'order'      => 'DESC',      // Descending order
+            'number'     => 1            // Get only the top term
+        ]);
+        return isset( $terms[0] ) ? $terms[0] : [];
     }
 
 }

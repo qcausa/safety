@@ -13,8 +13,10 @@ class DocCategories extends BaseAPI {
         $this->get( 'doc-categories', [$this, 'get_response'] );
     }
 
-    public function get_response() {
+    public function get_response($request) {
         global $wpdb;
+
+        $mkb        = $request->get_param('knowledge_base');
 
         $terms_query = betterdocs()->query->terms_query( [
             'hide_empty' => false,
@@ -24,11 +26,23 @@ class DocCategories extends BaseAPI {
             'order'      => 'ASC'
         ] );
 
+        if( ! empty( $mkb ) ) {
+            $terms_query['meta_query'] = [
+                'relation' => 'AND',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $mkb,
+                    'compare' => 'LIKE'
+                ]
+            ];
+            $terms_query['order'] = 'ASC';
+        }
+
         $terms    = get_terms( $terms_query );
         $response = [];
 
         foreach ( $terms as $term ) {
-            $query_args = betterdocs()->query->docs_query_args( [
+            $original_args = [
                 'post_type'          => 'docs',
                 'posts_per_page'     => '-1',
                 'post_status'        => 'any',
@@ -36,7 +50,14 @@ class DocCategories extends BaseAPI {
                 'term_slug'          => $term->slug,
                 'nested_subcategory' => false,
                 'orderby'            => 'betterdocs_order'
-            ] );
+            ];
+
+            if( ! empty( $mkb ) ) {
+                $original_args['multiple_kb'] = true;
+                $original_args['kb_slug']     = $mkb;
+            }
+
+            $query_args = betterdocs()->query->docs_query_args($original_args);
 
             $posts                    = betterdocs()->query->get_posts( $query_args, true );
             $response[$term->term_id] = [];
@@ -65,18 +86,17 @@ class DocCategories extends BaseAPI {
 
         $_post__not_in = $wpdb->get_col( $_post__not_in_query );
 
-        if( ! empty( $_post__not_in ) ) {
-            $uncategorized_docs = [];
-            $_uncategorized_docs_query = new \WP_Query([
-                'post_type' => 'docs',
+        if ( ! empty( $_post__not_in ) ) {
+            $uncategorized_docs        = [];
+            $_uncategorized_docs_query = new \WP_Query( [
+                'post_type'   => 'docs',
                 'post_status' => 'any',
-                'post__in' => $_post__not_in
-            ]);
+                'post__in'    => $_post__not_in
+            ] );
 
             if ( ! $_uncategorized_docs_query->have_posts() ) {
                 wp_reset_query();
             }
-
             while ( $_uncategorized_docs_query->have_posts() ):
                 $_uncategorized_docs_query->the_post();
                 $data = $this->get_doc_data( get_the_ID() );
@@ -102,18 +122,10 @@ class DocCategories extends BaseAPI {
         $data      = [
             'author'         => (int) $post_data->post_author,
             'author_info'    => [
+                'name'            => get_the_author_meta( 'display_name', $post_data->post_author ),
                 'author_nicename' => get_the_author_meta( 'nicename', $post_data->post_author ),
                 'author_url'      => get_author_posts_url( $post_data->post_author )
             ],
-            'author_list'    =>
-            get_users( [
-                'fields' => [
-                    'ID',
-                    'user_login',
-                    'display_name'
-                ]
-            ] )
-            ,
             'unique_id'      => uniqid( 'doc' ),
             'id'             => $post_data->ID,
             'title'          => $post_data->post_title,

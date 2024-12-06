@@ -26,5 +26,23 @@
 
         do_action( 'archive_handbook_list' );
 
+    elseif( $current_category != null && $layout == 'layout-3' ) :
+        $post_query   = new WP_Query( $query_args );
+        echo '<div class="'.$blockId.' doc-category-layout-7">';
+                betterdocs()->views->get('template-parts/archive-doc-list', [
+                    'current_category' => $current_category,
+                    'post_query'       => $post_query
+                ]);
+
+                if( $pagination ) {
+                    $total_pages  = ceil( ( isset( $post_query->found_posts ) ? $post_query->found_posts : 0 ) / 10 );
+                    betterdocs()->views->get( 'template-parts/pagination', [
+                        'total_pages'  => $total_pages,
+                        'link'         => get_term_link( $current_category, 'doc_category' ),
+                        'current_page' => $page,
+                        'template'     => 'doc_category'
+                    ] );
+                }
+        echo '</div>';
     endif;
 ?>

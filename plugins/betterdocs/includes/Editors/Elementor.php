@@ -35,6 +35,7 @@ use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\SearchForm;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryBox;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryGrid;
 use WPDeveloper\BetterDocs\Editors\Elementor\Conditions\ArchiveCondition;
+use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Tags;
 // use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\BetterdocsEncyclopedia;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\CategoryArchiveHeader;
 
@@ -702,7 +703,8 @@ class Elementor extends BaseEditor {
             'betteredocs-elementor-reading-time'                => ReadingTime::class,
             'betterdocs-print-button'                           => PrintButton::class,
             'betterdocs-elementor-doc-author'                   => DocAuthor::class,
-            'betteredocs-elementor-doc-category-archive-header' => CategoryArchiveHeader::class
+            'betteredocs-elementor-doc-category-archive-header' => CategoryArchiveHeader::class,
+            'betterdocs-elementor-tags'                         => Tags::class
         ] );
     }
 

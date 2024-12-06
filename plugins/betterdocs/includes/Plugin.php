@@ -117,7 +117,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.7.0';
+    public $version = '3.8.3';
 
     /**
      * WriteWithAI Class
@@ -136,6 +136,7 @@ final class Plugin {
         $this->define_constants();
 
         do_action( 'betterdocs_init_before' );
+
         $this->setup_container();
         /**
          * Register activation and deactivation hooks
@@ -143,9 +144,12 @@ final class Plugin {
          */
         $this->container->get( Install::class );
 
-        $this->initialize();
+        add_action( 'init', [$this, 'initialize'], 0);
 
-        add_action( 'init', [$this, 'init'], 0 );
+        /**
+         * Initialize API
+         */
+        add_action( 'rest_api_init', [$this, 'api_initialization'] );
 
         /**
          * For admin only
@@ -206,10 +210,17 @@ final class Plugin {
     }
 
     public function initialize() {
+
+        /**
+         * Setup localization.
+         */
+        $this->load_plugin_textdomain();
+
         $this->container->get( Scripts::class );
         $this->rewrite = $this->container->get( Rewrite::class );
         $this->request = $this->container->get( Request::class );
         $this->query   = $this->container->get( Query::class );
+
         // Initialize background process
         $this->backgroundProccessor = $this->container->get( HelpScoutMigration::class );
 
@@ -230,29 +241,6 @@ final class Plugin {
         $this->editor          = $this->container->get( Editor::class );
         $this->ai_autowrtie    = $this->container->get( WriteWithAI::class );
 
-        /**
-         * Initialize all editors.
-         * Elementor, Gutenberg/BlockEditor
-         */
-        add_action( 'init', [$this->editor, 'init'] );
-
-        /**
-         * Initialize API
-         */
-        add_action( 'rest_api_init', [$this, 'api_initialization'] );
-    }
-
-    /**
-     * Initialize the BetterDocs Plugin
-     *
-     * @return void
-     * @since 2.5.0
-     */
-    public function init() {
-        /**
-         * Setup localization.
-         */
-        $this->load_plugin_textdomain();
 
         $this->container->get( Admin::class );
         $this->container->get( Roles::class );
@@ -267,6 +255,8 @@ final class Plugin {
         $this->container->get( FrontEnd::class );
 
         do_action( 'betterdocs_init' );
+
+        $this->editor->init();
     }
 
     /**
@@ -281,8 +271,11 @@ final class Plugin {
          */
         $locale = apply_filters( 'plugin_locale', $locale, $textdomain );
 
-        unload_textdomain( $textdomain );
-        load_textdomain( $textdomain, WP_LANG_DIR . "/$textdomain-" . $locale . '.mo' );
+        if( file_exists( WP_LANG_DIR . "/$textdomain-" . $locale . '.mo' )  ){
+            unload_textdomain( $textdomain );
+            load_textdomain( $textdomain, WP_LANG_DIR . "/$textdomain-" . $locale . '.mo' );
+        }
+
         load_plugin_textdomain( $textdomain, false, plugin_basename( dirname( $plugin_file ) ) . '/languages' );
     }
 

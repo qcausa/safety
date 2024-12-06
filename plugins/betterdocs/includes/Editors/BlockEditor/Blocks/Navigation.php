@@ -17,7 +17,8 @@ class Navigation extends Block {
 
     public function render( $attributes, $content ) {
         betterdocs()->views->get( 'templates/parts/navigation', [
-            'wrapper_class' => 'betterdocs-elementor-navigation'
+            'wrapper_class' => 'betterdocs-elementor-navigation',
+            'blockId'       => $this->attributes['blockId']
         ] );
     }
 }

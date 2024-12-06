@@ -18,6 +18,7 @@
     $title_tag      = betterdocs()->template_helper->is_valid_tag( $title_tag );
     $number_of_faqs = betterdocs()->customizer->defaults->get( 'search_modal_query_initial_number_of_faqs' );
     $number_of_docs = betterdocs()->customizer->defaults->get( 'search_modal_query_initial_number_of_docs' );
+    $enable_pagintion = betterdocs()->settings->get('archive_enable_pagination');
     // $faq_terms      = betterdocs()->customizer->defaults->get( 'search_modal_query_select_specific_faq' );
     // $doc_terms      = betterdocs()->customizer->defaults->get( 'search_modal_query_select_specific_doc_category' );
 ?>
@@ -34,15 +35,24 @@
         ];
 
         $current_category = get_queried_object();
+        $term_link        = isset( $current_category->term_id ) ? get_term_link( $current_category->term_id ) : '';
+        $page = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1;
         $args = betterdocs()->query->docs_query_args( [
             'term_id'        => $current_category->term_id,
             'term_slug'      => $current_category->slug,
-            'posts_per_page' => -1,
+            'posts_per_page' => 10,
+            'paged'          => $page,
             'orderby'        => betterdocs()->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
             'order'          => betterdocs()->settings->get( 'docs_order', 'ASC' )
         ] );
-        $post_query = new WP_Query( $args );
 
+        if( ! $enable_pagintion ) {
+            $args['posts_per_page'] = -1;
+            unset( $args['paged'] );
+        }
+
+        $post_query = new WP_Query( $args );
+        $total_pages = ceil( ( isset( $post_query->found_posts ) ? $post_query->found_posts : 0 ) / 10 );
         $_nested_categories = betterdocs()->query->get_child_term_ids_by_parent_id( 'doc_category', $current_category->term_id );
         if ( $_nested_categories ) {
             $sub_terms_count = count( explode( ',', $_nested_categories ) );
@@ -65,6 +75,10 @@
         <div id="main" class="betterdocs-content-area">
             <div class="betterdocs-content-inner-area">
                 <?php
+                    $view_object->get( 'templates/parts/mobile-nav', [
+                        'mobile_sidebar' => true,
+                        'mobile_toc' => false
+                    ] );
                     /**
                      * Breadcrumbs
                      */
@@ -103,6 +117,18 @@
                     $view_object->get( 'template-parts/archive-doc-list', [
                         'post_query' => $post_query
                     ] );
+                ?>
+
+                <?php
+                    if( $enable_pagintion ) {
+                        $page = get_query_var( 'paged' ) != '' ? get_query_var( 'paged' ) : 1; //applicable for parent category only
+                        $view_object->get( 'template-parts/pagination', [
+                            'total_pages'  => $total_pages,
+                            'link'         => $term_link,
+                            'current_page' => $page,
+                            'template'     => 'doc_category'
+                        ] );
+                    }
                 ?>
             </div>
         </div>

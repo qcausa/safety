@@ -2,9 +2,19 @@
     if ( ! $enable ) {
         return;
     }
+
+    $wrapper_class = [
+        'class' => 'betterdocs-print-pdf-2'
+    ];
+
+    if ( isset($widget_type) && $widget_type == 'blocks' ) {
+        $wrapper_class['class'] .= ' ' . $blockId;
+    }
+
+    $wrapper_class = betterdocs()->template_helper->get_html_attributes( $wrapper_class );
 ?>
 
-<div class="betterdocs-print-pdf-2">
+<div <?php echo $wrapper_class; ?>>
     <span class="betterdocs-print-btn-2">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_7329_2211" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">

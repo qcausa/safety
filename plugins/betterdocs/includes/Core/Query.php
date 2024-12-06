@@ -51,7 +51,7 @@ class Query extends Base {
                 $order              = isset( $wp_query->query['order'] ) ? $wp_query->query['order'] : '';
                 $order_by_query     = ( $order == 'ASC' || $order == 'DESC' ) ? "SUM({$wpdb->prefix}betterdocs_analytics.impressions) {$order}" : ( $order == 'MODIFIED' ? "{$wpdb->prefix}posts.post_modified_gmt DESC" : "{$wpdb->prefix}posts.post_date_gmt DESC" );
                 $clauses['join']    = "JOIN {$wpdb->prefix}betterdocs_analytics ON {$wpdb->prefix}posts.ID = {$wpdb->prefix}betterdocs_analytics.post_id";
-                $clauses['where']   = "AND ( ( {$wpdb->prefix}posts.post_type = 'docs' ) AND ( {$wpdb->prefix}posts.post_status = 'publish' OR {$wpdb->prefix}posts.post_status = 'future' OR {$wpdb->prefix}posts.post_status = 'draft' OR {$wpdb->prefix}posts.post_status = 'pending' OR {$wpdb->prefix}posts.post_status = 'private' ) )";
+                $clauses['where']   = ! is_user_logged_in() ? "AND ( ( {$wpdb->prefix}posts.post_type = 'docs' ) AND ( {$wpdb->prefix}posts.post_status = 'publish' OR {$wpdb->prefix}posts.post_status = 'future' ) )" : "AND ( ( {$wpdb->prefix}posts.post_type = 'docs' ) AND ( {$wpdb->prefix}posts.post_status = 'publish' OR {$wpdb->prefix}posts.post_status = 'future' OR {$wpdb->prefix}posts.post_status = 'draft' OR {$wpdb->prefix}posts.post_status = 'pending' OR {$wpdb->prefix}posts.post_status = 'private' ) )";
                 $clauses['orderby'] = $order_by_query;
                 $clauses['groupby'] = "{$wpdb->prefix}betterdocs_analytics.post_id";
                 if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' )  ) {

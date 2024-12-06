@@ -9,7 +9,8 @@
             $attributes = betterdocs()->template_helper->get_html_attributes( [
                 'htags'       => "{$htags}",
                 'hierarchy'   => "{$hierarchy}",
-                'list_number' => "{$list_number}"
+                'list_number' => "{$list_number}",
+                'collapsible_on_mobile' => false
             ] );
 
             echo do_shortcode( "[betterdocs_toc " . $attributes . "]" );
@@ -20,7 +21,31 @@
 
             if ( isset( $feedback ) && $feedback ) {
                 $reaction_text = betterdocs()->customizer->defaults->get( 'betterdocs_post_reactions_text_2' );
-                echo do_shortcode( '[betterdocs_article_reactions text="'.$reaction_text.'" layout="layout-3"]' );
+                // Collect reaction values and icons
+                $reactions_data = [
+                    'happy' => 'betterdocs_post_reactions_happy',
+                    'happy_icon' => 'betterdocs_post_reactions_happy_icon',
+                    'normal' => 'betterdocs_post_reactions_normal',
+                    'normal_icon' => 'betterdocs_post_reactions_normal_icon',
+                    'sad' => 'betterdocs_post_reactions_sad',
+                    'sad_icon' => 'betterdocs_post_reactions_sad_icon'
+                ];
+
+                foreach ( $reactions_data as $key => $theme_mod ) {
+                    $value = betterdocs()->customizer->defaults->get($theme_mod);
+                    if ( $value ) {
+                        $args[$key] = $value;
+                    } else {
+                        $args[$key] = false;
+                    }
+                }
+
+                // Build the attribute string for the shortcode
+                $attr = '';
+                foreach ( $args as $key => $value ) {
+                    $attr .= sprintf(' %s="%s"', esc_attr($key), esc_attr($value));
+                }
+                echo do_shortcode( '[betterdocs_article_reactions text="'.$reaction_text.'" layout="layout-3"' . $attr . ']' );
             }
         ?>
     </div>

@@ -152,7 +152,6 @@ final class StyleHandler {
 	 */
 	public function enqueue_frontend_assets() {
 		global $post;
-
 		$deps = apply_filters( 'betterdocs_generated_css_frontend_deps', [] );
 
 		// generatepress elements
@@ -193,7 +192,7 @@ final class StyleHandler {
 		}
 
 		//FSE Style Enqueue
-		if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && file_exists( $this->style_dir . $this->prefix . '-edit-site.min.css' ) ) {
+		if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && file_exists( $this->style_dir . $this->prefix . '-edit-site.min.css' ) && betterdocs()->helper->is_templates() ) {
 			wp_enqueue_style( 'betterdocs-fullsite-style', $this->style_url . $this->prefix . '-edit-site.min.css', $deps, substr( md5( microtime( true ) ), 0, 10 ) );
 		}
 
@@ -228,7 +227,7 @@ final class StyleHandler {
 		if ( false !== wp_is_post_revision( $post_id ) ) {
 			return;
 		}
-        
+
 		$parsed_content = $this->get_parsed_content( $post_id, $post, $post_type );
 
 		if ( is_array( $parsed_content ) && ! empty( $parsed_content ) ) {

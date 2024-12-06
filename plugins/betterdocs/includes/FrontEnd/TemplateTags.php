@@ -321,6 +321,16 @@ class TemplateTags extends Base {
                 // 'doc_terms'          => $this->defaults->get( 'search_modal_query_select_specific_doc_category' ),
                 'search_button_text' => $this->defaults->get( 'search_button_text', __( 'Search', 'betterdocs' ) )
             ];
+
+            if( $this->defaults->get('search_modal_query_type') == 'specific_doc_ids') {
+                $shortcode_attributes_new['doc_ids'] = $this->defaults->get('search_modal_query_doc_ids');
+            } else if( $this->defaults->get('search_modal_query_type') == 'specific_doc_term_ids' ) {
+                $shortcode_attributes_new['doc_categories_ids'] =  $this->defaults->get('search_modal_query_doc_term_ids');
+            }
+
+            if( $this->defaults->get('search_modal_faq_query_type') == 'specific_faq_term_ids' ) {
+                $shortcode_attributes_new['faq_categories_ids'] = $this->defaults->get('search_modal_query_faq_term_ids');
+            }
         }
 
         $_shortcode_license = $this->get_search_attributes( $shortcode_attributes_new );
@@ -343,21 +353,6 @@ class TemplateTags extends Base {
         ob_start();
         betterdocs()->views->get( 'layout-parts/search-2', [
             'attributes' => $this->get_html_attributes( $_shortcode_license )
-        ] );
-        echo ob_get_clean();
-    }
-
-
-    public function sidebar_search() {
-        if ( ! $this->settings->get( 'live_search' ) ) {
-            return;
-        }
-
-        $_shortcode_license = $this->get_search_attributes();
-
-        ob_start();
-        betterdocs()->views->get( 'layout-parts/sidebar-search', [
-            'attributes'  => $this->get_html_attributes( $_shortcode_license )
         ] );
         echo ob_get_clean();
     }
@@ -547,16 +542,6 @@ class TemplateTags extends Base {
         $this->views->get( 'template-parts/sub-category-counter', [
             'show_count' => $params['show_count'],
             'counts'     => $params['counts']
-        ] );
-    }
-
-    public function new_post_tag( $params ) {
-        if ( ! isset( $params['new_post_tag'], $params['new_post_tag'] ) ) {
-            return;
-        }
-
-        $this->views->get( 'template-parts/new-tag', [
-            'new_post_tag' => $params['new_post_tag']
         ] );
     }
 

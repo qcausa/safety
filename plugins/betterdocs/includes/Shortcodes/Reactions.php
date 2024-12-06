@@ -25,7 +25,13 @@ class Reactions extends Shortcode {
     public function default_attributes() {
         return [
             'text'   => '',
-            'layout' => 'layout-1'
+            'layout' => 'layout-1',
+            'happy' => true,
+            'happy_icon' => '',
+            'normal' => true,
+            'normal_icon' => '',
+            'sad' => true,
+            'sad_icon' => '',
         ];
     }
 
@@ -47,10 +53,19 @@ class Reactions extends Shortcode {
      * @return mixed
      */
     public function render( $atts, $content = null ) {
+        $args =  [
+            'happy' => $atts['happy'],
+            'happy_icon' => $atts['happy_icon'],
+            'normal' => $atts['normal'],
+            'normal_icon' => $atts['normal_icon'],
+            'sad' => $atts['sad'],
+            'sad_icon' => $atts['sad_icon']
+        ];
+
         if ( isset( $atts['layout'] ) && $atts['layout'] == 'layout-2' ) {
-            $this->views( 'widgets/reactions-2' );
+            $this->views( 'widgets/reactions-2', $args  );
         } else if ( isset( $atts['layout'] ) && $atts['layout'] == 'layout-3' ) {
-                $this->views( 'widgets/reactions-3' );
+                $this->views( 'widgets/reactions-3', $args );
         } else {
             $this->views( 'widgets/reactions' );
         }

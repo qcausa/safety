@@ -93,11 +93,20 @@ class CSSParser {
                                 if ( isset( $value["desktop"] ) ) {
                                     $styles[ $blockId ]["desktop"] .= $value["desktop"];
                                 }
+                                if( isset( $value['desktopHover'] ) ) {
+                                    $styles[ $blockId ]["desktop"] .= $value['desktopHover'];
+                                }
                                 if ( isset( $value["tab"] ) ) {
                                     $styles[ $blockId ]["tab"] .= $value["tab"];
                                 }
+                                if ( isset( $value["tabHover"] ) ) {
+                                    $styles[ $blockId ]["tab"] .= $value["tabHover"];
+                                }
                                 if ( isset( $value["mobile"] ) ) {
                                     $styles[ $blockId ]["mobile"] .= $value["mobile"];
+                                }
+                                if ( isset( $value["mobileHover"] ) ) {
+                                    $styles[ $blockId ]["mobile"] .= $value["mobileHover"];
                                 }
                             } else if ( isset( $block['customCss'] ) && is_string( $block['customCss'] ) && strlen( $block['customCss'] ) > 0 ) {
                                 $styles[ $blockId ]["customCss"] .= $block['customCss'];

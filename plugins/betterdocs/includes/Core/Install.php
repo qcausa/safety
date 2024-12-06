@@ -228,6 +228,10 @@ class Install extends Base {
             set_theme_mod( 'betterdocs_select_faq_template', 'layout-1' );
         }
 
+        if ( get_option('betterdocs_settings') && betterdocs()->settings->get( 'enable_estimated_reading_time' ) == false ) {
+            betterdocs()->settings->save( 'enable_estimated_reading_time', false );
+        }
+
         if ( function_exists( 'betterdocs_pro' ) ) {
             $mkb_layout = get_theme_mod( 'betterdocs_multikb_layout_select' );
             if ( empty( $mkb_layout ) ) {

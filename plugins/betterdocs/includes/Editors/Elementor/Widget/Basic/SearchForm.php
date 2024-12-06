@@ -20,7 +20,7 @@ class SearchForm extends BaseWidget {
     }
 
     public function get_title() {
-        return __( 'Doc Search Form', 'betterdocs' );
+        return __( 'BetterDocs Search Form', 'betterdocs' );
     }
 
     public function get_categories() {
@@ -144,20 +144,97 @@ class SearchForm extends BaseWidget {
         // );
 
         $this->add_control(
+            'search_modal_doc_query_type',
+            [
+                'label'       => __( 'Select Docs Type', 'betterdocs' ),
+                'label_block' => true,
+                'type'        => Controls_Manager::SELECT2,
+                'options'     => [
+                    'popular_docs'          => __('Popular Docs', 'betterdocs'),
+                    'specific_doc_ids'      => __("Specific Doc Id's", 'betterdocs'),
+                    'specific_doc_term_ids' => __("Specific Doc Term Id's", "betterdocs")
+                ],
+                'multiple'    => false,
+                'default'     => 'popular_docs'
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_query_term_ids',
+            [
+                'label'   => __( "Doc Term ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 8, 9'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'specific_doc_term_ids'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_query_doc_ids',
+            [
+                'label'   => __( "Doc ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 15, 16'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'specific_doc_ids'
+                ]
+            ]
+        );
+
+
+        $this->add_control(
             'initial_docs_number',
             [
-                'label'   => __( 'Initial Docs Number', 'betterdocs' ),
+                'label'   => __( 'Number of Docs', 'betterdocs' ),
                 'type'    => Controls_Manager::NUMBER,
-                'default' => '5'
+                'default' => '5',
+                'condition'  => [
+                    'search_modal_doc_query_type' => 'popular_docs'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_faq_query_type',
+            [
+                'label'       => __( 'Select FAQ Type', 'betterdocs' ),
+                'label_block' => true,
+                'type'        => Controls_Manager::SELECT2,
+                'default'     => 'default',
+                'options'     => [
+                    'default'                 => __('Default', 'betterdocs'),
+                    'specific_faq_term_ids'   => __("Specific FAQ Term Id's", 'betterdocs'),
+                ],
+                'multiple'    => false,
+            ]
+        );
+
+        $this->add_control(
+            'search_modal_query_faq_term_ids',
+            [
+                'label'   => __( "FAQ Term ID's", 'betterdocs' ),
+                'type'    => Controls_Manager::TEXT,
+                'description' => __('Example: 8, 9'),
+                'default' => esc_html__( "", 'betterdocs' ),
+                'condition'  => [
+                    'search_modal_faq_query_type' => 'specific_faq_term_ids'
+                ]
             ]
         );
 
         $this->add_control(
             'initial_faqs_number',
             [
-                'label'   => __( "Initial FAQ's Number", 'betterdocs' ),
+                'label'   => __( "Number of FAQ's", 'betterdocs' ),
                 'type'    => Controls_Manager::NUMBER,
-                'default' => '5'
+                'default' => '5',
+                'condition'  => [
+                    'search_modal_faq_query_type' => 'default'
+                ]
             ]
         );
 
@@ -908,6 +985,18 @@ class SearchForm extends BaseWidget {
             ]
         );
 
+        $this->add_responsive_control(
+            'search_modal_content_tabs_icon_colors',
+            [
+                'label'     => esc_html__( 'Icon Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-search-wrapper .betterdocs-search-details .betterdocs-search-content .betterdocs-search-info-tab .betterdocs-tab-items span svg path' => 'fill: {{VALUE}};'
+                ]
+            ]
+        );
+
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1318,9 +1407,12 @@ class SearchForm extends BaseWidget {
         } else {
             $number_of_docs     = isset( $settings['initial_docs_number'] ) ?  $settings['initial_docs_number'] : '';
             $number_of_faqs     = isset( $settings['initial_faqs_number'] ) ?  $settings['initial_faqs_number'] : '';
+            $doc_categories_ids = isset( $settings['search_modal_query_term_ids'] ) ? $settings['search_modal_query_term_ids']  : '';
+            $doc_ids            = isset( $settings['search_modal_query_doc_ids'] ) ? $settings['search_modal_query_doc_ids'] : '';
+            $faq_categories_ids = isset( $settings['search_modal_query_faq_term_ids'] ) ? $settings['search_modal_query_faq_term_ids'] : '';
             // $faq_terms          = isset( $settings['include_faq'] ) ?  implode(',', $settings['include_faq']) : '';
             // $doc_terms          = isset( $settings['include_doc_categories'] ) ? implode(',', $settings['include_doc_categories'] ) : '';
-            echo do_shortcode('[betterdocs_search_modal search_button="'.(isset( $settings['betterdocs_search_button_toogle'] ) ? $settings['betterdocs_search_button_toogle'] : true ).'" number_of_docs="' . $number_of_docs . '" number_of_faqs="' . $number_of_faqs . '" heading_tag="h2" subheading_tag="h3" search_button_text="Search" layout="layout-1" heading="'.(isset( $settings['section_search_field_heading'] ) ? $settings['section_search_field_heading'] : '' ).'" placeholder="' .( isset( $settings['section_search_field_placeholder'] ) ? $settings['section_search_field_placeholder'] : ''  ). '" subheading="'.(isset( $settings['section_search_field_sub_heading'] ) ? $settings['section_search_field_sub_heading'] : '').'" category_search="'.( isset( $settings['betterdocs_category_search_toogle'] ) ? $settings['betterdocs_category_search_toogle']  : false ).'" popular_search="'.( isset( $settings['betterdocs_popular_search_toogle'] ) ? $settings['betterdocs_popular_search_toogle'] : false ).'"]');
+            echo do_shortcode('[betterdocs_search_modal faq_categories_ids="'.$faq_categories_ids.'" doc_ids="'.$doc_ids.'" doc_categories_ids="'.$doc_categories_ids.'" search_button="'.(isset( $settings['betterdocs_search_button_toogle'] ) ? $settings['betterdocs_search_button_toogle'] : true ).'" number_of_docs="' . $number_of_docs . '" number_of_faqs="' . $number_of_faqs . '" heading_tag="h2" subheading_tag="h3" search_button_text="Search" layout="layout-1" heading="'.(isset( $settings['section_search_field_heading'] ) ? $settings['section_search_field_heading'] : '' ).'" placeholder="' .( isset( $settings['section_search_field_placeholder'] ) ? $settings['section_search_field_placeholder'] : ''  ). '" subheading="'.(isset( $settings['section_search_field_sub_heading'] ) ? $settings['section_search_field_sub_heading'] : '').'" category_search="'.( isset( $settings['betterdocs_category_search_toogle'] ) ? $settings['betterdocs_category_search_toogle']  : false ).'" popular_search="'.( isset( $settings['betterdocs_popular_search_toogle'] ) ? $settings['betterdocs_popular_search_toogle'] : false ).'"]');
         }
     }
 

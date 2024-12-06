@@ -21,8 +21,18 @@
             );
         }
     }
+
+    $wrapper_attributes = [
+        'class' => 'betterdocs-tags'
+    ];
+
+    if ( isset($widget_type) && $widget_type == 'blocks' ) {
+        $wrapper_attributes['class'] .= ' ' . $blockId;
+    }
+
+    $wrapper_class = betterdocs()->template_helper->get_html_attributes( $wrapper_attributes );
 ?>
 
-<div class="betterdocs-tags">
+<div <?php echo $wrapper_class; ?>>
     <?php echo implode( ', ', $_terms ); ?>
 </div>

@@ -1,8 +1,8 @@
 === WooCommerce Product Table Lite ===
 Contributors: wcproducttable
-Tags: woocommerce product table, wc product table, product table for woocommerce, woocommerce product list, woocommerce product tables, woocommerce tables, woocommerce product table layout, product table for wc,  product list for woocommerce, woocommerce product table plugin
+Tags: woocommerce product table, wc product table, product table for woocommerce, woocommerce product list, woocommerce tables
 Requires at least: 4.9
-Tested up to: 6.6.2
+Tested up to: 6.7.0
 Requires PHP: 5.5
 Stable tag: trunk
 License: GPLv2
@@ -177,8 +177,14 @@ You can purchase a license for [WooCommerce Product Table PRO](http://pro.wcprod
 
 == Changelog ==
 
-= 3.8.6 (26th July '24) =
+= 3.8.7 (18th November '24) =
 
+Fixed
+* Security vulnerability fix
+
+= 3.8.6 (26th July '24) = 
+
+Fixed
 * Security vulnerability fix 
 
 = 3.5.2 (25th March '24) =

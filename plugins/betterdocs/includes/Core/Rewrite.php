@@ -18,6 +18,25 @@ class Rewrite extends Base {
     public function init() {
         add_action( 'init', [$this, 'rules'] );
         add_action( 'betterdocs::settings::saved', [$this, 'save_permalink_structure'], 2, 3 );
+        add_action( 'template_redirect', [$this, 'handle_pagination_redirect'] );
+    }
+
+    /**
+     * Handle pagination redirect
+     * Redirects pagination attempts to main archive
+     */
+    public function handle_pagination_redirect() {
+        if ( ! is_post_type_archive( 'docs' ) ) {
+            return;
+        }
+
+        $paged = get_query_var('paged');
+        if ($paged > 1) {
+            global $wp_query;
+            $wp_query->set_404();
+            status_header(404);
+            nocache_headers();
+        }
     }
 
     public function remove_knowledge_base_placeholder( $permalink ) {
@@ -195,6 +214,15 @@ class Rewrite extends Base {
          * https://url/docs/(cat-slug)/(kb-slug)/(docs-slug)
          */
 
+        $base = $this->get_base_slug();
+
+        // Add rule to handle pagination attempts
+        $this->add_rewrite_rule(
+            $base . '/page/([0-9]+)/?$',
+            'index.php?post_type=docs',
+            'top'
+        );
+
         /**
          * This code of blocks used to determine single docs permalink.
          */
@@ -213,7 +241,6 @@ class Rewrite extends Base {
             $this->make_query( $_normalized_structure['group'] )
         );
 
-        $base = $this->get_base_slug();
         $this->add_rewrite_rule( $base . '/(feed|rdf|rss|rss2|atom)/?$', 'index.php?post_type=docs&feed=$matches[1]' );
     }
 

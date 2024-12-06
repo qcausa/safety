@@ -31,7 +31,28 @@ class TemplatesController extends Base {
         add_filter( 'pre_get_block_file_template', [ $this, 'get_block_file_template' ], 10, 3 );
         add_filter( 'get_block_templates', [ $this, 'add_block_templates' ], 10, 3 );
         add_filter( 'taxonomy_template_hierarchy', [ $this, 'add_doc_archive_to_eligible_for_fallback_templates' ], 10, 1 );
+        add_filter( 'admin_bar_menu', [ $this, 'betterdocs_update_site_editor_menu_name' ], 999 );
+        //add_filter( 'wp_insert_post_data', [ $this, 'betterdocs_preserve_template_author' ], 10, 2 );
     }
+
+    public function betterdocs_preserve_template_author( $data, $postarr ) {
+        if ( 'wp_template' === $data['post_type'] && ( 'taxonomy-doc_category' === $postarr['post_name'] || 'taxonomy-knowledge_base' === $postarr['post_name'] || 'taxonomy-doc_tag' === $postarr['post_name']  ) ) {
+            $data['post_author'] = get_current_user_id(); // Keep the current user as author
+            $data['post_name'] = 'betterdocs'; // Maintain correct menu slug
+            // Add any other fields you need to enforce here
+        }
+        return $data;
+    }
+
+    public function betterdocs_update_site_editor_menu_name( $wp_admin_bar ) {
+        // Target the site editor menu item by ID and rename it
+        $node = $wp_admin_bar->get_node( 'betterdocs/betterdocs' );
+        if ( $node ) {
+            $node->title = 'BetterDocs'; // Update the display name
+            $wp_admin_bar->add_node( $node ); // Apply the updated node
+        }
+    }
+
 
     /**
      * This function is used on the `pre_get_block_template` hook to return the fallback template from the db in case

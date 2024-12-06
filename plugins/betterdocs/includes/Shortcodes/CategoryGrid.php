@@ -46,6 +46,8 @@ class CategoryGrid extends Shortcode {
             'orderby'                  => $this->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
             'order'                    => $this->settings->get( 'docs_order', 'ASC' ),
             'show_count'               => $this->settings->get( 'post_count' ),
+            'count_suffix'             => '',
+            'count_suffix_singular'    => '',
             'column'                   => $this->settings->get( 'column_number' ),
             'nested_subcategory'       => $this->settings->get( 'nested_subcategory' ),
             'terms'                    => '',
@@ -178,7 +180,6 @@ class CategoryGrid extends Shortcode {
             'inner_wrapper_attr'     => $inner_wrapper_attr,
             'layout'                 => 'default',
             'widget_type'            => 'category-grid',
-
             'terms_query_args'       => $terms_query,
             'docs_query_args'        => $docs_query,
             'nested_docs_query_args' => $docs_query,

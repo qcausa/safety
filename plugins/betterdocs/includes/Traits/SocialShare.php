@@ -53,6 +53,10 @@ trait SocialShare {
             $this->view_wrapper .= ' layout-2';
         }
 
+        if(  isset( $this->attributes['layout'] ) && $this->attributes['layout']  == 'layout-2' ) { //for blocks
+            $this->view_wrapper .= ' layout-2';
+        }
+
         return [
             'links' => $links
         ];

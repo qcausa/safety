@@ -14,10 +14,11 @@ class ReadingTime extends Shortcode {
 
     public function default_attributes() {
         return [
-            'reading_title' => __( '', 'betterdocs' ),
-            'reading_text'  => __( 'min read', 'betterdocs' ),
-            'content'       => __( "Reading Time", 'betterdocs' ),
-            'the_content'   => get_the_content()
+            'reading_title'         => __( '', 'betterdocs' ),
+            'reading_text'          => __( 'min read', 'betterdocs' ),
+            'singular_reading_text' => __( 'min read', 'betterdocs' ),
+            'content'               => __( "Reading Time", 'betterdocs' ),
+            'the_content'           => get_the_content()
         ];
     }
 
@@ -38,7 +39,7 @@ class ReadingTime extends Shortcode {
         $post_id = get_the_ID();
 
         $est_reading_text = ! empty( get_post_meta( $post_id, '_betterdocs_est_reading_text', true ) ) ? get_post_meta( $post_id, '_betterdocs_est_reading_text', true ) : '';
-        $calculate_time   = $minutes . ' ' . $this->attributes['reading_text'];
+        $calculate_time   = $minutes . ' ' . ((int) $minutes <= 1  ?  $this->attributes['singular_reading_text'] : $this->attributes['reading_text'] );
         $calculate_time   = ! empty( $est_reading_text ) ? $est_reading_text : $calculate_time;
 
         return [

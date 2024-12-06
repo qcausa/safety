@@ -62,151 +62,217 @@ class WPExporter {
 
 	private $nav_menu_terms;
 
-	/**
-	 * Run export, by requested args.
-	 * Returns XML with exported data.
-	 *
-	 * @return array
-	 */
-	public function run(): array {
-
-        $ptype = get_post_type_object( $this->args['content'] );
-		if ( 'docs' === $this->args['content'] ) {
-			$where = $this->wpdb->prepare( "{$this->wpdb->posts}.post_type = %s", $this->args['content'] );// phpcs:ignore
-		} elseif( 'glossaries' === $this->args['content'] ) { //handles glossaries related xml export
-            if( isset( $this->args['glossary_terms'] ) && ( count( $this->args['glossary_terms'] ) > 0 ) ) {
-                $glossary_term_ids = [];
-                foreach( $this->args['glossary_terms'] as $glossary_slug ) {
-                    $term_object = get_term_by('slug', $glossary_slug , 'glossaries');
-                    if( isset( $term_object->term_id ) && ! empty( $term_object->term_id ) ){
-                        array_push($glossary_term_ids, $term_object->term_id);
-                    }
-                }
-            } else {
-                $glossary_term_ids = $this->wpdb->get_col( "SELECT term_id from {$this->wpdb->term_taxonomy} where taxonomy='{$this->args['content']}';" );
-            }
-            $filename = 'betterdocs.' . date( 'Y-m-d' ) . '.xml';
-            return [
-                'success' => true,
-                'data' => [
-                    'filename'  => $filename,
-                    'filetype'  => 'text/xml',
-                    'download'  => $this->get_xml_export($glossary_term_ids),
-                ]
-            ];
-        }else {
-			return [];
-		}
-
-        if( $this->args['include_faq'] ) { //include FAQ if enabled
-            $where .=  $this->wpdb->prepare( " OR {$this->wpdb->posts}.post_type = %s", 'betterdocs_faq' );
+    public function run(): array {
+        // Handle glossaries export (as taxonomy)
+        if ('glossaries' === $this->args['content']) {
+            return $this->handle_glossaries_export();
         }
 
-		if ( $this->args['status'] && 'docs' === $this->args['content'] ) {
-			$where .= $this->wpdb->prepare( " AND {$this->wpdb->posts}.post_status = %s", $this->args['status'] );// phpcs:ignore
-		} else {
-			$where .= " AND {$this->wpdb->posts}.post_status != 'auto-draft'";
-		}
+        // Early return for invalid post types
+        if ($this->args['content'] !== 'docs') {
+            return [];
+        }
 
-		if ( ! empty( $this->args['post__in'] ) ) {
-            $ids     = $this->args['post__in'];
-            if( $this->args['include_faq'] ) { //include FAQ if enabled when specific post id's are selected
-                $faq_posts_ids = get_posts([
-                    'numberposts' => -1,
-                    'post_type'   => 'betterdocs_faq',
-                    'fields'      => 'ids'
-                ]);
-                $ids = array_merge($ids, $faq_posts_ids);
-            }
-			$ids_placeholder = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
-			$where           .= $this->wpdb->prepare( " AND {$this->wpdb->posts}.ID IN ($ids_placeholder)", $ids );// phpcs:ignore
-		}
+        // Build the base query
+        $query_parts = $this->build_base_query();
+        $where = $query_parts['where'];
+        $join = $query_parts['join'];
 
+        // Handle post status
+        $where .= $this->build_status_condition();
 
+        // Handle specific posts selection
+        if (!empty($this->args['post__in'])) {
+            $where .= $this->build_post_in_condition();
+        }
 
-		$join = '';
+        // Handle category terms
+        if (isset($this->args['category_terms'])) {
+            $category_query = $this->build_category_query();
+            $join .= $category_query['join'];
+            $where .= $category_query['where'];
+        }
 
-		if ( isset( $this->args['category_terms'] ) && 'docs' === $this->args['content'] ) {
-            $join  = "INNER JOIN {$this->wpdb->term_relationships} ON ({$this->wpdb->posts}.ID = {$this->wpdb->term_relationships}.object_id)";
-            foreach ( $this->args['category_terms'] as $term_id ) {
-                $term = term_exists( $term_id, 'doc_category' );
-                if ( $term ) {
-                    $where .= $this->wpdb->prepare( " AND {$this->wpdb->term_relationships}.term_taxonomy_id = %d", $term['term_taxonomy_id'] );// phpcs:ignore
+        // Handle knowledge base terms
+        if (isset($this->args['kb_terms'])) {
+            $kb_query = $this->build_kb_query();
+            $join .= $kb_query['join'];
+            $where .= $kb_query['where'];
+        }
+
+        // Handle additional filters (author, dates, meta)
+        $where .= $this->build_additional_filters();
+
+        // Get the main doc post IDs
+        $post_ids = $this->wpdb->get_col("SELECT DISTINCT {$this->wpdb->posts}.ID FROM {$this->wpdb->posts} $join WHERE $where");
+
+        // Handle FAQ posts separately
+        $faq_post_ids = [];
+        if (!empty($this->args['include_faq'])) {
+            $faq_post_ids = $this->get_faq_posts();
+        }
+
+        // Combine post IDs
+        $all_post_ids = array_merge($post_ids, $faq_post_ids);
+
+        // Handle featured images
+        $thumbnail_ids = $this->get_thumbnail_ids($all_post_ids);
+
+        // Generate final post IDs array
+        $final_post_ids = array_unique(array_merge($all_post_ids, $thumbnail_ids));
+
+        return [
+            'success' => true,
+            'data' => [
+                'filename' => 'betterdocs.' . date('Y-m-d') . '.xml',
+                'filetype' => 'text/xml',
+                'download' => $this->get_xml_export($final_post_ids),
+            ]
+        ];
+    }
+
+    private function handle_glossaries_export(): array {
+        if ( isset( $this->args['glossary_terms'] ) && ( count( $this->args['glossary_terms'] ) > 0 ) ) {
+            $glossary_term_ids = [];
+            foreach( $this->args['glossary_terms'] as $glossary_slug ) {
+                $term_object = get_term_by('slug', $glossary_slug , 'glossaries');
+                if( isset( $term_object->term_id ) && ! empty( $term_object->term_id ) ){
+                    array_push($glossary_term_ids, $term_object->term_id);
                 }
             }
-		} else if ( isset( $this->args['kb_terms'] ) && 'docs' === $this->args['content'] ) {
-            $join  = "INNER JOIN {$this->wpdb->term_relationships} ON ({$this->wpdb->posts}.ID = {$this->wpdb->term_relationships}.object_id)";
-            foreach ( $this->args['kb_terms'] as $term_id ) {
-                $term = term_exists( $term_id, 'knowledge_base' );
-                if ( $term ) {
-                    $where .= $this->wpdb->prepare( " AND {$this->wpdb->term_relationships}.term_taxonomy_id = %d", $term['term_taxonomy_id'] );// phpcs:ignore
-                }
-            }
-		}
-
-		if ( $this->args['content'] ) {
-			if ( $this->args['author'] ) {
-				$where .= $this->wpdb->prepare( " AND {$this->wpdb->posts}.post_author = %d", $this->args['author'] );// phpcs:ignore
-			}
-
-			if ( $this->args['start_date'] ) {
-				$where .= $this->wpdb->prepare( " AND {$this->wpdb->posts}.post_date >= %s", gmdate( 'Y-m-d', strtotime( $this->args['start_date'] ) ) );// phpcs:ignore
-			}
-
-			if ( $this->args['end_date'] ) {
-				$where .= $this->wpdb->prepare( " AND {$this->wpdb->posts}.post_date < %s", gmdate( 'Y-m-d', strtotime( '+1 month', strtotime( $this->args['end_date'] ) ) ) );// phpcs:ignore
-			}
-		}
-
-		$limit = '';
-
-		// if ( - 1 !== (int) $this->args['limit'] ) {
-		// 	$limit = 'LIMIT ' . (int) $this->args['limit'] . ' OFFSET ' . (int) $this->args['offset'];
-		// }
-
-		if ( ! empty( $this->args['meta_query'] ) ) {
-			if ( $join ) {
-				$join .= ' ';
-			}
-
-			if ( $where ) {
-				$where .= ' ';
-			}
-
-			$meta_query = new \WP_Meta_Query( $this->args['meta_query'] );
-
-			global $wpdb;
-
-			$query_clauses = $meta_query->get_sql( 'docs', $wpdb->posts, 'ID' );
-
-			$join  .= $query_clauses['join'];
-			$where .= $query_clauses['where'];
-		}
-
-		// Grab a snapshot of post IDs, just in case it changes during the export.
-		$post_ids      = $this->wpdb->get_col( "SELECT ID FROM {$this->wpdb->posts} $join WHERE $where $limit" );// phpcs:ignore
-		$thumbnail_ids = [];
-
-		if ( ! empty( $this->args['include_post_featured_image_as_attachment'] ) ) {
-			foreach ( $post_ids as $post_id ) {
-				$thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
-
-				if ( $thumbnail_id && ! in_array( $thumbnail_id, $post_ids, true ) ) {
-					$thumbnail_ids [] = $thumbnail_id;
-				}
-			}
-		}
+        } else {
+            $glossary_term_ids = $this->wpdb->get_col( "SELECT term_id from {$this->wpdb->term_taxonomy} where taxonomy='{$this->args['content']}';" );
+        }
 
         $filename = 'betterdocs.' . date( 'Y-m-d' ) . '.xml';
-		return [
+        return [
             'success' => true,
-			'data' => [
+            'data' => [
                 'filename'  => $filename,
                 'filetype'  => 'text/xml',
-                'download'  => $this->get_xml_export( array_merge( $post_ids, $thumbnail_ids ) ),
+                'download'  => $this->get_xml_export($glossary_term_ids),
             ]
-		];
-	}
+        ];
+    }
+
+    private function build_base_query(): array {
+        $where = $this->wpdb->prepare("{$this->wpdb->posts}.post_type = %s", 'docs');
+        return [
+            'where' => $where,
+            'join' => ''
+        ];
+    }
+
+    private function build_status_condition(): string {
+        if ($this->args['status']) {
+            return $this->wpdb->prepare(" AND {$this->wpdb->posts}.post_status = %s", $this->args['status']);
+        }
+        return " AND {$this->wpdb->posts}.post_status != 'auto-draft'";
+    }
+
+    private function build_post_in_condition(): string {
+        $ids = $this->args['post__in'];
+        $ids_placeholder = implode(', ', array_fill(0, count($ids), '%d'));
+        return $this->wpdb->prepare(" AND {$this->wpdb->posts}.ID IN ($ids_placeholder)", $ids);
+    }
+
+    private function build_category_query(): array {
+        $join = "INNER JOIN {$this->wpdb->term_relationships} tr ON ({$this->wpdb->posts}.ID = tr.object_id)
+                 INNER JOIN {$this->wpdb->term_taxonomy} tt ON (tr.term_taxonomy_id = tt.term_taxonomy_id)";
+
+        $where = " AND tt.taxonomy = 'doc_category'";
+
+        if (!empty($this->args['category_terms'])) {
+            $term_ids = [];
+            foreach ($this->args['category_terms'] as $term_id) {
+                $term = term_exists($term_id, 'doc_category');
+                if ($term) {
+                    $term_ids[] = $term['term_taxonomy_id'];
+                }
+            }
+
+            if (!empty($term_ids)) {
+                $term_placeholder = implode(', ', array_fill(0, count($term_ids), '%d'));
+                $where .= $this->wpdb->prepare(" AND tt.term_taxonomy_id IN ($term_placeholder)", $term_ids);
+            }
+        }
+
+        return [
+            'join' => $join,
+            'where' => $where
+        ];
+    }
+
+    private function build_kb_query(): array {
+        $join = "INNER JOIN {$this->wpdb->term_relationships} tr ON ({$this->wpdb->posts}.ID = tr.object_id)
+                 INNER JOIN {$this->wpdb->term_taxonomy} tt ON (tr.term_taxonomy_id = tt.term_taxonomy_id)";
+
+        $where = " AND tt.taxonomy = 'knowledge_base'";
+
+        if (!empty($this->args['kb_terms'])) {
+            $term_ids = [];
+            foreach ($this->args['kb_terms'] as $term_id) {
+                $term = term_exists($term_id, 'knowledge_base');
+                if ($term) {
+                    $term_ids[] = $term['term_taxonomy_id'];
+                }
+            }
+
+            if (!empty($term_ids)) {
+                $term_placeholder = implode(', ', array_fill(0, count($term_ids), '%d'));
+                $where .= $this->wpdb->prepare(" AND tt.term_taxonomy_id IN ($term_placeholder)", $term_ids);
+            }
+        }
+
+        return [
+            'join' => $join,
+            'where' => $where
+        ];
+    }
+
+    private function build_additional_filters(): string {
+        $where = '';
+
+        if ($this->args['author']) {
+            $where .= $this->wpdb->prepare(" AND {$this->wpdb->posts}.post_author = %d", $this->args['author']);
+        }
+
+        if ($this->args['start_date']) {
+            $where .= $this->wpdb->prepare(" AND {$this->wpdb->posts}.post_date >= %s",
+                gmdate('Y-m-d', strtotime($this->args['start_date'])));
+        }
+
+        if ($this->args['end_date']) {
+            $where .= $this->wpdb->prepare(" AND {$this->wpdb->posts}.post_date < %s",
+                gmdate('Y-m-d', strtotime('+1 month', strtotime($this->args['end_date']))));
+        }
+
+        return $where;
+    }
+
+    private function get_faq_posts(): array {
+        return get_posts([
+            'numberposts' => -1,
+            'post_type' => 'betterdocs_faq',
+            'fields' => 'ids',
+            'post_status' => 'publish'
+        ]);
+    }
+
+    private function get_thumbnail_ids(array $post_ids): array {
+        $thumbnail_ids = [];
+
+        if (!empty($this->args['include_post_featured_image_as_attachment'])) {
+            foreach ($post_ids as $post_id) {
+                $thumbnail_id = get_post_meta($post_id, '_thumbnail_id', true);
+                if ($thumbnail_id && !in_array($thumbnail_id, $post_ids, true)) {
+                    $thumbnail_ids[] = $thumbnail_id;
+                }
+            }
+        }
+
+        return $thumbnail_ids;
+    }
 
 	/**
 	 * Return tabulation characters, by `$columns`.
@@ -513,7 +579,7 @@ class WPExporter {
         // Get the object taxonomies
         $taxonomies = get_object_taxonomies( $this->args['content'] );
 
-        if ( isset( $this->args['selected_docs'] ) && $this->args['selected_docs'][0] == 'all' ) {
+        if ( isset( $this->args['selected_docs'] ) && ! empty ( $this->args['selected_docs'] ) && $this->args['selected_docs'][0] == 'all' ) {
             $terms = get_terms( [
                 'taxonomy'   => $taxonomies,
                 'hide_empty' => false,

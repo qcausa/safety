@@ -308,7 +308,9 @@ class Settings extends BaseAPI {
         if ( $insights->do_tracking( true ) ) {
             $insights->update_block_notice( 'betterdocs' );
         }
-
+        if ( ! isset( $_COOKIE['betterdocs_insights_allowed'] ) ) {
+            setcookie("betterdocs_insights_allowed", true, time() + (30 * 24 * 60 * 60), "/");
+        }
         return true;
     }
 

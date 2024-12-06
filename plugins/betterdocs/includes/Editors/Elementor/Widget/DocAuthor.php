@@ -6,6 +6,8 @@ use WPDeveloper\BetterDocs\Editors\Elementor\BaseWidget;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Border as Group_Control_Border;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -70,6 +72,15 @@ class DocAuthor extends BaseWidget{
                 'types'    => ['classic', 'gradient'],
                 'label'    => esc_html__( 'Background Hover Color', 'betterdocs' ),
                 'selector' => '{{WRAPPER}} .betterdocs-author-date:hover'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'author_updated_time_wrapper_border',
+                'label'    => esc_html__( 'Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-author-date'
             ]
         );
 

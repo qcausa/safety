@@ -70,6 +70,16 @@ class ReadingTime extends BaseWidget {
             ]
         );
 
+        $this->add_control(
+            'singular_ert_reading_text',
+            [
+                'label'       => __( 'Singluar Reading Time Text', 'betterdocs' ),
+                'type'        => Controls_Manager::TEXT,
+                'default'     => __( 'min read', 'betterdocs' ),
+                'placeholder' => __( 'Type Here' )
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(

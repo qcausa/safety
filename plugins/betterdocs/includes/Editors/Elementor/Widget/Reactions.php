@@ -71,6 +71,84 @@ class Reactions extends BaseWidget {
             ]
         );
 
+        $this->add_control(
+            'happy',
+            [
+                'label'        => esc_html__( 'Happy', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'betterdocs' ),
+                'label_off'    => esc_html__( 'Hide', 'betterdocs' ),
+                'return_value' => true,
+                'default'      => true,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'happy_icon',
+			[
+				'label' => esc_html__( 'Happy Icon', 'betterdocs' ),
+				'type' => Controls_Manager::MEDIA,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+			]
+		);
+
+        $this->add_control(
+            'normal',
+            [
+                'label'        => esc_html__( 'Normal', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'betterdocs' ),
+                'label_off'    => esc_html__( 'Hide', 'betterdocs' ),
+                'return_value' => true,
+                'default'      => true,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'normal_icon',
+			[
+				'label' => esc_html__( 'Normal Icon', 'betterdocs' ),
+				'type' => Controls_Manager::MEDIA,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+			]
+		);
+
+        $this->add_control(
+            'sad',
+            [
+                'label'        => esc_html__( 'Sad', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'betterdocs' ),
+                'label_off'    => esc_html__( 'Hide', 'betterdocs' ),
+                'return_value' => true,
+                'default'      => true,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'sad_icon',
+			[
+				'label' => esc_html__( 'Sad Icon', 'betterdocs' ),
+				'type' => Controls_Manager::MEDIA,
+                'condition'    => [
+                    'reactions_layout_template' => ['layout-2', 'layout-3']
+                ]
+			]
+		);
+
         $this->end_controls_section();
 
         $this->box_style_layout_1();
@@ -860,12 +938,18 @@ class Reactions extends BaseWidget {
         }
     }
 
-    public function view_params(){
+    public function view_params() {
         $settings = &$this->attributes;
         $wrapper_attr = $this->generate_attributes();
         return [
             'wrapper_attr'   => $wrapper_attr,
             'reactions_text' => $settings['reactions_layout_template'] == 'layout-1' ? $this->attributes['reaction_text'] : ( $settings['reactions_layout_template'] == 'layout-2' ? $this->attributes['reaction_text_layout_2'] :  $this->attributes['reaction_text_layout_3'] ),
+            'happy' => $settings['happy'],
+            'happy_icon' =>  is_array( $settings['happy_icon'] ) ? $settings['happy_icon']['url'] : '',
+            'normal' => $settings['normal'],
+            'normal_icon' => is_array( $settings['normal_icon'] ) ? $settings['normal_icon']['url'] : '',
+            'sad' => $settings['sad'],
+            'sad_icon' => is_array( $settings['sad_icon'] ) ? $settings['sad_icon']['url'] : ''
         ];
     }
 }
