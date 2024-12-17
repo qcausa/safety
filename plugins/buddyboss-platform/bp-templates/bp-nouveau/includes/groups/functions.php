@@ -987,7 +987,6 @@ function bp_nouveau_group_reset_front_template( $templates = array(), $group = n
  * @return string The located template.
  */
 function bp_nouveau_group_locate_template_part( $template = '' ) {
-
 	$current_group = groups_get_current_group();
 	$bp_nouveau    = bp_nouveau();
 
@@ -1027,7 +1026,6 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
 	foreach ( $bp_nouveau->groups->current_group_hierarchy as $part ) {
 		$templates[] = sprintf( $part, sanitize_file_name( $template ) );
 	}
-	
 
 	/**
 	 * Filters the found template parts for the group template part locating functionality.
@@ -1036,9 +1034,7 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
 	 *
 	 * @param array $templates Array of found templates.
 	 */
-	$final_template = bp_locate_template( apply_filters( 'bp_nouveau_group_locate_template_part', $templates ), false, true );
-	
-	return $final_template;
+	return bp_locate_template( apply_filters( 'bp_nouveau_group_locate_template_part', $templates ), false, true );
 }
 
 /**
@@ -1051,7 +1047,6 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
  * @return string HTML output.
  */
 function bp_nouveau_group_get_template_part( $template = '' ) {
-
 	$located = bp_nouveau_group_locate_template_part( $template );
 
 	if ( false !== $located ) {
