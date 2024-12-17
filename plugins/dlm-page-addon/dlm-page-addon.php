@@ -181,7 +181,10 @@ class WP_DLM_Page_Addon {
 		global $dlm_page_addon, $post;
 		wp_enqueue_script( 'jquery' );
 		wp_register_style( 'dlm-page-addon-frontend', $this->plugin_url() . '/assets/css/page.css' );
-		$this->page_id = $post->ID;
+		// TODO Custom Code
+		if ($post->ID) {
+			$this->page_id = $post->ID;
+		}
 
 		// Enqueue modal scripts if needed.
 		if ( class_exists( 'WP_DLM' ) && method_exists( 'WP_DLM', 'do_xhr' ) && WP_DLM::do_xhr() && get_option( 'dlm_no_access_modal', false ) && 0 !== intval( $this->page_id ) ) {
@@ -307,13 +310,26 @@ class WP_DLM_Page_Addon {
 	public function download_page( $args = array() ) {
 		global $wp;
 
+		if ( function_exists( 'bp_get_current_group_id' ) ) {
+			$group_id = bp_get_current_group_id();
+			BugFu::log( $group_id );
+			// Fetch post ID from group meta
+			$page_id = groups_get_groupmeta( $group_id, 'group_post_id' );
+			BUgFu::log( $page_id );
+			
+		}
+
+	
+	
+		// Get the current page ID
+		//$page_id = get_queried_object_id();
+		//BugFu::log( "Page ID: " . $page_id );
+	
 		// Enqueue main plugin's frontend style
 		wp_enqueue_style( 'dlm-frontend' );
-
 		wp_enqueue_style( 'dlm-page-addon-frontend' );
-
+	
 		ob_start();
-
 		do_action( 'dlm_page_addon_before_download_page' );
 
 		if ( ! empty( $wp->query_vars['download-category'] ) ) {
@@ -329,161 +345,177 @@ class WP_DLM_Page_Addon {
 
 			$this->search_results( sanitize_text_field( $_GET['download_search'] ), $args );
 		} else {
+	
+		// Extract shortcode arguments
+		extract( shortcode_atts( array(
+			'format'             => 'pa',
+			'show_search'        => 'true',
+			'show_featured'      => 'true',
+			'show_tags'          => 'true',
+			'featured_limit'     => '4',
+			'featured_format'    => 'pa-thumbnail',
+			'category_limit'     => '4',
+			'front_orderby'      => 'download_count',
+			'exclude_categories' => '',
+			'include_categories' => '',
+			'division'           => '', // New argument for division filtering
+			'divisions'          => 'false', // Enable or disable division filtering
+			'direct_download'    => 'false'
+		), $args ) );
+	
+		$show_search     = ( $show_search === 'true' );
+		$show_featured   = ( $show_featured === 'true' );
+		$show_tags       = ( $show_tags === 'true' );
+		$direct_download = ( $direct_download === 'true' );
+		$divisions       = ( $divisions === 'true' );
+		$meta_key        = '';
+		$order_by_count  = '';
+		switch ( $front_orderby ) {
+			case 'title' :
+			default :
+				$order = 'asc';
+				break;
+			case 'download_count' :
+				$order          = 'desc';
+				$front_orderby  = 'meta_value_num';
+				$meta_key       = '_download_count';
+				$order_by_count = '1';
+				break;
+			case 'date' :
+				$order = 'desc';
+				break;
+		}
 
-			// extract shortcode arguments
-			extract( shortcode_atts( array(
-				'format'             => 'pa',
-				'posts_per_page'     => '20',
-				'show_search'        => 'true',
-				'show_featured'      => 'true',
-				'show_tags'          => 'true',
-				'featured_limit'     => '4',
-				'featured_format'    => 'pa-thumbnail',
-				'category_limit'     => '4',
-				'front_orderby'      => 'download_count',
-				'exclude_categories' => '',
-				'include_categories' => '',
-				'direct_download'    => 'false'
-			), $args ) );
+		$template_handler = new DLM_Template_Handler();
 
-			$show_search     = ( $show_search === 'true' );
-			$show_featured   = ( $show_featured === 'true' );
-			$show_tags       = ( $show_tags === 'true' );
-			$direct_download = ( $direct_download === 'true' );
-			$meta_key        = '';
-			$order_by_count  = '';
-			switch ( $front_orderby ) {
-				case 'title' :
-				default :
-					$order = 'asc';
-					break;
-				case 'download_count' :
-					$order          = 'desc';
-					$front_orderby  = 'meta_value_num';
-					$meta_key       = '_download_count';
-					$order_by_count = '1';
-					break;
-				case 'date' :
-					$order = 'desc';
-					break;
+		if ( $show_search ) {
+			$template_handler->get_template_part( 'search-downloads', '', $this->plugin_path() . 'templates/' );
+		}
+
+		if ( $show_featured ) {
+
+			// fetch downloads
+			$downloads = download_monitor()->service( 'download_repository' )->retrieve( array(
+				'orderby'    => $front_orderby,
+				'order'      => $order,
+				'meta_key'   => $meta_key,
+				'order_by_count' => $order_by_count,
+				'meta_query' => array(
+					array(
+						'key'   => '_featured',
+						'value' => 'yes'
+					)
+				)
+			), $featured_limit );
+
+			// make featured downloads filterable
+			$downloads = apply_filters( 'dlm_page_addon_featured_downloads', $downloads );
+
+			if ( count( $downloads ) > 0 ) {
+				$template_handler->get_template_part( 'featured-downloads', '', $this->plugin_path() . 'templates/', array(
+					'downloads'       => $downloads,
+					'format'          => $featured_format,
+					'direct_download' => $direct_download
+				) );
 			}
+		}
 
-			// template handler
-			$template_handler = new DLM_Template_Handler();
+		if ( $show_tags ) {
 
-			if ( $show_search ) {
-				$template_handler->get_template_part( 'search-downloads', '', $this->plugin_path() . 'templates/' );
+			// get tags
+			$tags = get_terms( 'dlm_download_tag', apply_filters( 'dlm_page_addon_get_tag_args', array(
+				'orderby' => 'count',
+				'order'   => 'DESC',
+				'number'  => 50
+			) ) );
+
+			// make tags filterable
+			$tags = apply_filters( 'dlm_page_addon_tags', $tags );
+
+			if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) {
+
+				foreach ( $tags as $key => $tag ) {
+					$tags[ $key ]->link = $this->get_tag_link( $tag );
+					$tags[ $key ]->id   = $tag->term_id;
+				}
+
+				$template_handler->get_template_part( 'download-tags', '', $this->plugin_path() . 'templates/', array( 'tags' => $tags ) );
 			}
-
-			if ( $show_featured ) {
-
-				// fetch downloads
-				$downloads = download_monitor()->service( 'download_repository' )->retrieve( array(
+		}
+	
+		// Initialize meta query for division filtering
+		$meta_query = array();
+	
+		if ( $divisions ) {
+			// Only apply division logic on specific pages, like archives
+			if ( is_singular() || is_archive() ) {
+				BugFu::log( "Division Filtering Enabled" );
+				$meta_query[] = array(
+					'key'     => 'bb_group',
+					'value'   => $group_id,
+					'compare' => 'LIKE',
+				);
+			}
+		}
+	
+		// Fetch and display categories and downloads
+		$include = array_filter( array_map( 'absint', explode( ',', $include_categories ) ) );
+		$exclude = array_filter( array_map( 'absint', explode( ',', $exclude_categories ) ) );
+	
+		$category_args = apply_filters( 'dlm_page_addon_get_category_args', array(
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+			'hide_empty' => ! empty( $include ) ? false : true,
+			'pad_counts' => true,
+			'child_of'   => 0,
+			'exclude'    => $exclude,
+			'include'    => $include,
+			'parent'     => 0, // Only top-level terms
+		) );
+	
+		$categories = get_terms( 'dlm_download_category', $category_args );
+		$categories = apply_filters( 'dlm_page_addon_categories', $categories, $category_args );
+	
+		
+	
+		if ( $categories ) {
+			echo apply_filters( 'dlm_page_addon_categories_start', '<div class="download-monitor-categories">' );
+	
+			foreach ( $categories as $category ) {
+				$downloads = download_monitor()->service( 'download_repository' )->retrieve( apply_filters( 'dlm_page_addon_download_retrieve_args', array(
+					'meta_query' => $meta_query,
 					'orderby'    => $front_orderby,
-					'order'      => $order,
-					'meta_key'   => $meta_key,
-					'order_by_count' => $order_by_count,
-					'meta_query' => array(
+					'order'      => 'ASC',
+					'tax_query'  => array(
 						array(
-							'key'   => '_featured',
-							'value' => 'yes'
+							'taxonomy' => 'dlm_download_category',
+							'field'    => 'slug',
+							'terms'    => $category->slug,
 						)
 					)
-				), $featured_limit );
+				), $category ), $category_limit );
+				//BugFu::log($downloads);
 
-				// make featured downloads filterable
-				$downloads = apply_filters( 'dlm_page_addon_featured_downloads', $downloads );
+				// make downloads filterable
+				$downloads = apply_filters( 'dlm_page_addon_category_downloads', $downloads, $category );
 
+				
 				if ( count( $downloads ) > 0 ) {
-					$template_handler->get_template_part( 'featured-downloads', '', $this->plugin_path() . 'templates/', array(
+					$template_handler->get_template_part( 'download-categories', '', $this->plugin_path() . 'templates/', array(
+						'category'        => $category,
 						'downloads'       => $downloads,
-						'format'          => $featured_format,
+						'format'          => $format,
 						'direct_download' => $direct_download
 					) );
 				}
 			}
-
-			if ( $show_tags ) {
-
-				// get tags
-				$tags = get_terms( 'dlm_download_tag', apply_filters( 'dlm_page_addon_get_tag_args', array(
-					'orderby' => 'count',
-					'order'   => 'DESC',
-					'number'  => 50
-				) ) );
-
-				// make tags filterable
-				$tags = apply_filters( 'dlm_page_addon_tags', $tags );
-
-				if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) {
-
-					foreach ( $tags as $key => $tag ) {
-						$tags[ $key ]->link = $this->get_tag_link( $tag );
-						$tags[ $key ]->id   = $tag->term_id;
-					}
-
-					$template_handler->get_template_part( 'download-tags', '', $this->plugin_path() . 'templates/', array( 'tags' => $tags ) );
-				}
-			}
-
-			// Categories
-			$include = array_filter( array_map( 'absint', explode( ',', $include_categories ) ) );
-			$exclude = array_filter( array_map( 'absint', explode( ',', $exclude_categories ) ) );
-
-			$category_args = apply_filters( 'dlm_page_addon_get_category_args', array(
-				'orderby'    => 'name',
-				'order'      => 'ASC',
-				'hide_empty' => ! empty( $include ) ? false : true,
-				'pad_counts' => true,
-				'child_of'   => 0,
-				'exclude'    => $exclude,
-				'include'    => $include
-			) );
-
-			$categories = get_terms( 'dlm_download_category', $category_args );
-
-			$categories = apply_filters( 'dlm_page_addon_categories', $categories, $category_args );
-
-			if ( $categories ) {
-
-				echo apply_filters( 'dlm_page_addon_categories_start', '<div class="download-monitor-categories">' );
-
-				foreach ( $categories as $category ) {
-
-					$downloads = download_monitor()->service( 'download_repository' )->retrieve( apply_filters( 'dlm_page_addon_download_retrieve_args', array(
-						'orderby'   => $front_orderby,
-						'order'     => $order,
-						'meta_key'  => $meta_key,
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'dlm_download_category',
-								'field'    => 'slug',
-								'terms'    => $category->slug,
-							)
-						)
-					),                                                                                          $category ), $category_limit );
-
-					// make downloads filterable
-					$downloads = apply_filters( 'dlm_page_addon_category_downloads', $downloads, $category );
-
-					if ( count( $downloads ) > 0 ) {
-						$template_handler->get_template_part( 'download-categories', '', $this->plugin_path() . 'templates/', array(
-							'category'        => $category,
-							'downloads'       => $downloads,
-							'format'          => $format,
-							'direct_download' => $direct_download
-						) );
-					}
-
-				}
-				echo apply_filters( 'dlm_page_addon_categories_end', '</div>' );
-
-			}
-
+			echo apply_filters( 'dlm_page_addon_categories_end', '</div>' );
 		}
-
-		return '<div id="download-page">' . ob_get_clean() . '</div><!-- Download Page powered by WordPress Download Monitor (https://www.download-monitor.com) -->';
 	}
+	
+		return '<div id="download-page">' . ob_get_clean() . '</div><!-- Download Page powered by WordPress Download Monitor -->';
+	}
+	
 
 	/**
 	 * Show a download's info page

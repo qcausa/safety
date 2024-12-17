@@ -1,4 +1,0 @@
-<?php
-/**
- * Testimonials start template
- */
