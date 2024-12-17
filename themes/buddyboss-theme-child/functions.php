@@ -1289,35 +1289,51 @@ add_action('elementor/query/featured_posts', function($query) {
 
 
 function wpf_dev_dynamic_choices_include_subcategories( $args, $field, $form_id ) {
+    BugFu::log("wpf_dev_dynamic_choices_include_subcategories");
 
+    // Ensure $form_id is correctly retrieved
     if ( is_array( $form_id ) ) {
         $form_id = $form_id['id'];
     }
 
-    // Only target form ID #946 and field ID #5
-    if ( $form_id == 946 && $field['id'] == 5 ) {
+    // Only target form ID #946
+    if ( $form_id == 946 ) {
         
-        // Define the parent category ID
-        $parent_category_id = 161; // Age Range category
+        // Map field IDs to parent category IDs
+        $field_to_category_map = [
+            5  => 132, // Field ID 5 -> Category ID 132
+            11 => 143,
+            12 => 193,
+            13 => 199,
+            14 => 161,
+            15 => 167, 
+            16 => 175,
+            17 => 190, 
+        ];
 
-        // Get all subcategories under the parent category
-        $subcategories = get_terms( [
-            'taxonomy'   => 'category',
-            'parent'     => $parent_category_id,
-            'hide_empty' => false, // Include empty categories
-        ] );
+        // Check if the current field ID exists in the map
+        if ( isset( $field_to_category_map[ $field['id'] ] ) ) {
+            $parent_category_id = $field_to_category_map[ $field['id'] ];
 
-        // Extract the term IDs and create a comma-separated string
-        $subcategory_ids = !empty( $subcategories ) ? wp_list_pluck( $subcategories, 'term_id' ) : [];
-        $args['include'] = implode( ',', $subcategory_ids );
+            // Get all subcategories under the parent category
+            $subcategories = get_terms( [
+                'taxonomy'   => 'category',
+                'parent'     => $parent_category_id,
+                'hide_empty' => false, // Include empty categories
+            ] );
 
-        // Optionally include the parent category itself
-        $args['include'] = $parent_category_id . ',' . $args['include'];
+            // Extract term IDs and include the parent category itself
+            $subcategory_ids = !empty( $subcategories ) ? wp_list_pluck( $subcategories, 'term_id' ) : [];
+            $args['include'] = $parent_category_id . ',' . implode( ',', $subcategory_ids );
+
+            BugFu::log($args['include']);
+        }
     }
 
     return $args;
 }
 add_filter( 'wpforms_dynamic_choice_taxonomy_args', 'wpf_dev_dynamic_choices_include_subcategories', 10, 3 );
+
 
 
 

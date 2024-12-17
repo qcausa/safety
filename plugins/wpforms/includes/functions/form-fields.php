@@ -90,6 +90,7 @@ function wpforms_get_field_dynamic_choices( $field, $form_id, $form_data = [] ) 
 			),
 			true
 		);
+		//BugFu::log($terms);
 		
 
 		foreach ( $terms as $term ) {
