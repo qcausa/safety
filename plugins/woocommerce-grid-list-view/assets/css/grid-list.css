@@ -1,0 +1,51 @@
+/* Toggle Buttons */
+.wc-view-toggle {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.wc-view-toggle button {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.wc-view-toggle button.active {
+  background: #0071a1;
+  color: #fff;
+}
+
+/* Grid View (Default WooCommerce) */
+.woocommerce ul.products.wc-grid-view {
+  display: flex;
+  flex-wrap: wrap;
+}
+.woocommerce ul.products.wc-grid-view li.product {
+  width: 30%; /* Adjust columns */
+  margin-right: 3.33%;
+  margin-bottom: 20px;
+}
+.woocommerce ul.products.wc-grid-view li.product:nth-child(3n) {
+  margin-right: 0;
+}
+
+/* List View */
+.woocommerce ul.products.wc-list-view {
+  display: block;
+}
+.woocommerce ul.products.wc-list-view li.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.woocommerce
+  ul.products.wc-list-view
+  li.product
+  .woocommerce-LoopProduct-link
+  img {
+  width: 150px;
+  margin-right: 20px;
+}
+.woocommerce ul.products.wc-list-view li.product .woocommerce-LoopProduct-link {
+  flex: 1;
+}
