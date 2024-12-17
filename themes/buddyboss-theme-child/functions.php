@@ -469,15 +469,15 @@ function custom_bp_group_new_tab() {
     ) );
 
     // Register a new sub-navigation item (tab) for each group
-    bp_core_new_subnav_item( array(
-        'name'            => __( 'Add ', 'textdomain' ), // Tab Name
-        'slug'            => 'custom-landing', // Unique Slug for the Tab
-        'parent_url'      => bp_get_group_permalink( $current_group ), // Parent Group URL
-        'parent_slug'     => bp_get_current_group_slug(), // Parent Slug
-        'screen_function' => 'custom_bp_group_tab_screen', // Callback function
-        'position'        => 0, // Set position to 0 to make it the first tab
-        'default_subnav_slug' => 'custom-landing', // Define as the default tab
-    ) );
+    // bp_core_new_subnav_item( array(
+    //     'name'            => __( 'Add ', 'textdomain' ), // Tab Name
+    //     'slug'            => 'custom-landing', // Unique Slug for the Tab
+    //     'parent_url'      => bp_get_group_permalink( $current_group ), // Parent Group URL
+    //     'parent_slug'     => bp_get_current_group_slug(), // Parent Slug
+    //     'screen_function' => 'custom_bp_group_tab_screen', // Callback function
+    //     'position'        => 0, // Set position to 0 to make it the first tab
+    //     'default_subnav_slug' => 'custom-landing', // Define as the default tab
+    // ) );
 }
 add_action( 'bp_setup_nav', 'custom_bp_group_new_tab' );
 
