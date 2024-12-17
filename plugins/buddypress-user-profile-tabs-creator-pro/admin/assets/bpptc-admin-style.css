@@ -1,0 +1,7 @@
+.cmb2-id--bpptc-tab-visible-roles .cmb2-list,
+.cmb2-id--bpptc-tab-enabled-roles .cmb2-list,
+.bpptc-subnav-available-roles .cmb2-list,
+.bpptc-subnav-visibile-roles .cmb2-list {
+    max-height: 150px;
+    overflow: auto;
+}

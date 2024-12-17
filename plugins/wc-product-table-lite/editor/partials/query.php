@@ -10,8 +10,7 @@
       $child_cats = get_terms('product_cat', array('parent' => $category->term_id, 'hide_empty' => 0));
       ?>
       <div class="wcpt-category">
-        <label>
-          <input type="checkbox" class="<?php echo $child_cats ? 'wcpt-hr-parent-term' : ''; ?>"
+        <label><input type="checkbox" class="<?php echo $child_cats ? 'wcpt-hr-parent-term' : ''; ?>"
             wcpt-model-key="category[]" wcpt-controller="category" value="<?php echo $category->term_taxonomy_id; ?>" />
           <?php echo $category->name; ?>
         </label>

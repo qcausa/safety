@@ -99,6 +99,10 @@ function updateUI(repeater, addButton) {
  * @param {HTMLElement} repeater
  */
 export function refreshRepeater(repeater) {
+  if (repeater.classList.contains("pmxi-repeater-initialized")) return;
+
+  repeater.classList.add("pmxi-repeater-initialized");
+
   const addButton = repeater.querySelector(".pmxi-repeater-add-row");
   const switchers = getModeSwitchers(repeater);
 

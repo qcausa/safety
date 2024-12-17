@@ -1,16 +1,15 @@
 <?php
 namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns;
 
-
 class CategoryArchive extends BasePattern {
 
-    public function register() {
-        register_block_pattern(
-            'betterdocs/doc-category-sleek-layout',
-            array(
-                'title'         => __( 'Category Archive Sleek Layout', 'betterdocs' ),
-                'description'   => _x( 'Doc Category Archive Layout', 'Block pattern description', 'betterdocs' ),
-                'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
+	public function register() {
+		register_block_pattern(
+			'betterdocs/doc-category-sleek-layout',
+			array(
+				'title'         => __( 'Category Archive Sleek Layout', 'betterdocs' ),
+				'description'   => _x( 'Doc Category Archive Layout', 'Block pattern description', 'betterdocs' ),
+				'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
                     <div class="wp-block-group has-base-2-background-color has-background" style="padding-bottom:50px"><!-- wp:group {"layout":{"backgroundColor":"#f2f4f7","inherit":true,"contentSize":"1400px","type":"constrained"}} -->
                     <div class="wp-block-group"><!-- wp:columns {"align":"wide"} -->
                     <div class="wp-block-columns alignwide"><!-- wp:column {"width":"33.33%"} -->
@@ -27,17 +26,17 @@ class CategoryArchive extends BasePattern {
                     <!-- /wp:columns --></div>
                     <!-- /wp:group --></div>
                     <!-- /wp:group -->',
-                'categories'    => array( 'betterdocs-catgory' ),
-                'keywords'      => array( 'betterdocs', 'doc archive' ),
-                'viewportWidth' => 1600,
-            )
-        );
-        register_block_pattern(
-            'betterdocs/doc-category',
-            array(
-                'title'         => __( 'Category Archive Classic Layout', 'betterdocs' ),
-                'description'   => _x( 'Doc Category Archive Layout', 'Block pattern description', 'betterdocs' ),
-                'content'       => '<!-- wp:group {"style":{"color":{"background":"#f2f4f7"},"spacing":{"padding":{"bottom":"50px"}}},"layout":{"type":"default"}} -->
+				'categories'    => array( 'betterdocs-catgory' ),
+				'keywords'      => array( 'betterdocs', 'doc archive' ),
+				'viewportWidth' => 1600,
+			)
+		);
+		register_block_pattern(
+			'betterdocs/doc-category',
+			array(
+				'title'         => __( 'Category Archive Classic Layout', 'betterdocs' ),
+				'description'   => _x( 'Doc Category Archive Layout', 'Block pattern description', 'betterdocs' ),
+				'content'       => '<!-- wp:group {"style":{"color":{"background":"#f2f4f7"},"spacing":{"padding":{"bottom":"50px"}}},"layout":{"type":"default"}} -->
                 <div
                     class="wp-block-group has-background"
                     style="background-color: #f2f4f7; padding-bottom: 50px"
@@ -73,10 +72,10 @@ class CategoryArchive extends BasePattern {
                     <!-- /wp:group -->
                 </div>
                 <!-- /wp:group -->',
-                'categories'    => array( 'betterdocs-catgory' ),
-                'keywords'      => array( 'betterdocs', 'doc archive' ),
-                'viewportWidth' => 1600,
-            )
-        );
-    }
+				'categories'    => array( 'betterdocs-catgory' ),
+				'keywords'      => array( 'betterdocs', 'doc archive' ),
+				'viewportWidth' => 1600,
+			)
+		);
+	}
 }

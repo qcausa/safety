@@ -2,11 +2,11 @@
 function pmxi_wp_ajax_auto_detect_sf(){
 
 	if ( ! check_ajax_referer( 'wp_all_import_secure', 'security', false )){
-		exit( json_encode(array('result' => array(), 'msg' => __('Security check', 'wp_all_import_plugin'))) );
+		exit( json_encode(array('result' => array(), 'msg' => __('Security check', 'wp-all-import-pro'))) );
 	}
 
 	if ( ! current_user_can( PMXI_Plugin::$capabilities ) ){
-		exit( json_encode(array('result' => array(), 'msg' => __('Security check', 'wp_all_import_plugin'))) );
+		exit( json_encode(array('result' => array(), 'msg' => __('Security check', 'wp-all-import-pro'))) );
 	}
 
 	$input = new PMXI_Input();

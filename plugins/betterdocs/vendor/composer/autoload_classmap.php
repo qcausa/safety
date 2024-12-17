@@ -51,7 +51,6 @@ return array(
     'WPDeveloper\\BetterDocs\\Admin\\Importer\\Parsers\\WXR_Parser_SimpleXML' => $baseDir . '/includes/Admin/Importer/Parsers/WXR_Parser_SimpleXML.php',
     'WPDeveloper\\BetterDocs\\Admin\\Importer\\Parsers\\WXR_Parser_XML' => $baseDir . '/includes/Admin/Importer/Parsers/WXR_Parser_XML.php',
     'WPDeveloper\\BetterDocs\\Admin\\Importer\\WPImport' => $baseDir . '/includes/Admin/Importer/WPImport.php',
-    'WPDeveloper\\BetterDocs\\Admin\\PostsTable' => $baseDir . '/includes/Admin/PostsTable.php',
     'WPDeveloper\\BetterDocs\\Admin\\ReportEmail' => $baseDir . '/includes/Admin/ReportEmail.php',
     'WPDeveloper\\BetterDocs\\Admin\\WPExporter' => $baseDir . '/includes/Admin/WPExporter.php',
     'WPDeveloper\\BetterDocs\\Core\\Admin' => $baseDir . '/includes/Core/Admin.php',

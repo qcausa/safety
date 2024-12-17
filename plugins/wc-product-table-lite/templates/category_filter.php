@@ -101,13 +101,13 @@ if (empty($hide_empty)) {
 }
 
 // display all category options
-if (empty($redirect_enabled)) {
-	$display_all = false;
-}
+// if (empty($redirect_enabled)) {
+// 	$display_all = false;
+// }
 
 $terms = array();
 if (
-	$display_all ||
+	!empty($display_all) ||
 	( // archive
 		isset($sc_attrs['_archive']) &&
 		(
@@ -349,8 +349,6 @@ if (
 			foreach ($dropdown_options as &$option) {
 				$option = apply_filters('wcpt_nav_filter_option', $option, 'category', array('taxonomy' => $taxonomy));
 			}
-
-
 
 			// All & Category
 			if (

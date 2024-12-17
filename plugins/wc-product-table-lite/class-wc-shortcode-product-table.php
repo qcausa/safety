@@ -102,12 +102,6 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 		return apply_filters('wcpt_products', $products);
 	}
 
-	public function get_query_args()
-	{
-		return $this->product_loop('nav_markup');
-		return $query_args;
-	}
-
 	public function get_nav_markup()
 	{
 		return $this->product_loop('nav_markup');
@@ -139,7 +133,6 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 		return false;
 	}
-
 	private function ensure_device()
 	{
 		$table_data = wcpt_get_table_data();
@@ -161,30 +154,13 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 		}
 		$mobile_detect = new Mobile_Detect;
 
-		// device
-		$tablet_device = (method_exists($mobile_detect, 'isTablet') && $mobile_detect->isTablet());
-		$phone_device = ($mobile_detect->isMobile() && !$tablet_device);
-		$laptop_device = !$tablet_device && !$phone_device;
-
-		// assign $_GET a device
-		$requested_device = 'laptop';
-
-		if ($tablet_device) {
-			if (!wcpt_get_device_columns_2('tablet')) {
-				$requested_device = 'laptop';
-			}
-		}
-
-		if ($phone_device) {
+		// device detection
+		if ($mobile_detect->isTablet()) {
+			$requested_device = 'tablet';
+		} elseif ($mobile_detect->isMobile() && !$mobile_detect->isTablet()) {
 			$requested_device = 'phone';
-
-			if (!wcpt_get_device_columns_2('phone')) {
-				$requested_device = 'tablet';
-
-				if (!wcpt_get_device_columns_2('tablet')) {
-					$requested_device = 'laptop';
-				}
-			}
+		} else {
+			$requested_device = 'laptop';
 		}
 
 		$_GET[$table_id . '_device'] = $requested_device;
@@ -192,7 +168,6 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 	protected function product_loop($return = false)
 	{
-
 		// prep vars
 		$this->id = $table_id = $this->attributes['id'];
 		$data = wcpt_get_table_data();
@@ -370,8 +345,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 			$products = $GLOBALS['wp_query'];
 			if (!$products->found_posts) {
 				do_action('woocommerce_no_products_found');
-
-				return;
+				return '';
 			}
 		}
 
@@ -392,15 +366,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 		}
 
-		$this->remove_ordering_args();
-
-		remove_filter('posts_where', array($this, 'search'));
-
 		$GLOBALS['wcpt_products'] = $products;
-
-		// begin container 
-
-		include($tpl . 'container-open.php');
 
 		if (
 			function_exists('wc_print_notices') &&
@@ -409,16 +375,21 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 			wc_print_notices();
 		}
 
+		// begin container 
+		include($tpl . 'container-open.php');
+
 		wcpt_print_styles();
 
 		do_action('wcpt_before_loop', $this->attributes);
 
 		// print navigation
 		if (!$this->only_loop) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo apply_filters('wcpt_navigation', $nav);
 		}
 
 		if ($cache = $this->get_cache()) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $cache;
 
 		} else {
@@ -485,6 +456,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 								include($tpl . 'cell-open.php');
 
 								ob_start();
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo apply_filters(
 									'wcpt_cell_value',
 									trim(wcpt_parse_2($column['cell']['template'], $product)),
@@ -494,6 +466,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 								);
 								if ($cell_val = ob_get_clean()) {
 									include($tpl . 'cell-value-open.php');
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo $cell_val;
 									include($tpl . 'cell-value-close.php');
 								}
@@ -508,6 +481,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 						$row_markup = apply_filters('wcpt_row', ob_get_clean());
 
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped						
 						echo $row_markup;
 
 						// Restore product visibility.
@@ -526,12 +500,8 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 						!empty($this->attributes['paginate']) &&
 						!$this->only_loop
 					) {
-						if (!empty($data['query']['sc_attrs'][$_GET[$table_id . '_device'] . '_infinite_scroll'])) {
-							include($tpl . 'infinite-scroll-dots.php');
-
-						} else {
+						if (!apply_filters('wcpt_pagination_override', false, $products, $device)) {
 							include($tpl . 'pagination.php');
-
 						}
 					}
 
@@ -542,6 +512,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 					ob_start();
 					include $tpl . 'no-results.php';
 					$no_results_markup = ob_get_clean();
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo apply_filters('wcpt_no_results', $no_results_markup);
 
 				}
@@ -553,6 +524,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 			do_action('wcpt_container_close');
 
 			$markup = ob_get_clean();
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $markup;
 
 			$this->set_cache($markup);
@@ -561,20 +533,21 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 		// update cart info
 		if (wp_doing_ajax()) {
-			?>
-			<script type="text/javascript">
-				if (typeof wcpt_update_cart_items !== 'undefined') {
-					wcpt_update_cart_items(<?php echo json_encode(WC()->cart->get_cart()); ?>);
-				}
-			</script>
-			<?php
+			sprintf(
+				'<script type="text/javascript">
+					if (typeof wcpt_update_cart_items !== "undefined") {
+						wcpt_update_cart_items(%s);
+					}
+				</script>',
+				json_encode(WC()->cart->get_cart())
+			);
 		}
 
 		// edit table link
 		if (current_user_can('edit_others_wc_product_tables')) {
 			?>
 			<div class="wcpt-edit-wrapper">
-				<a class="wcpt-edit" target="_blank" href="<?php echo get_edit_post_link($table_id); ?>">Edit table</a>
+				<a class="wcpt-edit" target="_blank" href="<?php echo esc_url(get_edit_post_link($table_id)); ?>">Edit table</a>
 			</div>
 			<?php
 		}
@@ -583,22 +556,6 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 		return ob_get_clean();
 
-	}
-
-	public function order_by_asc_popularity_post_clauses($args)
-	{
-		global $wpdb;
-		$args['orderby'] = "$wpdb->postmeta.meta_value+0 ASC, $wpdb->posts.post_date DESC";
-		return $args;
-	}
-
-	/**
-	 * Remove ordering queries.
-	 */
-	public function remove_ordering_args()
-	{
-		remove_filter('posts_clauses', array($this, 'order_by_asc_popularity_post_clauses'));
-		remove_filter('get_meta_sql', array($this, 'cast_decimal_precision'));
 	}
 
 	public function parse_query_args()
@@ -925,7 +882,7 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 				// search
 				if ($filter_info['filter'] == 'search') {
 					foreach ($filter_info['searches'] as $search) {
-						wcpt_search($search, $query_args['post__in']);
+						$query_args['post__in'] = wcpt_search($search, empty($query_args['post__in']) ? array() : $query_args['post__in']);
 					}
 				}
 
@@ -1074,12 +1031,12 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 
 		}
 
-		$ordering_args = WC()->query->get_catalog_ordering_args($query_args['orderby'], $query_args['order']);
-		$query_args['orderby'] = $ordering_args['orderby'];
-		$query_args['order'] = $ordering_args['order'];
+		$wc_ordering_args = WC()->query->get_catalog_ordering_args($query_args['orderby'], $query_args['order']);
+		$query_args['orderby'] = $wc_ordering_args['orderby'];
+		$query_args['order'] = $wc_ordering_args['order'];
 
-		if ($ordering_args['meta_key']) {
-			$query_args['meta_key'] = $ordering_args['meta_key'];
+		if ($wc_ordering_args['meta_key']) {
+			$query_args['meta_key'] = $wc_ordering_args['meta_key'];
 		}
 
 		$query_args['posts_per_page'] = intval($this->attributes['limit']);
@@ -1119,12 +1076,6 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 	protected function parse_attributes($attributes)
 	{
 		$attributes = apply_filters('wcpt_before_parse_attributes', $attributes);
-
-		$table_data = $GLOBALS['wcpt_table_data'];
-
-		if (empty($GLOBALS['wcpt_table_data']['query']['sc_attrs'])) {
-			$GLOBALS['wcpt_table_data']['query']['sc_attrs'] = array();
-		}
 
 		$GLOBALS['wcpt_table_data']['query']['sc_attrs'] = array_merge($GLOBALS['wcpt_table_data']['query']['sc_attrs'], $attributes);
 
@@ -1401,11 +1352,5 @@ class WC_Shortcode_Product_Table extends WC_Shortcode_Products
 		$GLOBALS['wcpt_nav_later_flag'] = false;
 
 		return $nav;
-	}
-
-	public function cast_decimal_precision($array)
-	{
-		$array['where'] = str_replace('DECIMAL', 'DECIMAL(10,3)', $array['where']);
-		return $array;
 	}
 }

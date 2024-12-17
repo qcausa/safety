@@ -1,17 +1,22 @@
-<?php $reading_text = betterdocs()->settings->get( 'estimated_reading_time_text' ); $singular_reading_text = betterdocs()->settings->get( 'singular_estimated_reading_time_text' );  $reading_title = betterdocs()->settings->get('estimated_reading_time_title'); ?>
-<?php echo betterdocs()->settings->get('enable_estimated_reading_time') ? do_shortcode( '[betterdocs_reading_time singular_reading_text="'.$singular_reading_text.'" reading_text="'.$reading_text.'" reading_title="'.$reading_title.'"]' ) : ''; ?>
+<?php $reading_text    = betterdocs()->settings->get( 'estimated_reading_time_text' );
+$singular_reading_text = betterdocs()->settings->get( 'singular_estimated_reading_time_text' );
+$reading_title         = betterdocs()->settings->get( 'estimated_reading_time_title' ); ?>
+<?php echo betterdocs()->settings->get( 'enable_estimated_reading_time' ) ? do_shortcode( '[betterdocs_reading_time singular_reading_text="' . $singular_reading_text . '" reading_text="' . $reading_text . '" reading_title="' . $reading_title . '"]' ) : ''; ?>
 <div class="betterdocs-entry-content">
-    <?php
-        /**
-         * Print Icon
-         */
-        $view_object->get( 'templates/parts/print-icon', [
-            'enable' => betterdocs()->settings->get( 'enable_print_icon', false )
-        ] );
+	<?php
+		/**
+		 * Print Icon
+		 */
+		$view_object->get(
+			'templates/parts/print-icon',
+			[
+				'enable' => betterdocs()->settings->get( 'enable_print_icon', false )
+			]
+		);
 
-        /**
-         * Content
-         */
-        $view_object->get( 'templates/parts/content' );
-    ?>
+		/**
+		 * Content
+		 */
+		$view_object->get( 'templates/parts/content' );
+		?>
 </div>

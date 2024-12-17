@@ -2,30 +2,36 @@
   clear: both;
 }
 
-body.wc_product_table_page_wcpt-edit {
-  background: white;
-  font-size: 16px;
-}
-
 body.wc_product_table_page_wcpt-edit #wpcontent * {
   box-sizing: border-box;
 }
 
 body.wc_product_table_page_wcpt-edit .wcpt-title-resources {
-  display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   background: #f7f7f7;
   color: #d6d6d6;
   text-shadow: 1px 1px 1px white;
   position: relative;
   top: -8px;
-  border: 1px solid #f3f3f3;
+  border: 1px solid #00000026;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  width: 670px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 body.wc_product_table_page_wcpt-edit .wcpt-title-resources a {
-  padding: 15px 20px;
+  padding: 15px;
   text-decoration: none;
-  display: inline-block;
+  border-right: 1px solid #00000026;
+  text-align: center;
+  flex: 1;
+}
+
+body.wc_product_table_page_wcpt-edit .wcpt-title-resources a:last-child {
+  border-right: none;
 }
 
 body.wc_product_table_page_wcpt-edit
@@ -43,7 +49,7 @@ body.wc_product_table_page_wcpt-edit
   margin: 30px 40px 40px 0;
   padding-left: 55px;
   line-height: 45px;
-  display: inline-block;
+  display: block;
   color: #000;
   font-size: 45px;
   position: relative;
@@ -55,44 +61,41 @@ body.wc_product_table_page_wcpt-edit
   left: 0;
 }
 
-.wcpt-table-title-label {
-  font-size: 20px;
-  width: 150px;
+.wcpt-table-title-label,
+.wcpt-sc-display-label {
+  font-size: 18px;
+  width: 105px;
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 0;
+  opacity: 0.7;
+  position: relative;
+  top: -3px;
+}
+
+input.wcpt-sc-display,
+input.wcpt-table-title {
+  display: inline-block;
+  font-size: 18px !important;
+  border: 1px solid #ddd !important;
+  padding: 0 0 0 0.5em !important;
+  border: 1px solid rgb(0 0 0 / 10%) !important;
+  border-radius: 3px !important;
+  height: 2.2em !important;
+  color: black;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 input.wcpt-table-title {
-  display: inline-block;
-  font-size: 20px;
-  width: 545px;
-  border: none;
-  border-bottom: 2px solid #ddd;
-  border-radius: 0 !important;
-  padding: 8px 16px 10px 0;
-  box-shadow: none !important;
-  margin-right: 15px;
-  margin-bottom: 0;
-  background: transparent;
-}
-
-.wcpt-sc-display-label {
-  font-size: 20px;
-  margin-top: 10px;
-  width: 150px;
-  display: inline-block;
+  width: 560px !important;
+  margin: 0 15px 10px 0 !important;
+  background: white !important;
 }
 
 input.wcpt-sc-display {
-  font-size: 20px;
-  margin-top: 10px;
-  border: none;
-  box-shadow: none !important;
-  outline: none !important;
-  padding: 5px 0;
-  width: 335px;
-  color: black;
-  background: transparent;
+  width: 350px !important;
+  background: rgb(0 0 0 / 1%) !important;
+  margin-right: 10px !important;
 }
 
 .wcpt-preview-table {
@@ -141,6 +144,7 @@ input.wcpt-sc-display {
 /* dynamic input wrapper */
 .wcpt-diw {
   position: relative;
+  flex-shrink: 0;
 }
 
 body .wcpt-editor .wcpt-diw > input,
@@ -176,6 +180,8 @@ body .wcpt-diw > input,
   margin-top: 70px;
   clear: both;
   width: 1050px;
+  border: 1px solid rgb(0 0 0 / 50%);
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);
 }
 
 .wcpt-tab-content {
@@ -212,10 +218,6 @@ body .wcpt-diw > input,
 
 .wcpt-tab-label.active {
   background: white;
-}
-
-.wcpt-tab-label:nth-child(4) {
-  border-right-width: 1px;
 }
 
 .wcpt-tab-label .wcpt-tab-label-text {
@@ -378,7 +380,7 @@ body .wcpt-diw > input,
 }
 /* customize rows - stop */
 
-.wcpt-editor-row-option label {
+.wcpt-editor-row-option > label {
   display: block;
   padding-bottom: 10px;
   font-size: 18px;
@@ -429,7 +431,11 @@ body .wcpt-diw > input,
 }
 
 .wcpt-editor-row-option {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.wcpt-editor-row-option:first-child:last-child {
+  margin-top: 10px;
 }
 
 .wcpt-editor-row-option:after {
@@ -462,9 +468,9 @@ body .wcpt-diw > input,
 
 /* row option elements */
 
-.wcpt-editor-row-option select,
-.wcpt-editor-row-option input[type="text"],
-.wcpt-editor-row-option input[type="number"] {
+.wcpt-editor-row-option select:not([wcpt-react-app] select),
+.wcpt-editor-row-option input[type="text"]:not([wcpt-react-app] input),
+.wcpt-editor-row-option input[type="number"]:not([wcpt-react-app] input) {
   font-size: 16px;
   width: 100%;
   padding: 5px 10px;
@@ -472,17 +478,26 @@ body .wcpt-diw > input,
   margin: 0 !important;
 }
 
-.wcpt-editor-row-option select {
+.wcpt-editor-row-option select:not([wcpt-react-app] select) {
   line-height: 1.1em;
   max-width: 100%;
 }
 
-.wcpt-editor-row-option textarea {
+.wcpt-editor-row-option textarea:not([wcpt-react-app] textarea) {
   font-size: 16px;
   width: 100%;
   padding: 5px 10px;
   height: 100px;
   margin: 0 !important;
+}
+
+/* react apps */
+[wcpt-react-app] .mantine-Input-input input,
+[wcpt-react-app] .mantine-Input-input input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
 }
 
 /* custom label option rows */
@@ -604,7 +619,7 @@ body .wcpt-diw > input,
   font-size: 20px;
   line-height: 1.2em;
   margin: 0 0 15px;
-  padding: 20px 30px;
+  padding: 20px;
   font-weight: 600;
   color: #404040;
   background: #fbfbfb;
@@ -1939,9 +1954,12 @@ input.wcpt-width--50-percent {
 
 .wcpt-footer > div {
   margin: 20px 20px 20px 0;
-  padding: 30px;
-  background: #f7f7f7;
+  padding: 20px 24px;
+  background: #ffffff;
   font-size: 16px;
+  border: 1px solid #00000026;
+  border-radius: 4px;
+  max-width: 1050px;
 }
 
 .wcpt-footer > div .wcpt-icon {
@@ -2040,8 +2058,8 @@ input.wcpt-width--50-percent {
 }
 
 .wcpt-editor-tab-style .wcpt-toggle-label {
-  text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .wcpt-editor-option-row.wcpt-separation-heading {
@@ -2341,7 +2359,7 @@ input.wcpt-width--50-percent {
 }
 
 .wcpt-search-rules input[type="number"] {
-  width: 80px;
+  width: 80px !important;
   height: 30px;
   display: inline-block;
   box-shadow: none;
@@ -2485,7 +2503,7 @@ a.wcpt-search__disable {
 /* select2 */
 
 .wcpt-editor-row-option .select2-selection {
-  min-height: 48px;
+  min-height: 52px;
 }
 
 .wcpt-editor-row-option .select2-selection__rendered,
@@ -2677,9 +2695,9 @@ a.wcpt-search__disable {
 
 .wcpt-shortcode-info {
   position: relative;
-  padding: 5px 10px;
+  padding: 0;
   font-size: 18px;
-  color: #666;
+  color: #727272;
   transition: 0.2s;
   border-radius: 4px;
   border-width: 0 0 1px 1px;

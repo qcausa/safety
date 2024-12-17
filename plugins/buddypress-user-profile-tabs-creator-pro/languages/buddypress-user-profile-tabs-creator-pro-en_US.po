@@ -1,0 +1,543 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyPress User Profile Tabs Creator Pro\n"
+"POT-Creation-Date: 2020-11-05 13:46+0530\n"
+"PO-Revision-Date: 2020-11-05 13:46+0530\n"
+"Last-Translator: \n"
+"Language-Team: BuddyDev\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/bpptc-profile-tabs-admin-misc.php:33
+msgid "View Tabs"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-admin-misc.php:34
+msgid "Documentation"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:47
+msgid "All Members"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:48
+#: admin/bpptc-profile-tabs-edit-helper.php:61
+msgid "None(Will remove it for everyone. Only applies for existing tabs)"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:59
+msgid "Do Not Modify(only applies when modifying existing tab or subnav)"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:60
+msgid "Anyone"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:62
+msgid "Logged In Members"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:63
+msgid "Profile Owner"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:67
+msgid "Friends"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:71
+msgid "Followers"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:72
+msgid "Leaders(whom the user is following)"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:82
+msgid "Tab Settings"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:90
+#: admin/bpptc-profile-tabs-edit-helper.php:215
+msgid "Need help?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:91
+#, php-format
+msgid "Get started with the <a href=\"%s\">new tab options</a>"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:97
+#: admin/bpptc-profile-tabs-edit-helper.php:233
+msgid "Is enabled?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:101
+msgid "Only enabled tabs will be visible."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:105
+#: admin/bpptc-profile-tabs-edit-helper.php:108
+msgid "Set it as default component?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:112
+msgid "Are we modifying predefined tab?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:115
+msgid "Are we modifying a tab added by BuddyPress or some other plugin?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:120
+msgid "Update label?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:126
+msgid "Should we update the tab label with new label?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:131
+msgid "Site admin only?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:135
+msgid "Is this tab visible to site admin only?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:140
+#: admin/bpptc-profile-tabs-edit-helper.php:282
+msgid "Add this tab for?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:145
+#: admin/bpptc-profile-tabs-edit-helper.php:288
+msgid "Tab will be available to these users on their profile"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:149
+msgid "Tab Visibility"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:154
+msgid ""
+"Tab will be visible to these users when they visit the profile of other "
+"user(tab enabled user)"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:159
+#: admin/bpptc-profile-tabs-edit-helper.php:264
+#: admin/bpptc-profile-tabs-list-helper.php:57
+msgid "Position"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:162
+msgid "Number, Required. Determines position of tab."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:166
+msgid "Tab Link"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:169
+msgid ""
+"Optional. Only use if you need dynamic url or link to absolute urls. See our "
+"<a href=\"https://buddydev.com/docs/guides/plugins/buddypress-plugins/"
+"buddypress-user-profile-tabs-creator-pro/buddypress-user-profile-tab-link-"
+"configuration/\">documentation</a> about this."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:173
+msgid "Default Subnav Slug"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:177
+msgid ""
+"Optional. Specify the slug of the subnav to be used. If not specified, first "
+"sub nav will be default."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:181
+msgid "Item CSS ID"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:184
+msgid "Optional. CSS id for the nav item."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:188
+#: admin/bpptc-profile-tabs-edit-helper.php:316
+msgid "Add to admin bar?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:193
+msgid "Optional. Add this tab to adminbar account menu for user."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:197
+#: admin/bpptc-profile-tabs-edit-helper.php:325
+msgid "Adminbar Item ID"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:201
+msgid ""
+"Optional. Admin bar nav item id. Required if you want to remove item from "
+"adminbar account menu(or add sub menu)."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:207
+msgid "Subnav"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:216
+#, php-format
+msgid "Get started with the <a href=\"%s\">sub nav options</a>"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:225
+msgid "Subnav {#}"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:226
+msgid "New"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:227
+msgid "Remove"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:237
+msgid "Only enabled sub navs are visible."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:241
+msgid "Is Existing?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:245
+msgid "Are we modifying an existing sub nav?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:250
+#: admin/bpptc-profile-tabs-list-helper.php:51
+msgid "Label"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:253
+msgid "Required. Label for the sub nav item."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:257
+#: admin/bpptc-profile-tabs-list-helper.php:56
+msgid "Slug"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:260
+msgid "Required. Unique slug for this sub nav."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:268
+msgid "Required. Please specify a position for the sub nav."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:273
+msgid "Site Admin Only"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:278
+msgid "Is this sub nav visible to site admin only?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:292
+msgid "Visible for?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:298
+msgid "Tab will be available to these users on their profile."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:302
+msgid "Url"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:305
+msgid "(Optional), if you want to link to some other page."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:309
+msgid "CSS ID"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:312
+msgid "Optional, CSS id for the sub nav item."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:321
+msgid "Optional, Add this tab to adminbar account menu for user."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:328
+msgid ""
+"Optional. Admin bar nav item id. Required if you want to remove item from "
+"adminbar account menu."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:332
+msgid "Content"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-edit-helper.php:336
+#, php-format
+msgid ""
+"Any type of content( shortcodes too ) will work. Please see <a href=\"%s"
+"\">documentation</a> for more details."
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:58
+msgid "Active?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:59
+msgid "Is New Tab?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:60
+msgid "Is Default Component?"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:99
+#: admin/bpptc-profile-tabs-list-helper.php:124
+#: admin/bpptc-profile-tabs-list-helper.php:135
+msgid "Yes"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:101
+#: admin/bpptc-profile-tabs-list-helper.php:126
+#: admin/bpptc-profile-tabs-list-helper.php:133
+msgid "No"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:111
+msgid "N/A"
+msgstr ""
+
+#: admin/bpptc-profile-tabs-list-helper.php:113
+msgid "Random"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:460
+msgid "BuddyPress Profile Tabs"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:462
+#: core/class-bpptc-profile-tabs-actions.php:464
+msgid "Profile Tabs"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:463
+msgid "Profile Tab"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:465
+#: core/class-bpptc-profile-tabs-actions.php:466
+msgid "New Profile Tab"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:467
+msgid "Edit Profile Tab"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:468
+msgid "Search profile Tabs"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:469
+msgid "No profile tab found in trash"
+msgstr ""
+
+#: core/class-bpptc-profile-tabs-actions.php:470
+msgid "No profile found"
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Base.php:422
+#, php-format
+msgid ""
+"The \"%1$s\" field parameter has been deprecated in favor of the \"%2$s\" "
+"parameter."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Base.php:426
+#, php-format
+msgid ""
+"Using the \"%1$s\" field parameter as a callback has been deprecated in "
+"favor of the \"%2$s\" parameter."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Base.php:456
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s! %3$s"
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Base.php:458
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s with no alternative available."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_JS.php:200
+msgctxt "Valid formatDate string for jquery-ui datepicker"
+msgid "mm/dd/yy"
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_JS.php:220
+msgctxt ""
+"Valid formatting string, as per http://trentrichardson.com/examples/"
+"timepicker/"
+msgid "hh:mm TT"
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Options_Hookup.php:139
+msgid "Nothing to update."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Options_Hookup.php:143
+msgid "Settings updated."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_Types.php:226
+msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
+msgstr ""
+
+#: vendors/cmb2/includes/CMB2_hookup.php:466
+#, php-format
+msgid "Toggle panel: %s"
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:257
+msgid "This box does not have read permissions."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:277
+msgid "This box does not have write permissions."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:300
+msgid ""
+"No box found by that id. A box needs to be registered with the \"show_in_rest"
+"\" parameter configured."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:378
+msgid "A human-readable description of the object."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:385
+msgid "The id for the object."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller.php:392
+msgid "The title for the object."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:51
+msgid "Includes the registered fields for the box in the response."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:72
+msgid ""
+"Includes the fully rendered attributes, 'form_open', 'form_close', as well "
+"as the enqueued 'js_dependencies' script handles, and 'css_dependencies' "
+"stylesheet handles."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:122
+msgid "No boxes found."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:27
+msgid ""
+"Includes the box object which the fields are registered to in the response."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:30
+msgid ""
+"When the '_rendered' argument is passed, the renderable field attributes "
+"will be returned fully rendered. By default, the names of the callback "
+"handers for the renderable attributes will be returned."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:33
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:36
+msgid ""
+"To view or modify the field's value, the 'object_id' and 'object_type' "
+"arguments are required."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:236
+msgid ""
+"CMB2 Field value cannot be updated without the value parameter specified."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:297
+msgid ""
+"CMB2 Field value cannot be modified without the object_id and object_type "
+"parameters specified."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:312
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:341
+msgid "No field found by that id."
+msgstr ""
+
+#: vendors/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:415
+#, php-format
+msgid "Value Error for %s"
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:25
+#, php-format
+msgid "Method '%s' must be overridden."
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:35
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:47
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:59
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:71
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:83
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:95
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:107
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:119
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:131
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:143
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:155
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:168
+#, php-format
+msgid "Method '%s' not implemented. Must be overridden in subclass."
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:273
+msgid "Current page of the collection."
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:281
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:290
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: vendors/cmb2/includes/shim/WP_REST_Controller.php:308
+msgid ""
+"Scope under which the request is made; determines fields present in response."
+msgstr ""

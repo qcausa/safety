@@ -4,11 +4,11 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 {
 
     if (!check_ajax_referer('wp_all_import_secure', 'security', false)) {
-        exit(json_encode(array('html' => __('Security check', 'wp_all_import_plugin'))));
+        exit(json_encode(array('html' => __('Security check', 'wp-all-import-pro'))));
     }
 
     if (!current_user_can(PMXI_Plugin::$capabilities)) {
-        exit(json_encode(array('html' => __('Security check', 'wp_all_import_plugin'))));
+        exit(json_encode(array('html' => __('Security check', 'wp-all-import-pro'))));
     }
 
     $import_id = $_POST['id'];
@@ -461,7 +461,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                         if (!hasActiveLicense) {
                             if (!$(this).data('iunderstand') && schedulingEnable) {
                                 $('#no-subscription').slideDown();
-                                $(this).find('.save-text').html('<?php echo _e('I Understand');?>');
+                                $(this).find('.save-text').html('<?php echo _e('I Understand', 'wp-all-import-pro');?>');
                                 $(this).find('.save-text').css('left', '100px');
                                 $(this).data('iunderstand', 1);
 
@@ -563,7 +563,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                             $('#find-subscription-link').show();
                             $('#find-subscription-link').animate({left: '395px'}, 300, 'swing');
                         }, 225);
-                        $('.subscribe-button-text').html('<?php _e('Activate'); ?>');
+                        $('.subscribe-button-text').html('<?php _e('Activate', 'wp-all-import-pro'); ?>');
                         saveSubscription = true;
                         return false;
                     });
@@ -604,14 +604,14 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                                         $('#subscribe-button .easing-spinner').hide();
                                         $('#subscribe-button svg.error').show();
-                                        $('.subscribe-button-text').html('<?php _e('Subscribe'); ?>');
+                                        $('.subscribe-button-text').html('<?php _e('Subscribe', 'wp-all-import-pro'); ?>');
 
                                         $('#subscribe-button svg.error').fadeOut(3000, function () {
                                             $('#subscribe-button svg.error').hide({queue: false});
 
                                         });
 
-                                        $('#add-subscription').html('<?php _e('Invalid license, try again?');?>');
+                                        $('#add-subscription').html('<?php _e('Invalid license, try again?', 'wp-all-import-pro');?>');
                                         $('.text-container p').fadeIn();
 
                                         $('#find-subscription-link').animate({width: 'toggle'}, 300, 'swing');
@@ -687,7 +687,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                 <label>
                     <input type="radio" name="scheduling_enable"
                            value="1" <?php if ($post['scheduling_enable'] == 1) { ?> checked="checked" <?php } ?>/>
-                    <h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+                    <h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', 'wp-all-import-pro'); ?>
                         <span class="connection-icon" style="margin-left: 8px; height: 16px;">
 															<?php include_once(__DIR__.'/../views/admin/import/options/scheduling/_connection_icon.php'); ?>
 														</span>
@@ -702,7 +702,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                     <label style="font-size: 13px;">
 	                    <?php printf(
 	                    /* translators: 1: Import ID */
-		                    esc_html__('Run import ID %d on a schedule.',PMXI_Plugin::LANGUAGE_DOMAIN), (int)$import_id); ?>
+		                    esc_html__('Run import ID %d on a schedule.', 'wp-all-import-pro'), (int)$import_id); ?>
                     </label>
                 </div>
                 <div id="automatic-scheduling"
@@ -713,7 +713,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                                 <input
                                         type="radio" <?php if (isset($post['scheduling_run_on']) && $post['scheduling_run_on'] != 'monthly') { ?> checked="checked" <?php } ?>
                                         name="scheduling_run_on" value="weekly"
-                                        checked="checked"/> <?php _e('Every week on...', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+                                        checked="checked"/> <?php _e('Every week on...', 'wp-all-import-pro'); ?>
                             </label>
                         </div>
                         <input type="hidden" style="width: 500px;" name="scheduling_weekly_days"
@@ -728,25 +728,25 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                         <ul class="days-of-week" id="weekly"
                             style="<?php if ($post['scheduling_run_on'] == 'monthly') { ?> display: none; <?php } ?>">
                             <li data-day="0" <?php if (in_array('0', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Mon
+                                <?php _e('Mon', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="1" <?php if (in_array('1', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Tue
+                                <?php _e('Tue', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="2" <?php if (in_array('2', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Wed
+                                <?php _e('Wed', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="3" <?php if (in_array('3', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Thu
+                                <?php _e('Thu', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="4" <?php if (in_array('4', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Fri
+                                <?php _e('Fri', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="5" <?php if (in_array('5', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Sat
+                                <?php _e('Sat', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="6" <?php if (in_array('6', $weeklyArray)) { ?> class="selected" <?php } ?>>
-                                Sun
+                                <?php _e('Sun', 'wp-all-import-pro'); ?>
                             </li>
                         </ul>
                     </div>
@@ -757,7 +757,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                                 <input
                                         type="radio" <?php if (isset($post['scheduling_run_on']) && $post['scheduling_run_on'] == 'monthly') { ?> checked="checked" <?php } ?>
                                         name="scheduling_run_on"
-                                        value="monthly"/> <?php _e('Every month on the first...', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+                                        value="monthly"/> <?php _e('Every month on the first...', 'wp-all-import-pro'); ?>
                             </label>
                         </div>
                         <input type="hidden" name="scheduling_monthly_days"
@@ -772,25 +772,25 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                         <ul class="days-of-week" id="monthly"
                             style="<?php if ($post['scheduling_run_on'] != 'monthly') { ?> display: none; <?php } ?>">
                             <li data-day="0" <?php if (in_array('0', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Mon
+                                <?php _e('Mon', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="1" <?php if (in_array('1', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Tue
+                                <?php _e('Tue', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="2" <?php if (in_array('2', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Wed
+                                <?php _e('Wed', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="3" <?php if (in_array('3', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Thu
+                                <?php _e('Thu', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="4" <?php if (in_array('4', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Fri
+                                <?php _e('Fri', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="5" <?php if (in_array('5', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Sat
+                                <?php _e('Sat', 'wp-all-import-pro'); ?>
                             </li>
                             <li data-day="6" <?php if (in_array('6', $monthlyArray)) { ?> class="selected" <?php } ?>>
-                                Sun
+                                <?php _e('Sun', 'wp-all-import-pro'); ?>
                             </li>
                         </ul>
                     </div>
@@ -798,7 +798,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                     <div id="times-container" style="margin-left: 5px;">
                         <div style="margin-top: 10px; margin-bottom: 5px;">
-                            What times do you want this import to run?
+                            <?php _e('What times do you want this import to run?', 'wp-all-import-pro'); ?>
                         </div>
 
                         <div id="times" style="margin-bottom: 10px;">
@@ -860,25 +860,25 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                                         </div>
 
                                         <span class="subscribe-button-text">
-                                            <?php _e('Subscribe'); ?>
+                                            <?php _e('Subscribe', 'wp-all-import-pro'); ?>
                                         </span>
                                     </div>
                                 </a>
                             </div>
                             <div class="text-container">
-                                <p class="wpai-first-line"><?php _e('Get automatic scheduling for unlimited sites, just $19/mo.'); ?></p>
-                                <p class="wpai-second-line"><?php _e('Have a license?'); ?>
+                                <p class="wpai-first-line"><?php _e('Get automatic scheduling for unlimited sites, just $19/mo.', 'wp-all-import-pro'); ?></p>
+                                <p class="wpai-second-line"><?php _e('Have a license?', 'wp-all-import-pro'); ?>
                                     <a href="#"
-                                       id="add-subscription"><?php _e('Register this site.'); ?></a> <?php _e('Questions?'); ?>
+                                       id="add-subscription"><?php _e('Register this site.', 'wp-all-import-pro'); ?></a> <?php _e('Questions?', 'wp-all-import-pro'); ?>
                                     <a href="#" class="help_scheduling">Read more.</a>
                                 </p>
                                 <input type="password" id="add-subscription-field"
                                        style="
                                        position: absolute; z-index: 2; top: -4px; font-size:14px;"
-                                       placeholder="<?php _e('Enter your license', PMXI_Plugin::LANGUAGE_DOMAIN); ?>"/>
+                                       placeholder="<?php _e('Enter your license', 'wp-all-import-pro'); ?>"/>
                                 <div style="position: absolute;" id="find-subscription-link"><a
                                             href="http://www.wpallimport.com/portal/automatic-scheduling/"
-                                            target="_blank"><?php _e('Find your license.'); ?></a></div>
+                                            target="_blank"><?php _e('Find your license.', 'wp-all-import-pro'); ?></a></div>
                             </div>
                         </div>
                         <?php

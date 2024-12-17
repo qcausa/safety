@@ -1,0 +1,7 @@
+.cmb2-id--bpgtc-tab-visible-for .cmb2-list,
+.cmb2-id--bpgtc-tab-enabled-for .cmb2-list,
+.bpptc-subnav-enabled-for .cmb2-list,
+.bpptc-subnav-visibile-for .cmb2-list {
+    max-height: 150px;
+    overflow: auto;
+}

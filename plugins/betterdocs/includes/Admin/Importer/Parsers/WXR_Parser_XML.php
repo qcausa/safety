@@ -158,9 +158,12 @@ class WXR_Parser_XML {
 		xml_parser_set_option( $xml, XML_OPTION_CASE_FOLDING, 0 );
 		xml_set_object( $xml, $this );
 
-		xml_set_character_data_handler( $xml, function ( $parser, $cdata ) {
-			$this->cdata( $cdata );
-		} );
+		xml_set_character_data_handler(
+			$xml,
+			function ( $parser, $cdata ) {
+				$this->cdata( $cdata );
+			}
+		);
 
 		$tag_open_callback = function ( $parse, $tag, $attr ) {
 			$this->tag_open( $tag, $attr );
@@ -173,16 +176,20 @@ class WXR_Parser_XML {
 		xml_set_element_handler( $xml, $tag_open_callback, $tag_close_callback );
 
 		if ( ! xml_parse( $xml, Utils::file_get_contents( $file ), true ) ) {
-			$current_line = xml_get_current_line_number( $xml );
+			$current_line   = xml_get_current_line_number( $xml );
 			$current_column = xml_get_current_column_number( $xml );
-			$error_code = xml_get_error_code( $xml );
-			$error_string = xml_error_string( $error_code );
+			$error_code     = xml_get_error_code( $xml );
+			$error_string   = xml_error_string( $error_code );
 
-			return new WP_Error( 'XML_parse_error', 'There was an error when reading this WXR file', [
-				$current_line,
-				$current_column,
-				$error_string,
-			] );
+			return new WP_Error(
+				'XML_parse_error',
+				'There was an error when reading this WXR file',
+				[
+					$current_line,
+					$current_column,
+					$error_string,
+				]
+			);
 		}
 		xml_parser_free( $xml );
 
@@ -191,14 +198,14 @@ class WXR_Parser_XML {
 		}
 
 		return array(
-			'authors' => $this->authors,
-			'posts' => $this->posts,
-			'categories' => $this->category,
-			'tags' => $this->tag,
-			'terms' => $this->term,
-			'base_url' => $this->base_url,
+			'authors'       => $this->authors,
+			'posts'         => $this->posts,
+			'categories'    => $this->category,
+			'tags'          => $this->tag,
+			'terms'         => $this->term,
+			'base_url'      => $this->base_url,
 			'base_blog_url' => $this->base_blog_url,
-			'version' => $this->wxr_version,
+			'version'       => $this->wxr_version,
 		);
 	}
 
@@ -219,7 +226,7 @@ class WXR_Parser_XML {
 			case 'category':
 				if ( isset( $attr['domain'], $attr['nicename'] ) ) {
 					$this->sub_data['domain'] = $attr['domain'];
-					$this->sub_data['slug'] = $attr['nicename'];
+					$this->sub_data['slug']   = $attr['nicename'];
 				}
 				break;
 			case 'item':
@@ -278,14 +285,14 @@ class WXR_Parser_XML {
 				break;
 			case 'wp:commentmeta':
 				$this->sub_data['commentmeta'][] = [
-					'key' => $this->sub_data['key'],
+					'key'   => $this->sub_data['key'],
 					'value' => $this->sub_data['value'],
 				];
 				break;
 			case 'category':
 				if ( ! empty( $this->sub_data ) ) {
 					$this->sub_data['name'] = $this->cdata;
-					$this->data['terms'][] = $this->sub_data;
+					$this->data['terms'][]  = $this->sub_data;
 				}
 				$this->sub_data = [];
 				break;
@@ -297,7 +304,7 @@ class WXR_Parser_XML {
 				break;
 			case 'item':
 				$this->posts[] = $this->data;
-				$this->data = [];
+				$this->data    = [];
 				break;
 			case 'wp:category':
 			case 'wp:tag':
@@ -334,10 +341,10 @@ class WXR_Parser_XML {
 			default:
 				if ( $this->in_sub_tag ) {
 					$this->sub_data[ $this->in_sub_tag ] = $this->cdata;
-					$this->in_sub_tag = false;
-				} else if ( $this->in_tag ) {
+					$this->in_sub_tag                    = false;
+				} elseif ( $this->in_tag ) {
 					$this->data[ $this->in_tag ] = $this->cdata;
-					$this->in_tag = false;
+					$this->in_tag                = false;
 				}
 		}
 
@@ -347,18 +354,18 @@ class WXR_Parser_XML {
 	private function clear() {
 		$this->wxr_version = '';
 
-		$this->cdata = '';
-		$this->data = [];
+		$this->cdata    = '';
+		$this->data     = [];
 		$this->sub_data = [];
 
-		$this->in_post = false;
-		$this->in_tag = false;
+		$this->in_post    = false;
+		$this->in_tag     = false;
 		$this->in_sub_tag = false;
 
-		$this->authors = [];
-		$this->posts = [];
-		$this->term = [];
+		$this->authors  = [];
+		$this->posts    = [];
+		$this->term     = [];
 		$this->category = [];
-		$this->tag = [];
+		$this->tag      = [];
 	}
 }

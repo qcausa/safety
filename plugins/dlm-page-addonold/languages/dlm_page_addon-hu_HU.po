@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Download Monitor Page Addon v1.1.1 HU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-09-23 14:57+0100\n"
+"Last-Translator: FYGureout <webmester@konyvelozona.hu>\n"
+"Language-Team: FYGureout <wpfordito@wpforditas.farkasonline.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"Language: hu_HU\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ default
+#: download-monitor-page-addon.php:117
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
+"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr ""
+"Ismeretlen HTML hiba történt az API lekérdezésekor.</p>  <p><a href=\"?\" "
+"onclick=\"document.location.reload(); return false;\">Próbáljuk meg újra</a>"
+
+# @ default
+#: download-monitor-page-addon.php:122
+msgid "An unknown error occurred"
+msgstr "Ismeretlen hiba történt"
+
+# @ dlm_page_addon
+#: download-monitor-page-addon.php:314
+#, php-format
+msgid "Searching for \"%s\""
+msgstr "\"%s\" kifejezésre történő keresés"
+
+# @ download_monitor
+#: templates/content-download-pa-single.php:18
+msgid "Download"
+msgstr "Letöltés"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:42
+msgid "Previous versions"
+msgstr "Előző verzió"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:48
+#, php-format
+msgid "Version %s"
+msgstr "%s verzió"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:58
+msgid "Filename"
+msgstr "Fájlnév"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:63
+msgid "Filesize"
+msgstr "Fájlméret"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:68
+msgid "Version"
+msgstr "Verzió"
+
+# @ dlm_page_addon
+# @ download_monitor
+#: templates/content-download-pa-single.php:73 templates/orderby.php:6
+msgid "Date added"
+msgstr "Létrehozás dátuma"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:78
+msgid "Downloaded"
+msgstr "Letöltve"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:79
+#, php-format
+msgid "1 time"
+msgid_plural "%d times"
+msgstr[0] "1 alkalommal"
+msgstr[1] "%d alkalommal"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:83
+msgid "Category"
+msgstr "Kategória"
+
+# @ dlm_page_addon
+#: templates/content-download-pa-single.php:88 templates/download-tags.php:2
+msgid "Tags"
+msgstr "Címke"
+
+# @ download_monitor
+#: templates/content-download-pa-thumbnail.php:9
+#: templates/content-download-pa.php:9
+#, php-format
+msgid "1"
+msgid_plural "%d"
+msgstr[0] "1"
+msgstr[1] "%d"
+
+# @ dlm_page_addon
+#: templates/featured-downloads.php:3
+msgid "Featured"
+msgstr "Kiemelt"
+
+# @ dlm_page_addon
+#: templates/no-downloads-found.php:1
+msgid "No downloads found."
+msgstr "Nem találtunk letölthető állományt."
+
+# @ dlm_page_addon
+#: templates/orderby.php:2
+msgid "Order by:"
+msgstr "Rendezés:"
+
+# @ download_monitor
+#: templates/orderby.php:5
+msgid "Title"
+msgstr "Cím"
+
+# @ download_monitor
+#: templates/orderby.php:7
+msgid "Download count"
+msgstr "Letöltésszám"
+
+# @ dlm_page_addon
+#: templates/search-downloads.php:3
+msgid "Search Downloads"
+msgstr "Letöltések keresése"
+
+# @ dlm_page_addon
+#: templates/search-downloads.php:4
+msgid "Search downloads..."
+msgstr "Letöltések keresése..."
+
+# @ dlm_page_addon
+#: templates/search-downloads.php:5
+msgid "Search"
+msgstr "Keresés"
+
+# @ dlm_page_addon
+#: templates/subcategories.php:16
+msgid "Subcategories:"
+msgstr "Alkategória:"
+
+# @ github_plugin_updater
+#: updater.php:418
+msgid ""
+"The plugin has been updated, but could not be reactivated. Please reactivate "
+"it manually."
+msgstr "A bővítmény frissítésre került, de nem lett újra bekapcsolva. "
+
+# @ github_plugin_updater
+#: updater.php:419
+msgid "Plugin reactivated successfully."
+msgstr "A bővítmény ismételt bekapcsolása sikeres."

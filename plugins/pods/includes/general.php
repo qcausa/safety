@@ -3371,6 +3371,8 @@ function pods_template_part( $template, $data = null, $return = false ) {
  * @since 2.1.0
  */
 function pods_register_type( $type, $name, $object = null ) {
+	//BugFu::log( "pods_register_type" );
+	
 	if ( empty( $object ) ) {
 		$object = [];
 	}
@@ -3378,6 +3380,9 @@ function pods_register_type( $type, $name, $object = null ) {
 	if ( ! empty( $name ) ) {
 		$object['name'] = $name;
 	}
+
+
+	
 
 	if ( ! empty( $type ) ) {
 		$object['type'] = $type;
@@ -3431,17 +3436,22 @@ function pods_register_type( $type, $name, $object = null ) {
 
 	$registered = pods_register_object( $object, 'pod' );
 
+
 	if ( true === $registered ) {
+		//BugFu::log( $object['name'] );
 		try {
 			$object_collection = Store::get_instance();
+			//BugFu::log( $object['name'] );
 
 			$registered_object = $object_collection->get_object( 'pod/' . $object['name'] );
+			//BugFu::log( $registered_object );
 
 			if ( $registered_object ) {
 				PodsMeta::$queue[ $object['type'] ][ $object['name'] ] = $registered_object;
 			}
 		} catch ( Exception $exception ) {
 			return new WP_Error( 'pods-register-type-error', $exception->getMessage() );
+			//BugFu::log( $exception->getMessage() );
 		}
 	}
 
@@ -3526,6 +3536,7 @@ function pods_register_related_object( $name, $label, $options = null ) {
  * @return true|WP_Error True if successful, or else an WP_Error with the problem.
  */
 function pods_register_object( array $object, $type ) {
+	//BugFu::log( "pods_register_object" );
 	$object['object_type'] = $type;
 
 	if ( ! isset( $object['object_storage_type'] ) || 'post_type' === $object['object_storage_type'] ) {

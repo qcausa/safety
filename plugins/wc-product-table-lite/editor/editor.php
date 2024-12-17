@@ -11,14 +11,10 @@ if (!defined('ABSPATH')) {
 </h1>
 
 <div class="wcpt-title-resources">
-  <a href="https://pro.wcproducttable.com/#addons" target="_blank">Addons</a>
-  |
   <a href="https://wcproducttable.com/tutorials/" target="_blank">How to use</a>
-  |
   <a href="https://wcproducttable.com/documentation/" target="_blank">Documentation</a>
-  |
   <a href="https://www.notion.so/FAQs-f624e13d0d274a08ba176a98d6d79e1f" target="_blank">FAQs</a>
-  |
+  <a href="https://pro.wcproducttable.com/#addons" target="_blank">Addons</a>
   <a href="https://wcproducttable.com/support/" target="_blank">Support</a>
 </div>
 
@@ -45,7 +41,7 @@ if (wcpt_preset__required()) {
 <span class="wcpt-sc-display-label">
   <?php _e("Shortcode", "wc-product-table"); ?>:
 </span>
-<input class="wcpt-sc-display" value="<?php esc_html_e('[product_table id="' . $post_id . '"]'); ?>"
+<input class="wcpt-sc-display" value="<?php echo esc_html('[product_table id="' . $post_id . '"]'); ?>"
   onClick="this.setSelectionRange(0, this.value.length)" readonly />
 <span class="wcpt-shortcode-info wcpt-toggle wcpt-toggle-off">
   <span class="wcpt-toggle-trigger wcpt-noselect">
@@ -926,12 +922,15 @@ if (wcpt_preset__required()) {
           </td>
         </tr>
 
-        <!-- <tr>
-             <td>
-               dynamic_filters_lazy_load <br><?php wcpt_pro_badge(); ?>
-             </td>
-             <td>[product_table id="123" dynamic_hide_filters="true" dynamic_filters_lazy_load="true"] <br> This facility can be useful only in specific cases where there are several options in the navigation filters that need to be run through dynamic filters. Their processing is defered to a second AJAX call. But only use it if the product results were loading slow. Using it <em>unnecesarily</em> will only create extra AJAX calls and slow down results.</td>
-          </tr> -->
+        <tr>
+          <td>
+            dynamic_filters_lazy_load <br>
+            <?php wcpt_pro_badge(); ?>
+          </td>
+          <td>[product_table id="123" dynamic_hide_filters="true" dynamic_filters_lazy_load="true"] <br> With this
+            facility you can lazy load the other dynamic filter hide and recount facilities for better page load speed.
+          </td>
+        </tr>
 
         <tr>
           <td>
@@ -1197,17 +1196,6 @@ if (!wcpt_preset__maybe_display_message()) {
         href="https://wcproducttable.com/tutorials/" target="_blank">Tutorials</a>
     </span>
   </div>
-  <?php if (!defined('WCPT_PRO')): ?>
-    <div class="wcpt-support wcpt-footer-note">
-      <?php wcpt_icon('zap'); ?>
-      <span>
-        <?php _e("WCPT PRO is ready for your shop! Build better tables today!", "wc-product-table"); ?>
-        <a href="https://wcproducttable.com/get-pro/" target="_blank">
-          <?php _e("View enhancements", "wc-product-table"); ?>
-        </a>
-      </span>
-    </div>
-  <?php endif; ?>
 
   <div class="wcpt-support wcpt-footer-note">
     <?php wcpt_icon('heart'); ?>
@@ -1220,12 +1208,12 @@ if (!wcpt_preset__maybe_display_message()) {
 
 <!-- icon templates -->
 <?php
-$icons = array('trash', 'sliders', 'copy', 'x', 'check');
+$icons = array('trash', 'trash-2', 'sliders', 'copy', 'x', 'check');
 foreach ($icons as $icon_name) {
   ?>
   <script type="text/template" id="wcpt-icon-<?php echo $icon_name; ?>">
-                                  <?php echo wcpt_icon($icon_name); ?>
-                                </script>
+                                                <?php echo wcpt_icon($icon_name); ?>
+                                              </script>
   <?php
 }
 ?>

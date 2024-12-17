@@ -686,9 +686,10 @@ abstract class WP_Background_Process extends WP_Async_Request {
 		$interval = $this->get_cron_interval();
 
 		if ( 1 === $interval ) {
-			$display = __( 'Every Minute' );
+			$display = __( 'Every Minute', 'betterdocs' );
 		} else {
-			$display = sprintf( __( 'Every %d Minutes' ), $interval );
+			// Translators: %d is the interval in minutes.
+			$display = sprintf( __( 'Every %d Minutes', 'betterdocs' ), $interval );
 		}
 
 		// Adds an "Every NNN Minute(s)" schedule to the existing cron schedules.
@@ -787,5 +788,4 @@ abstract class WP_Background_Process extends WP_Async_Request {
 
 		return $data;
 	}
-
 }

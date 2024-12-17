@@ -1,7 +1,7 @@
 <h2>Edit Cell Row</h2>
 
 <!-- condition -->
-<?php require( 'condition/outer.php' ); ?>
+<?php require('condition/outer.php'); ?>
 
 <!-- style -->
 <div class="wcpt-editor-row-option" wcpt-model-key="style">
@@ -17,13 +17,22 @@
     <div class="wcpt-editor-row-option">
       <label>Gap above</label>
       <input type="text" wcpt-model-key="margin-top" class="wcpt-margin-input-force-full-width">
-    </div>    
+    </div>
 
     <!-- margin-bottom -->
     <div class="wcpt-editor-row-option">
       <label>Gap below</label>
       <input type="text" wcpt-model-key="margin-bottom" class="wcpt-margin-input-force-full-width">
-    </div>        
+    </div>
+
+    <!-- white-space -->
+    <div class="wcpt-editor-row-option">
+      <label>Allow elements to wrap</label>
+      <select wcpt-model-key="white-space">
+        <option value="normal">Yes, allow elements to wrap to new line</option>
+        <option value="nowrap">No, force elements to stay in same line</option>
+      </select>
+    </div>
 
     <!-- padding -->
     <div class="wcpt-editor-row-option">
@@ -67,7 +76,7 @@
     <!-- border-radius -->
     <div class="wcpt-editor-row-option">
       <label>Border radius</label>
-      <input type="text" wcpt-model-key="border-radius" >
+      <input type="text" wcpt-model-key="border-radius">
     </div>
 
   </div>

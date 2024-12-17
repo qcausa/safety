@@ -15,8 +15,8 @@ function wcpt_qv2_admin_enqueue()
     array(
       'apiUrl' => rest_url('wcpt_qv2/v1/'),
       'nonce' => wp_create_nonce('wp_rest'),
-      'taxonomies' => wcpt_qv2_get_product_taxonomies(),
-      'authors' => wcpt_qv2_get_product_authors(),
+      'taxonomies' => wcpt_react_app_get_product_taxonomies(),
+      'authors' => wcpt_react_app_get_product_authors(),
       'isPro' => defined('WCPT_PRO'),
     )
   );
@@ -435,6 +435,7 @@ function wcpt_qv2_inset_shortcode_attributes($sc_attrs = [])
     "lazy_load" => "lazyLoad",
     "dynamic_hide_filters" => "dynamicHideFilters",
     "dynamic_recount" => "dynamicRecount",
+    "dynamic_filters_lazy_load" => "dynamicFiltersLazyLoad",
   );
   foreach ($arr as $sc_key => $qv2_key) {
     if (!empty($query_v2[$qv2_key])) {
@@ -640,7 +641,7 @@ add_action('rest_api_init', function () {
     '/terms/(?P<taxonomy_slug>[a-zA-Z0-9_-]+)',
     array (
       'methods' => WP_REST_Server::READABLE,
-      'callback' => 'wcpt_qv2_get_taxonomy_terms_with_children',
+      'callback' => 'wcpt_qv2_ajax_return_taxonomy_terms_with_children',
       'args' => array (
         'taxonomy_slug' => array (
           'validate_callback' => function ($param, $request, $key) {
@@ -661,120 +662,7 @@ add_action('rest_api_init', function () {
   );
 });
 // -- callback to return terms
-function wcpt_qv2_get_taxonomy_terms_with_children($request)
+function wcpt_qv2_ajax_return_taxonomy_terms_with_children($request)
 {
-  $taxonomy_slug = $request['taxonomy_slug'];
-  $terms = get_terms(
-    array(
-      'taxonomy' => $taxonomy_slug,
-      'hide_empty' => false,
-      'parent' => 0 // Get only top-level terms initially
-    )
-  );
-
-  if (is_wp_error($terms)) {
-    return $terms;
-  }
-
-  $formatted_terms = array();
-  foreach ($terms as $term) {
-    $formatted_terms[] = wcpt_qv2_format_term_with_children($term, $taxonomy_slug);
-  }
-
-  return new WP_REST_Response($formatted_terms, 200);
-}
-
-// -- helper to format terms
-function wcpt_qv2_format_term_with_children($term, $taxonomy_slug)
-{
-  $children_terms = get_terms(
-    array(
-      'taxonomy' => $taxonomy_slug,
-      'hide_empty' => false,
-      'parent' => $term->term_id
-    )
-  );
-
-  $formatted_term = array(
-    'label' => $term->name,
-    'id' => $term->term_id,
-    'slug' => $term->slug,
-  );
-
-  if (!empty($children_terms)) {
-    $children = array();
-    foreach ($children_terms as $child) {
-      $children[] = wcpt_qv2_format_term_with_children($child, $taxonomy_slug); // Recursively find children
-    }
-
-    // Add the 'children' key only if there are child terms
-    $formatted_term['children'] = $children;
-  }
-
-  return $formatted_term;
-}
-
-
-// get product taxonomies
-function wcpt_qv2_get_product_taxonomies()
-{
-  $taxonomies = get_taxonomies(array('object_type' => array('product')), 'objects');
-  $taxonomy_data = array();
-
-  foreach ($taxonomies as $taxonomy) {
-    $type = 'custom';
-    $label = $taxonomy->label;
-    if ($taxonomy->name === 'product_cat') {
-      $type = 'category';
-    } elseif ($taxonomy->name === 'product_tag') {
-      $type = 'tag';
-    } elseif (strpos($taxonomy->name, 'pa_') !== false) {
-      $type = 'attribute';
-      $label = preg_replace('/^Product\s+/', '', $taxonomy->label);
-    } elseif ($taxonomy->name === 'product_type') {
-      continue;
-    }
-
-    $taxonomy_data[] = array(
-      'label' => $label,
-      'slug' => $taxonomy->name,
-      'terms' => null,
-      'type' => $type,
-    );
-  }
-
-  if (!in_array("product_cat", array_column($taxonomy_data, 'slug'))) {
-    $taxonomy_data[] = array(
-      'label' => 'Product category',
-      'slug' => 'product_cat',
-      'terms' => null,
-      'type' => 'category',
-    );
-  }
-
-  return $taxonomy_data;
-}
-
-// get product authors
-function wcpt_qv2_get_product_authors()
-{
-  $args = array(
-    'fields' => array('ID', 'display_name'), // Adjust this to get the fields you need
-    'orderby' => 'display_name',
-    'order' => 'ASC',
-  );
-
-  $users = get_users($args);
-
-  $user_list = [];
-  foreach ($users as $user) {
-    if (user_can($user->ID, 'edit_products')) { // Check if the user can edit products
-      $user_list[] = [
-        'value' => $user->ID,
-        'label' => $user->display_name
-      ];
-    }
-  }
-
-  return $user_list;
+  return new WP_REST_Response(wcpt_react_app_get_taxonomy_terms_with_children($request['taxonomy_slug']), 200);
 }

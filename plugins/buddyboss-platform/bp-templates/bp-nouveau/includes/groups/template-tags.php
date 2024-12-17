@@ -268,7 +268,9 @@ function bp_nouveau_group_creation_screen() {
  */
 
 function bp_nouveau_group_manage_screen() {
+
 	$action          = bp_action_variable( 0 );
+
 	$is_group_create = bp_is_group_create();
 	$output          = '';
 
@@ -277,11 +279,13 @@ function bp_nouveau_group_manage_screen() {
 	}
 
 	$screen_id = urlencode( sanitize_file_name( urldecode( $action ) ) );
+
 	if ( ! bp_is_group_admin_screen( $screen_id ) && ! bp_is_group_creation_step( $screen_id ) ) {
 		return;
 	}
 
 	if ( ! $is_group_create ) {
+
 		/**
 		 * Fires inside the group admin form and before the content.
 		 *
@@ -291,9 +295,11 @@ function bp_nouveau_group_manage_screen() {
 
 		$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
 
+
 	// It's a group step, get the creation screens.
 	} else {
 		$core_screen = bp_nouveau_group_get_core_create_screens( $screen_id );
+
 	}
 
 	if ( ! $core_screen ) {
@@ -321,6 +327,7 @@ function bp_nouveau_group_manage_screen() {
 
 	// Else we load the core screen.
 	} else {
+	
 		if ( ! empty( $core_screen['hook'] ) ) {
 			/**
 			 * Fires before the display of group delete admin.
@@ -332,14 +339,17 @@ function bp_nouveau_group_manage_screen() {
 		}
 
 		$template = 'groups/single/admin/' . $screen_id;
+	
 
 		if ( ! empty( $core_screen['template'] ) ) {
 			$template = $core_screen['template'];
 		}
 
 		bp_get_template_part( $template );
+	
 
 		if ( ! empty( $core_screen['hook'] ) ) {
+			
 
 			// Group's "Manage > Details" page.
 			if ( 'group_details_admin' === $core_screen['hook'] ) {
@@ -1409,6 +1419,7 @@ function bp_nouveau_group_meta() {
  * @since BuddyPress 3.0.0
  */
 function bp_nouveau_group_template_part() {
+
 	/**
 	 * Fires before the display of the group home body.
 	 *

@@ -191,6 +191,7 @@ class Store {
 	 * @param string $class_name  Object class name.
 	 */
 	public function register_object_type( $object_type, $class_name ) {
+		//\BugFu::log( "register_object_type");
 		$this->object_types[ $object_type ] = $class_name;
 
 		$this->refresh_salt();
@@ -319,6 +320,7 @@ class Store {
 	 * @param Whatsit|array $object Pods object.
 	 */
 	public function register_object( $object ) {
+		//\BugFu::log( "register_object");
 		$id                  = null;
 		$identifier          = null;
 		$object_storage_type = 'collection';
@@ -750,6 +752,7 @@ class Store {
 	 * @return Whatsit|null Object or null if not found.
 	 */
 	public function get_object( $identifier ) {
+		//\BugFu::log( $identifier);
 		// Is this already an object?
 		if ( $identifier instanceof Whatsit ) {
 			return $this->setup_object( $identifier );

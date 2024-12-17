@@ -1,0 +1,187 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPForms Post Submissions 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wpforms.com/support/\n"
+"Last-Translator: WPForms <support@wpforms.com>\n"
+"Language-Team: WPForms <support@wpforms.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-05T12:20:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpforms-post-submissions\n"
+
+#. Plugin Name of the plugin
+msgid "WPForms Post Submissions"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://wpforms.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "Post Submissions with WPForms."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPForms"
+msgstr ""
+
+#: src/Plugin.php:145
+msgid "Some of the Field Options for the selected field will be disabled to prevent changes as long as the field is being used as the Post Featured Image."
+msgstr ""
+
+#: src/Plugin.php:147
+msgid "This field is being used to upload the Post Featured Image. Some Field Options cannot be changed. You can change the Post Featured Image upload field by going to <strong>Settings » Post Submissions.</strong>"
+msgstr ""
+
+#: src/Plugin.php:517
+#: src/Plugin.php:537
+msgid "Post Submissions"
+msgstr ""
+
+#: src/Plugin.php:546
+msgid "Enable Post Submissions"
+msgstr ""
+
+#: src/Plugin.php:557
+#: src/Template.php:76
+msgid "Post Title"
+msgstr ""
+
+#: src/Plugin.php:560
+#: src/Plugin.php:573
+#: src/Plugin.php:586
+#: src/Plugin.php:599
+#: src/Plugin.php:692
+msgid "--- Select Field ---"
+msgstr ""
+
+#: src/Plugin.php:570
+#: src/Template.php:83
+msgid "Post Content"
+msgstr ""
+
+#: src/Plugin.php:583
+#: src/Template.php:101
+msgid "Post Excerpt"
+msgstr ""
+
+#: src/Plugin.php:596
+msgid "Post Featured Image"
+msgstr ""
+
+#: src/Plugin.php:619
+msgid "Post Type"
+msgstr ""
+
+#: src/Plugin.php:632
+msgid "Post Status"
+msgstr ""
+
+#: src/Plugin.php:634
+msgid "Select the default status used for new posts."
+msgstr ""
+
+#: src/Plugin.php:650
+msgid "Current User"
+msgstr ""
+
+#: src/Plugin.php:664
+msgid "Post Author"
+msgstr ""
+
+#: src/Plugin.php:666
+msgid "Select the post author used for new posts. Selecting Current User will use the current WordPress user that submits the form."
+msgstr ""
+
+#: src/Plugin.php:668
+msgid "--- Select User ---"
+msgstr ""
+
+#: src/Plugin.php:674
+msgid "Custom Post Meta"
+msgstr ""
+
+#: src/Plugin.php:687
+msgid "Enter meta key..."
+msgstr ""
+
+#. translators: %d - field ID.
+#: src/Plugin.php:699
+msgid "Field #%d"
+msgstr ""
+
+#: src/Template.php:21
+msgid "Blog Post Submission Form"
+msgstr ""
+
+#: src/Template.php:23
+msgid "User-submitted content made easy. Allow your users to submit guest blog posts in WordPress. You can add and remove fields as needed."
+msgstr ""
+
+#: src/Template.php:29
+msgid "Don&#39;t Forget"
+msgstr ""
+
+#: src/Template.php:30
+msgid "Additional post submission options are available in the settings panel."
+msgstr ""
+
+#: src/Template.php:39
+msgid "Author Details"
+msgstr ""
+
+#: src/Template.php:40
+msgid "Please enter your contact details, so we can give you proper credit for this blog post."
+msgstr ""
+
+#: src/Template.php:46
+msgid "Name"
+msgstr ""
+
+#: src/Template.php:54
+msgid "Email"
+msgstr ""
+
+#: src/Template.php:61
+msgid "Short Author Bio"
+msgstr ""
+
+#: src/Template.php:62
+msgid "Please keep it below 300 characters."
+msgstr ""
+
+#: src/Template.php:69
+msgid "Create a Blog Post"
+msgstr ""
+
+#: src/Template.php:70
+msgid "Please submit your guest blog posts by using the fields below."
+msgstr ""
+
+#: src/Template.php:91
+msgid "Featured Image"
+msgstr ""
+
+#: src/Template.php:92
+msgid "Please make sure the dimensions are (600 x 300px)."
+msgstr ""
+
+#: src/Template.php:108
+msgid "Category"
+msgstr ""
+
+#: src/Template.php:111
+msgid "First Choice"
+msgstr ""
+
+#: src/Template.php:125
+msgid "Submit"
+msgstr ""
+
+#: src/Template.php:126
+msgid "Sending..."
+msgstr ""

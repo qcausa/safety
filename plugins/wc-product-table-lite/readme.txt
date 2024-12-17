@@ -2,7 +2,7 @@
 Contributors: wcproducttable
 Tags: woocommerce product table, wc product table, product table for woocommerce, woocommerce product list, woocommerce tables
 Requires at least: 4.9
-Tested up to: 6.7.0
+Tested up to: 6.7.1
 Requires PHP: 5.5
 Stable tag: trunk
 License: GPLv2
@@ -128,8 +128,9 @@ WooCommerce Product Table PRO supports the official [[WooCommerce Product Addons
 * Now WooCommerce content in your table will show up as translated as well.
 * For non-WooCommerce text in your table use [wcpt_translate default=“text” en_US=“English text” fr_FR=“French text”] in the input fields to add translations.
 
-## Replace shop product grid with a product table instead
-You can use the 'Archive override' facility included in the PRO version of the plugin that lets you conveniently replace the default WooCommerce grid layout on your product archive pages (such as shop, category, search attribute and tag) with product tables. The facility is located in wp admin > product tables > settings > archive override.
+## Replace shop grid with table
+* If you are not using a theme builder plugin like Elementor, Divi, etc then use the [Archive Override](https://wcproducttable.com/documentation/enable-archive-override) facility available in the PRO version of this plugin. This facility lets you conveniently replace default WooCommerce grids with product tables on all your product archive pages — shop, category, tag, attribute, search. The facility is located in WP Dashboard > Product Tables > Settings > Archive Override.
+* If you are using popupar theme builder plugin like Elementor, Divi, Visual Composer, Oxygen, etc then use the [Archive override guide for theme builders](https://wcproducttable.com/documentation/elementor-woocommerce-product-table).
 
 
 == Installation ==
@@ -148,7 +149,7 @@ The manual installation method involves downloading the plugin and uploading it 
 
 = How do I replace my default WooCommerce shop grid with a product table? =
 
-Use the 'Archive Override' facility available in WooCommerce Product Table PRO (premium version). This facility lets you conveniently replace default WooCommerce grids with product tables on all your product archive pages — shop, category, tag, attribute, search. The facility is located in WP Dashboard > Product Tables > Settings > Archive Override.
+Use the [Archive Override](https://wcproducttable.com/documentation/enable-archive-override) facility available in WooCommerce Product Table PRO (premium version). This facility lets you conveniently replace default WooCommerce grids with product tables on all your product archive pages — shop, category, tag, attribute, search. The facility is located in WP Dashboard > Product Tables > Settings > Archive Override.
 
 = How do I create a new table? =
 
@@ -177,20 +178,89 @@ You can purchase a license for [WooCommerce Product Table PRO](http://pro.wcprod
 
 == Changelog ==
 
-= 3.8.7 (18th November '24) =
+= 3.9.4 (11th December '24) =
+
+Fixed
+* Product results not returning correctly over AJAX navigation in some cases
+
+= 3.9.3 (9th December '24) =
+
+Fixed
+* Pagination buttons not appearing correctly in some cases
+
+= 3.9.2 (8th December '24) =
+
+Improved
+* Integration with Min Max Step Quantity Limits Manager for WooCommerce 
+* The category filter can show checkboxes for sibling category branches on category page in archive override mode
+
+Fixed
+* Select variation element will set correct product image size 
+* BeTheme compatibility with variation add to cart
+* Mantine UI conflict with some other modules causing page body or text color issues
+* Products grouped by category can exceed 10 products
+* Low grade security issue regarding previous version's backup data being droppped
+* Total element’s ability to handle decimal increments without jitter
+* Total element is going to follow the pricing format from woocommerce settings
+* Device parameter will not be added to the url when url update feature is turned off
+* Element search in the editor will match regardless of caps lock
+
+
+= 3.9.0 (18th November '24) =
+
+Fixed
+* Important security vulnerability fixes
+* Search functionality fixed for theme builder plugins - woocommerce compatibility update 
+* Backward compatibility with Request a Quote by Addify
+
+= 3.8.6 (26th July '24) =
 
 Fixed
 * Security vulnerability fix
 
-= 3.8.6 (26th July '24) = 
+= 3.8.5 (24th May '24) = 
+
+Added
+* Option to set border color of Quantity element on mouse hover
 
 Fixed
-* Security vulnerability fix 
+* Table columns automatically generated in editor for smaller devices
+* Changed code to avoid wordfence false positive warning 
 
-= 3.5.2 (25th March '24) =
+= 3.8.0 (9th May '24) = 
+
+Improved
+* License tracker app for easy and complete clarity
+* Close tooltip by clicking outside
 
 Fixed
-* Category input will not be disabled if incorrect name is entered
+* Issue with phone not inheriting tablet columns 
+* Main settings page breaks if category has single quote ‘ in name
+
+= 3.7.0 (17th April '24) = 
+
+Added
+* Variation override facility to automatically insert variation tables on variable product pages
+
+= v3.6.1 (12th April '24) =
+
+Fixed
+* Rare but potential vulnerability fix
+* Reduced encrypted param length, and switched to POST for reliable AJAX navigation
+* Issue with archive product search
+
+Improved
+* Category element in table will show categories based on hierarchy
+
+= 3.6.0 (8th April '24) =
+
+Improved
+* Moved away from sessions db for complete cookie GDPR compliance and improved performance
+
+Added
+* Adaptive / dynamic filters now have lazy load option to improve performance on large sites
+* Table element's custom field conditions now support `LIKE %keyword%` conditions
+* New styling option in column row settings → style → `force elements to stay in same line`
 
 = 3.5.1 (25th March '24) =
 
@@ -223,7 +293,7 @@ Added
 = 3.2.0 (20th December '23) =
 
 Improved
-* The colums tab has better, intuitive UX to create and sort your device columns
+* The columns tab has better, intuitive UX to create and sort your device columns
 
 Fixed
 * Issue with HTML stripping in Short description and Content elements
@@ -240,7 +310,7 @@ Fixed
 
 = 3.1.0 (15th November '23) =
 
-Added: 
+Added
 * New facility to group products by category using shortcode option laptop_group_by_category="true" [PRO]
 * The product image lightbox color theme can be switched between black (default) and white
 * Option to change product row background color on mouse hover
@@ -727,4 +797,6 @@ Fixed
 * Issue with saving table settings.
 
 = 1.0.0 (4 Sept '18) =
-Hello, world! :)
+
+Added
+* Hello, world! :)

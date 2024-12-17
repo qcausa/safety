@@ -365,12 +365,13 @@ jQuery(function ($) {
   // other toggle
   $("body").on("click", ".wcpt-toggle-label", function () {
     var $this = $(this),
-      $container = $this.closest(".wcpt-toggle-options"),
-      toggle = $container.attr("wcpt-model-key");
+      $section = $this.closest(".wcpt-toggle-options"),
+      toggle_anchor =
+        $section.attr("wcpt-model-key") || $section.attr("data-wcpt-anchor");
 
-    $container.toggleClass("wcpt-open");
-    if (toggle && $container.parent().hasClass("wcpt-settings")) {
-      window.location.hash = toggle;
+    $section.toggleClass("wcpt-open");
+    if (toggle_anchor && $section.parent().hasClass("wcpt-settings")) {
+      window.location.hash = toggle_anchor;
     }
   });
 
@@ -417,13 +418,15 @@ jQuery(function ($) {
       });
   });
 
-  // resume editor tab
+  // resume editor tab / settings section
   if (window.location.hash) {
     $(
       '[data-wcpt-tab="' + window.location.hash.substr(1) + '"].wcpt-tab-label'
     ).trigger("click");
     $(
       '.wcpt-settings > [wcpt-model-key="' +
+        window.location.hash.substr(1) +
+        '"] > .wcpt-toggle-label, .wcpt-settings > [data-wcpt-anchor="' +
         window.location.hash.substr(1) +
         '"] > .wcpt-toggle-label'
     ).trigger("click");

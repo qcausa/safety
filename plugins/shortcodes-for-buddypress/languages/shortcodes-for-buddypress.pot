@@ -1,0 +1,1894 @@
+# Copyright (C) 2024
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 07:04:13+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Varun Dubey\n"
+"Language-Team: Wbcom Designs\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: admin/class-shortcode-for-buddypress-user-review.php:88
+#. translators: Number of years
+msgid "%s years"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:90
+msgid "a year"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:97
+#. translators: Number of weeks
+msgid "%s weeks"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:99
+msgid "a week"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:106
+#. translators: Number of days
+msgid "%s days"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:108
+msgid "a day"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:115
+#. translators: Number of hours
+msgid "%s hours"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:117
+msgid "an hour"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:124
+#. translators: Number of minutes
+msgid "%s minutes"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:126
+msgid "a minute"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:133
+#. translators: Number of seconds
+msgid "%s seconds"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:135
+msgid "a second"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:271
+msgid "Shortcodes For BP"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:274
+msgid "Are you enjoying Shortcodes For BP?"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:277
+#. translators: 1. Name
+msgid ""
+"We hope you're enjoying %1$s! Could you please do us a BIG favor and give "
+"it a 5-star rating on WordPress to help us spread the word and boost our "
+"motivation?"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:281
+msgid "Leave a Review"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:282
+msgid "No thanks / I already have"
+msgstr ""
+
+#: admin/class-shortcode-for-buddypress-user-review.php:311
+msgid "Shortcode For BuddyPress"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:125
+msgid "WB Plugins"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:126
+#: admin/class-shortcodes-for-buddypress-admin.php:200
+msgid "General"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:128
+msgid "BP Shortcodes"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:151
+msgid "BuddyPress Shortcodes"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:155
+#: admin/wbcom/templates/wbcom-license-page.php:16
+#. translators: %s:
+msgid "Version %s"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:197
+msgid "Welcome"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:203
+#: admin/settings/buddypress-shortcode-general-settings.php:27
+msgid "Activities"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:206
+#: admin/settings/buddypress-shortcode-general-settings.php:45
+msgid "Members"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:209
+#: admin/settings/buddypress-shortcode-general-settings.php:63
+#: buddypress-groups-element.php:15
+msgid "Groups"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:212
+#: admin/settings/buddypress-shortcode-general-settings.php:81
+msgid "User Notification"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:29
+#: admin/settings/buddypress-shortcode-groups-listing.php:27
+#: admin/settings/buddypress-shortcode-member-listing.php:27
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:27
+msgid "title"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:31
+#: admin/settings/buddypress-shortcode-groups-listing.php:29
+#: admin/settings/buddypress-shortcode-member-listing.php:29
+msgid ""
+"The title for the activities. Title will display on the top of the "
+"activities."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:35
+#: admin/settings/buddypress-shortcode-activity-listing.php:114
+#: admin/settings/buddypress-shortcode-activity-listing.php:178
+#: admin/settings/buddypress-shortcode-groups-listing.php:33
+#: admin/settings/buddypress-shortcode-groups-listing.php:48
+#: admin/settings/buddypress-shortcode-groups-listing.php:112
+#: admin/settings/buddypress-shortcode-groups-listing.php:128
+#: admin/settings/buddypress-shortcode-groups-listing.php:208
+#: admin/settings/buddypress-shortcode-groups-listing.php:224
+#: admin/settings/buddypress-shortcode-groups-listing.php:240
+#: admin/settings/buddypress-shortcode-groups-listing.php:256
+#: admin/settings/buddypress-shortcode-member-listing.php:33
+#: admin/settings/buddypress-shortcode-member-listing.php:48
+#: admin/settings/buddypress-shortcode-member-listing.php:112
+#: admin/settings/buddypress-shortcode-member-listing.php:128
+#: admin/settings/buddypress-shortcode-member-listing.php:192
+#: admin/settings/buddypress-shortcode-member-listing.php:208
+#: admin/settings/buddypress-shortcode-member-listing.php:224
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:33
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:48
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:112
+msgid "Type - string"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:44
+#: admin/settings/buddypress-shortcode-groups-listing.php:58
+#: admin/settings/buddypress-shortcode-member-listing.php:58
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:58
+msgid "page"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:46
+msgid ""
+"Which page of results to fetch. Using page=1 without per_page will result "
+"in no pagination."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:50
+#: admin/settings/buddypress-shortcode-activity-listing.php:66
+#: admin/settings/buddypress-shortcode-groups-listing.php:64
+#: admin/settings/buddypress-shortcode-groups-listing.php:80
+#: admin/settings/buddypress-shortcode-groups-listing.php:272
+#: admin/settings/buddypress-shortcode-member-listing.php:256
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:64
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:80
+msgid "Type - int"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:51
+#: admin/settings/buddypress-shortcode-groups-listing.php:65
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:65
+msgid "Default - 1"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:60
+#: admin/settings/buddypress-shortcode-groups-listing.php:74
+#: admin/settings/buddypress-shortcode-member-listing.php:74
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:74
+msgid "per_page"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:62
+#: admin/settings/buddypress-shortcode-member-listing.php:76
+msgid "Number of results per page."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:67
+#: admin/settings/buddypress-shortcode-groups-listing.php:81
+#: admin/settings/buddypress-shortcode-member-listing.php:81
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:81
+msgid "Default - 20"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:76
+#: admin/settings/buddypress-shortcode-groups-listing.php:90
+#: admin/settings/buddypress-shortcode-member-listing.php:90
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:90
+msgid "max"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:78
+#: admin/settings/buddypress-shortcode-member-listing.php:92
+msgid "Maximum number of results to return."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:82
+#: admin/settings/buddypress-shortcode-groups-listing.php:96
+#: admin/settings/buddypress-shortcode-member-listing.php:64
+#: admin/settings/buddypress-shortcode-member-listing.php:80
+#: admin/settings/buddypress-shortcode-member-listing.php:96
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:96
+msgid "Type - int|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:83
+#: admin/settings/buddypress-shortcode-groups-listing.php:97
+#: admin/settings/buddypress-shortcode-member-listing.php:97
+msgid "Default - false ( unlimited )"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:92
+msgid "count_total"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:94
+msgid ""
+"An additional DB query is run to count the total activity items for the "
+"query."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:98
+#: admin/settings/buddypress-shortcode-activity-listing.php:306
+msgid "Type - string|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:99
+#: admin/settings/buddypress-shortcode-activity-listing.php:323
+#: admin/settings/buddypress-shortcode-groups-listing.php:161
+#: admin/settings/buddypress-shortcode-member-listing.php:161
+msgid "Default - true"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:108
+msgid "sort"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:110
+#: admin/settings/buddypress-shortcode-groups-listing.php:204
+msgid "Sort activies by \"ASC\" or \"DESC\""
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:115
+#: admin/settings/buddypress-shortcode-groups-listing.php:209
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:49
+msgid "Default - DESC"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:124
+#: admin/settings/buddypress-shortcode-groups-listing.php:138
+#: admin/settings/buddypress-shortcode-member-listing.php:138
+msgid "exclude"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:126
+msgid "Array of activity IDs to exclude."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:130
+#: admin/settings/buddypress-shortcode-activity-listing.php:146
+#: admin/settings/buddypress-shortcode-activity-listing.php:162
+msgid "Type - array|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:131
+#: admin/settings/buddypress-shortcode-activity-listing.php:147
+#: admin/settings/buddypress-shortcode-activity-listing.php:163
+#: admin/settings/buddypress-shortcode-activity-listing.php:179
+#: admin/settings/buddypress-shortcode-activity-listing.php:195
+#: admin/settings/buddypress-shortcode-activity-listing.php:211
+#: admin/settings/buddypress-shortcode-activity-listing.php:227
+#: admin/settings/buddypress-shortcode-activity-listing.php:243
+#: admin/settings/buddypress-shortcode-activity-listing.php:259
+#: admin/settings/buddypress-shortcode-activity-listing.php:275
+#: admin/settings/buddypress-shortcode-activity-listing.php:291
+#: admin/settings/buddypress-shortcode-groups-listing.php:145
+#: admin/settings/buddypress-shortcode-groups-listing.php:177
+#: admin/settings/buddypress-shortcode-groups-listing.php:193
+#: admin/settings/buddypress-shortcode-groups-listing.php:241
+#: admin/settings/buddypress-shortcode-groups-listing.php:257
+#: admin/settings/buddypress-shortcode-groups-listing.php:318
+#: admin/settings/buddypress-shortcode-groups-listing.php:334
+#: admin/settings/buddypress-shortcode-member-listing.php:65
+#: admin/settings/buddypress-shortcode-member-listing.php:145
+#: admin/settings/buddypress-shortcode-member-listing.php:177
+#: admin/settings/buddypress-shortcode-member-listing.php:209
+#: admin/settings/buddypress-shortcode-member-listing.php:225
+#: admin/settings/buddypress-shortcode-member-listing.php:241
+msgid "Default - false"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:140
+msgid "in"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:142
+msgid ""
+"Array of IDs to limit query by (IN). \"in\" is intended to be used in "
+"conjunction with other filter parameters."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:156
+#: admin/settings/buddypress-shortcode-groups-listing.php:170
+#: admin/settings/buddypress-shortcode-member-listing.php:170
+msgid "include"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:158
+msgid ""
+"Array of exact activity IDs to query. Providing an \"include\" array will "
+"override all other filters passed in the argument array. When viewing the "
+"permalink page for a single activity item, this value defaults to the ID of "
+"that item."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:172
+msgid "scope"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:174
+msgid ""
+"Use a BuddyPress pre-built filter. - \"just-me\" - retrieves items "
+"belonging only to a user; this is equivalent to passing a \"user_id\" "
+"argument. - \"friends\" - retrieves items belonging to the friends of a "
+"user. - \"groups\" - retrieves items belonging to groups to which a user "
+"belongs to. - \"favorites\" - retrieves a users favorited activity items. - "
+"\"mentions\" - retrieves items where a user has received an @-mention."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:188
+msgid "object"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:190
+msgid ""
+"Filters by the `component` column in the database, which is generally the "
+"component ID in the case of BuddyPress components, or the plugin slug in "
+"the case of plugins."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:194
+#: admin/settings/buddypress-shortcode-member-listing.php:240
+msgid "Type - string|array|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:204
+#: admin/settings/buddypress-shortcode-groups-listing.php:266
+#: admin/settings/buddypress-shortcode-member-listing.php:250
+msgid "user_id"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:206
+msgid "The ID(s) of user(s) whose activity should be fetched."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:210
+#: admin/settings/buddypress-shortcode-activity-listing.php:258
+#: admin/settings/buddypress-shortcode-activity-listing.php:274
+msgid "Type - int|array|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:220
+msgid "action"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:222
+msgid "Filters by the `type` column in the database."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:226
+msgid "Type - string|array|bool\t"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:236
+msgid "primary_id"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:238
+msgid "Filters by the `item_id` column in the database."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:242
+msgid "Type - int|array|bool\t"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:252
+msgid "secondary_id"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:254
+msgid "Filters by the `secondary_item_id` column in the database."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:268
+msgid "offset"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:270
+msgid "Return only activity items with an ID greater than or equal to this one."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:284
+#: admin/settings/buddypress-shortcode-groups-listing.php:327
+msgid "show_hidden"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:286
+msgid "Whether to show items marked hide_sitewide."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:290
+#: admin/settings/buddypress-shortcode-activity-listing.php:322
+#: admin/settings/buddypress-shortcode-groups-listing.php:160
+#: admin/settings/buddypress-shortcode-groups-listing.php:333
+#: admin/settings/buddypress-shortcode-member-listing.php:160
+msgid "Type - bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:300
+msgid "spam"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:302
+msgid ""
+"Spam status. \"ham_only\", \"spam_only\", or false to show all activity "
+"regardless of spam status."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:307
+#: admin/settings/buddypress-shortcode-member-listing.php:333
+msgid "Default - ham_only"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:316
+#: admin/settings/buddypress-shortcode-member-listing.php:154
+msgid "populate_extras"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-activity-listing.php:318
+msgid "Whether to pre-fetch the activity metadata for the queried items."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:30
+msgid ""
+"BuddyPress Activity Shortcode allows you to embed BuddyPress activities in "
+"posts/pages using shortcodes. "
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:36
+msgid "[activity-listing]"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:48
+msgid ""
+"BuddyPress Members Shortcode allows you to embed BuddyPress members in "
+"posts/pages using shortcodes."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:54
+msgid "[members-listing]"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:66
+msgid ""
+"BuddyPress Groups Shortcode allows you to embed BuddyPress groups in "
+"posts/pages using shortcodes."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:72
+msgid "[groups-listing]"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:84
+msgid ""
+"BuddyPress Notification Shortcode allows you to embed BuddyPress "
+"notificaition list in posts/pages using shortcodes."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-general-settings.php:90
+msgid "[notifications-listing]"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:42
+#: admin/settings/buddypress-shortcode-member-listing.php:42
+msgid "type"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:44
+msgid ""
+"Shorthand for certain orderby/order combinations. \"newest\", \"active\", "
+"\"popular\", \"alphabetical\", \"random\". When present, will override "
+"orderby and order params."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:49
+msgid "Default - alphabetical"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:60
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:60
+msgid "Page offset of results to return."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:76
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:76
+msgid "Number of items to return per page of results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:92
+msgid ""
+"Does NOT affect query. May change the reported number of total groups "
+"found, but not the actual number of found groups. Default: false."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:106
+#: admin/settings/buddypress-shortcode-member-listing.php:106
+msgid "page_arg"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:108
+msgid "Query argument used for pagination."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:113
+msgid "Default - grpage"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:122
+#: admin/settings/buddypress-shortcode-member-listing.php:122
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:106
+msgid "container_class"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:124
+msgid "The container class of group listing loop."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:129
+msgid "Default - group"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:140
+msgid ""
+"Array or comma-separated list of group IDs. Results will exclude the listed "
+"groups."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:144
+#: admin/settings/buddypress-shortcode-groups-listing.php:176
+#: admin/settings/buddypress-shortcode-groups-listing.php:349
+msgid "Type - array|string"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:154
+msgid "update_meta_cache"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:156
+msgid "Whether to fetch groupmeta for queried groups."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:172
+msgid ""
+"Array or comma-separated list of group IDs. Results will be limited to "
+"groups within the list."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:186
+msgid "meta_query"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:188
+msgid "An array of meta_query conditions."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:192
+msgid "Type - array"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:202
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:42
+msgid "order"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:218
+msgid "orderby"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:220
+msgid ""
+"Property to sort by. \"date_created\", \"last_activity\", "
+"\"total_member_count\", \"name\", \"random\"."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:225
+msgid "Default - last_activity"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:234
+#: admin/settings/buddypress-shortcode-member-listing.php:218
+msgid "search_terms"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:236
+msgid ""
+"If provided, only groups whose names or descriptions match the search terms "
+"will be returned."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:250
+msgid "slug"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:252
+msgid "If provided, only the group with the matching slug will be returned."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:268
+msgid ""
+"If provided, results will be limited to groups of which the specified user "
+"is a member."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:281
+msgid "group_type"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:283
+#: admin/settings/buddypress-shortcode-groups-listing.php:298
+msgid "Array or comma-separated list of group types to limit results to."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:287
+#: admin/settings/buddypress-shortcode-groups-listing.php:302
+#: admin/settings/buddypress-shortcode-groups-listing.php:317
+#: admin/settings/buddypress-shortcode-member-listing.php:272
+#: admin/settings/buddypress-shortcode-member-listing.php:287
+#: admin/settings/buddypress-shortcode-member-listing.php:302
+#: admin/settings/buddypress-shortcode-member-listing.php:317
+#: admin/settings/buddypress-shortcode-member-listing.php:332
+msgid "Type - string|array"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:296
+msgid "group_type__in"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:311
+msgid "group_type__not_in"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:313
+msgid ""
+"Array or comma-separated list of group types that will be excluded from "
+"results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:329
+msgid "Whether to include hidden groups in results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:343
+msgid "parent_id"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:345
+msgid ""
+"Array or comma-separated list of group IDs. Results will include only child "
+"groups of the listed groups."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-groups-listing.php:350
+msgid "Default - null"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:44
+msgid ""
+"Sort order. Accepts \"active\", \"random\", \"newest\", \"popular\", "
+"\"online\", \"alphabetical\"."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:49
+msgid "Default - active"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:60
+msgid "Page of results to display."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:108
+msgid "The string used as a query parameter in pagination links."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:113
+msgid "Default - upage"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:124
+msgid "The class of conainer of member loop."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:129
+msgid "Default - members"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:140
+msgid ""
+"Exclude users from results by ID. Accepts an array, a single integer, a "
+"comma-separated list of IDs, or false (to disable this limiting)."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:144
+msgid "Type - array|string|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:156
+msgid "Whether to fetch optional data, such as friend counts."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:172
+msgid ""
+"Limit results by a list of user IDs. Accepts an array, a single integer, a "
+"comma-separated list of IDs, or false (to disable this limiting). Accepts "
+"\"active\", \"alphabetical\",\"newest\", or \"random\"."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:176
+msgid "Type - array|int|string|bool"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:186
+msgid "meta_value"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:188
+msgid "When used with meta_key, limits results by the a matching usermeta value."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:193
+msgid "Default - mixed"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:202
+msgid "meta_key"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:204
+msgid "Limit results by the presence of a usermeta key."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:220
+msgid "Limit results by a search term"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:234
+msgid "user_ids"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:236
+msgid ""
+"An array or comma-separated list of IDs, or false (to disable this "
+"limiting)."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:252
+msgid "If provided, results are limited to the friends of the specified user."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:257
+msgid "Default - 0"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:266
+msgid "member_type"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:268
+#: admin/settings/buddypress-shortcode-member-listing.php:283
+msgid "Array or comma-separated list of member types to limit results to."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:281
+msgid "member_type__in"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:296
+msgid "member_type__not_in"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:298
+msgid "Array or comma-separated list of member types to exclude from results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:311
+msgid "include_member_role"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:313
+msgid "Array or comma-separated list of member role to include in results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:326
+msgid "exclude_member_role"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-member-listing.php:328
+msgid "Array or comma-separated list of member role to exclude in results."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:29
+msgid ""
+"The title for the notification listing. Title will display on the top of "
+"the listing."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:44
+msgid "Sort notifications by \"ASC\" or \"DESC\""
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:92
+msgid ""
+"Does NOT affect query. May change the reported number of total "
+"notifications found, but not the actual number of found notifications. "
+"Default: false."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:97
+msgid "Default - false(unlimited)"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:108
+msgid "The container class of notification listing loop."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-user-notification-listing.php:113
+msgid "Default - notification"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:19
+msgid ""
+"Shortcodes & Elementor Widgets For BuddyPress plugin allows you to embed "
+"BuddyPress Activities, BuddyPress Members and Groups in posts/pages using "
+"shortcodes."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:26
+msgid "Help &amp; Support Resources"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:27
+msgid ""
+"Here are all the resources you may need to get help from us. Documentation "
+"is usually the best place to start. Should you require help anytime, our "
+"customer care team is available to assist you at the support center."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:32
+msgid "Documentation"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:33
+msgid ""
+"We have prepared an extensive guide on BuddyPress Ads to learn all aspects "
+"of the plugin. You will find most of your answers here."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:34
+msgid "Read Documentation"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:40
+msgid "Support Center"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:41
+msgid ""
+"We strive to offer the best customer care via our support center. Once your "
+"theme is activated, you can ask us for help anytime."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:42
+msgid "Get Support"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:47
+msgid "Got Feedback?"
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:48
+msgid ""
+"We want to hear about your experience with the plugin. We would also love "
+"to hear any suggestions you may for future updates."
+msgstr ""
+
+#: admin/settings/buddypress-shortcode-welcome-page.php:49
+msgid "Send Feedback"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:12
+msgid "Shortcodes & Elementor Widgets For BuddyPress"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:23
+msgid "Plugin License"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:29
+#: admin/wbcom/templates/wbcom-license-page.php:41
+msgid "Product"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:30
+#: admin/wbcom/templates/wbcom-license-page.php:42
+msgid "Version"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:31
+#: admin/wbcom/templates/wbcom-license-page.php:43
+msgid "Key"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:32
+#: admin/wbcom/templates/wbcom-license-page.php:44
+msgid "Status"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-license-page.php:33
+#: admin/wbcom/templates/wbcom-license-page.php:45
+msgid "Action"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:12
+#: admin/wbcom/wbcom-admin-settings.php:322
+msgid "Themes & Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:20
+#: admin/wbcom/templates/wbcom-plugins-page.php:28
+msgid "Paid Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:21
+msgid "Free Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:22
+msgid "LearnDash Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:23
+#: admin/wbcom/templates/wbcom-plugins-page.php:362
+#: admin/wbcom/wbcom-admin-settings.php:241
+#: admin/wbcom/wbcom-admin-settings.php:242
+msgid "Our Themes"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:29
+#: admin/wbcom/templates/wbcom-plugins-page.php:300
+#: admin/wbcom/templates/wbcom-plugins-page.php:425
+msgid "View More Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:37
+msgid "BuddyPress Moderation Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:38
+msgid ""
+"BuddyPress Moderation solution with advanced features to give you complete "
+"control over your community and keep it secure with automatic moderation "
+"and limitations, and more."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:40
+#: admin/wbcom/templates/wbcom-plugins-page.php:53
+#: admin/wbcom/templates/wbcom-plugins-page.php:66
+#: admin/wbcom/templates/wbcom-plugins-page.php:79
+#: admin/wbcom/templates/wbcom-plugins-page.php:92
+#: admin/wbcom/templates/wbcom-plugins-page.php:105
+#: admin/wbcom/templates/wbcom-plugins-page.php:118
+#: admin/wbcom/templates/wbcom-plugins-page.php:131
+#: admin/wbcom/templates/wbcom-plugins-page.php:144
+#: admin/wbcom/templates/wbcom-plugins-page.php:157
+#: admin/wbcom/templates/wbcom-plugins-page.php:170
+#: admin/wbcom/templates/wbcom-plugins-page.php:183
+#: admin/wbcom/templates/wbcom-plugins-page.php:196
+#: admin/wbcom/templates/wbcom-plugins-page.php:209
+#: admin/wbcom/templates/wbcom-plugins-page.php:222
+#: admin/wbcom/templates/wbcom-plugins-page.php:235
+#: admin/wbcom/templates/wbcom-plugins-page.php:248
+#: admin/wbcom/templates/wbcom-plugins-page.php:261
+#: admin/wbcom/templates/wbcom-plugins-page.php:274
+#: admin/wbcom/templates/wbcom-plugins-page.php:287
+#: admin/wbcom/templates/wbcom-plugins-page.php:311
+#: admin/wbcom/templates/wbcom-plugins-page.php:324
+#: admin/wbcom/templates/wbcom-plugins-page.php:337
+#: admin/wbcom/templates/wbcom-plugins-page.php:350
+#: admin/wbcom/templates/wbcom-plugins-page.php:374
+#: admin/wbcom/templates/wbcom-plugins-page.php:387
+#: admin/wbcom/templates/wbcom-plugins-page.php:400
+#: admin/wbcom/templates/wbcom-plugins-page.php:413
+#: admin/wbcom/templates/wbcom-plugins-page.php:433
+#: admin/wbcom/templates/wbcom-plugins-page.php:443
+#: admin/wbcom/templates/wbcom-plugins-page.php:453
+#: admin/wbcom/templates/wbcom-plugins-page.php:463
+#: admin/wbcom/templates/wbcom-plugins-page.php:473
+#: admin/wbcom/templates/wbcom-plugins-page.php:483
+#: admin/wbcom/templates/wbcom-plugins-page.php:493
+#: admin/wbcom/templates/wbcom-plugins-page.php:503
+#: admin/wbcom/templates/wbcom-plugins-page.php:513
+#: admin/wbcom/templates/wbcom-plugins-page.php:523
+#: admin/wbcom/templates/wbcom-plugins-page.php:533
+#: admin/wbcom/templates/wbcom-plugins-page.php:543
+msgid "View Details"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:41
+#: admin/wbcom/templates/wbcom-plugins-page.php:54
+#: admin/wbcom/templates/wbcom-plugins-page.php:67
+#: admin/wbcom/templates/wbcom-plugins-page.php:80
+#: admin/wbcom/templates/wbcom-plugins-page.php:93
+#: admin/wbcom/templates/wbcom-plugins-page.php:106
+#: admin/wbcom/templates/wbcom-plugins-page.php:119
+#: admin/wbcom/templates/wbcom-plugins-page.php:132
+#: admin/wbcom/templates/wbcom-plugins-page.php:145
+#: admin/wbcom/templates/wbcom-plugins-page.php:158
+#: admin/wbcom/templates/wbcom-plugins-page.php:171
+#: admin/wbcom/templates/wbcom-plugins-page.php:184
+#: admin/wbcom/templates/wbcom-plugins-page.php:197
+#: admin/wbcom/templates/wbcom-plugins-page.php:210
+#: admin/wbcom/templates/wbcom-plugins-page.php:223
+#: admin/wbcom/templates/wbcom-plugins-page.php:236
+#: admin/wbcom/templates/wbcom-plugins-page.php:249
+#: admin/wbcom/templates/wbcom-plugins-page.php:262
+#: admin/wbcom/templates/wbcom-plugins-page.php:275
+#: admin/wbcom/templates/wbcom-plugins-page.php:288
+#: admin/wbcom/templates/wbcom-plugins-page.php:312
+#: admin/wbcom/templates/wbcom-plugins-page.php:325
+#: admin/wbcom/templates/wbcom-plugins-page.php:338
+#: admin/wbcom/templates/wbcom-plugins-page.php:351
+#: admin/wbcom/templates/wbcom-plugins-page.php:388
+#: admin/wbcom/templates/wbcom-plugins-page.php:444
+#: admin/wbcom/templates/wbcom-plugins-page.php:454
+#: admin/wbcom/templates/wbcom-plugins-page.php:464
+#: admin/wbcom/templates/wbcom-plugins-page.php:474
+#: admin/wbcom/templates/wbcom-plugins-page.php:484
+#: admin/wbcom/templates/wbcom-plugins-page.php:494
+#: admin/wbcom/templates/wbcom-plugins-page.php:504
+#: admin/wbcom/templates/wbcom-plugins-page.php:514
+#: admin/wbcom/templates/wbcom-plugins-page.php:524
+#: admin/wbcom/templates/wbcom-plugins-page.php:534
+#: admin/wbcom/templates/wbcom-plugins-page.php:544
+msgid "Get It Now"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:50
+msgid "BuddyPress Resume Manager"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:51
+msgid ""
+"BuddyPress Resume Manager adds display resume functionality on a user’s "
+"BuddyPress/BuddyBoss Platform Profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:63
+msgid "BuddyPress Polls"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:64
+msgid ""
+"BuddyPress Polls allows your community members to create polls as an "
+"activity, letting your members respond."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:76
+msgid "BuddyPress Private Community Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:77
+msgid ""
+"BuddyPress Private Community Pro offers Privacy control for profiles. It "
+"provides a feature to lockdown BuddyPress Component and asks users to log "
+"in to go further to check the profile or any other protected details."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:89
+msgid "BuddyPress Profile Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:90
+msgid ""
+"BuddyPress Profile Pro gives you the power to extend BuddyPress Profiles "
+"with repeater fields and groups. You can easily add multiple field groups "
+"and display them at a member’s profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:102
+msgid "BuddyPress Check-ins Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:103
+msgid ""
+"BuddyPress Check-ins Pro Plugin allows your members to post check-ins like "
+"other social media platforms, on your website activity stream. Members have "
+"a mashup of their check-ins on their profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:115
+#: admin/wbcom/templates/wbcom-plugins-page.php:430
+msgid "BuddyPress Member Blog"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:116
+msgid ""
+"BuddyPress Member Blog Pro plugin provides each of your site members their "
+"own writing environment with a fantastic user experience."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:128
+msgid "BuddyPress BuddyVendor"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:129
+msgid ""
+"BuddyVendor or BuddyPress Multivendor Marketplace Quickly turn your "
+"BuddyPress community into a social marketplace."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:141
+msgid "BuddyPress Statistics"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:142
+msgid ""
+"BuddyPress Stats plugin creates an activity log of everything that happens "
+"on your BuddyPress powered community site and keeps all counts on the user "
+"profile that displays a range of statistics of your community members."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:154
+msgid "Who viewed my profile"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:155
+msgid ""
+"The Who Viewed My Profile Plugin helps you to know about your profile "
+"visitors. It displays the count of the profile views on the member profile "
+"header."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:167
+msgid "BuddyPress Friend & Follow Suggestion"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:168
+msgid ""
+"BuddyPress Friends and Follow suggestions plugin assists you with improving "
+"your BuddyPress or BuddyBoss Platform-based community."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:180
+msgid "BuddyPress Giphy"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:181
+msgid ""
+"Make your activity stream even more tempting and interesting to attract "
+"members by adding GIFs."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:193
+msgid "Shortcodes for BuddyPress Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:194
+msgid ""
+"Add and Customize the BuddyPress components on any of the WordPress "
+"pages/posts using elementor widgets"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:206
+msgid "BuddyPress Sticky Post"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:207
+msgid ""
+"Make your posts sticky on BuddyPress by pinning site-wide and group "
+"activities on the top of the community wall."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:219
+msgid "BuddyPress Quotes"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:220
+msgid ""
+"Allow BuddyPress users to post content with attractive background colors "
+"and beautiful images."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:232
+msgid "BuddyPress Auto Friends"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:233
+msgid ""
+"The new BuddyPress Automatic Friends plugins makes your new users feel a "
+"little more at home upon signing up to your community."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:245
+msgid "BuddyPress Newsfeed"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:246
+msgid ""
+"Create A Customized Newsfeed Experience Just Like Facebook. By default, "
+"BuddyPress offers separate type of activities for your BuddyPress Activity "
+"Stream."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:258
+msgid "BuddyPress Status"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:259
+msgid ""
+"Allow members to add status on their profile and give their reactions to "
+"all the activity updates."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:271
+msgid "BuddyPress Hashtags"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:272
+msgid ""
+"BuddyPress Hashtags for BuddyPress and bbPress. It allows adding hashtag "
+"links to BuddyPress activity and bbPress topics. "
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:284
+msgid "BuddyPress Profanity"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:285
+msgid ""
+"Specify a list of bad words to control the content in your BuddyPress "
+"community."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:299
+msgid "Extension for LearnDash"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:308
+msgid "LMS Notes"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:309
+msgid ""
+"Learndash Notes will extend the LearnDash functionality to create Notes for "
+"courses, lessons and topics."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:321
+msgid "Learndash wpForo"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:322
+msgid ""
+"Learndash wpForo integration allows you to add a discussion channel for "
+"your learners. Allow you to link your course with multiple forums."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:334
+msgid "LearnDash Dashboard"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:335
+msgid ""
+"LearnDash Dashboard gives the admin, instructors, and students a dashboard "
+"of their own, where they can easily manage anything related to their "
+"courses, lessons, and contact others."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:347
+msgid "PeepSo LearnDash Integration"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:348
+msgid ""
+"Integrate LearnDash with PeepSo to display options for courses inside a "
+"member profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:363
+msgid "View More Themes"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:371
+msgid "Reign BuddyPress Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:372
+msgid ""
+"Create your social network website for the company, school, sports team, or "
+"any niche community using a highly customizable WordPress BuddyPress theme."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:375
+msgid "Get Sandbox"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:384
+msgid "BuddyX Pro Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:385
+msgid ""
+"To build an online community website for all niches with full flexibility, "
+"control, and freedom. No coding is required! Offers unique layouts with "
+"clean code and easy-to-customize options giving you a whole new way to "
+"visualize BuddyPress."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:397
+msgid "BuddyX Free Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:398
+#: admin/wbcom/templates/wbcom-plugins-page.php:451
+msgid ""
+"Allow users to create and manage their to-dos with the relevant category "
+"right from their profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:401
+#: admin/wbcom/templates/wbcom-plugins-page.php:434
+msgid "Get Pro"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:410
+msgid "KnowX Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:411
+msgid ""
+"A Free WordPress Knowledge base Theme. KnowX helps you set up a Knowledge "
+"Base in WordPress in less time than it takes to brew a coffee."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:414
+msgid "Get Demo"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:424
+msgid "Our Free Extension"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:431
+msgid ""
+"BuddyPress Member Blog is a free plugin that allows users to create/manage "
+"their blog/posts from the profile."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:440
+msgid "BuddyPress Ads"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:441
+msgid ""
+"Integrate your BuddyPress community to provide a smooth customer experience "
+"and increase site engagement."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:450
+msgid "BuddyPress User Todo List"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:460
+msgid "BuddyPress Job Manager"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:461
+msgid "Create specific tabs in employer’s and candidate’s profiles on BuddyPress."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:470
+msgid "BuddyPress Member Reviews"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:471
+msgid ""
+"Allow members to provide their ratings and reviews to other members’ "
+"profiles based on multiple criteria."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:480
+msgid "BuddyPress Birthday Widget"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:481
+msgid "Display the upcoming birthdays of your BuddyPress community members."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:490
+msgid "reCaptcha for BuddyPress"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:491
+msgid ""
+"Buddypress reCaptcha is the best solution that provides an all-in-one "
+"captcha for  Buddypress, WordPress, and woo-commerce."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:500
+msgid "BuddyPress WooCommerce Integration"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:501
+msgid ""
+"BuddyWoo Integration Plugin will help to integrate WooCommerce with "
+"Buddypress."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:510
+msgid "BuddyPress Member Export Import"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:511
+msgid ""
+"Easily import/export your BuddyPress members. Small but an important "
+"features."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:520
+msgid "BuddyPress Activity Bump"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:521
+msgid ""
+"ump the most recent activity on the top of newsfeed in your BuddyPress "
+"website."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:530
+msgid "Shortcodes for BuddyPress"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:531
+msgid ""
+"Use shortcodes to display activity streams, members, group listings, and "
+"user notifications on any post."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:540
+msgid "BuddyPress Create Group Type"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:541
+msgid ""
+"Create group types on BuddyPress based on the interest areas of your "
+"community members."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:12
+#: admin/wbcom/wbcom-admin-settings.php:328
+msgid "Help & Support"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:17
+msgid "How can we help you?"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:18
+msgid ""
+"Our team is here to help you out at anytime. If you have any idea about how "
+"we could improve. You can share access to your site on our helpdesk if it "
+"can help getting faster."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:27
+msgid "Tickets Support"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:28
+msgid ""
+"Open a ticket on our helpdesk, we don't guarantee a fast response but "
+"within a week. Except if you've purchased one of our product we'll reply "
+"within 24 hours."
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:31
+msgid "Open a ticket"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:44
+#: admin/wbcom/templates/wbcom-support-page.php:48
+msgid "Contact Us"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:45
+msgid ""
+"Create a new thread on our plugin page, participation is open to anyone "
+"from all around the world. We'll be there to help as well but can't "
+"guarantee any delay."
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:210
+msgid "Activate"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:211
+msgid "Deactivate"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:233
+#: admin/wbcom/wbcom-admin-settings.php:234
+msgid "Our Plugins"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:249
+#: admin/wbcom/wbcom-admin-settings.php:250
+msgid "Support"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:316
+msgid "Settings"
+msgstr ""
+
+#: buddypress-groups-element.php:43 buddypress-members-element.php:48
+#: buddypress-shortcodes-element.php:42
+msgid "Query"
+msgstr ""
+
+#: buddypress-groups-element.php:50 buddypress-members-element.php:55
+#: buddypress-shortcodes-element.php:49
+msgid "Title"
+msgstr ""
+
+#: buddypress-groups-element.php:52 buddypress-members-element.php:57
+#: buddypress-shortcodes-element.php:51
+msgid "Add activity title"
+msgstr ""
+
+#: buddypress-groups-element.php:59
+msgid "Display number of group"
+msgstr ""
+
+#: buddypress-groups-element.php:62 buddypress-members-element.php:67
+msgid "How many members display on page."
+msgstr ""
+
+#: buddypress-groups-element.php:72 buddypress-members-element.php:77
+#: buddypress-shortcodes-element.php:71
+msgid "Shortcodes for BuddyPress PRO"
+msgstr ""
+
+#: buddypress-groups-element.php:74 buddypress-members-element.php:79
+#: buddypress-shortcodes-element.php:73
+msgid "Power up up your listing with custom queries and templates."
+msgstr ""
+
+#: buddypress-groups-element.php:87
+msgid "Listing Groups"
+msgstr ""
+
+#: buddypress-groups-element.php:96 buddypress-members-element.php:113
+#: buddypress-shortcodes-element.php:95 buddypress-shortcodes-element.php:263
+#: buddypress-shortcodes-element.php:296
+msgid "Background"
+msgstr ""
+
+#: buddypress-groups-element.php:107 buddypress-shortcodes-element.php:256
+msgid "Normal"
+msgstr ""
+
+#: buddypress-groups-element.php:124 buddypress-shortcodes-element.php:289
+msgid "Hover"
+msgstr ""
+
+#: buddypress-groups-element.php:158 buddypress-groups-element.php:193
+#: buddypress-members-element.php:138 buddypress-shortcodes-element.php:120
+#: buddypress-shortcodes-element.php:353
+msgid "Border Radius"
+msgstr ""
+
+#: buddypress-groups-element.php:171 buddypress-groups-element.php:206
+#: buddypress-members-element.php:162 buddypress-shortcodes-element.php:132
+#: buddypress-shortcodes-element.php:374
+msgid "Padding"
+msgstr ""
+
+#: buddypress-members-element.php:15
+msgid "Members List"
+msgstr ""
+
+#: buddypress-members-element.php:64
+msgid "Per Page"
+msgstr ""
+
+#: buddypress-members-element.php:92
+msgid "Listing"
+msgstr ""
+
+#: buddypress-members-element.php:100
+msgid "View"
+msgstr ""
+
+#: buddypress-members-element.php:150
+msgid "Margin"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:15
+msgid "Acivity List"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:58
+msgid "display number of activities"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:61
+msgid "How many activity items to display."
+msgstr ""
+
+#: buddypress-shortcodes-element.php:86
+msgid "Activity Item Container"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:144
+msgid "Spacing items"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:163
+msgid "Load More Button"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:172 buddypress-shortcodes-element.php:230
+msgid "Base Style"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:185
+msgid "Display"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:189
+msgid "Inline"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:190
+msgid "Block"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:201
+msgid "Alignment"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:205
+msgid "Left"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:209
+msgid "Center"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:213
+msgid "Right"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:246
+msgid "Typography"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:275 buddypress-shortcodes-element.php:308
+msgid "Color"
+msgstr ""
+
+#: buddypress-shortcodes-element.php:320
+msgid "Border Color"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:233
+msgid "Please check if Activity Stream is active in BuddyPress Components page."
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:761
+#. translators: %1$s is the name of the group.
+msgid "Group logo of %1$s"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:879
+msgid "Please check if Notifications is active in BuddyPress Components page."
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:883
+msgid "Please Log in to view notifications"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:952
+#. translators: %s: member name
+msgid "Profile photo of %s"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1000
+msgid "Post in: Profile"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1014
+msgid "Post in: Group"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1015
+msgid "Start typing the group name..."
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1032
+#. translators: %s: display buddypress user firstname.
+msgid "What's new, %s?"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1033
+msgid "Post what's new"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1034
+msgid "Post in"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1035
+msgid "Post Update"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1036
+msgid "Cancel"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1075
+msgid "Go PRO"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:1141
+msgid "Sorry, there was no activity found."
+msgstr ""
+
+#: shortcodes-for-buddypress.php:44
+msgid "Wbcom Designs – Shortcodes & Elementor Widgets For BuddyPress"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:45
+msgid "Wbcom Designs - Shortcode For BuddyPress Pro"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:48
+#. translators: %s:
+msgid "%1$s and %2$s will not activate togather. Please deactivate %1$s"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:196 shortcodes-for-buddypress.php:377
+msgid "Shortcodes For BuddyPress"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:197 shortcodes-for-buddypress.php:378
+msgid "BuddyPress"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:198
+msgid "install BuddyPress"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:202 shortcodes-for-buddypress.php:383
+#. translators: 1: Shortcodes For BuddyPress, 2: BuddyPress
+msgid ""
+"%1$s is ineffective as it requires %2$s to be installed and active. Please "
+"%3$s."
+msgstr ""
+
+#: shortcodes-for-buddypress.php:379
+msgid "Install BuddyPress"
+msgstr ""
+
+#: shortcodes-for-buddypress.php:417
+msgid "BuddyPress Widgets"
+msgstr ""
+
+#: templates/legacy/groups/bp-shortcodes-groups.php:53
+#. translators: accessibility text
+msgid "Groups directory"
+msgstr ""
+
+#: templates/legacy/members/bp-shortcodes-members.php:36
+#. translators: accessibility text
+msgid "Members directory"
+msgstr ""
+
+#: templates/legacy/notifications/notifications-loop.php:37
+#. translators: accessibility text
+msgid "Unread notifications"
+msgstr ""
+
+#: templates/nouveau/activity/bp-shortcodes-activity.php:41
+msgid "Load More"
+msgstr ""
+
+#: templates/nouveau/groups/bp-shortcodes-groups.php:115
+#. translators: %s: last activity timestamp (e.g. "Active 1 hour ago")
+msgid "Active %s"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:37
+msgid "Select all"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:38
+msgid "Notification"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:40
+msgid "Date Received"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:43
+msgid "Actions"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:56
+msgid "Select this notification"
+msgstr ""
+
+#: public/class-shortcodes-for-buddypress-public.php:365
+msgctxt "button"
+msgid "Load More"
+msgstr ""

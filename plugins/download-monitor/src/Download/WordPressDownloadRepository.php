@@ -220,7 +220,9 @@ class DLM_WordPress_Download_Repository implements DLM_Download_Repository {
 
 		$posts = $q->query( $filters );
 
+
 		$items = $this->create_downloads_from_array( $posts );
+
 
 		do_action( 'dlm_reset_postdata', $filters );
 

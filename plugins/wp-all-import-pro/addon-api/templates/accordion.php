@@ -11,7 +11,7 @@
                         <td colspan="3">
                             <?php if (!empty($groups)) : ?>
                                 <p>
-                                    <strong><?php _e("Please choose your group.", 'wp_all_import_plugin'); ?></strong>
+                                    <strong><?php _e("Please choose your group.", 'wp-all-import-pro'); ?></strong>
                                 </p>
                                 <ul>
                                     <?php foreach ($groups as $group) {
@@ -32,7 +32,7 @@
                                 <div class="pmxi-addon-groups-output"></div>
                             <?php else : ?>
                                 <p>
-                                    <strong><?php _e("Please create Groups.", 'wp_all_import_plugin'); ?></strong>
+                                    <strong><?php _e("Please create Groups.", 'wp-all-import-pro'); ?></strong>
                                 </p>
                             <?php endif; ?>
                         </td>

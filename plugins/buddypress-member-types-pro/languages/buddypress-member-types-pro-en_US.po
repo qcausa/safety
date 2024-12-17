@@ -1,0 +1,941 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyPress Member Types Pro\n"
+"POT-Creation-Date: 2023-03-01 16:10+0530\n"
+"PO-Revision-Date: 2023-03-01 16:10+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/bpmtp-admin-misc.php:38
+#, php-format
+msgid ""
+"BuddyPress Member Types Pro: Please deactivate <a href=\"%s\" "
+"title=\"Deactivate\"><em>BuddyPress Member Type Generator</em></a>."
+msgstr ""
+
+#: admin/bpmtp-admin-misc.php:41
+#, php-format
+msgid ""
+"BuddyPress Member Types Pro: Please deactivate <a href=\"%s\" "
+"title=\"Deactivate\"> <em>BuddyPress Xprofile Member Type Field</em></a> "
+"plugin."
+msgstr ""
+
+#: admin/bpmtp-admin-misc.php:60
+msgid "View Member Types"
+msgstr ""
+
+#: admin/bpmtp-admin-misc.php:63
+msgid "Documentation"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:56 admin/bpmtp-network-admin-settings.php:87
+#: admin/bpmtp-network-admin-settings.php:107
+msgctxt "admin page title"
+msgid "Member Type Settings"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:57 admin/bpmtp-network-admin-settings.php:88
+#: admin/bpmtp-network-admin-settings.php:108
+msgctxt "admin menu title"
+msgid "Member Types"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:85 admin/bpmtp-network-admin-settings.php:215
+msgctxt "setting panel title"
+msgid "General"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:85
+msgctxt "admin panel description"
+msgid ""
+"Please create some member type and then you can update the settings here"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:113
+msgctxt "setting panel title"
+msgid "Roles"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:114
+msgctxt "Admin settings section title"
+msgid "Roles to member type association"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:114
+#, php-format
+msgctxt "admin section description"
+msgid ""
+"You can update WordPress role to member type mapping here. Changing role "
+"will update the member type accordingly. View <a href=\"%s\" "
+"target=\"_blank\">documentation</a>"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:133
+msgctxt "setting panel title"
+msgid "Miscellaneous"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:137
+#, php-format
+msgid ""
+"Please see our documentation for <a href=\"%s\">Conditional Registration "
+"page</a> for more details"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:139
+msgctxt "Admin settings section title"
+msgid "Registration"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:144
+msgid "Enable Member Type based Conditional registration fields"
+msgstr ""
+
+#: admin/bpmtp-admin-settings.php:147
+msgid ""
+"If enabled, Registration page honours fields available to a member type. "
+"Please make sure to read the docs."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:65 admin/bpmtp-admin-tools.php:82
+#: admin/pt-settings/src/class-ajax-handler.php:45
+msgid "Invalid action."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:72
+msgid "Access denied."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:89
+msgid "We only support renaming active member types."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:98
+msgid "The new value for member type is not allowed."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:106
+msgid "The old and new name should be different."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:115
+#, php-format
+msgid "The member type %s is not managed by BuddyPress Member Types Pro."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:123
+#, php-format
+msgid "Please use a different name. %s is already a registered member type."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:143
+#, php-format
+msgid ""
+"Please use a different name. We are unable to use %s due to the "
+"implemnetation limitations."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:152
+msgid "There was a problem. Please try again later."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:162
+msgid "There was a problem saving details. Please try again later."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:183 admin/bpmtp-admin-tools.php:282
+msgid "New Name"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:184 admin/bpmtp-admin-tools.php:283
+msgid "Rename"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:194
+msgid "Renamed."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:228
+#: core/class-bpmtp-member-types-pro-actions.php:123
+#: modules/class-bpmtp-indeed-umpro-helper.php:156
+#: modules/class-bpmtp-wc-member-type.php:132
+msgid "Member Types"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:244
+msgid "Please provide new member type name."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:255
+msgctxt "Page heading"
+msgid "Member Types Pro: Tools"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:258
+msgid "Member Type Safe Rename"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:266 admin/bpmtp-list-helper.php:61
+msgid "Label"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:267 admin/bpmtp-list-helper.php:66
+#: core/class-bpmtp-member-types-pro-actions.php:124
+msgid "Member Type"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:268
+msgid "Action"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:292
+msgid "No active member types found."
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:309 admin/bpmtp-import-export-helper.php:96
+msgctxt "Page heading"
+msgid "Export Member Types"
+msgstr ""
+
+#: admin/bpmtp-admin-tools.php:314 admin/bpmtp-import-export-helper.php:101
+msgid "export"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:64
+msgid "Member type details"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:69
+msgid "Member Type Status"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:75
+msgid "Redirection setting"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:103
+msgid ""
+"<span>Member Type Name:</span>(unique slug, used to identify the member "
+"type, It is also called name, e.g student, staff, teacher etc):"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:108
+msgid ""
+"Plugins will use this <strong>member type name </strong> to identify the "
+"member type. Please avoid changing it. If you change the unique name, you "
+"will lose the information about members having this member type."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:110
+msgid ""
+"<strong>Note:</strong> Use lowercases. Avoid using dash/hyphen(-), white "
+"space to avoid issues on directory listing."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:115
+msgid "Plural Label:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:117
+msgid "Plural name e.g. Students"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:122
+msgid "Singular Label:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:124
+msgid "Singular name, e.g. Student"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:132
+msgid "Enable Directory?"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:135
+msgid ""
+"By enabling directory, you can see a list of all members having this member "
+"type by appending member type name or directory slug(if specified).Only "
+"applies to BuddyPress 2.3+)"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:139
+msgid "Directory Slug:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:143
+msgid ""
+"If you have enabled directory, It will be used to append to your memeber "
+"directory url to list all members having this member type( Only applies to "
+"BuddyPress 2.3+)"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:244
+msgid "Is active?"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:247
+msgid ""
+"Only active member types will be registered. You can set a member type to "
+"inactive to disable it."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:251
+msgid "List in directory?"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:254
+msgid "A New tab will be added in directory with the member type."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:258
+msgid "Exclude members with this type from directory?"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:261
+msgid "The members having this type will be excluded from directory listing."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:285
+msgid ""
+"BuddyPress Member Types Pro allows you to setup dynamic login, account "
+"activation redirect."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:287
+msgid ""
+"You can use tokens such as [site_url], [user_profile_url] etc in the url."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:288
+#, php-format
+msgid "For more details, please <a href=\"%s\">view documentation</a>."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:294
+msgid "On First Login, Redirect to:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:298
+msgid ""
+"If you specify a url, the users belonging to this member will be redirected "
+"on their first login to the above url."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:302
+msgid "On Login, Redirect to:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:306
+msgid ""
+"If you specify a url, the users belonging to this member will be redirected "
+"on their login to the above url. If first login redirect is setup above, "
+"That will be used for the very first login of user."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:310
+msgid "On Account activation, Redirect to:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:314 admin/bpmtp-edit-helper.php:335
+msgid ""
+"If you specify a url, the users belonging to this member will be redirected "
+"on their login to the above url."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:318
+msgid "Set default landing tab for user profile:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:320 admin/bpmtp-list-helper.php:100
+#: admin/bpmtp-list-helper.php:110
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:176
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:182
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:190
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:196
+msgid "No"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:321
+msgid "Yes, if visitor has this member type"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:322
+msgid "Yes, if displayed user has this member type"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:323
+msgid ""
+"Yes, If user is logged  and they have this member type, If not logged and "
+"displayed user has this member type"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:327
+msgid "Select the criteria for setting default tab when visiting the profile."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:331
+msgid "Default profile tab slug:"
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:448 admin/bpmtp-edit-helper.php:450
+msgid "Member type updated."
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:452
+msgid "Member type published. "
+msgstr ""
+
+#: admin/bpmtp-edit-helper.php:454
+msgid "Member type  saved."
+msgstr ""
+
+#: admin/bpmtp-import-export-helper.php:53
+#: admin/bpmtp-import-export-helper.php:64
+msgid "Import"
+msgstr ""
+
+#: admin/bpmtp-import-export-helper.php:54
+#: admin/bpmtp-import-export-helper.php:65
+msgid "Export"
+msgstr ""
+
+#: admin/bpmtp-import-export-helper.php:75
+msgctxt "Page heading"
+msgid "Import Member Types"
+msgstr ""
+
+#: admin/bpmtp-import-export-helper.php:80
+msgid "import"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:67
+msgid "Active?"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:68
+msgid "Shortcode"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:69
+msgid "Has Directory?"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:70
+msgid "Directory Slug?"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:71
+msgid "Directory URL"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:98 admin/bpmtp-list-helper.php:108
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:175
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:181
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:189
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:195
+msgid "Yes"
+msgstr ""
+
+#: admin/bpmtp-list-helper.php:129
+msgctxt "member type URL base"
+msgid "type"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:140
+msgctxt "setting panel title"
+msgid "Multisite Options"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:142
+msgctxt "setting section title"
+msgid "Global Settings"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:151
+msgctxt "setting option label"
+msgid "Add user to the site on registration?"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:154
+msgctxt "setting option"
+msgid "Yes"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:155
+msgctxt "setting option"
+msgid "No"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:158
+msgid ""
+"BuddyPress does not add user to the site on registration/activation. If you "
+"enable this option, User will be added to the site/blog on which they "
+"activate their account."
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:166
+msgctxt "setting option label"
+msgid ""
+"How to associate Role & Member Type on sub site(Other than your main site)?"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:169
+msgctxt "setting option"
+msgid "Don't do anything on sub site"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:170
+msgctxt "setting option"
+msgid "Let me choose it on sub site"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:171
+msgctxt "setting option"
+msgid "Use default association(as specified below)"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:174
+#, php-format
+msgctxt "setting help text"
+msgid "Please see the <a href=\"%s\">documentation</a> for help."
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:177
+msgctxt "setting section title"
+msgid "Members Types to Roles for Sub sites."
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:215
+msgctxt "admin panel description"
+msgid ""
+"Please create some member type and then you can update the settings here."
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:236
+msgctxt "Admin settings panel title"
+msgid "Member Types"
+msgstr ""
+
+#: admin/bpmtp-network-admin-settings.php:238
+msgctxt "setting option label"
+msgid "Members Types to Roles."
+msgstr ""
+
+#: admin/bpmtp-user-helper.php:92 admin/bpmtp-user-helper.php:94
+msgid "Change member type to"
+msgstr ""
+
+#: admin/bpmtp-user-helper.php:102
+msgid "Change"
+msgstr ""
+
+#: admin/bpmtp-user-helper.php:163
+#, php-format
+msgid "Updated member type for %d user(s) to %s. "
+msgstr ""
+
+#: admin/pt-settings/src/class-ajax-handler.php:52
+msgid "Page details not found."
+msgstr ""
+
+#: admin/pt-settings/src/class-ajax-handler.php:67
+msgid "Page created successfully."
+msgstr ""
+
+#: admin/pt-settings/src/class-ajax-handler.php:71
+#: admin/pt-settings/src/fields/class-pages-dropdown.php:71
+msgctxt "Ading Settings page panel, page view label"
+msgid "View"
+msgstr ""
+
+#: admin/pt-settings/src/fields/class-image.php:63
+msgid "Remove"
+msgstr ""
+
+#: admin/pt-settings/src/fields/class-pages-dropdown.php:51
+msgid "Select Page"
+msgstr ""
+
+#: admin/pt-settings/src/fields/class-pages-dropdown.php:62
+msgid "Create"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:121
+msgid "BuddyPress Member Types"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:125
+msgid "Member Types( pro )"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:126
+#: core/class-bpmtp-member-types-pro-actions.php:127
+msgid "New Member Type"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:128
+msgid "Edit Member Type"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:129
+msgid "Search Member Types"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:130
+msgid "No Member Types found in trash"
+msgstr ""
+
+#: core/class-bpmtp-member-types-pro-actions.php:131
+msgid "No Member Type found"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:20
+msgctxt "xprofile field type category"
+msgid "Single Fields"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:21
+msgctxt "xprofile field type"
+msgid "Single Member Type"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:142
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:157
+msgid "Show field as"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:144
+msgid "Radio"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:147
+msgid "Selectbox"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:152
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:167
+msgid "Which member types to list in field option?"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:154
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:169
+msgid "All"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:157
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:172
+msgid "Only selected"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:174
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:188
+msgid "Link the profile displayed data to member type directory?"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:180
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:194
+msgid "Allow users to change their member type after registration?"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:186
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:200
+msgid "Default value?"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-type.php:188
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:202
+#: modules/class-bpmtp-pmpro-helper.php:76
+msgid "None"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:20
+msgctxt "xprofile field type category"
+msgid "Multi Fields"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:21
+msgctxt "xprofile field type"
+msgid "Multi Member Type"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:159
+msgid "Checkbox"
+msgstr ""
+
+#: core/field/class-bpmtp-xprofile-field-type-member-types.php:162
+msgid "Multi Selectbox"
+msgstr ""
+
+#: integrations/if-menu-conditions.php:29
+#, php-format
+msgid "User has member type: %s"
+msgstr ""
+
+#: integrations/if-menu-conditions.php:34
+#: integrations/if-menu-conditions.php:44
+msgid "User"
+msgstr ""
+
+#: integrations/if-menu-conditions.php:39
+#, php-format
+msgid "User does not have member type: %s"
+msgstr ""
+
+#: modules/class-bpmpt-roles-helper.php:326
+msgid "Associated Roles"
+msgstr ""
+
+#: modules/class-bpmpt-roles-helper.php:356
+msgid ""
+"The user will be assigned the associated role(s) when their member type is "
+"updated."
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:51
+msgctxt "Admin settings section title"
+msgid "Default Avatar"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:56
+msgid "Override member avatar"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:59
+msgid ""
+"if enabled member avatar will be override by member type avatar if user has "
+"not uploaded"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:70
+msgid "Associated avatar"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:108
+msgid "The custom avatar support is: <strong>ENABLED</strong>"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:111
+#: modules/class-bpmtp-cover-image-helper.php:105
+#, php-format
+msgid "You can disable it from <a href=\"%s\">settings</a> page"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:115
+msgid "The custom avatar support is: <strong>DISABLED</strong>"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:118
+#: modules/class-bpmtp-cover-image-helper.php:112
+#, php-format
+msgid "You can enable it from <a href=\"%s\">settings</a> page"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:125
+msgid "Remove thumbnail"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:133
+msgid "Upload thumbnail image"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:137
+msgid "Remove full"
+msgstr ""
+
+#: modules/class-bpmtp-avatar-helper.php:143
+msgid "Upload full image"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:52
+msgctxt "Admin settings section title"
+msgid "Default cover image"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:57
+msgid "Override member cover image"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:60
+msgid ""
+"if enabled member cover image will be override by member type cover image if "
+"user has not uploaded"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:71
+msgid "Associated cover image"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:102
+msgid "The custom cover image support is: <strong>ENABLED</strong>"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:109
+msgid "The custom cover image support is: <strong>DISABLED</strong>"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:119
+msgid "Remove image"
+msgstr ""
+
+#: modules/class-bpmtp-cover-image-helper.php:127
+msgid "Upload cover image"
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:48
+msgid "Associated BuddyPress Groups"
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:92
+#: modules/class-bpmtp-learndash-group.php:108
+msgid "Select Group"
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:94
+#: modules/class-bpmtp-learndash-group.php:110
+msgid "Type group name."
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:97
+msgid ""
+"The user will be added to these groups when his/her member type is updated."
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:103
+msgid "Sync groups to member type."
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:107
+msgid ""
+"If you enable it, the user will be removed from all other groups and only "
+"added to the selected group. In case a user is assigned multiple member "
+"type, the groups form the last member type will be the only groups they will "
+"be part of."
+msgstr ""
+
+#: modules/class-bpmtp-groups-helper.php:108
+msgid ""
+"If the group list is empty and sync is enabled, user will be removed from "
+"all groups."
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:158
+msgid "View docs"
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:158
+msgid "View Docs"
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:160
+#: modules/class-bpmtp-wc-member-type.php:160
+msgid "Set member type to:"
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:170
+msgid "Sync:"
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:174
+msgid ""
+"On subscription activation, set user's member type(s) to the selected ones."
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:179
+msgid "On subscription expire/removal, remove these member types from user."
+msgstr ""
+
+#: modules/class-bpmtp-indeed-umpro-helper.php:184
+msgid "Save Changes"
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:64
+msgid "Learndash Groups"
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:113
+msgid ""
+"The user will be added to these learndash groups when his/her member type is "
+"updated."
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:118
+msgid "Remove groups on user removal from this member type."
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:122
+msgid ""
+"If enabled, When this member type is removed from user, user will be removed "
+"from the above selected Learndash groups."
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:128
+msgid "Remove Extra Groups."
+msgstr ""
+
+#: modules/class-bpmtp-learndash-group.php:132
+msgid ""
+"If enabled, When users member type changes, they will be removed from all "
+"other Learndash groups except the above list."
+msgstr ""
+
+#: modules/class-bpmtp-memberpress-helper.php:92
+msgid ""
+"On membership activation, set user's member type(s) to the selected ones."
+msgstr ""
+
+#: modules/class-bpmtp-memberpress-helper.php:98
+msgid "On membership expire/removal, remove these member types from user."
+msgstr ""
+
+#: modules/class-bpmtp-pmpro-helper.php:55
+msgid "Associated Paid Memberships Pro Levels"
+msgstr ""
+
+#: modules/class-bpmtp-pmpro-helper.php:90
+msgid ""
+"The user will be assigned the associated level(s) when their member type is "
+"updated."
+msgstr ""
+
+#: modules/class-bpmtp-pmpro-helper.php:91
+msgid ""
+"Changing member type will mark old levels as inactive(if the user had any)."
+msgstr ""
+
+#: modules/class-bpmtp-pmpro-helper.php:92
+msgid "Also, Changing membership levels will have no effect on member type."
+msgstr ""
+
+#: modules/class-bpmtp-pmpro-helper.php:95
+#: modules/class-bpmtp-wc-membership-helper.php:76
+msgid "View Documentation"
+msgstr ""
+
+#: modules/class-bpmtp-wc-membership-helper.php:39
+msgid "Associated WooCommerce Memberships"
+msgstr ""
+
+#: modules/class-bpmtp-wc-membership-helper.php:71
+msgid ""
+"The user will be assigned the associated plan(s) when their member type is "
+"updated."
+msgstr ""
+
+#: modules/class-bpmtp-wc-membership-helper.php:72
+msgid "Changing member type will not remove old plans, only add new ones."
+msgstr ""
+
+#: modules/class-bpmtp-wc-membership-helper.php:73
+msgid "Also, Changing membership plans will have no effect on member type."
+msgstr ""

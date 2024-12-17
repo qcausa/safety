@@ -1,0 +1,1497 @@
+{
+    "manifest_version": "1.0.21",
+    "title": "Subx - SaaS Elementor Template Kit",
+    "page_builder": "elementor",
+    "kit_version": "1.0.0",
+    "templates": [
+        {
+            "name": "Global Kit Styles",
+            "screenshot": "screenshots\/global-kit-styles.jpg",
+            "source": "templates\/global.json",
+            "preview_url": "https:\/\/mahative.com",
+            "type": "section",
+            "category": "page",
+            "metadata": {
+                "template_type": "global-styles",
+                "include_in_zip": "1",
+                "elementor_pro_required": null,
+                "additional_template_information": [
+                    "These are the global theme styles configured through the Elementor Theme Styles area."
+                ]
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Blog",
+            "screenshot": "screenshots\/blog.jpg",
+            "source": "templates\/blog.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/blog\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "404",
+            "screenshot": "screenshots\/404.jpg",
+            "source": "templates\/404.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/404\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Under Maintenance",
+            "screenshot": "screenshots\/under-maintenance.jpg",
+            "source": "templates\/under-maintenance.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/under-maintenance\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "FAQ",
+            "screenshot": "screenshots\/faq.jpg",
+            "source": "templates\/faq.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/faq\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Contact",
+            "screenshot": "screenshots\/contact.jpg",
+            "source": "templates\/contact.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/contact\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Feature",
+            "screenshot": "screenshots\/feature.jpg",
+            "source": "templates\/feature.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/feature\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Pricing",
+            "screenshot": "screenshots\/pricing.jpg",
+            "source": "templates\/pricing.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/pricing\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Download",
+            "screenshot": "screenshots\/download.jpg",
+            "source": "templates\/download.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/download\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Career",
+            "screenshot": "screenshots\/career.jpg",
+            "source": "templates\/career.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/career\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Single Post",
+            "screenshot": "screenshots\/single-post.jpg",
+            "source": "templates\/single-post.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/single-post\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "About",
+            "screenshot": "screenshots\/about.jpg",
+            "source": "templates\/about.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/about\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Home",
+            "screenshot": "screenshots\/home.jpg",
+            "source": "templates\/home.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/home\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Form - Feature",
+            "screenshot": "screenshots\/form-feature.jpg",
+            "source": "templates\/form-feature.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/form-feature\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Form - Download",
+            "screenshot": "screenshots\/form-download.jpg",
+            "source": "templates\/form-download.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/form-download\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Form - Contact",
+            "screenshot": "screenshots\/form-contact.jpg",
+            "source": "templates\/form-contact.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/form-contact\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Footer",
+            "screenshot": "screenshots\/footer.jpg",
+            "source": "templates\/footer.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/footer\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        },
+        {
+            "name": "Header",
+            "screenshot": "screenshots\/header.jpg",
+            "source": "templates\/header.json",
+            "preview_url": "https:\/\/mahative.com\/subx\/template-kit\/header\/",
+            "type": "page",
+            "category": "page",
+            "metadata": {
+                "template_type": "single-page",
+                "include_in_zip": "1",
+                "elementor_pro_required": null
+            },
+            "elementor_pro_required": false
+        }
+    ],
+    "required_plugins": [
+        {
+            "name": "Jeg Elementor Kit",
+            "version": "2.6.1",
+            "file": "jeg-elementor-kit\/jeg-elementor-kit.php",
+            "author": "Jegtheme"
+        },
+        {
+            "name": "MetForm",
+            "version": "3.3.2",
+            "file": "metform\/metform.php",
+            "author": "Wpmet"
+        },
+        {
+            "name": "Elementor",
+            "version": "3.13.3",
+            "file": "elementor\/elementor.php",
+            "author": "Elementor.com"
+        }
+    ],
+    "images": [
+        {
+            "filename": "Vector.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector.png",
+            "templates": [
+                {
+                    "source": "templates\/blog.json",
+                    "name": "Blog"
+                },
+                {
+                    "source": "templates\/faq.json",
+                    "name": "FAQ"
+                },
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                },
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/download.json",
+                    "name": "Download"
+                },
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                },
+                {
+                    "source": "templates\/single-post.json",
+                    "name": "Single Post"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 8013,
+            "dimensions": [
+                644,
+                374
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Vector-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector-1.png",
+            "templates": [
+                {
+                    "source": "templates\/blog.json",
+                    "name": "Blog"
+                },
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 5997,
+            "dimensions": [
+                621,
+                257
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Vector-5.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector-5.png",
+            "templates": [
+                {
+                    "source": "templates\/404.json",
+                    "name": "404"
+                },
+                {
+                    "source": "templates\/under-maintenance.json",
+                    "name": "Under Maintenance"
+                },
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                },
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/download.json",
+                    "name": "Download"
+                },
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                },
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 9009,
+            "dimensions": [
+                466,
+                441
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-101-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/06\/Group-101-2.png",
+            "templates": [
+                {
+                    "source": "templates\/under-maintenance.json",
+                    "name": "Under Maintenance"
+                }
+            ],
+            "filesize": 228158,
+            "dimensions": [
+                1991,
+                2105
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/server-maintenance-web-illustrations-43CXTXC"
+        },
+        {
+            "filename": "Group-93-3.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-93-3.png",
+            "templates": [
+                {
+                    "source": "templates\/faq.json",
+                    "name": "FAQ"
+                },
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 1284,
+            "dimensions": [
+                30,
+                30
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/business-finance-line-icons-XAMLPEF"
+        },
+        {
+            "filename": "Group-93-7.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-93-7.png",
+            "templates": [
+                {
+                    "source": "templates\/faq.json",
+                    "name": "FAQ"
+                },
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 760,
+            "dimensions": [
+                28,
+                31
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/tech-support-line-icons-NLVFB2Z"
+        },
+        {
+            "filename": "Group-93-6.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-93-6.png",
+            "templates": [
+                {
+                    "source": "templates\/faq.json",
+                    "name": "FAQ"
+                },
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 604,
+            "dimensions": [
+                30,
+                31
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/business-finance-line-icons-XAMLPEF"
+        },
+        {
+            "filename": "Vector-4.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector-4.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 25040,
+            "dimensions": [
+                1586,
+                988
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "pict_feature_3.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/pict_feature_3.jpg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 9330,
+            "dimensions": [
+                60,
+                60
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/portrait-of-smiling-businesswoman-in-office-with-h-ZT4Z7RE"
+        },
+        {
+            "filename": "pict_feature_2.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/pict_feature_2.jpg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 7969,
+            "dimensions": [
+                60,
+                60
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/smile-camera-and-portrait-of-a-photographer-workin-EFPTSTB"
+        },
+        {
+            "filename": "pict_feature_1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/pict_feature_1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 7463,
+            "dimensions": [
+                60,
+                60
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/mature-business-man-portrait-242RX7A"
+        },
+        {
+            "filename": "female-restaurant-worker-using-computer-terminal-w-2023-01-16-01-58-59-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/female-restaurant-worker-using-computer-terminal-w-2023-01-16-01-58-59-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 251795,
+            "dimensions": [
+                565,
+                415
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/female-restaurant-worker-using-computer-terminal-w-N2UBUP9"
+        },
+        {
+            "filename": "Group-97-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-97-2.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 2909,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/network-lineart-icons-SUNPT2Y"
+        },
+        {
+            "filename": "Group-97-3.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-97-3.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 2478,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/network-lineart-icons-SUNPT2Y"
+        },
+        {
+            "filename": "Group-97-4.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-97-4.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 3033,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/tech-support-line-icons-NLVFB2Z"
+        },
+        {
+            "filename": "Group-97-5.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-97-5.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 3408,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/network-lineart-icons-SUNPT2Y"
+        },
+        {
+            "filename": "Desktop-7.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Desktop-7.jpg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 216958,
+            "dimensions": [
+                983,
+                699
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-92-1.svg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-92-1.svg",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 349,
+            "dimensions": [
+                0,
+                0
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-92-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-92-2.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 11515,
+            "dimensions": [
+                275,
+                325
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-92-3.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-92-3.png",
+            "templates": [
+                {
+                    "source": "templates\/feature.json",
+                    "name": "Feature"
+                }
+            ],
+            "filesize": 4783,
+            "dimensions": [
+                234,
+                159
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-93-5.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-93-5.png",
+            "templates": [
+                {
+                    "source": "templates\/pricing.json",
+                    "name": "Pricing"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 852,
+            "dimensions": [
+                30,
+                31
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/business-finance-line-icons-XAMLPEF"
+        },
+        {
+            "filename": "Rectangle-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/06\/Rectangle-1.png",
+            "templates": [
+                {
+                    "source": "templates\/download.json",
+                    "name": "Download"
+                }
+            ],
+            "filesize": 271615,
+            "dimensions": [
+                934,
+                1710
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Frame-5.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/06\/Frame-5.png",
+            "templates": [
+                {
+                    "source": "templates\/download.json",
+                    "name": "Download"
+                }
+            ],
+            "filesize": 18288,
+            "dimensions": [
+                500,
+                639
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "group-of-business-people-working-in-office-2023-03-08-20-45-28-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/group-of-business-people-working-in-office-2023-03-08-20-45-28-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 94498,
+            "dimensions": [
+                307,
+                205
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/group-of-business-people-working-in-office-2GPXQTK"
+        },
+        {
+            "filename": "Group-96.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-96.png",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 2882,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/communication-lineart-7V4C9JT"
+        },
+        {
+            "filename": "two-young-men-in-university-2021-09-24-04-02-18-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/two-young-men-in-university-2021-09-24-04-02-18-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 73725,
+            "dimensions": [
+                307,
+                205
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/two-young-men-in-university-BHSVPNA"
+        },
+        {
+            "filename": "Group-96-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-96-1.png",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 2888,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/communication-lineart-7V4C9JT"
+        },
+        {
+            "filename": "group-of-business-people-working-in-office-2023-03-08-20-43-37-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/group-of-business-people-working-in-office-2023-03-08-20-43-37-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 93549,
+            "dimensions": [
+                307,
+                205
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/group-of-business-people-working-in-office-7JBWJE8"
+        },
+        {
+            "filename": "Group-96-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-96-2.png",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 3110,
+            "dimensions": [
+                100,
+                100
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/communication-lineart-7V4C9JT"
+        },
+        {
+            "filename": "multicultural-team-working-together-in-office-and-2022-05-31-14-34-02-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/multicultural-team-working-together-in-office-and-2022-05-31-14-34-02-utc-1-800x618.jpg",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                }
+            ],
+            "filesize": 325898,
+            "dimensions": [
+                811,
+                626
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/multicultural-team-working-together-in-office-and--GM99A6Z"
+        },
+        {
+            "filename": "Subtract.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Subtract.png",
+            "templates": [
+                {
+                    "source": "templates\/career.json",
+                    "name": "Career"
+                },
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                },
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 2917,
+            "dimensions": [
+                203,
+                182
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "teamwork-2022-10-11-20-02-12-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/teamwork-2022-10-11-20-02-12-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 260806,
+            "dimensions": [
+                705,
+                415
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/teamwork-PESFKVX"
+        },
+        {
+            "filename": "multicultural-team-working-together-in-office-and-2022-05-19-18-13-27-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/multicultural-team-working-together-in-office-and-2022-05-19-18-13-27-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 172032,
+            "dimensions": [
+                565,
+                355
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/multicultural-team-working-together-in-office-and--M63P8H2"
+        },
+        {
+            "filename": "multicultural-team-working-together-in-office-and-2022-05-20-20-07-36-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/multicultural-team-working-together-in-office-and-2022-05-20-20-07-36-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 168492,
+            "dimensions": [
+                565,
+                355
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/multicultural-team-working-together-in-office-and--BJFTJVK"
+        },
+        {
+            "filename": "mixed-business-team-working-sitting-at-table-in-of-2022-12-16-06-46-56-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/mixed-business-team-working-sitting-at-table-in-of-2022-12-16-06-46-56-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 279121,
+            "dimensions": [
+                565,
+                355
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/mixed-business-team-working-sitting-at-table-in-of-BDGPSCQ"
+        },
+        {
+            "filename": "business-people-doing-teamwork-on-startup-presenta-2022-09-07-18-45-59-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/business-people-doing-teamwork-on-startup-presenta-2022-09-07-18-45-59-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 162772,
+            "dimensions": [
+                385,
+                453
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/business-people-doing-teamwork-on-startup-presenta-5N9WYQL"
+        },
+        {
+            "filename": "Group-96-1-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-96-1-1.png",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 9364,
+            "dimensions": [
+                285,
+                227
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "multiracial-group-of-people-in-an-office-discussin-2023-03-28-19-54-47-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/multiracial-group-of-people-in-an-office-discussin-2023-03-28-19-54-47-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/about.json",
+                    "name": "About"
+                }
+            ],
+            "filesize": 310966,
+            "dimensions": [
+                565,
+                610
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/multiracial-group-of-people-in-an-office-discussin-JUSUPVB"
+        },
+        {
+            "filename": "Desktop-6.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Desktop-6.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 60027,
+            "dimensions": [
+                801,
+                569
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-20-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-20-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 4592,
+            "dimensions": [
+                270,
+                114
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-19-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-19-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 4883,
+            "dimensions": [
+                270,
+                114
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Vector-8.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector-8.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 26654,
+            "dimensions": [
+                1775,
+                959
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "logo-ipsum1-1-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/logo-ipsum1-1-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 3739,
+            "dimensions": [
+                243,
+                55
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/venture-logo-5FBMRGJ"
+        },
+        {
+            "filename": "logo-ipsum2-1-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/logo-ipsum2-1-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 3639,
+            "dimensions": [
+                238,
+                46
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/venture-logo-5FBMRGJ"
+        },
+        {
+            "filename": "logo-ipsum3-1-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/logo-ipsum3-1-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 4425,
+            "dimensions": [
+                239,
+                60
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/venture-logo-5FBMRGJ"
+        },
+        {
+            "filename": "logo-ipsum4-1-1-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/logo-ipsum4-1-1-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 4209,
+            "dimensions": [
+                237,
+                62
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "no",
+            "image_urls": "https:\/\/elements.envato.com\/venture-logo-5FBMRGJ"
+        },
+        {
+            "filename": "Group-100.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-100.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 4650,
+            "dimensions": [
+                431,
+                140
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-98.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-98.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 13014,
+            "dimensions": [
+                431,
+                320
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-99.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-99.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 8878,
+            "dimensions": [
+                433,
+                255
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-105.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-105.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 6585,
+            "dimensions": [
+                201,
+                203
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-106.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-106.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 6781,
+            "dimensions": [
+                203,
+                203
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "portrait-of-smiling-businesswoman-in-office-with-h-2023-03-08-20-43-33-utc.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/portrait-of-smiling-businesswoman-in-office-with-h-2023-03-08-20-43-33-utc-800x436.jpg",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 476889,
+            "dimensions": [
+                1006,
+                548
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/portrait-of-smiling-businesswoman-in-office-with-h-ZT4Z7RE"
+        },
+        {
+            "filename": "Group-92.svg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-92.svg",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 351,
+            "dimensions": [
+                0,
+                0
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-95-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-95-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 15960,
+            "dimensions": [
+                436,
+                385
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "mature-business-man-portrait-2022-09-02-19-46-41-utc-1.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/mature-business-man-portrait-2022-09-02-19-46-41-utc-1.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 19351,
+            "dimensions": [
+                97,
+                97
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/mature-business-man-portrait-242RX7A"
+        },
+        {
+            "filename": "smile-camera-and-portrait-of-a-photographer-worki-2023-02-03-01-50-40-utc-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/smile-camera-and-portrait-of-a-photographer-worki-2023-02-03-01-50-40-utc-2.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 21334,
+            "dimensions": [
+                97,
+                97
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/smile-camera-and-portrait-of-a-photographer-workin-EFPTSTB"
+        },
+        {
+            "filename": "portrait-of-african-american-man-looking-at-camera-2022-01-19-00-02-51-utc-2.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/portrait-of-african-american-man-looking-at-camera-2022-01-19-00-02-51-utc-2.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 19605,
+            "dimensions": [
+                97,
+                97
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/portrait-of-african-american-man-looking-at-camera-3H2BSSV"
+        },
+        {
+            "filename": "Vector-7.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Vector-7.png",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 6162,
+            "dimensions": [
+                355,
+                385
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "beautiful-woman-using-laptop-in-kitchen-2022-12-16-18-13-51-utc-1.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/07\/beautiful-woman-using-laptop-in-kitchen-2022-12-16-18-13-51-utc-1.jpg",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 152384,
+            "dimensions": [
+                450,
+                393
+            ],
+            "image_source": "envato_elements",
+            "person_or_place": "yes",
+            "image_urls": "https:\/\/elements.envato.com\/beautiful-woman-using-laptop-in-kitchen-H6JQDCD"
+        },
+        {
+            "filename": "Group-93.jpg",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-93.jpg",
+            "templates": [
+                {
+                    "source": "templates\/home.json",
+                    "name": "Home"
+                }
+            ],
+            "filesize": 32334,
+            "dimensions": [
+                249,
+                263
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-34.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-34.png",
+            "templates": [
+                {
+                    "source": "templates\/footer.json",
+                    "name": "Footer"
+                }
+            ],
+            "filesize": 2031,
+            "dimensions": [
+                129,
+                40
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        },
+        {
+            "filename": "Group-33.png",
+            "thumbnail_url": "https:\/\/mahative.com\/subx\/wp-content\/uploads\/sites\/13\/2023\/05\/Group-33.png",
+            "templates": [
+                {
+                    "source": "templates\/header.json",
+                    "name": "Header"
+                }
+            ],
+            "filesize": 33205,
+            "dimensions": [
+                1651,
+                512
+            ],
+            "image_source": "self_created",
+            "person_or_place": "no",
+            "image_urls": ""
+        }
+    ]
+}

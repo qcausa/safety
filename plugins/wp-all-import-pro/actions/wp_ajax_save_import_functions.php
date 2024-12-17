@@ -3,11 +3,11 @@
 function pmxi_wp_ajax_save_import_functions(){
 
 	if ( ! check_ajax_referer( 'wp_all_import_secure', 'security', false )){
-		exit( json_encode(array('html' => __('Security check', 'wp_all_import_plugin'))) );
+		exit( json_encode(array('html' => __('Security check', 'wp-all-import-pro'))) );
 	}
 
 	if ( ! current_user_can( PMXI_Plugin::$capabilities ) ){
-		exit( json_encode(array('html' => __('Security check', 'wp_all_import_plugin'))) );
+		exit( json_encode(array('html' => __('Security check', 'wp-all-import-pro'))) );
 	}
 
 	$uploads   = wp_upload_dir();
@@ -35,14 +35,14 @@ function pmxi_wp_ajax_save_import_functions(){
 	{
 		if (strpos($post, "<?php") === false || strpos($post, "?>") === false)
 		{
-			exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;	
+			exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp-all-import-pro')))); die;	
 		}	
 		else
 		{
 			file_put_contents($functions, $post);
 		}
 
-   		exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp_all_import_plugin')))); die;
+   		exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp-all-import-pro')))); die;
 	}
 	else
 	{
@@ -62,7 +62,7 @@ function pmxi_wp_ajax_save_import_functions(){
 		{
 			if (strpos($post, "<?php") === false || strpos($post, "?>") === false)
 			{
-				exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;	
+				exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp-all-import-pro')))); die;	
 			}	
 			else
 			{
@@ -71,5 +71,5 @@ function pmxi_wp_ajax_save_import_functions(){
 		}
 	}	
 
-	exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp_all_import_plugin')))); die;
+	exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp-all-import-pro')))); die;
 }

@@ -10,7 +10,7 @@ class PMXI_Addon_Media_Field extends PMXI_Addon_Field {
 
 	public static function isImage($url) {
 		$ext = pmxi_getExtensionFromStr($url);
-		$exts = ['jpeg', 'jpg', 'png', 'gif', 'svg', 'webp'];
+		$exts = explode('|',wp_all_import_supported_image_extensions());
 
 		if (in_array($ext, $exts)) return true;
 

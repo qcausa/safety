@@ -1,7 +1,7 @@
 <?php
 
 if ( ! betterdocs()->settings->get( 'enable_breadcrumb' ) ) {
-    return;
+	return;
 }
 
 $view_object->get( 'widgets/breadcrumbs' );

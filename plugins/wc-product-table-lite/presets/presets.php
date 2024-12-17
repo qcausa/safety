@@ -100,7 +100,7 @@ function wcpt_presets__get_grid_markup()
 add_action('admin_init', 'wcpt_presets__set_preset_required_meta_flag');
 function wcpt_presets__set_preset_required_meta_flag()
 {
-  if (!wcpt_preset__is_table_editor()) {
+  if (!wcpt_preset__is_table_editor_page()) {
     return;
   }
 
@@ -223,14 +223,6 @@ function wcpt_preset__required($post_id = false)
   }
 
   return get_post_meta($post_id, 'wcpt_preset_required', true);
-}
-
-function wcpt_preset__is_table_editor()
-{
-  return !empty($_GET['post_type']) &&
-    $_GET['post_type'] === 'wc_product_table' &&
-    !empty($_GET['page']) &&
-    $_GET['page'] === 'wcpt-edit';
 }
 
 function wcpt_preset__is_table_editor_page()

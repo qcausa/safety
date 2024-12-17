@@ -33,6 +33,7 @@ if (!class_exists('PMXI_RapidAddon')) {
 			'featured_delim' => ',',
 			'search_existing_images' => 1,
 			'is_featured' => 0,
+            'allow_delay_image_resize' => 0,
 			'create_draft' => 'no',
 			'set_image_meta_title' => 0,
 			'image_meta_title_delim' => ',',

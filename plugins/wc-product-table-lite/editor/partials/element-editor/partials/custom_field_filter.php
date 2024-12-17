@@ -7,24 +7,16 @@
 <!-- heading -->
 <div class="wcpt-editor-row-option">
   <label>Heading</label>
-  <div
-    wcpt-block-editor
-    wcpt-be-add-element-partial="add-navigation-filter-heading-element"
-    wcpt-model-key="heading"
-    wcpt-be-add-row="0"
-  ></div>
+  <div wcpt-block-editor wcpt-be-add-element-partial="add-navigation-filter-heading-element" wcpt-model-key="heading"
+    wcpt-be-add-row="0"></div>
 </div>
 
-<!-- heading format upon option selection -->  
-<?php require( 'heading_format__op_selected.php' ); ?>
+<!-- heading format upon option selection -->
+<?php require('heading_format__op_selected.php'); ?>
 
-<div
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="position"
-  wcpt-condition-val="header"
->
-  <!-- display type -->  
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="position"
+  wcpt-condition-val="header">
+  <!-- display type -->
   <div class="wcpt-editor-row-option">
     <label>Display type</label>
     <select wcpt-model-key="display_type">
@@ -35,12 +27,8 @@
   </div>
 
   <!-- heading separate line -->
-  <div
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="display_type"
-    wcpt-condition-val="row"
-  >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="display_type"
+    wcpt-condition-val="row">
     <label>
       <input type="checkbox" wcpt-model-key="heading_separate_line" />
       Show heading in separate line above
@@ -58,48 +46,33 @@
 </div>
 
 
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="manager"
-  wcpt-condition-val="acf"  
->
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="manager" wcpt-condition-val="acf">
 
-<!-- ACF field type -->
-  <div
-    class="wcpt-editor-row-option"  
-  >
+  <!-- ACF field type -->
+  <div class="wcpt-editor-row-option">
     <label>ACF field type</label>
     <label>
-      <input value="basic" type="radio" wcpt-model-key="acf_field_type"> Basic (Text, Number) 
+      <input value="basic" type="radio" wcpt-model-key="acf_field_type"> Basic (Text, Number)
     </label>
     <label>
-      <input value="choice" type="radio" wcpt-model-key="acf_field_type"> Choice (Select, Radio) 
-    </label>  
+      <input value="choice" type="radio" wcpt-model-key="acf_field_type"> Choice (Select, Radio)
+    </label>
   </div>
 
   <!-- ACF options -->
-  <div 
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="acf_field_type"
-    wcpt-condition-val="choice"  
-  >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="acf_field_type"
+    wcpt-condition-val="choice">
     <label>
       ACF field choices
-      <small>Copy paste what you entered in the 'Choices' option in your ACF field settings to add those same options to this filter</small>
+      <small>Copy paste what you entered in the 'Choices' option in your ACF field settings to add those same options to
+        this filter</small>
     </label>
     <textarea wcpt-model-key="acf_choices"></textarea>
   </div>
 </div>
 
 <!-- only show if manager:ACF is not selected -->
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="manager"
-  wcpt-condition-val="!acf"  
->
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="manager" wcpt-condition-val="!acf">
 
   <!-- compare -->
   <div class="wcpt-editor-row-option">
@@ -109,7 +82,7 @@
       Exact
       <small>
         Each filter option will be a specific number or text
-      </small> 
+      </small>
     </label>
     <label>
       <input type="radio" wcpt-model-key="compare" name="compare" value="BETWEEN" />
@@ -121,15 +94,10 @@
   </div>
 
   <!-- field value type -- exact match -->
-  <div
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="compare"
-    wcpt-condition-val="IN"
-  >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="compare" wcpt-condition-val="IN">
     <div class="wcpt-editor-row-option">
       <label>
-      Order the options as
+        Order the options as
       </label>
       <select wcpt-model-key="field_type__exact_match">
         <option value="NUMERIC">Number</option>
@@ -147,18 +115,10 @@
   </div>
 
   <!-- field value type -- range -->
-  <div
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="compare"
-    wcpt-condition-val="BETWEEN"
-  >
-    <div
-      class="wcpt-editor-row-option"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="range_slider_enabled"
-      wcpt-condition-val="false"
-    >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="compare"
+    wcpt-condition-val="BETWEEN">
+    <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="range_slider_enabled"
+      wcpt-condition-val="false">
       <label>Field value type</label>
       <select wcpt-model-key="field_type">
         <option value="NUMERIC">Numeric</option>
@@ -175,44 +135,24 @@
   <div class="wcpt-editor-row-option">
     <label class="wcpt-editor-options-heading">
       Filter options
-      <small
-        wcpt-panel-condition="prop"
-        wcpt-condition-prop="compare"
-        wcpt-condition-val="IN"
-      >
+      <small wcpt-panel-condition="prop" wcpt-condition-prop="compare" wcpt-condition-val="IN">
         Leave this empty to let the plugin auto generate the filter options.
         <br>
         Or you can manually create the options if you need to show custom labels.
       </small>
-      <small
-        wcpt-panel-condition="prop"
-        wcpt-condition-prop="compare"
-        wcpt-condition-val="BETWEEN"
-      >
-      Use the 'Add an Option' button below to create range options for this filter
+      <small wcpt-panel-condition="prop" wcpt-condition-prop="compare" wcpt-condition-val="BETWEEN">
+        Use the 'Add an Option' button below to create range options for this filter
       </small>
     </label>
   </div>
 
   <!-- exact options -->
-  <div class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="compare"
-    wcpt-condition-val="IN"
-  >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="compare" wcpt-condition-val="IN">
 
-    <div
-      class="wcpt-label-options-rows-wrapper wcpt-sortable"
-      wcpt-model-key="manual_options"
-    >
-      <div
-        class="wcpt-editor-row wcpt-editor-custom-label-setup"
-        wcpt-controller="manual_options"
-        wcpt-model-key="[]"
-        wcpt-model-key-index="0"
-        wcpt-row-template="cf_manual_option_2"
-        wcpt-initial-data="custom_field_filter_manual_option"
-      >
+    <div class="wcpt-label-options-rows-wrapper wcpt-sortable" wcpt-model-key="manual_options">
+      <div class="wcpt-editor-row wcpt-editor-custom-label-setup" wcpt-controller="manual_options" wcpt-model-key="[]"
+        wcpt-model-key-index="0" wcpt-row-template="cf_manual_option_2"
+        wcpt-initial-data="custom_field_filter_manual_option">
 
         <!-- value -->
         <div class="wcpt-editor-row-option">
@@ -236,12 +176,8 @@
           <!-- content: label -->
           <div class="wcpt-tab-content">
             <div class="wcpt-editor-row-option">
-              <div
-                wcpt-model-key="label"
-                class="wcpt-term-relabel-editor"
-                wcpt-block-editor=""
-                wcpt-be-add-row="1"
-              ></div>
+              <div wcpt-model-key="label" class="wcpt-term-relabel-editor" wcpt-block-editor="" wcpt-be-add-row="1">
+              </div>
             </div>
           </div>
 
@@ -260,10 +196,7 @@
 
       </div>
 
-      <button
-        class="wcpt-button"
-        wcpt-add-row-template="cf_manual_option_2"
-      >
+      <button class="wcpt-button" wcpt-add-row-template="cf_manual_option_2">
         Add an Option
       </button>
 
@@ -284,24 +217,12 @@
   </div>
 
   <!-- range options -->
-  <div
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="compare"
-    wcpt-condition-val="BETWEEN"
-  >
-    <div
-      class="wcpt-label-options-rows-wrapper wcpt-sortable"
-      wcpt-model-key="range_options"
-    >
-      <div
-        class="wcpt-editor-row wcpt-editor-custom-label-setup"
-        wcpt-controller="range_options"
-        wcpt-model-key="[]"
-        wcpt-model-key-index="0"
-        wcpt-row-template="cf_range_option_2"
-        wcpt-initial-data="custom_field_filter_range_option"
-      >
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="compare"
+    wcpt-condition-val="BETWEEN">
+    <div class="wcpt-label-options-rows-wrapper wcpt-sortable" wcpt-model-key="range_options">
+      <div class="wcpt-editor-row wcpt-editor-custom-label-setup" wcpt-controller="range_options" wcpt-model-key="[]"
+        wcpt-model-key-index="0" wcpt-row-template="cf_range_option_2"
+        wcpt-initial-data="custom_field_filter_range_option">
 
         <!-- min value -->
         <div class="wcpt-editor-row-option">
@@ -331,12 +252,8 @@
           <!-- content: label -->
           <div class="wcpt-tab-content">
             <div class="wcpt-editor-row-option">
-              <div
-                wcpt-model-key="label"
-                class="wcpt-term-relabel-editor"
-                wcpt-block-editor=""
-                wcpt-be-add-row="1"
-              ></div>
+              <div wcpt-model-key="label" class="wcpt-term-relabel-editor" wcpt-block-editor="" wcpt-be-add-row="1">
+              </div>
             </div>
           </div>
 
@@ -354,10 +271,7 @@
 
       </div>
 
-      <button
-        class="wcpt-button"
-        wcpt-add-row-template="cf_range_option_2"
-      >
+      <button class="wcpt-button" wcpt-add-row-template="cf_range_option_2">
         Add an Option
       </button>
 
@@ -368,16 +282,14 @@
       <label>
         <input type="checkbox" wcpt-model-key="custom_min_max_enabled">
         Enable custom 'Min' & 'Max' input options
-        <small>Enable to get the <a href="https://wcproducttable.com/documentation/multi-range-slider-for-cf-price-filters" target="_blank">range slider</a> option as well</small>
+        <small>Enable to get the <a
+            href="https://wcproducttable.com/documentation/multi-range-slider-for-cf-price-filters"
+            target="_blank">range slider</a> option as well</small>
       </label>
     </div>
 
-    <div
-      class="wcpt-editor-row-option"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="custom_min_max_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="custom_min_max_enabled"
+      wcpt-condition-val="true">
 
       <!-- range_slider_enabled -->
       <div class="wcpt-editor-row-option">
@@ -397,7 +309,7 @@
       <div class="wcpt-editor-row-option">
         <label>
           Max permitted value
-          <small>Leave empty to get max from db automatically</small>      
+          <small>Leave empty to get max from db automatically</small>
         </label>
         <input type="number" wcpt-model-key="max">
       </div>
@@ -466,7 +378,7 @@
       </div>      -->
 
       <!-- 'Min' -->
-      <div class="wcpt-editor-row-option"  >
+      <div class="wcpt-editor-row-option">
         <label>Label for "Min" placeholder</label>
         <input type="text" wcpt-model-key="min_label">
       </div>
@@ -513,6 +425,14 @@
 
 </div>
 
+<!-- show all label -->
+<div class="wcpt-editor-row-option">
+  <label>
+    "Show All" label
+  </label>
+  <input type="text" wcpt-model-key="show_all_label">
+</div>
+
 <!-- accordion always open -->
 <div class="wcpt-editor-row-option">
   <label>
@@ -526,12 +446,8 @@
 </div>
 
 <!-- search placeholder -->
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="search_enabled"
-  wcpt-condition-val="true"
->
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="search_enabled"
+  wcpt-condition-val="true">
   <label>Placeholder for the search input box</label>
   <input type="text" wcpt-model-key="search_placeholder">
 </div>

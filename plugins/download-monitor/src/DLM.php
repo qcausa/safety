@@ -67,9 +67,8 @@ class WP_DLM {
 
 		// Setup Services
 		$this->services = new DLM_Services();
-
-		// Load plugin text domain.
-		$this->load_textdomain();
+		// Setup the download monitor upsells
+		DLM_Upsells::get_instance();
 
 		// Table for Download Infos.
 		$wpdb->download_log = "{$wpdb->prefix}download_log";
@@ -237,6 +236,8 @@ class WP_DLM {
 
 		// Load the integrated Terms and Conditions functionality.
 		new DLM_Integrated_Terms_And_Conditions();
+		// Load the Members Lock functionality.
+		new DLM_Members_Lock();
 
 		// Backwards Compatibility.
 		$dlm_backwards_compatibility
@@ -258,8 +259,6 @@ class WP_DLM {
 		// Generate attachment URL as Download link for protected files. Adding this here because we need it both in admin and in front.
 		add_filter( 'wp_get_attachment_url',
 			array( $this, 'generate_attachment_url' ), 15, 2 );
-
-		add_action( 'admin_menu', array( $this, 'init_upsells' ) );
 	}
 
 	/**
@@ -314,6 +313,8 @@ class WP_DLM {
 
 		// setup product manager
 		DLM_Product_Manager::get()->setup();
+		// Set the no access session
+		add_action( 'wp', array( $this, 'set_no_access_session' ) );
 	}
 
 	/**
@@ -542,6 +543,8 @@ class WP_DLM {
 	 */
 	public function register_globals() {
 		$GLOBALS['dlm_download'] = null;
+
+		$this->load_textdomain();
 	}
 
 	/**
@@ -931,15 +934,6 @@ class WP_DLM {
 	}
 
 	/**
-	 * Initialize the Upsells
-	 *
-	 * @since 4.9.9
-	 */
-	public function init_upsells() {
-		DLM_Upsells::get_instance();
-	}
-
-	/**
 	 * Display admin notice when DLM Terms & Conditions is deactivated.
 	 *
 	 * @since 5.0.0
@@ -950,5 +944,18 @@ class WP_DLM {
 			<p><?php esc_html_e('DLM - Terms & Conditions plugin was deactivated because it is now integrated within Download Monitor.', 'download-monitor'); ?></p>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Set no access session
+	 *
+	 * @return void
+	 * @since 5.0.14
+	 */
+	public function set_no_access_session() {
+		$no_access_page = get_option( 'dlm_no_access_page', 0 );
+		if ( $no_access_page && ! isset( $_SESSION ) ) {
+			session_start();
+		}
 	}
 }

@@ -553,6 +553,7 @@ function bp_core_create_subnav_link( $args = '', $component = 'members' ) {
 	);
 
 	buddypress()->{$component}->nav->add_nav( $subnav_item );
+	//BugFu::log($subnav_item );
 
 	return $subnav_item;
 }

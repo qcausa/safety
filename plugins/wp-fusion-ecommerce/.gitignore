@@ -1,0 +1,6 @@
+*.sublime-project
+*.sublime-workspace
+composer.json
+*.codekit
+.DS_Store
+wp-fusion-ecommerce.code-workspace

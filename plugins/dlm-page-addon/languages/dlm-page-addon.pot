@@ -1,0 +1,129 @@
+# Copyright (C) 2015 Download Monitor
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Download Monitor Page Addon 1.1.6\n"
+"Report-Msgid-Bugs-To: https://www.download-monitor.com/\n"
+"POT-Creation-Date: 2015-07-01 12:43:28+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+
+#: templates/content-download-pa-thumbnail.php:9
+#: templates/content-download-pa.php:9
+msgid "1"
+msgid_plural "%d"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dlm-page-addon.php:249
+msgid "Searching for \"%s\""
+msgstr ""
+
+#: templates/content-download-pa-single.php:18
+msgid "Download"
+msgstr ""
+
+#: templates/content-download-pa-single.php:46
+msgid "Previous versions"
+msgstr ""
+
+#: templates/content-download-pa-single.php:52
+msgid "Version %s"
+msgstr ""
+
+#: templates/content-download-pa-single.php:62
+msgid "Filename"
+msgstr ""
+
+#: templates/content-download-pa-single.php:67
+msgid "Filesize"
+msgstr ""
+
+#: templates/content-download-pa-single.php:72
+msgid "Version"
+msgstr ""
+
+#: templates/content-download-pa-single.php:77 templates/orderby.php:6
+msgid "Date added"
+msgstr ""
+
+#: templates/content-download-pa-single.php:82
+msgid "Downloaded"
+msgstr ""
+
+#: templates/content-download-pa-single.php:83
+msgid "1 time"
+msgid_plural "%d times"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/content-download-pa-single.php:87
+msgid "Category"
+msgstr ""
+
+#: templates/content-download-pa-single.php:92 templates/download-tags.php:2
+msgid "Tags"
+msgstr ""
+
+#: templates/featured-downloads.php:3
+msgid "Featured"
+msgstr ""
+
+#: templates/no-downloads-found.php:1
+msgid "No downloads found."
+msgstr ""
+
+#: templates/orderby.php:2
+msgid "Order by:"
+msgstr ""
+
+#: templates/orderby.php:5
+msgid "Title"
+msgstr ""
+
+#: templates/orderby.php:7
+msgid "Download count"
+msgstr ""
+
+#: templates/search-downloads.php:3
+msgid "Search Downloads"
+msgstr ""
+
+#: templates/search-downloads.php:4
+msgid "Search downloads..."
+msgstr ""
+
+#: templates/search-downloads.php:5
+msgid "Search"
+msgstr ""
+
+#: templates/subcategories.php:16
+msgid "Subcategories:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Download Monitor Page Addon"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.download-monitor.com/extensions/page-addon/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Adds a [download_page] shortcode for showing off your available downloads, "
+"tags and categories."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Download Monitor"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.download-monitor.com"
+msgstr ""

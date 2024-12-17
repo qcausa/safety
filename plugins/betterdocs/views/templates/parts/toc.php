@@ -1,6 +1,6 @@
 <?php
 if ( ! betterdocs()->settings->get( 'enable_toc', false ) ) {
-    return;
+	return;
 }
 
 $toc_hierarchy          = betterdocs()->settings->get( 'toc_hierarchy' );
@@ -9,11 +9,13 @@ $collapsible_toc_mobile = betterdocs()->settings->get( 'collapsible_toc_mobile' 
 $supported_tag          = betterdocs()->settings->get( 'supported_heading_tag', '' );
 $htags                  = $supported_tag ? implode( ',', $supported_tag ) : '';
 
-$attributes = betterdocs()->template_helper->get_html_attributes([
-    'htags' => "{$htags}",
-    'hierarchy' => "{$toc_hierarchy}",
-    'list_number' => "{$toc_list_number}",
-    'collapsible_on_mobile' => "{$collapsible_toc_mobile}"
-]);
+$attributes = betterdocs()->template_helper->get_html_attributes(
+	[
+		'htags'                 => "{$htags}",
+		'hierarchy'             => "{$toc_hierarchy}",
+		'list_number'           => "{$toc_list_number}",
+		'collapsible_on_mobile' => "{$collapsible_toc_mobile}"
+	]
+);
 
-echo do_shortcode( "[betterdocs_toc ". $attributes ."]" );
+echo do_shortcode( '[betterdocs_toc ' . $attributes . ']' );

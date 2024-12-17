@@ -105,7 +105,7 @@ jQuery(function ($) {
           "?&",
           "?"
         );
-      } else {
+      } else if (!sc_attrs.disable_url_update) {
         url = url + "?" + id + "_device=" + device;
       }
 
@@ -324,18 +324,14 @@ jQuery(function ($) {
     // trigger variation
     prep_variation_options($new_rows);
 
+    // dynamic filters lazy load
+    dynamic_filters_lazy_load($container);
+
     // cb select all: duplicate to footer
     wcpt_util.do_once_on_container(
       $container,
       "wcpt-select-all-init",
       duplicate_select_all
-    );
-
-    // dynamic filters lazy load
-    wcpt_util.do_once_on_container(
-      $container,
-      "wcpt-dynamic-filters-lazy-load-init",
-      dynamic_filters_lazy_load
     );
 
     // checkbox
@@ -752,7 +748,7 @@ jQuery(function ($) {
 
     // -- measurement
     if (has_measurement) {
-      var measurement = get_measurement($product_rows);
+      var measurement = wcpt_get_measurement($product_rows);
       if (!$.isEmptyObject(measurement)) {
         params.payload.measurement[product_id] = measurement;
       }
@@ -760,7 +756,7 @@ jQuery(function ($) {
 
     // -- name your price
     if (has_nyp) {
-      var nyp = get_nyp($product_rows);
+      var nyp = wcpt_get_nyp($product_rows);
       if (nyp) {
         params.payload.nyp[product_id] = nyp;
       }
@@ -827,7 +823,7 @@ jQuery(function ($) {
 
     // -- measurement (submit via post)
     if (has_measurement) {
-      var measurement = get_measurement($product_rows);
+      var measurement = wcpt_get_measurement($product_rows);
       if (!$.isEmptyObject(measurement)) {
         $.extend(ajax_data, measurement);
       }
@@ -835,7 +831,7 @@ jQuery(function ($) {
 
     // -- name your price (submit via post)
     if (has_nyp) {
-      var nyp = get_nyp($product_rows);
+      var nyp = wcpt_get_nyp($product_rows);
       if (nyp) {
         ajax_data.nyp = nyp;
       }
@@ -1273,7 +1269,7 @@ jQuery(function ($) {
       // if( ! $this.is(':hover') ) return;
       $this.addClass("wcpt-open");
       fix_tooltip_position($this);
-    }, 50);
+    }, 200);
 
     $this.data("wcpt_hover_intent_clear_timeout", clear_timeout);
 
@@ -1318,17 +1314,25 @@ jQuery(function ($) {
       $content = $dropdown.find(content_selector),
       $body = $("body");
 
-    if ("click" !== get_event_type_for_dropdown($dropdown)) {
+    // clicked outside any tootltip / filter
+    if (!$dropdown.length) {
+      // close all dropdowns or tooltips not in nav modal or sidebar
+      if (!$target.closest(".wcpt-nav-modal").length) {
+        $body.find(container_selector).each(function () {
+          if (
+            $(this).hasClass("wcpt-tooltip") ||
+            (!$(this).closest(".wcpt-nav-modal").length &&
+              !$(this).closest(".wcpt-left-sidebar").length)
+          ) {
+            $(this).removeClass("wcpt-open");
+          }
+        });
+      }
+
       return;
     }
 
-    // clicked outside any tootltip / filter
-    if (!$dropdown.length) {
-      // close all dropdowns
-      if (!$target.closest(".wcpt-nav-modal").length) {
-        $body.find(container_selector).removeClass("wcpt-open");
-      }
-
+    if ("click" !== get_event_type_for_dropdown($dropdown)) {
       return;
     }
 
@@ -2120,11 +2124,7 @@ jQuery(function ($) {
       $container: $container,
     });
 
-    // var $new_container = $(response);
-    // $container.replaceWith( $new_container );
-    // $container = $new_container;
-
-    // replace $container inner html without losing refrence required by internal callback
+    // replace $container inner html
     var $new_container = $(response);
     $container.html($new_container.html());
 
@@ -2398,10 +2398,11 @@ jQuery(function ($) {
           "&" +
           query.slice(1),
         data = {
-          id: table_id,
+          wcpt_encrypted_attrs: wcpt_util.get_encrypted_attrs($container),
+          id: table_id, // @TODO -- remove this
         };
 
-      // form mode / disable ajax redirect
+      // redirect if 'form mode' / 'disable ajax' is enabled
       if (
         sc_attrs.form_mode ||
         (sc_attrs.disable_ajax && sc_attrs.disable_ajax !== "false")
@@ -2426,7 +2427,7 @@ jQuery(function ($) {
         // else AJAX
         $.ajax({
           url: url,
-          method: "GET",
+          method: "POST",
           beforeSend: function () {
             $container.addClass("wcpt-loading");
             $container.trigger("wcpt_before_ajax");
@@ -2532,12 +2533,18 @@ jQuery(function ($) {
   //   }
   // })
   //-- taxonomy parent
-  $("body").on("click", ".wcpt-ac-icon", function (e) {
-    var $this = $(this);
-    $this.closest(".wcpt-accordion").toggleClass("wcpt-ac-open");
-    e.stopPropagation();
-    return false;
-  });
+  $("body").on(
+    "click",
+    ".wcpt-filter-hierarchy-accordion__trigger",
+    function (e) {
+      var $this = $(this);
+      $this
+        .closest(".wcpt-filter-hierarchy-accordion")
+        .toggleClass("wcpt-filter-hierarchy-accordion--open");
+      e.stopPropagation();
+      return false;
+    }
+  );
 
   // nav modal
   function nav_modal(e) {
@@ -2737,10 +2744,6 @@ jQuery(function ($) {
   });
 
   $("body").on("click", ".wcpt-rn-filter, .wcpt-rn-sort", nav_modal);
-
-  $("body").on("click", ".wcpt-accordion-heading", function () {
-    $(this).closest(".wcpt-accordion").toggleClass("wcpt-open");
-  });
 
   // apply filters
   $("body").on("click", ".wcpt-apply", function () {
@@ -3593,6 +3596,12 @@ jQuery(function ($) {
               "wcpt_default_image",
               $product_image[0].outerHTML
             );
+          }
+
+          // replace variation image accoring to 'product image' element size settings
+          if (data.variation.wcpt_image && data.variation.wcpt_image.src) {
+            data.variation.image.src = data.variation.image.srcset =
+              data.variation.wcpt_image.src;
           }
 
           if (
@@ -5402,12 +5411,12 @@ jQuery(function ($) {
 
       // measurement
       if ($row.hasClass("wcpt-product-has-measurement")) {
-        measurement[product_id] = get_measurement($row);
+        measurement[product_id] = wcpt_get_measurement($row);
       }
 
       // name your price
       if ($row.hasClass("wcpt-product-has-name-your-price")) {
-        nyp[product_id] = get_nyp($row);
+        nyp[product_id] = wcpt_get_nyp($row);
       }
     });
 
@@ -5504,7 +5513,7 @@ jQuery(function ($) {
   };
 
   // measurement
-  function get_measurement($row) {
+  window.wcpt_get_measurement = function ($row) {
     var $price_calculator = $(
         ".wcpt-add-to-cart-wrapper form #price_calculator",
         wcpt_get_sibling_rows($row)
@@ -5517,10 +5526,10 @@ jQuery(function ($) {
     });
 
     return measurement;
-  }
+  };
 
   // name your price
-  function get_nyp($row) {
+  window.wcpt_get_nyp = function ($row) {
     var $nyp = get_nyp_input_element($row),
       val = 0;
 
@@ -5529,7 +5538,7 @@ jQuery(function ($) {
     }
 
     return val;
-  }
+  };
 
   function get_nyp_input_element($row) {
     return $(".wcpt-name-your-price--input", wcpt_get_sibling_rows($row));
@@ -5584,14 +5593,16 @@ jQuery(function ($) {
     if (!val) {
       $option.show();
 
-      $(".wcpt-ac-open", $filter).removeClass("wcpt-ac-open");
+      $(".wcpt-filter-hierarchy-accordion--open", $filter).removeClass(
+        "wcpt-filter-hierarchy-accordion--open"
+      );
 
       $("input[type=radio], input[type=checkbox]", $option).each(function () {
         var $this = $(this);
         if ($this.is(":checked")) {
           $this
-            .closest(".wcpt-dropdown-option.wcpt-accordion")
-            .addClass("wcpt-ac-open");
+            .closest(".wcpt-dropdown-option.wcpt-filter-hierarchy-accordion")
+            .addClass("wcpt-filter-hierarchy-accordion--open");
         }
       });
       return;
@@ -5605,8 +5616,8 @@ jQuery(function ($) {
       } else {
         $this.show();
         $this
-          .closest(".wcpt-dropdown-option.wcpt-accordion")
-          .addClass("wcpt-ac-open");
+          .closest(".wcpt-dropdown-option.wcpt-filter-hierarchy-accordion")
+          .addClass("wcpt-filter-hierarchy-accordion--open");
       }
     });
   });
@@ -5709,19 +5720,15 @@ jQuery(function ($) {
   // cart
 
   window.wcpt_cart = function (params) {
-
     // maybe add to pending requests
     if (
       // there has been at least one cart call earlier
-      window.wcpt_cart_call_id && (
-        // no results cache ie, no call is resolved yet
-        ! window.wcpt_cart_result_cache ||
-        (
+      window.wcpt_cart_call_id &&
+      // no results cache ie, no call is resolved yet
+      (!window.wcpt_cart_result_cache ||
         // the call id in result cache (ie last resolved call) is uneqal to current call id
         window.wcpt_cart_call_id !=
-          window.wcpt_cart_result_cache.payload.wcpt_cart_call_id 
-        )          
-      )
+          window.wcpt_cart_result_cache.payload.wcpt_cart_call_id)
     ) {
       !window.wcpt_cart_pending_req_params &&
         (window.wcpt_cart_pending_req_params = {});
@@ -5731,8 +5738,10 @@ jQuery(function ($) {
       return;
     }
 
-    // begin / increment the cart call counter    
-    window.wcpt_cart_call_id = window.wcpt_cart_call_id ? window.wcpt_cart_call_id + 1 : 1;
+    // begin / increment the cart call counter
+    window.wcpt_cart_call_id = window.wcpt_cart_call_id
+      ? window.wcpt_cart_call_id + 1
+      : 1;
 
     var _params = {
       payload: {
@@ -5899,19 +5908,18 @@ jQuery(function ($) {
             is_cache: true,
           });
           $("body").trigger("wcpt_cart", result);
-
         }
-        ).always(function (result) {
-          if (params.always) {
-            params.always(result);
-          }
-          
-          // resolve any pending requests
-          if(window.wcpt_cart_pending_req_params){
-            wcpt_cart(window.wcpt_cart_pending_req_params);
-            window.wcpt_cart_pending_req_params = false;
-          }
-          
+      ).always(function (result) {
+        if (params.always) {
+          params.always(result);
+        }
+
+        // resolve any pending requests
+        if (window.wcpt_cart_pending_req_params) {
+          wcpt_cart(window.wcpt_cart_pending_req_params);
+          window.wcpt_cart_pending_req_params = false;
+        }
+
         if (params.redirect) {
           if (
             // redirect after user reads error
@@ -6017,20 +6025,21 @@ jQuery(function ($) {
       added = true;
     }
 
-    var in_cart_products = [];
+    var in_cart_products = []; // variations and parent variable products at same level
 
     if (result.in_cart) {
       $.each(result.in_cart, function (key, val) {
+        // variable product
         if (typeof val === "object") {
-          // variation
+          // related to parent variable product
           var qty = 0,
             total = 0;
 
-          // qty
+          // iterate over variations
           $.each(val, function (key2, val2) {
             var _total = result.in_cart_total[key][key2];
 
-            // discreet entries for variations
+            // insert variations as separate entries
             in_cart_products.push({
               id: key2,
               type: "variation",
@@ -6038,10 +6047,12 @@ jQuery(function ($) {
               total: _total,
             });
 
-            qty += parseFloat(val2);
-            total += parseFloat(_total);
+            // sum up variation quantities and totals (decimal fix)
+            qty = (qty * 1000 + parseFloat(val2) * 1000) / 1000;
+            total = (total * 1000 + parseFloat(_total) * 1000) / 1000;
           });
 
+          // insert parent variable product
           in_cart_products.push({
             id: key,
             type: "variable",
@@ -6066,15 +6077,12 @@ jQuery(function ($) {
 
     $rows.each(function () {
       var $row = $(this),
-        type = $row.attr("data-wcpt-type");
-      (product_id = $row.attr("data-wcpt-product-id")),
-        (variation_id = $row.attr("data-wcpt-variation-id")),
-        (id =
-          type == "variation"
-            ? $row.attr("data-wcpt-variation-id")
-            : $row.attr("data-wcpt-product-id")),
-        (cart_item = false),
-        (min_call_id = $row.data("wcpt-min-cart-call-id"));
+        type = $row.attr("data-wcpt-type"),
+        product_id = $row.attr("data-wcpt-product-id"),
+        variation_id = $row.attr("data-wcpt-variation-id"),
+        id = type == "variation" ? variation_id : product_id,
+        cart_item = false,
+        min_call_id = $row.data("wcpt-min-cart-call-id");
 
       if (min_call_id > result.payload.wcpt_cart_call_id) {
         return;
@@ -6082,7 +6090,9 @@ jQuery(function ($) {
 
       $.each(in_cart_products, function (key, item) {
         if (
+          // variation
           (variation_id && variation_id == item.id) ||
+          // regular product
           (!variation_id && product_id == item.id)
         ) {
           cart_item = item;
@@ -6225,7 +6235,7 @@ jQuery(function ($) {
         ".frzTbl-fixed-heading-wrapper-outer:visible",
         $this
       ),
-      sc_attrs = $this.data("wcpt-sc-attrs"),
+      sc_attrs = $this.data("wcpt_sc_attrs"),
       device = get_device(),
       offset = parseInt(
         sc_attrs[device + "_scroll_offset"]
@@ -6250,9 +6260,9 @@ jQuery(function ($) {
     }
   });
 
-  // dynamic filters
+  // dynamic filters lazy load
   function dynamic_filters_lazy_load($container) {
-    // dynamic recount / hide filters not enabled
+    // check for shortcode attrs
     if (
       !$container.data("wcpt_sc_attrs").dynamic_filters_lazy_load ||
       (!$container.data("wcpt_sc_attrs").dynamic_recount &&
@@ -6261,118 +6271,77 @@ jQuery(function ($) {
       return;
     }
 
-    var key = $container.attr("data-wcpt--dynamic-filters-lazy-load--key"),
-      _options = $container.attr(
-        "data-wcpt--dynamic-filters-lazy-load--filter-options"
-      );
-
-    if (!key || !_options) {
-      return;
-    }
-
-    var options = JSON.parse(_options),
-      filters = [
-        "category",
-        "attribute",
-        "availability",
-        "on_sale",
-        "taxonomy",
-      ];
-
-    $(".wcpt-filter", $container).each(function () {
-      var $this = $(this),
-        filter = $this.attr("data-wcpt-filter");
-
-      if (-1 !== $.inArray(filter, filters)) {
-        dynamic_filters_lazy_load__fetch($this, key, options);
-      }
-    });
-  }
-
-  function dynamic_filters_lazy_load__fetch($filter, key, options) {
-    var filter = $filter.attr("data-wcpt-filter"),
-      taxonomy = $filter.attr("data-wcpt-taxonomy"),
-      filter_options = [],
-      $container = $filter.closest(".wcpt");
-
-    $.each(options, function (i, option) {
-      if (
-        filter == option["filter"] &&
-        (filter !== "attribute" || taxonomy == option["taxonomy"])
-      ) {
-        filter_options.push(option);
-      }
-    });
+    var encrypted_cache = $container.attr(
+      "data-wcpt-encrypted-dynamic-filters-lazy-load-cache"
+    );
 
     $.ajax({
       url: wcpt_params.wc_ajax_url.replace(
         "%%endpoint%%",
         "wcpt__dynamic_filter__lazy_load"
       ),
-      method: "GET",
+      method: "POST",
       data: {
-        wcpt__dynamic_filter__key: key,
-        wcpt__dynamic_filter__options: filter_options,
+        wcpt_dynamic_filter_encrypted_cache: encrypted_cache,
       },
       success: function (result) {
-        var result = JSON.parse(result),
-          $style = $("style#" + key, $container),
-          $script = $("script#" + key, $container);
+        var result = JSON.parse(result);
 
         // append style and script
-        if (!$style.length) {
-          $style = $('<style id="' + key + '"></style>').prependTo($container);
-        }
-        $style.append($(result.style).html());
+        $(result.style + result.script).appendTo($container);
 
-        if (!$script.length) {
-          $script = $('<script id="' + key + '"></script>').prependTo(
-            $container
-          );
-        }
-        $script.append($(result.style).html());
+        var $filters = $(".wcpt-filter", $container);
 
-        // add count
-        $filter = $filter.add(
-          '.wcpt-nav-modal .wcpt-filter[data-wcpt-filter="' + filter + '"]'
-        );
-        if (taxonomy) {
-          $filter = $filter.filter('[data-wcpt-taxonomy="' + taxonomy + '"]');
-        }
+        var target_filters = [
+          "category",
+          "attribute",
+          "availability",
+          "on_sale",
+          "taxonomy",
+        ];
 
-        var add_count = false;
-        sc_attrs = $container.attr("data-wcpt-sc-attrs");
+        if ($container.data("wcpt_sc_attrs").dynamic_recount) {
+          $filters.each(function () {
+            var $filter = $(this),
+              filter_type = $filter.attr("data-wcpt-filter");
+            if (!target_filters.includes(filter_type)) return true;
 
-        if (sc_attrs && sc_attrs.length > 2) {
-          sc_attrs = JSON.parse(sc_attrs);
-
-          if (sc_attrs.dynamic_recount) {
-            add_count = true;
-          }
-        }
-
-        if (add_count) {
-          $.each(result.options, function (i, option) {
-            var count =
-                '<span class="wcpt-count">(' + option.count + ")</span>",
-              $label = $(
-                'label[data-wcpt-value="' + option.value + '"]',
-                $filter
-              ),
-              $icon = $label.children(".wcpt-icon"),
-              $prev_count = $(".wcpt-count", $label);
-
-            $prev_count.remove(); // in case duplicate taxonomy filter is printed
-
-            if ($icon.length) {
-              $icon.before(count);
-            } else {
-              $label.append(count);
+            var taxonomy = false;
+            if (["taxonomy", "attribute"].includes(filter_type)) {
+              taxonomy = $filter.attr("data-wcpt-taxonomy");
             }
+
+            result.options.forEach(function (option) {
+              if (option.filter !== filter_type) return;
+              if (taxonomy && option.taxonomy !== taxonomy) return;
+
+              var $option = $(
+                '[data-wcpt-value="' + option.value + '"]',
+                $filter
+              );
+              if (!$option.length) return;
+
+              var count =
+                  '<span class="wcpt-count">(' + option.count + ")</span>",
+                $label = $(
+                  'label[data-wcpt-value="' + option.value + '"]',
+                  $filter
+                ),
+                $icon = $label.children(".wcpt-icon"),
+                $prev_count = $(".wcpt-count", $label);
+
+              $prev_count.remove(); // in case duplicate taxonomy filter is printed
+
+              if ($icon.length) {
+                $icon.before(count);
+              } else {
+                $label.append(count);
+              }
+            });
           });
         }
 
-        $filter.removeClass("wcpt--dynamic-filters--loading-filter");
+        $filters.removeClass("wcpt--dynamic-filters--loading-filter");
       },
     });
   }
@@ -7591,194 +7560,6 @@ jQuery(function ($) {
     }
   );
 
-  // WC Request a Quote (by Addify)
-
-  if (typeof wcpt_afrfq_params == "undefined") {
-    wcpt_afrfq_params = {
-      product_ids: [],
-      view_quote_url: "",
-      view_quote_label: "",
-    };
-  }
-
-  // -- button status & switch html class
-  $("body").on("wcpt_after_every_load", ".wcpt", function () {
-    var $this__container = $(this);
-
-    // switch native html class to wcpt html class on plugin buttons
-    $(
-      ".afrfqbt, .afrfqbt_single_page",
-      wcpt_util.get_uninit_rows($this__container)
-    )
-      .removeClass("afrfqbt afrfqbt_single_page")
-      .addClass("wcpt-afrfqbt"); // override with WCPT handler
-
-    // remove afrfqbt success message
-    $(".added_quote_pro").remove();
-
-    // set added status
-    afrfqbt_status($this__container);
-  });
-
-  setTimeout(afrfqbt_status, 500); // some external script removes 'added' html class
-
-  function afrfqbt_status($container) {
-    // $container will be $('.wcpt-afrfqbt'), $row, $wcpt or $body
-    if (typeof $container === "undefined") {
-      $container = $("body");
-    }
-
-    var $raq_buttons = $container.is(".wcpt-afrfqbt")
-      ? $container
-      : $(".wcpt-afrfqbt", wcpt_util.get_uninit_rows($container));
-
-    $raq_buttons.each(function () {
-      var $raq_button = $(this),
-        $row = $raq_button.closest(".wcpt-row"),
-        id = false,
-        product_type = $row.attr("data-wcpt-type"),
-        $prev_view_link = $raq_button.siblings(
-          ".wcpt-afrfqbt-view-quote-wrapper"
-        );
-
-      if (product_type === "variable") {
-        id = $row.data("wcpt_variation_id");
-      } else if (product_type === "variation") {
-        id = $row.attr("data-wcpt-variation-id");
-      } else {
-        id = $row.attr("data-wcpt-product-id");
-      }
-
-      if (-1 !== $.inArray(parseInt(id), wcpt_afrfq_params.product_ids)) {
-        $raq_button.addClass("added");
-
-        if (!$prev_view_link.length) {
-          $raq_button.after(
-            '<div class="wcpt-afrfqbt-view-quote-wrapper"><a href="' +
-              wcpt_afrfq_params.view_quote_url +
-              '" class="wcpt-afrfqbt-view-quote">' +
-              wcpt_afrfq_params.view_quote_label +
-              "</a></div>"
-          );
-        }
-      } else {
-        $raq_button.removeClass("added");
-        $prev_view_link.remove();
-      }
-    });
-  }
-
-  // -- ev: 'select_variation' - enable / disable button
-  $("body").on("select_variation", ".wcpt-product-type-variable", function () {
-    var $this = $(this),
-      variation_id = $this.data("wcpt_variation_id"),
-      $raq_button = $(".wcpt-afrfqbt", $this);
-
-    afrfqbt_status($this);
-
-    if (variation_id) {
-      // enable button
-      $raq_button.removeClass("disabled");
-    } else {
-      // disable button
-      $raq_button.addClass("disabled");
-    }
-  });
-
-  // -- AJAX req
-
-  $("body").on("click", ".wcpt-afrfqbt", function (e) {
-    e.preventDefault();
-
-    var $this = $(this),
-      $row = $this.closest(".wcpt-row"),
-      product_id = $row.attr("data-wcpt-product-id"),
-      variation_id = false,
-      variation_attributes = false,
-      qty = 0;
-
-    if ($(".cart .qty", $row).length) {
-      qty = $(".cart .qty", $row).val();
-    } else {
-      qty = $(".qty", $row).val();
-    }
-
-    if (!qty) {
-      qty = 1;
-    }
-
-    if ($row.hasClass("wcpt-product-type-variable")) {
-      variation_id = $row.data("wcpt_variation_id");
-      variation_attributes = $row.data("wcpt_attributes");
-    } else if ($row.hasClass("wcpt-product-type-variation")) {
-      variation_id = $row.attr("data-wcpt-variation-id");
-      variation_attributes = $row.data("wcptVariationAttributes");
-    }
-
-    if ($row.hasClass("wcpt-product-type-variable") && !variation_id) {
-      alert(wcpt_i18n.i18n_make_a_selection_text);
-      return;
-    }
-
-    if ($this.hasClass("disabled")) {
-      return;
-    }
-
-    $this.removeClass("added"); // avoid conflict with .loading animation
-
-    if (variation_id) {
-      var ajax_data = {
-        action: "add_to_quote_single_vari",
-        form_data: {
-          product_id: product_id,
-          variation_id: variation_id,
-          "add-to-cart": product_id,
-          quantity: qty,
-        },
-        nonce: afrfq_phpvars.nonce,
-      };
-
-      ajax_data.form_data = $.param(ajax_data.form_data);
-
-      $.extend(ajax_data.form_data, variation_attributes);
-    } else {
-      var ajax_data = {
-        action: "add_to_quote_single",
-        product_id: product_id,
-        quantity: qty,
-        woo_addons: false,
-        woo_addons1: false,
-        nonce: afrfq_phpvars.nonce,
-      };
-    }
-
-    $.ajax({
-      url: afrfq_phpvars.admin_url,
-      method: "POST",
-      beforeSend: function () {
-        $this.addClass("loading");
-      },
-      data: ajax_data,
-    }).done(function (response) {
-      // keep list of products in raq
-      // upon after every load, refer to this list
-      $this.removeClass("loading");
-
-      if (variation_id) {
-        wcpt_afrfq_params.product_ids.push(parseInt(variation_id));
-      } else {
-        wcpt_afrfq_params.product_ids.push(parseInt(product_id));
-      }
-
-      afrfqbt_status($this);
-
-      if (response !== "success") {
-        // menu mini quote
-        $(".quote-li").replaceWith(response["mini-quote"]);
-      }
-    });
-  });
-
   // init tables
   var $wcpt = $(".wcpt");
   if ($wcpt.length) {
@@ -7808,11 +7589,25 @@ jQuery(function ($) {
   }
 
   $(window).on("pageshow", function (e) {
+    // trigger cart events
     if (e.originalEvent.persisted) {
       wcpt_cart({
         payload: { skip_cart_triggers: true },
       });
     }
+
+    // reset select variation to default
+    $(".wcpt-select-variation-dropdown").each(function () {
+      var $this = $(this),
+        $row = $this.closest(".wcpt-row"),
+        variation_id = $row.data("wcpt_variation_id");
+
+      if (variation_id) {
+        $this.val(variation_id);
+      } else {
+        $this.val("");
+      }
+    });
   });
 });
 
@@ -8545,10 +8340,15 @@ jQuery(function ($) {
 (function ($) {
   $("body").on("click", ".wcpt-csv-download", function () {
     var $this = $(this),
-      session_key = $this.attr("data-wcpt-csv-session-key"),
+      file_name = $this.attr("data-wcpt-file-name"),
       include_all_products = $this.attr("data-wcpt-csv-include-all-products"),
-      headings = window[$this.attr("data-wcpt-headings-js-var-name")].join(","),
-      file_name = $this.attr("data-wcpt-file-name");
+      $container = $this.closest(".wcpt"),
+      encrypted_query_vars = $container.attr("data-wcpt-encrypted-query-vars"),
+      encrypted_user_filters = $container.attr(
+        "data-wcpt-encrypted-user-filters"
+      ),
+      encrypted_columns = $this.attr("data-wcpt-csv-encrypted-columns"),
+      table_id = $this.closest(".wcpt").attr("data-wcpt-table-id");
 
     if ($this.hasClass("wcpt-disabled")) {
       return;
@@ -8556,24 +8356,27 @@ jQuery(function ($) {
 
     $.ajax({
       url: wcpt_params.wc_ajax_url.replace("%%endpoint%%", "wcpt_get_csv"),
-      method: "POST",
+      method: "POST", // @todo: change to GET
       beforeSend: function () {
         $this.addClass("wcpt-disabled wcpt-loading");
       },
       data: {
-        wcpt_csv_session_key: session_key,
         wcpt_csv_include_all_products: include_all_products,
+        wcpt_csv_encrypted_query_vars: encrypted_query_vars,
+        wcpt_csv_encrypted_user_filters: encrypted_user_filters,
+        wcpt_csv_encrypted_columns: encrypted_columns,
+        wcpt_csv_table_id: table_id,
       },
     }).done(function (json_data) {
       $this.removeClass("wcpt-disabled wcpt-loading");
-      build_csv_and_download(json_data, headings, file_name);
+      build_csv_and_download(json_data, file_name);
     });
   });
 
-  function build_csv_and_download(json_data, headings, file_name) {
-    var csv = headings + "\n";
-    $.each(json_data, function (key, product) {
-      $.each(product, function (prop, val) {
+  function build_csv_and_download(json_data, file_name) {
+    var csv = "";
+    $.each(json_data, function (_, row) {
+      $.each(row, function (_, val) {
         csv += val + ",";
       });
       csv = csv.slice(0, -1) + "\n";
@@ -8961,10 +8764,47 @@ var wcpt_util;
         history.replaceState({}, "", url_object.href);
       }
     },
+
+    get_encrypted_attrs: ($container) => {
+      const encrypted_attrs = {};
+      $container.each(function () {
+        $.each(this.attributes, function () {
+          if (this.specified && this.name.startsWith("data-wcpt-encrypted-")) {
+            encrypted_attrs[this.name] = this.value;
+          }
+        });
+      });
+      return encrypted_attrs;
+    },
+
+    format_price_figure: (price) => {
+      price = parseFloat(price);
+
+      // remove decimal if it is unnecessary ie .00
+      if (price !== parseInt(price)) {
+        price = parseFloat(price).toFixed(wcpt_params.price_decimals);
+      } else {
+        price = parseInt(price);
+      }
+
+      // decimal separator
+      price = (price + "").replace(".", wcpt_params.price_decimal_separator);
+
+      // thousands separator
+      var decimal_split = price.split(wcpt_params.price_decimal_separator);
+      (non_decimal = decimal_split[0].toString()), (decimal = decimal_split[1]);
+
+      if (non_decimal.length > 3) {
+        formatted_non_decimal =
+          non_decimal.slice(0, -3) +
+          wcpt_params.price_thousand_separator +
+          non_decimal.slice(-3);
+        price =
+          formatted_non_decimal +
+          (decimal ? wcpt_params.price_decimal_separator + decimal : "");
+      }
+
+      return price;
+    },
   };
 })(jQuery);
-
-
-// first and second products are init immedately sync rest are pending
-
-

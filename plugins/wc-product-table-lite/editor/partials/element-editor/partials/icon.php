@@ -24,13 +24,13 @@
     <!-- font-color -->
     <div class="wcpt-editor-row-option">
       <label>Stroke color</label>
-      <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker" >
+      <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker">
     </div>
 
     <!-- fill -->
     <div class="wcpt-editor-row-option">
       <label>Fill color</label>
-      <input type="text" wcpt-model-key="fill" class="wcpt-color-picker" >
+      <input type="text" wcpt-model-key="fill" class="wcpt-color-picker">
     </div>
 
     <!-- stroke-width -->
@@ -46,6 +46,17 @@
       <input type="text" wcpt-model-key="margin-right" placeholder="right">
       <input type="text" wcpt-model-key="margin-bottom" placeholder="bottom">
       <input type="text" wcpt-model-key="margin-left" placeholder="left">
+    </div>
+
+    <!-- position offset -->
+    <div class="wcpt-editor-row-option">
+      <label>Position offset</label>
+      <div style="display: flex;">
+        <input type="text" wcpt-model-key="top" placeholder="top">
+        <input type="text" wcpt-model-key="right" placeholder="right">
+        <input type="text" wcpt-model-key="bottom" placeholder="bottom">
+        <input type="text" wcpt-model-key="left" placeholder="left">
+      </div>
     </div>
 
   </div>

@@ -1,0 +1,25 @@
+{
+  "name": "shortcodes-for-buddypress",
+  "version": "2.1.0",
+  "url": "https://github.com/wbcomdesigns/shortcodes-for-buddypress",
+  "license": "GPL-2.0+",
+  "description": "shortcodes-for-buddypress",
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-wp-i18n": "^1.0.3",
+    "grunt-checktextdomain": "^1.0.1"
+  },
+  "engines": {
+    "node": "16.4.0",
+    "npm": "7.24.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vapvarun/buddypress-polls"
+  },
+  "dependencies": {
+    "grunt-checktextdomain": "^1.0.1",
+    "grunt-rtlcss": "^2.0.2",
+    "load-grunt-tasks": "^3.5.2"
+  }
+}

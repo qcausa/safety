@@ -1,12 +1,12 @@
 <div class="wcpt-editor-row-option <?php wcpt_pro_cover(); ?>">
   <!-- custom field condition -->
   <div class="wcpt-editor-row-option">
-      <select wcpt-model-key="action">
-        <option value="show">Show element only if ALL conditions are met</option>
-        <option value="hide">Hide element only if ALL conditions are met</option>
-        <option value="show_any">Show element if ANY condition is met</option>
-        <option value="hide_any">Hide element if ANY condition is met</option>
-      </select>
+    <select wcpt-model-key="action">
+      <option value="show">Show element only if ALL conditions are met</option>
+      <option value="hide">Hide element only if ALL conditions are met</option>
+      <option value="show_any">Show element if ANY condition is met</option>
+      <option value="hide_any">Hide element if ANY condition is met</option>
+    </select>
   </div>
 
   <!-- custom field condition -->
@@ -17,12 +17,8 @@
     </label>
   </div>
 
-  <div
-    class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="custom_field_enabled"
-    wcpt-condition-val="true"
-  >
+  <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+    wcpt-condition-prop="custom_field_enabled" wcpt-condition-val="true">
 
     <div class="wcpt-editor-row-option">
       <label>
@@ -38,6 +34,7 @@
         <small>Single permitted value: <i>value 1</i></small>
         <small>Multiple permitted values: <i>value 1 || value 2 || value 3</i></small>
         <small>Range of permitted numeric values: <i>150 - 600</i></small>
+        <small>Values "like" these (use % for wildcard): <i>like: %value1% || %value2%</i></small>
         <small>No value should be set: <i>-</i></small>
       </label>
       <input type="text" wcpt-model-key="custom_field_value">
@@ -53,32 +50,28 @@
     </label>
   </div>
 
-  <div
-    class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="attribute_enabled"
-    wcpt-condition-val="true"
-  >
+  <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+    wcpt-condition-prop="attribute_enabled" wcpt-condition-val="true">
 
     <div class="wcpt-editor-row-option">
       <label>Attribute</label>
       <?php
-        $attributes = wc_get_attribute_taxonomies();
-        if( empty( $attributes ) ){
-          echo '<div class="wcpt-notice">There are no WooCommerce attributes on this site!</div>';
-          $hide_class = 'wcpt-hide';
-        }
+      $attributes = wc_get_attribute_taxonomies();
+      if (empty($attributes)) {
+        echo '<div class="wcpt-notice">There are no WooCommerce attributes on this site!</div>';
+        $hide_class = 'wcpt-hide';
+      }
       ?>
-      <select class="<?php echo empty( $attributes ) ? 'wcpt-hide' : '';  ?>" wcpt-model-key="attribute">
+      <select class="<?php echo empty($attributes) ? 'wcpt-hide' : ''; ?>" wcpt-model-key="attribute">
         <option value=""></option>
         <?php
-          foreach( $attributes as $attribute ){
-            ?>
-            <option value="<?php echo $attribute->attribute_name; ?>">
-              <?php echo $attribute->attribute_label; ?>
-            </option>
-            <?php
-          }
+        foreach ($attributes as $attribute) {
+          ?>
+          <option value="<?php echo $attribute->attribute_name; ?>">
+            <?php echo $attribute->attribute_label; ?>
+          </option>
+          <?php
+        }
         ?>
       </select>
     </div>
@@ -104,22 +97,18 @@
     </label>
   </div>
 
-  <div
-    class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="category_enabled"
-    wcpt-condition-val="true"
-  >
+  <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+    wcpt-condition-prop="category_enabled" wcpt-condition-val="true">
 
     <div class="wcpt-editor-row-option">
       <label>
         Category slugs
         <small>
-          Enter multiple possible categories with || separator: <br/>
+          Enter multiple possible categories with || separator: <br />
           <i>category-1 || category-2 || category-3</i>
-        </small>      
+        </small>
       </label>
-      <input type="text" wcpt-model-key="category"/>
+      <input type="text" wcpt-model-key="category" />
     </div>
 
   </div>
@@ -131,12 +120,8 @@
       Add price condition
     </label>
 
-    <div
-      class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="price_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+      wcpt-condition-prop="price_enabled" wcpt-condition-val="true">
 
       <div class="wcpt-editor-row-option">
         <label>
@@ -161,12 +146,8 @@
       Add stock condition
     </label>
 
-    <div
-      class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="stock_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+      wcpt-condition-prop="stock_enabled" wcpt-condition-val="true">
 
       <div class="wcpt-editor-row-option">
         <label>
@@ -191,25 +172,21 @@
       Add product type condition
     </label>
 
-    <div
-      class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="product_type_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+      wcpt-condition-prop="product_type_enabled" wcpt-condition-val="true">
       <div class="wcpt-editor-row-option">
         <label>
           Product types:
         </label>
         <?php
-          foreach( wc_get_product_types() as $product_type => $label ){
-            ?>
-            <label class="wcpt-editor-checkbox-label">
-              <input type="checkbox" value="<?php echo strtolower( $product_type ); ?>" wcpt-model-key="product_type[]">
-              <?php echo str_replace( ' product', '', $label ); ?>
-            </label>
-            <?php
-          }
+        foreach (wc_get_product_types() as $product_type => $label) {
+          ?>
+          <label class="wcpt-editor-checkbox-label">
+            <input type="checkbox" value="<?php echo strtolower($product_type); ?>" wcpt-model-key="product_type[]">
+            <?php echo str_replace(' product', '', $label); ?>
+          </label>
+          <?php
+        }
         ?>
       </div>
 
@@ -223,42 +200,38 @@
       Add store timings condition
     </label>
 
-    <div
-      class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="store_timings_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+      wcpt-condition-prop="store_timings_enabled" wcpt-condition-val="true">
 
       <div class="wcpt-editor-row-option">
         <label>
           Select the shop's timezone
-        </label>   
+        </label>
         <select wcpt-model-key="timezone">
-          <?php echo wp_timezone_choice( 'UTC+0', get_user_locale() ); ?>
+          <?php echo wp_timezone_choice('UTC+0', get_user_locale()); ?>
         </select>
-      </div>      
+      </div>
 
       <div class="wcpt-editor-row-option">
         <label>
           <small>
-              Enter only one day-timings rule per line<br>
-              Multiple timeslots for the same day are separated by "|"<br>
-              You can also use "[open_all_day]" and "[closed_all_day]"<br>
-              To target specific dates enter in the format: "month date, year: timings" <br>
-              <br>
-              monday: 1000 - 1400 | 1600 - 2000<br>
-              tuesday: 1000 - 1400 | 1600 - 2000<br>
-              wednesday: 1000 - 1400 | 1600 - 2000<br>
-              thursday: 1000 - 1400 | 1600 - 2000<br>
-              friday: 1000 - 1400 | 1600 - 2000<br><br>
-              saturday: [open_all_day]<br>
-              sunday: [closed_all_day]<br><br>
-              December 31, 2000: [closed_all_day]<br>
-              January 1, 2001: [open_all_day]<br>
-              January 2, 2001: 1000 - 1400 | 1600 - 2000<br>
+            Enter only one day-timings rule per line<br>
+            Multiple timeslots for the same day are separated by "|"<br>
+            You can also use "[open_all_day]" and "[closed_all_day]"<br>
+            To target specific dates enter in the format: "month date, year: timings" <br>
+            <br>
+            monday: 1000 - 1400 | 1600 - 2000<br>
+            tuesday: 1000 - 1400 | 1600 - 2000<br>
+            wednesday: 1000 - 1400 | 1600 - 2000<br>
+            thursday: 1000 - 1400 | 1600 - 2000<br>
+            friday: 1000 - 1400 | 1600 - 2000<br><br>
+            saturday: [open_all_day]<br>
+            sunday: [closed_all_day]<br><br>
+            December 31, 2000: [closed_all_day]<br>
+            January 1, 2001: [open_all_day]<br>
+            January 2, 2001: 1000 - 1400 | 1600 - 2000<br>
           </small>
-        </label>   
+        </label>
         <textarea wcpt-model-key="store_timings" style="height: 200px; width: 100%;"></textarea>
       </div>
 
@@ -273,28 +246,24 @@
       Add user role condition
     </label>
 
-    <div
-      class="wcpt-editor-row-option wcpt-editor-row-option--inset-options"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="user_role_enabled"
-      wcpt-condition-val="true"
-    >
+    <div class="wcpt-editor-row-option wcpt-editor-row-option--inset-options" wcpt-panel-condition="prop"
+      wcpt-condition-prop="user_role_enabled" wcpt-condition-val="true">
       <div class="wcpt-editor-row-option">
         <label>
           User roles:
         </label>
         <?php
-          global $wp_roles;
-          $user_roles = array('_visitor' => 'Guest') + $wp_roles->get_names();
+        global $wp_roles;
+        $user_roles = array('_visitor' => 'Guest') + $wp_roles->get_names();
 
-          foreach( $user_roles as $role => $label ){
-            ?>
-            <label class="wcpt-editor-checkbox-label">
-              <input type="checkbox" value="<?php echo strtolower( $role ); ?>" wcpt-model-key="user_role[]">
-              <?php echo $label; ?>
-            </label>
-            <?php
-          }
+        foreach ($user_roles as $role => $label) {
+          ?>
+          <label class="wcpt-editor-checkbox-label">
+            <input type="checkbox" value="<?php echo strtolower($role); ?>" wcpt-model-key="user_role[]">
+            <?php echo $label; ?>
+          </label>
+          <?php
+        }
         ?>
       </div>
 

@@ -64,35 +64,44 @@
 
 	}
 
-	function wpaiMakeDroppableTinyMce(){
+	function wpaiMakeDroppableTinyMce() {
 		// Get tinymce instance
 		var ed = tinymce.get('content');
 
-		// Get bounds of the TinyMCE iframe
-		var tinymceIframe = $('#content_ifr');
-		if (tinymceIframe.length === 0) {
+		// Function to get current iframe bounds.
+		function getIframeBounds() {
+			var tinymceIframe = $('#content_ifr');
+			if (tinymceIframe.length === 0) {
+				return null;
+			}
+			var iframeOffset = tinymceIframe.offset();
+			return {
+				top: iframeOffset.top - $(window).scrollTop(),
+				left: iframeOffset.left - $(window).scrollLeft(),
+				bottom: iframeOffset.top + tinymceIframe.height() - $(window).scrollTop(),
+				right: iframeOffset.left + tinymceIframe.width() - $(window).scrollLeft()
+			};
+		}
+
+		// Initial drop area coordinates.
+		var dropArea = getIframeBounds();
+		if (!dropArea) {
 			return;
 		}
-		var iframeOffset = tinymceIframe.offset();
 
-		// Define drop area coordinates
-		var dropArea = {
-			top: iframeOffset.top,
-			left: iframeOffset.left,
-			bottom: iframeOffset.top + tinymceIframe.height(),
-			right: iframeOffset.left + tinymceIframe.width(),
-		};
-
-		// Apply draggable to your elements
+		// Apply draggable to elements.
 		$(".ui-draggable").draggable({
-			helper: function() {
+			helper: function () {
 				return $('<div>').text($(this).data('xpath'));
 			},
-			start: function(event, ui) {
+			start: function (event, ui) {
 				// Create a duplicate node as a proxy
 				proxy = ui.helper.clone().appendTo('body');
 			},
-			drag: function(event, ui) {
+			drag: function (event, ui) {
+				// Recalculate drop area for iframe.
+				dropArea = getIframeBounds();
+
 				// Check if draggable is over the tinymce, update proxy to follow cursor and hide the helper
 				if (
 					event.clientX >= dropArea.left &&
@@ -107,7 +116,10 @@
 					ui.helper.show();
 				}
 			},
-			stop: function(event, ui) {
+			stop: function (event, ui) {
+				// Recalculate drop area for iframe.
+				dropArea = getIframeBounds();
+
 				// Append to tinymce content if it was dropped on tinymce
 				if (
 					event.clientX >= dropArea.left &&
@@ -1554,8 +1566,10 @@
             // download images hosted elsewhere
             if ($(this).val() == 'yes'){
                 $('.search_through_the_media_library_logic').show();
+				$('.download_images').show();
             } else {
                 $('.search_through_the_media_library_logic').hide();
+				$('.download_images').hide();
             }
 		});
 
@@ -1568,8 +1582,10 @@
 			// download images hosted elsewhere
 			if ($(this).val() == 'yes'){
 				$('.search_through_the_media_library_logic').slideDown();
+				$('.download_images').slideDown();
 			} else {
 				$('.search_through_the_media_library_logic').slideUp();
+				$('.download_images').slideUp();
 			}
 		});
 

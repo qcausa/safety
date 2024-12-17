@@ -167,7 +167,1160 @@ add_action('elementor/query/division_downloads', function($query) {
 });
 
 
+
+add_action( 'save_post', 'custom_woocommerce_order_update', 10, 3 );
+
+function custom_woocommerce_order_update( $post_id, $post, $update ) {
+   BugFu::log("custom_woocommerce_order_update");
+   BugFu::log($post);
+
+}
+
+
+/**
+ * Register custom shortcode after all plugins are loaded to ensure Download Monitor is available.
+ */
+function custom_register_download_page_shortcode() {
+   if ( function_exists( 'download_monitor' ) ) {
+
+       /**
+        * Wrapper for [download_page] shortcode to add a 'division' argument and filter downloads by post meta.
+        */
+       function custom_download_page_shortcode( $atts ) {
+           // Parse shortcode arguments
+           $atts = shortcode_atts( array(
+               'division' => '', // Custom attribute
+           ), $atts, 'custom_download_page' );
+
+           // Debug to confirm shortcode execution
+           error_log( 'Shortcode Executed: Division = ' . $atts['division'] );
+
+           // Sanitize the division value
+           $division_filter = sanitize_text_field( $atts['division'] );
+           BugFu::log($division_filter);
+
+           // Hook into the Download Monitor query to add the division filter
+           add_filter( 'dlm_page_addon_download_retrieve_args', function( $query_args, $category ) use ( $division_filter ) {
+               if ( ! empty( $division_filter ) ) {
+                   $query_args['meta_query'][] = array(
+                       'key'     => 'download_divisions',
+                       'value'   => $division_filter,
+                       'compare' => 'LIKE',
+                   );
+               }
+               return $query_args;
+           }, 10, 2 );
+
+           // Safely call the original download_page function
+           // Ensure Download Monitor is active
+            if ( function_exists( 'download_monitor' ) ) {
+               $download_page_service = download_monitor()->service( 'download_page' );
+
+               if ( $download_page_service && method_exists( $download_page_service, 'download_page' ) ) {
+                  // Safely call the original download_page() function
+                  return $download_page_service->download_page( $atts );
+               }
+            }
+  
+
+           return __( 'Unable to display downloads. Please try again.', 'text-domain' );
+       }
+
+       // Register the custom shortcode
+       add_shortcode( 'custom_download_page', 'custom_download_page_shortcode' );
+
+   } else {
+       // Fallback message if Download Monitor is inactive
+       add_shortcode( 'custom_download_page', function() {
+           return __( 'Download Monitor plugin is not active.', 'text-domain' );
+       } );
+   }
+}
+add_action( 'wp_loaded', 'custom_register_download_page_shortcode', 9999 );
+
+
+
+
+/**
+ * Assign a Contact post to a category when the contact_division changes.
+ */
+function custom_assign_contact_to_division_category( $pieces, $is_new_item, $id ) {
+   BUgFu::log("custom_assign_contact_to_division_category");
+   $params = $pieces['params'];
+   BUgFu::log($params);
+   //BugFu::log($params['pod']);
+   BugFu::log($params->pod);
+   // Check if the pod is "contacts" (your custom post type)
+   if ( 'contact' !== $params->pod ) {
+       return;
+   }
+
+   // Get the new value of the contact_division relationship field
+   $new_divisions_ids = isset( $pieces['fields']['contact_division']['value'] ) ? $pieces['fields']['contact_division']['value'] : null;
+    BugFu::log($new_divisions_ids);
+
+    // Ensure $new_divisions is an array
+    if ( ! is_array( $new_divisions_ids ) ) {
+        $new_divisions_ids = ! empty( $new_divisions_ids ) ? array( $new_divisions_ids ) : array();
+    }
+
+    // Retrieve the old divisions to detect changes
+    $old_divisions = get_post_meta( $id, 'contact_division', true );
+
+    // Check if there are any changes
+    if ( $new_divisions_ids === $old_divisions ) {
+        return;
+    }
+
+    // Update the post meta to save the new divisions value
+    update_post_meta( $id, 'contact_division', $new_divisions_ids );
+
+    // Prepare an array to hold term IDs
+    $term_ids = array();
+
+    // Loop through each division
+    foreach ( $new_divisions_ids as $new_divisions_id ) {
+        if ( empty( $new_divisions_id ) ) {
+            continue;
+        }
+        BugFu::log($new_divisions_id);
+
+         // Get the division name (post title)
+         $division_name = get_the_title( $division_id );
+         BugFu::log($division_name);
+
+        // Check if the category exists
+        $division_term = get_term_by( 'name', $division_name, 'category' );
+
+        // If the category doesn't exist, create it
+        if ( ! $division_term ) {
+            $new_term = wp_insert_term( $division_name, 'category' );
+            if ( ! is_wp_error( $new_term ) ) {
+                $term_id = $new_term['term_id'];
+            } else {
+                continue; // Skip this term if creation failed
+            }
+        } else {
+            $term_id = $division_term->term_id;
+        }
+
+        // Add the term ID to the list
+        $term_ids[] = $term_id;
+        BugFu::log($term_ids);
+    }
+
+    // Assign all collected categories (term IDs) to the post
+    if ( ! empty( $term_ids ) ) {
+        wp_set_post_terms( $id, $term_ids, 'category', false );
+    }
+}
+add_action( 'pods_api_post_save_pod_item', 'custom_assign_contact_to_division_category', 10, 3 );
+
+function bb_custom_login() {?>
+    <style type="text/css">
+        .login-split {
+            background-position: 10% center !important;
+        }
+
+        .register-section-logo{
+            text-align: center !important; 
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'bb_custom_login' );
+
+
+
+
+
+add_action( 'elementor/theme/register_conditions', function( $conditions_manager ) {
+	class Page_Template_Condition extends ElementorPro\Modules\ThemeBuilder\Conditions\Condition_Base {
+		public static function get_type() {
+			return 'singular';
+		}
+
+		public static function get_priority() {
+			return 30;
+		}
+
+		public function get_name() {
+			return 'page_template';
+		}
+
+		public function get_label() {
+			return __( 'Page Template' );
+		}
+
+		public function check( $args ) {
+			return isset( $args['id'] ) && is_page_template( $args['id'] );
+		}
+
+		protected function _register_controls() {
+			$this->add_control(
+				'page_template',
+				[
+					'section' => 'settings',
+					'label' => __( 'Page Template' ),
+					'type' => \Elementor\Controls_Manager::SELECT,
+					'options' => array_flip( get_page_templates() ),
+				]
+			);
+		}
+	}
+
+	$conditions_manager->get_condition( 'singular' )->register_sub_condition( new Page_Template_Condition() );
+}, 100 );
+
+
+add_action( 'elementor/theme/register_conditions', function( $conditions_manager ) {
+
+    /**
+     * BuddyPress Group Page Condition Class
+     */
+    class BP_Group_Page_Condition extends ElementorPro\Modules\ThemeBuilder\Conditions\Condition_Base {
+
+        /**
+         * Condition Type
+         */
+        public static function get_type() {
+            return 'singular'; // Add under 'Singular' conditions.
+        }
+
+        /**
+         * Condition Priority
+         */
+        public static function get_priority() {
+            return 30;
+        }
+
+        /**
+         * Condition Name
+         */
+        public function get_name() {
+            return 'bp_group_page';
+        }
+
+        /**
+         * Condition Label (What the user sees in Elementor)
+         */
+        public function get_label() {
+            return __( 'BuddyPress Group Page', 'your-text-domain' );
+        }
+
+        /**
+         * Check if Condition is Met
+         */
+        public function check( $args ) {
+            if ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
+                // Check if the current tab slug matches 'custom-landing'
+                global $bp;
+                // BugFu::log("check");
+                // BugFu::log($bp->current_action);
+               // Return true ONLY when the current action is 'custom-landing'
+                return true;
+            }
+            return false;
+        }
+
+        /**
+         * No Custom Controls Required
+         */
+        protected function _register_controls() {
+            // No additional controls needed since it targets all BuddyPress group pages.
+        }
+    }
+
+    // Register the custom BuddyPress Group Page condition
+    $conditions_manager->get_condition( 'singular' )->register_sub_condition( new BP_Group_Page_Condition() );
+
+}, 100 );
+
+
  
+ 
+/**
+ * Add a custom tab to BuddyPress Groups
+ */
+function custom_bp_group_new_tab() {
+    if ( ! bp_is_group() ) {
+        return; // Avoid errors if not on a group page
+    }
+
+    $current_group = groups_get_current_group();
+    //BugFu::log($current_group);
+    $parent_url = bp_get_group_permalink( $current_group );
+    //BugFu::log($parent_url);
+    $parent_slug = bp_get_current_group_slug();
+    //BUgFu::log($parent_slug);
+
+    if ( empty( $current_group ) ) {
+        return; // Exit if no group context is available
+    }
+
+    // Register a new sub-navigation item (tab) for each group
+    bp_core_new_subnav_item( array(
+        'name'            => __( 'Custom Landing', 'textdomain' ), // Tab Name
+        'slug'            => 'custom-landing', // Unique Slug for the Tab
+        'parent_url'      => bp_get_group_permalink( $current_group ), // Parent Group URL
+        'parent_slug'     => bp_get_current_group_slug(), // Parent Slug
+        'screen_function' => 'custom_bp_group_tab_screen', // Callback function
+        'position'        => 0, // Set position to 0 to make it the first tab
+        'default_subnav_slug' => 'custom-landing', // Define as the default tab
+    ) );
+
+    // Register a new sub-navigation item (tab) for each group
+    bp_core_new_subnav_item( array(
+        'name'            => __( 'Add ', 'textdomain' ), // Tab Name
+        'slug'            => 'custom-landing', // Unique Slug for the Tab
+        'parent_url'      => bp_get_group_permalink( $current_group ), // Parent Group URL
+        'parent_slug'     => bp_get_current_group_slug(), // Parent Slug
+        'screen_function' => 'custom_bp_group_tab_screen', // Callback function
+        'position'        => 0, // Set position to 0 to make it the first tab
+        'default_subnav_slug' => 'custom-landing', // Define as the default tab
+    ) );
+}
+add_action( 'bp_setup_nav', 'custom_bp_group_new_tab' );
+
+/**
+ * Screen Function for the Custom Tab
+ */
+function custom_bp_group_tab_screen() {
+    add_action( 'bp_template_content', 'custom_bp_group_tab_content' );
+    bp_core_load_template( 'groups/single/plugins' );
+}
+
+/**
+ * Content for the Custom Tab - Load Elementor Template Dynamically
+ */
+function custom_bp_group_tab_content() {
+    echo '<div id="custom-landing-tab">';
+    // echo '<h2>' . __( 'Custom Group Landing Page', 'textdomain' ) . '</h2>';
+
+    // Check if Elementor Pro is active and the condition is met
+    if ( function_exists( 'bp_is_group' ) && bp_is_group() && bp_current_action() === 'custom-landing' ) {
+
+        // Elementor Template ID (replace with your template ID)
+        $template_id = 1253; // Replace 123 with the actual Elementor template ID
+
+        if ( class_exists( '\Elementor\Plugin' ) ) {
+            // Render the Elementor template dynamically
+            echo Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $template_id );
+        } else {
+            // Fallback if Elementor is not active
+            echo '<p>' . __( 'Elementor is not active or the template is missing.', 'textdomain' ) . '</p>';
+        }
+    }
+
+    echo '</div>';
+}
+
+
+define( 'BP_GROUPS_DEFAULT_EXTENSION', 'custom-landing' );
+
+/**
+ * Redirect BuddyPress Group Root to the Custom Landing Tab
+ */
+// function custom_bp_group_default_tab_redirect() {
+//     BugFu::log("custom_bp_group_default_tab_redirect");
+//     BugFu::log(bp_is_group());
+//     BugFu::log(! bp_is_group_admin_page());
+//     BugFu::log(bp_is_current_action( '' ));
+//     if ( bp_is_group() && ! bp_is_group_admin_page() && bp_is_current_action( '' ) ) {
+//         $group_permalink = bp_get_group_permalink( groups_get_current_group() );
+//         wp_redirect( $group_permalink . 'custom-landing/' ); // Redirect to the Custom Landing tab
+//         exit;
+//     }
+// }
+// add_action( 'bp_actions', 'custom_bp_group_default_tab_redirect' );
+
+
+/**
+ * Change post status after submission based on user role.
+ *
+ * @param array $fields Submitted form fields.
+ * @param array $entry  Entry data.
+ * @param int   $form_id Form ID.
+ */
+function custom_change_post_status_based_on_user_role( $fields, $entry, $form_id ) {
+    // Check if this is the correct form (replace 123 with your form ID)
+    // if ( $form_id !== 123 ) {
+    //     return;
+    // }
+
+    // Check if the post was created
+    if ( empty( $entry['post_id'] ) ) {
+        return;
+    }
+
+    // Get the current user
+    $current_user = wp_get_current_user();
+
+    // Default post status
+    $new_post_status = 'pending'; // Default fallback status
+
+    // Set post status based on user role
+    if ( in_array( 'administrator', (array) $current_user->roles, true ) ) {
+        $new_post_status = 'publish'; // Admin posts are published immediately
+    } elseif ( in_array( 'editor', (array) $current_user->roles, true ) ) {
+        $new_post_status = 'publish'; // Editors need pending review
+    } elseif ( in_array( 'subscriber', (array) $current_user->roles, true ) ) {
+        $new_post_status = 'pending'; // Subscribers’ posts are saved as drafts
+    }
+
+    // Update the post status
+    $post_id = (int) $entry['post_id'];
+
+    wp_update_post( array(
+        'ID'          => $post_id,
+        'post_status' => $new_post_status,
+    ) );
+}
+add_action( 'wpforms_post_submissions_process_complete', 'custom_change_post_status_based_on_user_role', 10, 3 );
+
+
+
+
+/**
+ * Allow WooCommerce products and posts to use the same 'post_tag' taxonomy.
+ */
+function custom_share_tags_between_posts_and_products() {
+    // Unregister WooCommerce's default 'product_tag' taxonomy
+    unregister_taxonomy( 'product_tag' );
+
+    // Register 'post_tag' taxonomy for WooCommerce products
+    register_taxonomy_for_object_type( 'post_tag', 'product' );
+}
+add_action( 'init', 'custom_share_tags_between_posts_and_products', 11 );
+
+
+/**
+ * Register 'post_tag' taxonomy for WooCommerce products early.
+ */
+function custom_register_post_tag_for_products() {
+    global $wp_taxonomies;
+
+    // Ensure 'post_tag' is associated with 'product'
+    if ( isset( $wp_taxonomies['post_tag'] ) ) {
+        $wp_taxonomies['post_tag']->object_type[] = 'product';
+        register_taxonomy_for_object_type( 'post_tag', 'product' );
+    }
+}
+add_action( 'after_setup_theme', 'custom_register_post_tag_for_products', 0 );
+
+
+
+
+
+
+ 
+add_action('bp_setup_nav', function()
+{
+    // BugFu::log("bp_setup_nav");
+    $bp = buddypress();
+    if(bp_is_group())
+    {
+        //BugFu::log("bp_is_group");
+ 
+        $group_slug = bp_get_current_group_slug();
+        $current_group = groups_get_current_group();
+        $parent_url = trailingslashit( bp_get_group_permalink( $current_group ) . 'admin' );
+        $args =
+        [
+            'name' => 'Group Slider',
+            'slug' => 'group-slider',
+            'rewrite_id' => 'bp_group_manage_change_group_photo',
+            'parent_slug' => $group_slug . '_manage',
+            'parent_url'      => $parent_url,
+            'position' => 10,
+            'user_has_access' => true,
+            'show_in_admin_bar' => true,
+            'no_access_url'   => bp_get_group_permalink( $current_group ),
+            'screen_function' => 'custom_group_management_tab_loader'
+        ];
+        $tab = bp_core_new_subnav_item($args, 'groups');
+    }
+}, 100);
+
+function custom_group_management_tab_loader() {
+
+}
+
+function groups_screen_group_admin_change_gorup_photo() {
+	if ( 'group-slider' != bp_get_group_current_admin_tab() ) {
+		return false;
+	}
+
+	/**
+	 * Filters the template to load for a group's Change cover photo page.
+	 *
+	 * @since BuddyPress 2.4.0
+	 *
+	 * @param string $value Path to a group's Change cover photo template.
+	 */
+	bp_core_load_template( apply_filters( 'groups_template_group_admin_cover_image', 'groups/single/admin' ) );
+}
+add_action( 'bp_screens', 'groups_screen_group_admin_change_gorup_photo' );
+
+
+/**
+ * Load the requested Manage Screen for the current group.
+ *
+ * @since BuddyPress 3.0.0
+ */
+
+ function bp_custom_nouveau_group_manage_screen() {
+	BugFu::log( 'bp_custom_nouveau_group_manage_screen' );
+	$action          = bp_action_variable( 0 );
+	BugFu::log( $action );
+	$is_group_create = bp_is_group_create();
+	$output          = '';
+
+	if ( $is_group_create ) {
+		$action = bp_action_variable( 1 );
+	}
+
+	$screen_id = urlencode( sanitize_file_name( urldecode( $action ) ) );
+	BugFu::log( $screen_id );   //change-group-photo
+	if ( ! bp_is_group_admin_screen( $screen_id ) && ! bp_is_group_creation_step( $screen_id ) ) {
+		return;
+	}
+
+	if ( ! $is_group_create ) {
+		BugFu::log( 'not is_group_create' );
+		/**
+		 * Fires inside the group admin form and before the content.
+		 *
+		 * @since BuddyPress 1.1.0
+		 */
+		do_action( 'bp_before_group_admin_content' );
+
+		$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
+		BugFu::log( $core_screen );
+
+	// It's a group step, get the creation screens.
+	} else {
+		$core_screen = bp_nouveau_group_get_core_create_screens( $screen_id );
+		BugFu::log( $core_screen );
+	}
+
+	if ( ! $core_screen ) {
+		if ( ! $is_group_create ) {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group edit screens.
+			 *
+			 * @since BuddyPress 1.1.0
+			 */
+
+             //TODO : Custom Code Here
+            $template = 'groups/single/admin/' . $screen_id;
+            //BugFu::log(bp_get_template_part( $template ));
+            bp_get_template_part( $template );
+            
+			do_action( 'groups_custom_edit_steps' );
+
+		// Else use the group create hook
+		} else {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group creation steps.
+			 *
+			 * @since BuddyPress 1.1.0
+			 */
+
+             
+
+			do_action( 'groups_custom_create_steps' );
+		}
+
+	// Else we load the core screen.
+	} else {
+		if ( ! empty( $core_screen['hook'] ) ) {
+			/**
+			 * Fires before the display of group delete admin.
+			 *
+			 * @since BuddyPress 1.1.0 For most hooks.
+			 * @since BuddyPress 2.4.0 For the cover photo hook.
+			 */
+			do_action( 'bp_before_' . $core_screen['hook'] );
+		}
+
+		$template = 'groups/single/admin/' . $screen_id;
+		BugFu::log( $template );
+
+		if ( ! empty( $core_screen['template'] ) ) {
+			$template = $core_screen['template'];
+		}
+
+		bp_get_template_part( $template );
+		BugFu::log(bp_get_template_part( $template ));
+
+		if ( ! empty( $core_screen['hook'] ) ) {
+			BugFu::log( $core_screen['hook'] );
+
+			// Group's "Manage > Details" page.
+			if ( 'group_details_admin' === $core_screen['hook'] ) {
+				/**
+				 * Fires after the group description admin details.
+				 *
+				 * @since BuddyPress 1.0.0
+				 */
+				do_action( 'groups_custom_group_fields_editable' );
+			}
+
+			/**
+			 * Fires before the display of group delete admin.
+			 *
+			 * @since BuddyPress 1.1.0 For most hooks.
+			 * @since BuddyPress 2.4.0 For the cover photo hook.
+			 */
+			do_action( 'bp_after_' . $core_screen['hook'] );
+		}
+
+		if ( ! empty( $core_screen['nonce'] ) ) {
+			if ( ! $is_group_create ) {
+				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'buddyboss' ) );
+
+				// Specific case for the delete group screen
+				if ( 'delete-group' === $screen_id ) {
+					$output = sprintf(
+						'<div class="submit">
+							<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
+						</div>',
+						esc_attr__( 'Delete Group', 'buddyboss' )
+					);
+				}
+			}
+		}
+	}
+
+	if ( $is_group_create ) {
+		/**
+		 * Fires before the display of the group creation step buttons.
+		 *
+		 * @since BuddyPress 1.1.0
+		 */
+		do_action( 'bp_before_group_creation_step_buttons' );
+
+		if ( 'crop-image' !== bp_get_avatar_admin_step() ) {
+			$creation_step_buttons = '';
+
+			if ( ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf(
+					'<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
+					esc_attr__( 'Previous Step', 'buddyboss' ),
+					"location.href='" . esc_js( esc_url_raw( bp_get_group_creation_previous_link() ) ) . "'"
+				);
+			}
+
+			if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf(
+					'<input type="submit" value="%s" id="group-creation-next" name="save" />',
+					esc_attr__( 'Next Step', 'buddyboss' )
+				);
+			}
+
+			if ( bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf(
+					'<input type="submit" value="%s" id="group-creation-create" name="save" />',
+					esc_attr__( 'Create Group and Continue', 'buddyboss' )
+				);
+			}
+
+			if ( bp_is_last_group_creation_step() ) {
+				$creation_step_buttons .= sprintf(
+					'<input type="submit" value="%s" id="group-creation-finish" name="save" />',
+					esc_attr__( 'Finish', 'buddyboss' )
+				);
+			}
+
+			// Set the output for the buttons
+			$output = sprintf( '<div class="submit" id="previous-next">%s</div>', $creation_step_buttons );
+		}
+
+		/**
+		 * Fires after the display of the group creation step buttons.
+		 *
+		 * @since BuddyPress 1.1.0
+		 */
+		do_action( 'bp_after_group_creation_step_buttons' );
+	}
+
+	/**
+	 * Avoid nested forms with the Backbone views for the group invites step.
+	 */
+	if ( 'group-invites' === bp_get_groups_current_create_step() ) {
+		printf(
+			'<form action="%s" method="post" enctype="multipart/form-data">',
+			bp_get_group_creation_form_action()
+		);
+	}
+
+	if ( ! empty( $core_screen['nonce'] ) ) {
+		wp_nonce_field( $core_screen['nonce'] );
+	}
+
+	printf(
+		'<input type="hidden" name="group-id" id="group-id" value="%s" />',
+		$is_group_create ? esc_attr( bp_get_new_group_id() ) : esc_attr( bp_get_group_id() )
+	);
+
+	printf(
+		'<input type="hidden" name="parent-id" id="parent-id" value="%s" />',
+		$is_group_create ? esc_attr( bp_get_parent_group_id( bp_get_new_group_id() ) ) : esc_attr( bp_get_parent_group_id( bp_get_group_id() ) )
+	);
+
+	// The submit actions
+	echo $output;
+
+	if ( ! $is_group_create ) {
+		/**
+		 * Fires inside the group admin form and after the content.
+		 *
+		 * @since BuddyPress 1.1.0
+		 */
+		do_action( 'bp_after_group_admin_content' );
+
+	} else {
+		/**
+		 * Fires and displays the groups directory content.
+		 *
+		 * @since BuddyPress 1.1.0
+		 */
+		do_action( 'bp_directory_groups_content' );
+	}
+
+	/**
+	 * Avoid nested forms with the Backbone views for the group invites step.
+	 */
+	if ( 'group-invites' === bp_get_groups_current_create_step() ) {
+		echo '</form>';
+	}
+}
+
+
+
+
+
+
+/**
+ * Add BuddyPress Groups to Pods 'Extend an Existing Content Type' screen.
+ */
+add_filter( 'pods_admin_setup_add_extend_pod_type', 'add_buddypress_groups_to_pods_extend_types' );
+
+function add_buddypress_groups_to_pods_extend_types( $data ) {
+    // Ensure BuddyPress is active before adding BuddyPress Groups
+    if ( function_exists( 'groups_get_groups' ) ) {
+        // Add BuddyPress Groups to the Extend Content Type list
+        $data['bp_groups'] = __( 'BuddyPress Groups', 'textdomain' );
+    }
+
+    return $data;
+}
+
+
+/**
+ * Register BuddyPress Groups in Pods using the existing wp_bp_groups table.
+ */
+add_action( 'pods_init', 'register_bp_groups_pods_type' );
+
+function register_bp_groups_pods_type() {
+    // Ensure BuddyPress is active
+    if ( ! function_exists( 'groups_get_groups' ) ) {
+        return;
+    }
+
+    // Register BuddyPress Groups as a Pods type
+    $args = array(
+        'name'        => 'bp_groups',
+        'label'       => __( 'BuddyPress Groups', 'textdomain' ),
+        'type'        => 'custom', // Mark it as a custom content type
+        'table'       => 'wp_bp_groups', // Use the existing BuddyPress groups table
+        'object_type' => 'custom',
+        'groups'      => array(
+            array(
+                'name'  => 'main',
+                'label' => __( 'Main Fields', 'textdomain' ),
+            ),
+        ),
+        'fields'      => array(
+            array(
+                'name'  => 'id',
+                'label' => __( 'Group ID', 'textdomain' ),
+                'type'  => 'number',
+                'options' => array( 'readonly' => true ),
+            ),
+            array(
+                'name'  => 'name',
+                'label' => __( 'Group Name', 'textdomain' ),
+                'type'  => 'text',
+            ),
+            array(
+                'name'  => 'slug',
+                'label' => __( 'Group Slug', 'textdomain' ),
+                'type'  => 'text',
+            ),
+            array(
+                'name'  => 'description',
+                'label' => __( 'Group Description', 'textdomain' ),
+                'type'  => 'textarea',
+            ),
+            array(
+                'name'  => 'status',
+                'label' => __( 'Group Status', 'textdomain' ),
+                'type'  => 'text',
+            ),
+        ),
+    );
+
+    pods_register_type( 'custom', 'bp_groups', $args );
+}
+
+
+
+add_action( 'bp_activity_post_form_options', 'render_custom_activity_fields' );
+function render_custom_activity_fields() {
+	if ( ! bp_is_groups_component() ) {
+		return;
+	}
+	
+	if ( ! groups_is_user_admin( get_current_user_id(), bp_get_current_group_id() ) ) {
+		return;
+	}
+    ?>
+    <div style="padding: 20px 25px 16px;background-color: var(--bb-content-alternate-background-color);">
+        <input type="checkbox" name="is_announcement" id="is_announcement" value="1" />
+        <label for="is_announcement">Is announcement?</label>
+    </div>
+
+   
+
+    <?php
+}
+
+
+add_action( 'elementor/query/bp_activity_query', function( $query ) {
+    BugFu::log("elementor/query/bp_activity_query");
+    global $wpdb;
+
+    // Custom table name
+    $activity_table = $wpdb->prefix . 'bp_activity';
+
+    // Query to fetch recent activity records (you can add conditions here)
+    $results = $wpdb->get_results( "
+        SELECT id
+        FROM $activity_table
+        WHERE type = 'last_activity'
+        ORDER BY date_recorded DESC
+        LIMIT 10
+    " );
+
+    BugFu::log($results);
+
+    // Prepare an array of post IDs for the Loop Grid
+    $post_ids = [];
+    foreach ( $results as $activity ) {
+        // Use activity ID to store as post IDs in a virtual way
+        $post_ids[] = $activity->id;
+    }
+    BugFu::log($post_ids);
+
+    // Stop if no results found
+    if ( empty( $post_ids ) ) {
+        return;
+    }
+
+    // Modify the main query to include custom "post IDs"
+    $query->set( 'post_type', 'any' ); // Use 'any' to allow custom virtual posts
+    $query->set( 'post__in', $post_ids );
+    $query->set( 'orderby', 'post__in' );
+    $query->set( 'posts_per_page', count( $post_ids ) );
+} );
+ 
+
+
+/**
+ * Add a custom submenu item under 'Posts' for the 'Tips Tuesday' category
+ * and place it right after 'All Posts'.
+ */
+function add_tips_tuesday_admin_submenu() {
+    add_submenu_page(
+        'edit.php',                 // Parent menu slug (Posts)
+        'Tips Tuesday',             // Page title
+        'Tips Tuesday',             // Menu title
+        'edit_posts',               // Capability (who can see it)
+        'edit.php?tips_tuesday=1'   // Target URL with query string
+    );
+}
+add_action( 'admin_menu', 'add_tips_tuesday_admin_submenu' );
+
+/**
+ * Reorder the Posts submenu to make 'Tips Tuesday' priority 2.
+ */
+function reorder_tips_tuesday_submenu() {
+    global $submenu;
+
+    // Check if 'Posts' submenu exists
+    if ( isset( $submenu['edit.php'] ) ) {
+        $all_posts_item = array_shift( $submenu['edit.php'] ); // Remove 'All Posts'
+        $tips_tuesday_item = array_pop( $submenu['edit.php'] ); // Remove 'Tips Tuesday'
+        
+        // Reinsert in desired order
+        array_unshift( $submenu['edit.php'], $all_posts_item ); // Add 'All Posts' first
+        array_splice( $submenu['edit.php'], 1, 0, [ $tips_tuesday_item ] ); // Insert 'Tips Tuesday' as second
+    }
+}
+add_action( 'admin_menu', 'reorder_tips_tuesday_submenu', 999 );
+
+/**
+ * Add a custom view/tab in the posts list screen for the 'Tips Tuesday' category
+ * and place it after the 'All' tab.
+ */
+function add_custom_tips_tuesday_view( $views ) {
+    global $wpdb;
+
+    // Define the category slug for 'Tips Tuesday'
+    $tips_tuesday_slug = 'tips-tuesday';
+
+    // Get the category object
+    $category = get_category_by_slug( $tips_tuesday_slug );
+
+    // Ensure the category exists
+    if ( $category ) {
+        // Correctly count posts in the 'Tips Tuesday' category
+        $count = $wpdb->get_var( $wpdb->prepare(
+            "SELECT COUNT(*) FROM {$wpdb->posts} p
+             INNER JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+             INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+             WHERE p.post_status = 'publish'
+             AND tt.taxonomy = 'category'
+             AND tt.term_id = %d",
+            $category->term_id
+        ) );
+
+        // Highlight the active tab
+        $class = ( isset( $_GET['tips_tuesday'] ) ) ? 'current' : '';
+
+        // Add the Tips Tuesday view
+        $tips_tuesday_view = [
+            'tips_tuesday' => sprintf(
+                '<a href="%s" class="%s">Tips Tuesday <span class="count">(%d)</span></a>',
+                admin_url( 'edit.php?tips_tuesday=1' ),
+                $class,
+                $count
+            ),
+        ];
+
+        // Insert 'Tips Tuesday' after 'All'
+        if ( isset( $views['all'] ) ) {
+            $views = array_slice( $views, 0, 1, true ) + $tips_tuesday_view + array_slice( $views, 1, null, true );
+        } else {
+            $views = $tips_tuesday_view + $views;
+        }
+    }
+
+    return $views;
+}
+add_filter( 'views_edit-post', 'add_custom_tips_tuesday_view' );
+
+/**
+ * Modify the query to filter posts in the 'Tips Tuesday' category.
+ */
+function filter_posts_for_tips_tuesday( $query ) {
+    if ( is_admin() && $query->is_main_query() && isset( $_GET['tips_tuesday'] ) && $_GET['tips_tuesday'] == 1 ) {
+        // Add the category filter for 'Tips Tuesday'
+        $query->set( 'category_name', 'tips-tuesday' );
+    }
+}
+add_action( 'pre_get_posts', 'filter_posts_for_tips_tuesday' );
+
+
+
+
+
+
+/**
+ * Automatically sync year and month tags based on post date for 'Tips Tuesday' posts.
+ */
+function sync_post_year_month_tags( $post_id, $post, $update ) {
+    // Check if it's a 'post' post type and not an autosave or revision
+    if ( 'post' !== $post->post_type || wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+        return;
+    }
+
+    // Get the categories assigned to this post
+    $categories = wp_get_post_categories( $post_id, [ 'fields' => 'names' ] );
+
+    // Check if 'Tips Tuesday' category is assigned to this post
+    if ( ! in_array( 'Tips Tuesday', $categories ) ) {
+        return; // Exit if 'Tips Tuesday' is not assigned
+    }
+
+    // Get the post date
+    $post_date = get_the_date( 'Y-m-d', $post_id );
+    $year      = date( 'Y', strtotime( $post_date ) );
+    $month     = date( 'F', strtotime( $post_date ) ); // Full month name
+
+    // Prepare the new tags
+    $new_tags = [ $year, $month ];
+
+    // Get all existing tags for the post
+    $existing_tags = wp_get_post_tags( $post_id, [ 'fields' => 'names' ] );
+
+    // Remove old year/month tags if they exist
+    $old_tags = array_filter( $existing_tags, function( $tag ) {
+        return preg_match( '/^\d{4}$/', $tag ) || in_array( $tag, get_month_names() );
+    } );
+
+    // Remove old tags
+    $remaining_tags = array_diff( $existing_tags, $old_tags );
+
+    // Combine remaining tags with new year/month tags
+    $final_tags = array_merge( $remaining_tags, $new_tags );
+
+    // Assign the updated tags to the post
+    wp_set_post_tags( $post_id, $final_tags, false ); // 'false' replaces the tags completely
+}
+add_action( 'save_post', 'sync_post_year_month_tags', 10, 3 );
+
+/**
+ * Helper function to get an array of month names.
+ */
+function get_month_names() {
+    return [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+}
+
+
+
+// /**
+//  * Elementor Custom Query: Tips Tuesday Category with Tag Filtering.
+//  */
+// function custom_elementor_tips_tuesday_query( $query ) {
+//     BugFu::log("custom_elementor_tips_tuesday_query");
+//     // Set the base query to only include posts in the 'Tips Tuesday' category
+//     $query->set( 'category_name', 'tips-tuesday' );
+
+//     // Allow filtering by tags using Elementor's Taxonomy Filter Widget
+//     if ( isset( $_GET['post_tag'] ) && ! empty( $_GET['post_tag'] ) ) {
+//         $query->set( 'tag', sanitize_text_field( $_GET['post_tag'] ) );
+//     }
+// }
+// add_action( 'elementor/query/tips_tuesday_filter', 'custom_elementor_tips_tuesday_query' );
+
+
+add_action('elementor/query/featured_posts', function($query) {
+    // Add the "featured" meta query to the query
+    $meta_query = array(
+        array(
+            'key'     => '_featured', // Meta key for featured status (adjust this if your site uses a different meta key)
+            'value'   => 'yes',       // Value that indicates the post is featured
+            'compare' => '='
+        )
+    );
+
+    // Merge any existing meta query with the new condition
+    $existing_meta_query = $query->get('meta_query');
+
+    if ( !empty($existing_meta_query) ) {
+        $meta_query = array_merge($existing_meta_query, $meta_query);
+    }
+
+    $query->set('meta_query', $meta_query);
+
+    // Optional: Order by date or other criteria
+    $query->set('orderby', 'date');
+    $query->set('order', 'DESC');
+});
+
+
+
+/**
+ * Limit posts or pages displayed by category.
+ *
+ * @link https://wpforms.com/developers/how-to-exclude-posts-pages-or-categories-from-dynamic-choices/
+ */
+  
+//  function wpf_dynamic_choices_categories( $args, $field, $form_data ) {
+//     BugFu::log("wpf_dynamic_choices_categories");
+//     BugFu::log($args);
+//     BugFu::log($field);
+//     BugFu::log($form_data);
+      
+//     // For field #10 in form #851, only show entries in category #37
+//     if ( '946' == $form_data['id'] && '5' == $field[ 'id' ] ) {
+  
+//         $args[ 'category' ] = '161';
+  
+//     } 
+      
+//     return $args;
+      
+// }
+  
+// add_filter( 'wpforms_dynamic_choice_taxonomy_args', 'wpf_dynamic_choices_categories', 100, 3 );
+
+
+
+// function wpf_dev_dynamic_choices_exclude( $args, $field, $form_id ) {
+//     BugFu::log("wpf_dev_dynamic_choices_exclude");
+//     BugFu::log($args);
+  
+//     if ( is_array( $form_id ) ) {
+//         $form_id = $form_id[ 'id' ];
+//     }
+  
+//     // Only on form #212 and field #16
+//     if ( $form_id == 946 && $field[ 'id' ] == 5 ) {
+  
+//         // Category IDs to exclude
+//         $args[ 'include' ] = '161';
+//     }
+  
+//     return $args;
+  
+// }
+  
+// add_filter( 'wpforms_dynamic_choice_taxonomy_args', 'wpf_dev_dynamic_choices_exclude', 10, 3 );
+
+
+function wpf_dev_dynamic_choices_include_subcategories( $args, $field, $form_id ) {
+
+    if ( is_array( $form_id ) ) {
+        $form_id = $form_id['id'];
+    }
+
+    // Only target form ID #946 and field ID #5
+    if ( $form_id == 946 && $field['id'] == 5 ) {
+        
+        // Define the parent category ID
+        $parent_category_id = 161; // Age Range category
+
+        // Get all subcategories under the parent category
+        $subcategories = get_terms( [
+            'taxonomy'   => 'category',
+            'parent'     => $parent_category_id,
+            'hide_empty' => false, // Include empty categories
+        ] );
+
+        // Extract the term IDs and create a comma-separated string
+        $subcategory_ids = !empty( $subcategories ) ? wp_list_pluck( $subcategories, 'term_id' ) : [];
+        $args['include'] = implode( ',', $subcategory_ids );
+
+        // Optionally include the parent category itself
+        $args['include'] = $parent_category_id . ',' . $args['include'];
+    }
+
+    return $args;
+}
+add_filter( 'wpforms_dynamic_choice_taxonomy_args', 'wpf_dev_dynamic_choices_include_subcategories', 10, 3 );
+
+
+
 
 ?>
 

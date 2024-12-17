@@ -1,3 +1,3 @@
-<strong>Name</strong>: <?php _e( $name );?> <br>
-<strong>Docs</strong>: <?php _e( $article );?> <br>
-<?php _e( $message_text );?>
+<strong><?php esc_html_e( 'Name', 'betterdocs' ); ?></strong>: <?php echo esc_html( $name ); ?> <br>
+<strong><?php esc_html_e( 'Docs', 'betterdocs' ); ?></strong>: <?php echo esc_html( $article ); ?> <br>
+<?php echo esc_html( $message_text ); ?>

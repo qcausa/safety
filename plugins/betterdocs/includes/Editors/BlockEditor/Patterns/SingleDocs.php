@@ -1,16 +1,15 @@
 <?php
 namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns;
 
-
 class SingleDocs extends BasePattern {
 
-    public function register() {
-        register_block_pattern(
-            'betterdocs/single-docs-essence-layout',
-            array(
-                'title'         => __( 'Single Docs Essence Layout', 'betterdocs' ),
-                'description'   => _x( 'Single Docs Essence Layout', 'Block pattern description', 'betterdocs' ),
-                'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
+	public function register() {
+		register_block_pattern(
+			'betterdocs/single-docs-essence-layout',
+			array(
+				'title'         => __( 'Single Docs Essence Layout', 'betterdocs' ),
+				'description'   => _x( 'Single Docs Essence Layout', 'Block pattern description', 'betterdocs' ),
+				'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
                     <div class="wp-block-group has-base-2-background-color has-background" style="padding-bottom:50px"><!-- wp:group {"layout":{"backgroundColor":"#f2f4f7","inherit":true,"contentSize":"1400px","type":"constrained","justifyContent":"center"}} -->
                     <div class="wp-block-group"><!-- wp:columns {"align":"wide","style":{"spacing":{"padding":{"top":"30px","bottom":"30px"}}}} -->
                     <div class="wp-block-columns alignwide" style="padding-top:30px;padding-bottom:30px"><!-- wp:column {"width":"30%","layout":{"type":"constrained","contentSize":"100%"}} -->
@@ -51,18 +50,18 @@ class SingleDocs extends BasePattern {
                     <!-- /wp:columns --></div>
                     <!-- /wp:group --></div>
                     <!-- /wp:group -->',
-                'categories'    => array( 'betterdocs-single-docs' ),
-                'keywords'      => array( 'betterdocs', 'single docs', 'essence layout' ),
-                'viewportWidth' => 1600,
-            )
-        );
+				'categories'    => array( 'betterdocs-single-docs' ),
+				'keywords'      => array( 'betterdocs', 'single docs', 'essence layout' ),
+				'viewportWidth' => 1600,
+			)
+		);
 
-        register_block_pattern(
-            'betterdocs/single-docs-rustic-layout',
-            array(
-                'title'         => __( 'Single Docs Rustic Layout', 'betterdocs' ),
-                'description'   => _x( 'Single Docs Rustic Layout', 'Single Docs Rustic Layout', 'betterdocs' ),
-                'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
+		register_block_pattern(
+			'betterdocs/single-docs-rustic-layout',
+			array(
+				'title'         => __( 'Single Docs Rustic Layout', 'betterdocs' ),
+				'description'   => _x( 'Single Docs Rustic Layout', 'Single Docs Rustic Layout', 'betterdocs' ),
+				'content'       => '<!-- wp:group {"style":{"spacing":{"padding":{"bottom":"50px"}}},"backgroundColor":"base-2","layout":{"type":"default"}} -->
                     <div class="wp-block-group has-base-2-background-color has-background" style="padding-bottom:50px"><!-- wp:group {"layout":{"backgroundColor":"#f2f4f7","inherit":true,"contentSize":"1400px","type":"constrained","justifyContent":"center"}} -->
                     <div class="wp-block-group"><!-- wp:columns {"align":"wide","style":{"spacing":{"padding":{"top":"30px","bottom":"30px"}}}} -->
                     <div class="wp-block-columns alignwide" style="padding-top:30px;padding-bottom:30px"><!-- wp:column {"width":"30%","layout":{"type":"constrained","contentSize":"100%"}} -->
@@ -103,18 +102,18 @@ class SingleDocs extends BasePattern {
                     <!-- /wp:columns --></div>
                     <!-- /wp:group --></div>
                     <!-- /wp:group -->',
-                'categories'    => array( 'betterdocs-single-docs' ),
-                'keywords'      => array( 'betterdocs', 'single docs', 'essence layout' ),
-                'viewportWidth' => 1600,
-            )
-        );
+				'categories'    => array( 'betterdocs-single-docs' ),
+				'keywords'      => array( 'betterdocs', 'single docs', 'essence layout' ),
+				'viewportWidth' => 1600,
+			)
+		);
 
-        register_block_pattern(
-            'betterdocs/single-docs-layout-1',
-            array(
-                'title'         => __( 'Single Docs Classic Layout', 'betterdocs' ),
-                'description'   => _x( 'Single Docs Classic Layout', 'Block pattern description', 'betterdocs' ),
-                'content'       => '<!-- wp:group {"style":{"color":{"background":"#f2f4f7"},"spacing":{"padding":{"bottom":"50px"}}},"layout":{"type":"default"}} -->
+		register_block_pattern(
+			'betterdocs/single-docs-layout-1',
+			array(
+				'title'         => __( 'Single Docs Classic Layout', 'betterdocs' ),
+				'description'   => _x( 'Single Docs Classic Layout', 'Block pattern description', 'betterdocs' ),
+				'content'       => '<!-- wp:group {"style":{"color":{"background":"#f2f4f7"},"spacing":{"padding":{"bottom":"50px"}}},"layout":{"type":"default"}} -->
                     <div class="wp-block-group has-background" style="background-color:#f2f4f7;padding-bottom:50px"><!-- wp:group {"style":{"color":{"background":"#f7f7f7"}},"layout":{"backgroundColor":"#f2f4f7","inherit":true,"contentSize":"1400px","type":"constrained"}} -->
                     <div class="wp-block-group has-background" style="background-color:#f7f7f7"><!-- wp:betterdocs/searchbox {"blockId":"betterdocs-searchbox-qvz0olv","blockMeta":{"desktop":" .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper { margin-top: 28px; margin-right: 0px; margin-left: 0px; margin-bottom: 28px; background-color: #f7f7f7; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search { padding: 0px; transition: background 0.5s; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search:hover, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search:hover { } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .betterdocs-searchform, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform { background: #ffffff; color:#595959; transition: border 0.5s, border-radius 0.5s, box-shadow 0.5s ; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .betterdocs-searchform:hover, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform:hover{ } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .betterdocs-searchform .betterdocs-search-field::placeholder, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform .betterdocs-search-field::placeholder { color:#595959; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-searchform, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform{ padding-top: 22px; padding-right: 15px; padding-left: 15px; padding-bottom: 22px; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-searchform .betterdocs-search-field, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform .betterdocs-search-field{ font-size: 14px; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-searchform svg.docs-search-icon, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform svg.docs-search-icon { fill: #444b54; width:30px; height: auto; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .docs-search-close .close-line, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .docs-search-close .close-line { fill: #ff697b; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .docs-search-loader, .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .docs-search-close .close-border, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .docs-search-loader, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .docs-search-close .close-border { fill: #444b54; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result { width:100%; max-width:1600px; background-color: #ffffff; transition: border 0.5s, border-radius 0.5s, box-shadow 0.5s , background 0.5s; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result:hover, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result:hover{ } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result li, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result li { transition: border 0.5s, border-radius 0.5s, box-shadow 0.5s ; } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result li:hover, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result li:hover { } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result li:hover a span, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result li:hover a span{ } .betterdocs-searchbox-qvz0olv.betterdocs-searchbox-wrapper .betterdocs-live-search .docs-search-result li a span, .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .docs-search-result li a span { padding: 10px; color: #444b54; } .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform select{\n                        \n               \n              font-size: 14px;\n               \n               \n               \n               \n               \n               \n          ;\n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform .betterdocs-search-category{\n                    color:#595959;\n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform .search-submit {\n                    \n               \n              font-size: 18px;\n               \n               \n               \n               \n               \n               \n          \n                    color:#ffffff;\n                    background-color:#24cc8f;\n                      \n      \n          \n                 \n        \n            \n           \n          \n    \n       \n  \n  \n    \n                    \n            padding-top: 15px;\n            padding-right: 25px;\n            padding-left: 25px;\n            padding-bottom: 15px;\n        \n            \n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform .search-submit:hover {\n                    background-color:#24cc8f;\n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword{\n                    \n            margin-top: 24px;\n            margin-right: 0px;\n            margin-left: 0px;\n            margin-bottom: 0px;\n        \n            \n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-keyword{\n                    color:#99a3ca;\n                      \n      \n          \n                 \n        \n            \n           \n          \n    \n       \n  \n  \n    \n                    \n            padding-top: 8px;\n            padding-right: 25px;\n            padding-left: 25px;\n            padding-bottom: 8px;\n        \n            \n                    \n             \n             \n             \n             \n        \n            \n                    \n               \n              font-size: 14px;\n               \n               \n               \n               \n               \n               \n          \n                    background-color:#fff;\n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-search-title {\n                    color:#8588a6;\n                    \n               \n              font-size: 14px;\n               \n               \n               \n               \n               \n               \n          \n                }\n    ","tab":" .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform select{\n                \n               \n               \n               \n          ;\n            }\n            .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform .search-submit {\n                \n               \n               \n               \n          \n                  \n    \n         \n        \n                 \n    \n            \n        \n      \n    \n                \n                 \n                 \n                 \n                 \n    \n            \n            }\n            .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword{\n                \n                 \n                 \n                 \n                 \n    \n            \n            }\n            .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-keyword{\n                \n               \n               \n               \n          \n                  \n    \n         \n        \n                 \n    \n            \n        \n      \n    \n                \n                 \n                 \n                 \n                 \n    \n            \n                \n                 \n                 \n                 \n                 \n    \n            \n            }\n            .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-search-title {\n                \n               \n               \n               \n          \n            }\n    ","mobile":" .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-live-search .betterdocs-searchform select{\n                    \n               \n               \n               \n          ;\n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-searchform .search-submit {\n                    \n               \n               \n               \n          \n                    \n               \n               \n               \n          \n                    \n                 \n                 \n                 \n                 \n    \n            \n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword{\n                    \n                 \n                 \n                 \n                 \n    \n            \n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-keyword{\n                    \n               \n               \n               \n          \n                    \n    \n         \n        \n                 \n    \n            \n        \n    \n                    \n                 \n                 \n                 \n                 \n    \n            \n                    \n                 \n                 \n                 \n                 \n    \n            \n                }\n                .betterdocs-searchbox-qvz0olv.betterdocs-search-form-wrapper .betterdocs-popular-search-keyword .popular-search-title {\n                    \n               \n               \n               \n          \n                }\n    "}} /--></div>
                     <!-- /wp:group -->
@@ -147,10 +146,10 @@ class SingleDocs extends BasePattern {
                     <!-- /wp:columns --></div>
                     <!-- /wp:group --></div>
                     <!-- /wp:group -->',
-                'categories'    => array( 'betterdocs-single-docs' ),
-                'keywords'      => array( 'betterdocs', 'single docs layout 1' ),
-                'viewportWidth' => 1600,
-            )
-        );
-    }
+				'categories'    => array( 'betterdocs-single-docs' ),
+				'keywords'      => array( 'betterdocs', 'single docs layout 1' ),
+				'viewportWidth' => 1600,
+			)
+		);
+	}
 }

@@ -16,15 +16,18 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         return get_post_meta( $post_id );
     }
 
-    public function upsert( $articleData, $custom_type_details ) {
-        if ( empty( $articleData['ID'] ) ) {
-            $this->logger( sprintf( __( '<b>CREATING</b> `%s` `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ), $custom_type_details->labels->singular_name ?? $custom_type_details->labels->name ?? '' ) );
-        } else {
-            $this->logger( sprintf( __( '<b>UPDATING</b> `%s` `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ), $custom_type_details->labels->singular_name ?? $custom_type_details->labels->name ?? '' ) );
-        }
+	public function upsert( $articleData, $custom_type_details ) {
+		$articleTitle = $this->get_record_title( $articleData );
+		$labelName = $custom_type_details->labels->singular_name ?? $custom_type_details->labels->name ?? '';
 
-        return ( empty( $articleData['ID'] ) ) ? wp_insert_post( $articleData, true ) : wp_update_post( $articleData, true );
-    }
+		if ( empty( $articleData['ID'] ) ) {
+			$this->logger( sprintf( __( '<b>CREATING</b> `%s` `%s`', 'wp_all_import_plugin' ), $articleTitle, $labelName ) );
+		} else {
+			$this->logger( sprintf( __( '<b>UPDATING</b> `%s` `%s`', 'wp_all_import_plugin' ), $articleTitle, $labelName ) );
+		}
+
+		return ( empty( $articleData['ID'] ) ) ? wp_insert_post( $articleData, true ) : wp_update_post( $articleData, true );
+	}
 
     public function update_content( $post_id, $content ) {
         wp_update_post( [
@@ -36,14 +39,14 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
     public function update_meta( $post_id, $meta_key, $meta_value ) {
         update_post_meta( $post_id, $meta_key, $meta_value );
 
-        $this->logger( sprintf( __( 'Instead of deletion post with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin' ), $post_id, $meta_key, $meta_value ) );
+        $this->logger( sprintf( __( 'Instead of deletion post with ID `%s`, set Custom Field `%s` to value `%s`', 'wp-all-import-pro' ), $post_id, $meta_key, $meta_value ) );
     }
 
     public function move_missing_record_to_trash( $missing_post_id ) {
         if ( $final_post_type = get_post_type( $missing_post_id ) and 'trash' != get_post_status( $missing_post_id ) ) {
             wp_trash_post( $missing_post_id );
             $this->record->recount_terms( $missing_post_id, $final_post_type );
-            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to trash', 'wp_all_import_plugin' ), $missing_post_id ) );
+            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to trash', 'wp-all-import-pro' ), $missing_post_id ) );
         }
     }
 
@@ -51,7 +54,7 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         if ( $final_post_type = get_post_type( $missing_post_id ) and $this->options['status_of_removed'] != get_post_status( $missing_post_id ) ) {
             $this->wpdb->update( $this->wpdb->posts, array( 'post_status' => $this->options['status_of_removed'] ), array( 'ID' => $missing_post_id ) );
             $this->record->recount_terms( $missing_post_id, $final_post_type );
-            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to %s', 'wp_all_import_plugin' ), $missing_post_id, $this->options['status_of_removed'] ) );
+            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to %s', 'wp-all-import-pro' ), $missing_post_id, $this->options['status_of_removed'] ) );
         }
     }
 
@@ -59,7 +62,7 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         if ( $final_post_type = get_post_type( $post_id ) and $new_status != get_post_status( $post_id ) ) {
             $this->wpdb->update( $this->wpdb->posts, array( 'post_status' => $new_status ), array( 'ID' => $post_id ) );
             $this->record->recount_terms( $post_id, $final_post_type );
-            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to %s', 'wp_all_import_plugin' ), $post_id, $new_status ) );
+            $this->logger( sprintf( __( 'Instead of deletion, change post with ID `%s` status to %s', 'wp-all-import-pro' ), $post_id, $new_status ) );
         }
     }
 
@@ -111,7 +114,7 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         if ( 'shop_coupon' == $post_type ) {
             $articleData['post_excerpt'] = $articleData['post_content'];
         }
-        $this->logger( sprintf( __( 'Combine all data for post `%s`...', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+        $this->logger( sprintf( __( 'Combine all data for post `%s`...', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
 
         // if ( "xpath" == $this->options['status'] )
         // {
@@ -120,7 +123,7 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         // 	if ( empty($status_object) )
         // 	{
         // 		$articleData['post_status'] = 'draft';
-        // 		$this->logger(sprintf(__('<b>WARNING</b>: Post status `%s` is not supported, post `%s` will be saved in draft.', 'wp_all_import_plugin'), $post_status, $articleData['post_title']));
+        // 		$this->logger(sprintf(__('<b>WARNING</b>: Post status `%s` is not supported, post `%s` will be saved in draft.', 'wp-all-import-pro'), $post_status, $articleData['post_title']));
         // 		$logger and !$is_cron and PMXI_Plugin::$session->warnings++;
         // 	}
         // }
@@ -131,12 +134,12 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
     public function choose_data_to_update( $post_to_update, $post_to_update_id, $post_type, $taxonomies, &$articleData, $i, &$existing_taxonomies = [] ) {
         // preserve date of already existing article when duplicate is found
         if ( ( ! $this->options['is_update_categories'] and ( is_object_in_taxonomy( $post_type, 'category' ) or is_object_in_taxonomy( $post_type, 'post_tag' ) ) ) or ( $this->options['is_update_categories'] and $this->options['update_categories_logic'] != "full_update" ) ) {
-            $this->logger( sprintf( __( 'Preserve taxonomies of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve taxonomies of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
             $existing_taxonomies = array();
             foreach ( array_keys( $taxonomies ) as $tx_name ) {
                 $txes_list = get_the_terms( $articleData['ID'], $tx_name );
                 if ( is_wp_error( $txes_list ) ) {
-                    $this->logger( sprintf( __( '<b>WARNING</b>: Unable to get current taxonomies for article #%d, updating with those read from XML file', 'wp_all_import_plugin' ), $articleData['ID'] ) );
+                    $this->logger( sprintf( __( '<b>WARNING</b>: Unable to get current taxonomies for article #%d, updating with those read from XML file', 'wp-all-import-pro' ), $articleData['ID'] ) );
                     ! $this->is_cron and \PMXI_Plugin::$session->warnings ++;
                 } else {
                     $txes_new = array();
@@ -153,23 +156,23 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         if ( ! $this->options['is_update_dates'] ) { // preserve date of already existing article when duplicate is found
             $articleData['post_date']     = $post_to_update->post_date;
             $articleData['post_date_gmt'] = $post_to_update->post_date_gmt;
-            $this->logger( sprintf( __( 'Preserve date of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve date of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_status'] ) { // preserve status and trashed flag
             $articleData['post_status'] = $post_to_update->post_status;
-            $this->logger( sprintf( __( 'Preserve status of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve status of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_content'] ) {
             unset( $articleData['post_content'] );
-            $this->logger( sprintf( __( 'Preserve content of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve content of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_title'] ) {
             $articleData['post_title'] = $post_to_update->post_title;
-            $this->logger( sprintf( __( 'Preserve title of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve title of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_slug'] ) {
             $articleData['post_name'] = $post_to_update->post_name;
-            $this->logger( sprintf( __( 'Preserve slug of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve slug of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         // Check for changed slugs for published post objects and save the old slug.
         if ( ! empty( $articleData['post_name'] ) and $articleData['post_name'] != $post_to_update->post_name ) {
@@ -188,31 +191,31 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
 
         if ( ! $this->options['is_update_excerpt'] ) {
             $articleData['post_excerpt'] = $post_to_update->post_excerpt;
-            $this->logger( sprintf( __( 'Preserve excerpt of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve excerpt of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_menu_order'] ) {
             $articleData['menu_order'] = $post_to_update->menu_order;
-            $this->logger( sprintf( __( 'Preserve menu order of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve menu order of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_parent'] ) {
             $articleData['post_parent'] = $post_to_update->post_parent;
-            $this->logger( sprintf( __( 'Preserve post parent of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve post parent of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_post_type'] ) {
             $articleData['post_type'] = $post_to_update->post_type;
-            $this->logger( sprintf( __( 'Preserve post type of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve post type of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_comment_status'] ) {
             $articleData['comment_status'] = $post_to_update->comment_status;
-            $this->logger( sprintf( __( 'Preserve comment status of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve comment status of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_ping_status'] ) {
             $articleData['ping_status'] = $post_to_update->ping_status;
-            $this->logger( sprintf( __( 'Preserve ping status of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve ping status of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! $this->options['is_update_author'] ) {
             $articleData['post_author'] = $post_to_update->post_author;
-            $this->logger( sprintf( __( 'Preserve post author of already existing article for `%s`', 'wp_all_import_plugin' ), $this->get_record_title( $articleData ) ) );
+            $this->logger( sprintf( __( 'Preserve post author of already existing article for `%s`', 'wp-all-import-pro' ), $this->get_record_title( $articleData ) ) );
         }
         if ( ! wp_all_import_is_update_cf( '_wp_page_template', $this->options ) ) {
             $articleData['page_template'] = get_post_meta( $post_to_update_id, '_wp_page_template', true );
@@ -223,12 +226,12 @@ class PMXI_Addon_Post_Data_Importer extends PMXI_Addon_Data_Importer {
         $title = $this->get_record_title( $articleData );
 
         if ( $this->options['update_all_data'] == 'yes' or ( $this->options['update_all_data'] == 'no' and $this->options['is_update_attachments'] ) ) {
-            $this->logger( sprintf( __( 'Deleting attachments for `%s`', 'wp_all_import_plugin' ), $title ) );
+            $this->logger( sprintf( __( 'Deleting attachments for `%s`', 'wp-all-import-pro' ), $title ) );
             wp_delete_attachments( $post_id, ! $this->options['is_search_existing_attach'], 'files' );
         }
         // handle obsolete attachments (i.e. delete or keep) according to import settings
         if ( $this->options['update_all_data'] == 'yes' or ( $this->options['update_all_data'] == 'no' and $this->options['is_update_images'] and $this->options['update_images_logic'] == "full_update" ) ) {
-            $this->logger( sprintf( __( 'Deleting images for `%s`', 'wp_all_import_plugin' ), $title ) );
+            $this->logger( sprintf( __( 'Deleting images for `%s`', 'wp-all-import-pro' ), $title ) );
             if ( ! empty( $images_bundle ) ) {
                 foreach ( $images_bundle as $slug => $bundle_data ) {
                     $option_slug = ( $slug == 'pmxi_gallery_image' ) ? '' : $slug;

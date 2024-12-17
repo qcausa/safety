@@ -27,12 +27,12 @@ class WXR_Parser_Regex {
 	 */
 	private $has_gzip;
 
-	private $authors = [];
-	private $posts = [];
-	private $categories = [];
-	private $tags = [];
-	private $terms = [];
-	private $base_url = '';
+	private $authors       = [];
+	private $posts         = [];
+	private $categories    = [];
+	private $tags          = [];
+	private $terms         = [];
+	private $base_url      = '';
 	private $base_blog_url = '';
 
 	/**
@@ -41,13 +41,13 @@ class WXR_Parser_Regex {
 	 * @return array|WP_Error
 	 */
 	public function parse( $file ) {
-		$wxr_version = '';
+		$wxr_version  = '';
 		$in_multiline = false;
 
 		$multiline_content = '';
 
 		$multiline_tags = [
-			'item' => [
+			'item'        => [
 				'posts',
 				function ( $post ) {
 					return $this->process_post( $post );
@@ -59,13 +59,13 @@ class WXR_Parser_Regex {
 					return $this->process_category( $category );
 				},
 			],
-			'wp:tag' => [
+			'wp:tag'      => [
 				'tags',
 				function ( $tag ) {
 					return $this->process_tag( $tag );
 				},
 			],
-			'wp:term' => [
+			'wp:term'     => [
 				'terms',
 				function ( $term ) {
 					return $this->process_term( $term );
@@ -98,7 +98,7 @@ class WXR_Parser_Regex {
 
 				if ( false !== strpos( $importline, '<wp:author>' ) ) {
 					preg_match( '|<wp:author>(.*?)</wp:author>|is', $importline, $author );
-					$a = $this->process_author( $author[1] );
+					$a                                   = $this->process_author( $author[1] );
 					$this->authors[ $a['author_login'] ] = $a;
 					continue;
 				}
@@ -118,7 +118,7 @@ class WXR_Parser_Regex {
 						$multiline_content = trim( substr( $importline, $pos + strlen( $tag ) + 2 ) );
 
 						// We don't want to have this line added to `$is_multiline` below.
-						$importline = '';
+						$importline   = '';
 						$in_multiline = $tag;
 
 						continue;
@@ -127,7 +127,7 @@ class WXR_Parser_Regex {
 					$pos = strpos( $importline, "</$tag>" );
 
 					if ( false !== $pos ) {
-						$in_multiline = false;
+						$in_multiline       = false;
 						$multiline_content .= trim( substr( $importline, 0, $pos ) );
 
 						$this->{$handler[0]}[] = call_user_func( $handler[1], $multiline_content );
@@ -147,23 +147,23 @@ class WXR_Parser_Regex {
 		}
 
 		return [
-			'authors' => $this->authors,
-			'posts' => $this->posts,
-			'categories' => $this->categories,
-			'tags' => $this->tags,
-			'terms' => $this->terms,
-			'base_url' => $this->base_url,
+			'authors'       => $this->authors,
+			'posts'         => $this->posts,
+			'categories'    => $this->categories,
+			'tags'          => $this->tags,
+			'terms'         => $this->terms,
+			'base_url'      => $this->base_url,
 			'base_blog_url' => $this->base_blog_url,
-			'version' => $wxr_version,
+			'version'       => $wxr_version,
 		];
 	}
 
 	private function process_category( $category ) {
 		$term = [
-			'term_id' => $this->get_tag( $category, 'wp:term_id' ),
-			'cat_name' => $this->get_tag( $category, 'wp:cat_name' ),
-			'category_nicename' => $this->get_tag( $category, 'wp:category_nicename' ),
-			'category_parent' => $this->get_tag( $category, 'wp:category_parent' ),
+			'term_id'              => $this->get_tag( $category, 'wp:term_id' ),
+			'cat_name'             => $this->get_tag( $category, 'wp:cat_name' ),
+			'category_nicename'    => $this->get_tag( $category, 'wp:category_nicename' ),
+			'category_parent'      => $this->get_tag( $category, 'wp:category_parent' ),
 			'category_description' => $this->get_tag( $category, 'wp:category_description' ),
 		];
 
@@ -177,9 +177,9 @@ class WXR_Parser_Regex {
 
 	private function process_tag( $tag ) {
 		$term = [
-			'term_id' => $this->get_tag( $tag, 'wp:term_id' ),
-			'tag_name' => $this->get_tag( $tag, 'wp:tag_name' ),
-			'tag_slug' => $this->get_tag( $tag, 'wp:tag_slug' ),
+			'term_id'         => $this->get_tag( $tag, 'wp:term_id' ),
+			'tag_name'        => $this->get_tag( $tag, 'wp:tag_name' ),
+			'tag_slug'        => $this->get_tag( $tag, 'wp:tag_slug' ),
 			'tag_description' => $this->get_tag( $tag, 'wp:tag_description' ),
 		];
 
@@ -193,11 +193,11 @@ class WXR_Parser_Regex {
 
 	private function process_term( $term ) {
 		$term_data = [
-			'term_id' => $this->get_tag( $term, 'wp:term_id' ),
-			'term_taxonomy' => $this->get_tag( $term, 'wp:term_taxonomy' ),
-			'slug' => $this->get_tag( $term, 'wp:term_slug' ),
-			'term_parent' => $this->get_tag( $term, 'wp:term_parent' ),
-			'term_name' => $this->get_tag( $term, 'wp:term_name' ),
+			'term_id'          => $this->get_tag( $term, 'wp:term_id' ),
+			'term_taxonomy'    => $this->get_tag( $term, 'wp:term_taxonomy' ),
+			'slug'             => $this->get_tag( $term, 'wp:term_slug' ),
+			'term_parent'      => $this->get_tag( $term, 'wp:term_parent' ),
+			'term_name'        => $this->get_tag( $term, 'wp:term_name' ),
 			'term_description' => $this->get_tag( $term, 'wp:term_description' ),
 		];
 
@@ -220,7 +220,7 @@ class WXR_Parser_Regex {
 
 		foreach ( $meta[1] as $m ) {
 			$parsed_meta[] = [
-				'key' => $this->get_tag( $m, 'wp:meta_key' ),
+				'key'   => $this->get_tag( $m, 'wp:meta_key' ),
 				'value' => $this->get_tag( $m, 'wp:meta_value' ),
 			];
 		}
@@ -230,12 +230,12 @@ class WXR_Parser_Regex {
 
 	private function process_author( $a ) {
 		return [
-			'author_id' => $this->get_tag( $a, 'wp:author_id' ),
-			'author_login' => $this->get_tag( $a, 'wp:author_login' ),
-			'author_email' => $this->get_tag( $a, 'wp:author_email' ),
+			'author_id'           => $this->get_tag( $a, 'wp:author_id' ),
+			'author_login'        => $this->get_tag( $a, 'wp:author_login' ),
+			'author_email'        => $this->get_tag( $a, 'wp:author_email' ),
 			'author_display_name' => $this->get_tag( $a, 'wp:author_display_name' ),
-			'author_first_name' => $this->get_tag( $a, 'wp:author_first_name' ),
-			'author_last_name' => $this->get_tag( $a, 'wp:author_last_name' ),
+			'author_first_name'   => $this->get_tag( $a, 'wp:author_first_name' ),
+			'author_last_name'    => $this->get_tag( $a, 'wp:author_last_name' ),
 		];
 	}
 
@@ -244,21 +244,21 @@ class WXR_Parser_Regex {
 			return $this->normalize_tag( $matches );
 		};
 
-		$post_id = $this->get_tag( $post, 'wp:post_id' );
-		$post_title = $this->get_tag( $post, 'title' );
-		$post_date = $this->get_tag( $post, 'wp:post_date' );
-		$post_date_gmt = $this->get_tag( $post, 'wp:post_date_gmt' );
+		$post_id        = $this->get_tag( $post, 'wp:post_id' );
+		$post_title     = $this->get_tag( $post, 'title' );
+		$post_date      = $this->get_tag( $post, 'wp:post_date' );
+		$post_date_gmt  = $this->get_tag( $post, 'wp:post_date_gmt' );
 		$comment_status = $this->get_tag( $post, 'wp:comment_status' );
-		$ping_status = $this->get_tag( $post, 'wp:ping_status' );
-		$status = $this->get_tag( $post, 'wp:status' );
-		$post_name = $this->get_tag( $post, 'wp:post_name' );
-		$post_parent = $this->get_tag( $post, 'wp:post_parent' );
-		$menu_order = $this->get_tag( $post, 'wp:menu_order' );
-		$post_type = $this->get_tag( $post, 'wp:post_type' );
-		$post_password = $this->get_tag( $post, 'wp:post_password' );
-		$is_sticky = $this->get_tag( $post, 'wp:is_sticky' );
-		$guid = $this->get_tag( $post, 'guid' );
-		$post_author = $this->get_tag( $post, 'dc:creator' );
+		$ping_status    = $this->get_tag( $post, 'wp:ping_status' );
+		$status         = $this->get_tag( $post, 'wp:status' );
+		$post_name      = $this->get_tag( $post, 'wp:post_name' );
+		$post_parent    = $this->get_tag( $post, 'wp:post_parent' );
+		$menu_order     = $this->get_tag( $post, 'wp:menu_order' );
+		$post_type      = $this->get_tag( $post, 'wp:post_type' );
+		$post_password  = $this->get_tag( $post, 'wp:post_password' );
+		$is_sticky      = $this->get_tag( $post, 'wp:is_sticky' );
+		$guid           = $this->get_tag( $post, 'guid' );
+		$post_author    = $this->get_tag( $post, 'dc:creator' );
 
 		$post_excerpt = $this->get_tag( $post, 'excerpt:encoded' );
 		$post_excerpt = preg_replace_callback( '|<(/?[A-Z]+)|', $normalize_tag_callback, $post_excerpt );
@@ -280,9 +280,9 @@ class WXR_Parser_Regex {
 		preg_match_all( '|<category domain="([^"]+?)" nicename="([^"]+?)">(.+?)</category>|is', $post, $terms, PREG_SET_ORDER );
 		foreach ( $terms as $t ) {
 			$post_terms[] = [
-				'slug' => $t[2],
+				'slug'   => $t[2],
 				'domain' => $t[1],
-				'name' => str_replace( [ '<![CDATA[', ']]>' ], '', $t[3] ),
+				'name'   => str_replace( [ '<![CDATA[', ']]>' ], '', $t[3] ),
 			];
 		}
 		if ( ! empty( $post_terms ) ) {
@@ -294,19 +294,19 @@ class WXR_Parser_Regex {
 		if ( $comments ) {
 			foreach ( $comments as $comment ) {
 				$post_comments[] = [
-					'comment_id' => $this->get_tag( $comment, 'wp:comment_id' ),
-					'comment_author' => $this->get_tag( $comment, 'wp:comment_author' ),
+					'comment_id'           => $this->get_tag( $comment, 'wp:comment_id' ),
+					'comment_author'       => $this->get_tag( $comment, 'wp:comment_author' ),
 					'comment_author_email' => $this->get_tag( $comment, 'wp:comment_author_email' ),
-					'comment_author_IP' => $this->get_tag( $comment, 'wp:comment_author_IP' ),
-					'comment_author_url' => $this->get_tag( $comment, 'wp:comment_author_url' ),
-					'comment_date' => $this->get_tag( $comment, 'wp:comment_date' ),
-					'comment_date_gmt' => $this->get_tag( $comment, 'wp:comment_date_gmt' ),
-					'comment_content' => $this->get_tag( $comment, 'wp:comment_content' ),
-					'comment_approved' => $this->get_tag( $comment, 'wp:comment_approved' ),
-					'comment_type' => $this->get_tag( $comment, 'wp:comment_type' ),
-					'comment_parent' => $this->get_tag( $comment, 'wp:comment_parent' ),
-					'comment_user_id' => $this->get_tag( $comment, 'wp:comment_user_id' ),
-					'commentmeta' => $this->process_meta( $comment, 'wp:commentmeta' ),
+					'comment_author_IP'    => $this->get_tag( $comment, 'wp:comment_author_IP' ),
+					'comment_author_url'   => $this->get_tag( $comment, 'wp:comment_author_url' ),
+					'comment_date'         => $this->get_tag( $comment, 'wp:comment_date' ),
+					'comment_date_gmt'     => $this->get_tag( $comment, 'wp:comment_date_gmt' ),
+					'comment_content'      => $this->get_tag( $comment, 'wp:comment_content' ),
+					'comment_approved'     => $this->get_tag( $comment, 'wp:comment_approved' ),
+					'comment_type'         => $this->get_tag( $comment, 'wp:comment_type' ),
+					'comment_parent'       => $this->get_tag( $comment, 'wp:comment_parent' ),
+					'comment_user_id'      => $this->get_tag( $comment, 'wp:comment_user_id' ),
+					'commentmeta'          => $this->process_meta( $comment, 'wp:commentmeta' ),
 				];
 			}
 		}

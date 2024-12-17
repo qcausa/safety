@@ -21,6 +21,7 @@ $config = array(
 	"chunk_size" => 32,
 	"pingbacks" => 1,
 	"backups_prompt" => 1,
+	"pmxi_auto_retry_import" => 0,
 	"legacy_special_character_handling" => 1,
 	"case_sensitive" => 1,
 	"session_mode" => 'default',

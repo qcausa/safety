@@ -2,14 +2,14 @@
   <label>Icon name</label>
   <select class="wcpt-select-icon" wcpt-model-key="name" style="width: 100%;">
     <?php
-      $path = WCPT_PLUGIN_PATH . 'assets/feather';
-      $icons = array_diff( scandir( $path ), array( '..', '.', '.DS_Store' ) );
-      foreach( $icons as $icon ){
-        if( $icon ){
-          $icon_name = substr( $icon, 0, -4 );
-          echo '<option value="'. $icon_name .'">'. str_replace( '-', ' ', ucfirst( $icon_name ) ) .'</option>';
-        }
+    $path = WCPT_PLUGIN_PATH . 'assets/feather';
+    $icons = array_diff(scandir($path), array('..', '.', '.DS_Store'));
+    foreach ($icons as $icon) {
+      if ($icon) {
+        $icon_name = substr($icon, 0, -4);
+        echo '<option value="' . $icon_name . '">' . str_replace('-', ' ', ucfirst($icon_name)) . '</option>';
       }
+    }
     ?>
   </select>
 </div>
@@ -22,9 +22,14 @@
   <input type="text" wcpt-model-key="title" />
 </div>
 
-<div class="wcpt-editor-row-style-options" wcpt-model-key="style" style="margin-top: 25px;">
+<div class="wcpt-editor-row-option" wcpt-model-key="style">
 
-  <div class="wcpt-wrapper" wcpt-model-key="[id]">
+  <div class="wcpt-editor-row-option wcpt-toggle-options wcpt-row-accordion" wcpt-model-key="[id]">
+
+    <span class="wcpt-toggle-label">
+      Style for Element
+      <?php echo wcpt_icon('chevron-down'); ?>
+    </span>
 
     <!-- font-size -->
     <div class="wcpt-editor-row-option">
@@ -35,13 +40,13 @@
     <!-- font-color -->
     <div class="wcpt-editor-row-option">
       <label>Stroke color</label>
-      <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker" >
+      <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker">
     </div>
 
     <!-- fill -->
     <div class="wcpt-editor-row-option">
       <label>Fill color</label>
-      <input type="text" wcpt-model-key="fill" class="wcpt-color-picker" >
+      <input type="text" wcpt-model-key="fill" class="wcpt-color-picker">
     </div>
 
     <!-- stroke-width -->
@@ -64,4 +69,4 @@
 </div>
 
 <!-- condition -->
-<?php include( 'condition/outer.php' ); ?>
+<?php include ('condition/outer.php'); ?>

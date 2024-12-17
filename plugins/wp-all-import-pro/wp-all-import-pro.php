@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.9.0
+Version: 4.9.4
 Requires PHP: 7.4
 Author: Soflyy
 */
@@ -16,7 +16,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 
     include_once __DIR__.'/src/WordPress/AdminNotice.php';
     include_once __DIR__.'/src/WordPress/AdminErrorNotice.php';
-    $notice = new \Wpai\WordPress\AdminErrorNotice(__('Please de-activate and remove the free version of WP All Import before activating the paid version.', 'wp_all_import_plugin'));
+    $notice = new \Wpai\WordPress\AdminErrorNotice(__('Please de-activate and remove the free version of WP All Import before activating the paid version.', 'wp-all-import-pro'));
     $notice->render();
 
     deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-import-pro.php' );
@@ -26,7 +26,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
     /**
      *
      */
-    define('PMXI_VERSION', '4.9.0');
+    define('PMXI_VERSION', '4.9.4');
 
     /**
      *
@@ -189,7 +189,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
         /**
          *  Language domain key.
          */
-        const LANGUAGE_DOMAIN = 'wp_all_import_plugin';
+        const LANGUAGE_DOMAIN = 'wp-all-import-pro';
 
         /**
          * @var null
@@ -352,6 +352,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
             update_option('PMGI_Plugin_Options', $this->options, false);
 
 			register_activation_hook(self::FILE, array($this, 'activation'));
+			register_deactivation_hook(self::FILE, ['Wpai\WordPress\RegenerateImages', 'plugin_deactivation']);
 
 			// Register action handlers.
 			if (is_dir(self::ROOT_DIR . '/actions')) foreach (PMXI_Helper::safe_glob(self::ROOT_DIR . '/actions/*.php', PMXI_Helper::GLOB_RECURSE | PMXI_Helper::GLOB_PATH) as $filePath) {
@@ -1175,7 +1176,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 		 * @return void
 		 */
 		public function load_plugin_textdomain() {
-			load_plugin_textdomain( 'wp_all_import_plugin', false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
+			load_plugin_textdomain( 'wp-all-import-pro', false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
 		}
 
         /**
@@ -1187,12 +1188,12 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 			$uploads = wp_upload_dir();
 
 			if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . self::LOGS_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . self::LOGS_DIRECTORY)) {
-                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_import_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::LOGS_DIRECTORY));
+                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp-all-import-pro'), $uploads['basedir'] . DIRECTORY_SEPARATOR . self::LOGS_DIRECTORY));
                 return false;
 			}
 
 			if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY)) {
-                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp_all_import_plugin'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY));
+                $this->showNoticeAndDisablePlugin(sprintf(__('Uploads folder %s must be writable', 'wp-all-import-pro'), $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY));
                 return false;
 			}
 
@@ -1367,7 +1368,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 					?>
 					<div class="error"><p>
 						<?php printf(
-								__('<b>%s Plugin</b>: Current sql user %s doesn\'t have ALTER privileges', 'wp_all_import_plugin'),
+								__('<b>%s Plugin</b>: Current sql user %s doesn\'t have ALTER privileges', 'wp-all-import-pro'),
 								self::getInstance()->getName(), DB_USER
 						) ?>
 					</p></div>
@@ -1515,6 +1516,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 				'is_keep_imgs' => 0,
 				'is_delete_imgs' => 0,
 				'do_not_remove_images' => 1,
+                'preload_images' => 0,
 
 				'is_update_custom_fields' => 1,
 				'update_custom_fields_logic' => 'full_update',
@@ -1574,6 +1576,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 				'gallery_featured_delim' => ',',
                 'filters_output' => '',
 				'is_featured' => 1,
+				'allow_delay_image_resize' => 0,
 				'is_featured_xpath' => '',
 				'set_image_meta_title' => 0,
 				'set_image_meta_caption' => 0,
@@ -1778,3 +1781,5 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 	add_action( 'admin_init', 'wp_all_import_pro_updater', 0 );
 
 }
+
+\Wpai\WordPress\RegenerateImages::setup();

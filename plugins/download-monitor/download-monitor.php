@@ -3,11 +3,11 @@
 	Plugin Name: Download Monitor
 	Plugin URI: https://www.download-monitor.com
 	Description: A full solution for managing and selling downloadable files, monitoring downloads and outputting download links and file information on your WordPress powered site.
-	Version: 5.0.12
+	Version: 5.0.16
 	Author: WPChill
 	Author URI: https://wpchill.com
-	Requires at least: 5.5
-	Tested up to: 6.6
+	Requires at least: 6.4
+	Tested up to: 6.7
 	Requires PHP: 7.4
 	Text Domain: download-monitor
 
@@ -33,45 +33,8 @@ if (! defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 
-add_filter( 'site_transient_update_plugins', function( $value ) {
-	unset( $value->response['download-monitor/download-monitor.php'] );
-	return $value;
-} );
-
-$optionName = "dlm_master_license";
-$licenseInfo = array(
-    'license_key'    => '1415b451be1a13c283ba771ea52d38bb',
-    'email'          => 'noreply@gmail.com',
-    'status'         => 'active',
-     'license_status' => 'active'
-);
-update_option($optionName, json_encode($licenseInfo));
-
-
-add_filter('pre_http_request', function($preempt, $parsed_args, $url) {
-    if ($parsed_args['method'] === 'GET' && strpos($url, 'https://download-monitor.com/?wc-api') !== false) {  
-        $response_array = [
-            "success" => true,
-            "activated" => true,
-        ];
-
-        $response_body = json_encode($response_array);
-
-        return [
-            'headers' => [],
-            'body' => $response_body,
-            'response' => [
-                'code' => 200,
-                'message' => 'OK'
-            ],
-        ];
-    }
-
-    return $preempt;
-}, 10, 3);
-
 // Define DLM Version
-define('DLM_VERSION', '5.0.12');
+define('DLM_VERSION', '5.0.16');
 define('DLM_UPGRADER_VERSION', '4.6.0');
 
 // Define DLM FILE

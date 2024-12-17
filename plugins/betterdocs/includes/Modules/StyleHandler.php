@@ -19,7 +19,7 @@ final class StyleHandler {
 
 	public static function init() {
 		if ( null === self::$instance ) {
-			self::$instance = new self;
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -36,23 +36,27 @@ final class StyleHandler {
 		add_action( 'wp', [ $this, 'generate_post_content' ] );
 		add_action( 'rest_after_save_widget', [ $this, 'after_save_widget' ], 10, 4 );
 
-        // FSE assets generation
-		add_action( 'init', function () {
-			if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
-				add_filter( "404_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "archive_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "category_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "frontpage_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "home_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "index_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "page_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "search_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "single_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "singular_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "tag_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-				add_filter( "taxonomy_template", [ $this, 'fse_assets_generation' ], 99, 3 );
-			}
-		}, 999 );
+		// FSE assets generation
+		add_action(
+			'init',
+			function () {
+				if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+					add_filter( '404_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'archive_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'category_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'frontpage_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'home_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'index_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'page_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'search_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'single_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'singular_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'tag_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+					add_filter( 'taxonomy_template', [ $this, 'fse_assets_generation' ], 99, 3 );
+				}
+			},
+			999
+		);
 	}
 
 	/**
@@ -97,14 +101,17 @@ final class StyleHandler {
 	 * Write CSS
 	 */
 	public function write_css_from_content( $post, $post_id, $parsed_content ) {
-		$betterdocs_blocks          = [];
+		$betterdocs_blocks  = [];
 		$recursive_response = CSSParser::betterdocs_block_style_recursive( $parsed_content, $betterdocs_blocks );
 		$reusable_Blocks    = ! empty( $recursive_response['reusableBlocks'] ) ? $recursive_response['reusableBlocks'] : [];
 		// remove empty reusable blocks
-		$reusable_Blocks = array_filter( $reusable_Blocks, function ( $v ) {
-			return ! empty( $v );
-		} );
-		unset( $recursive_response["reusableBlocks"] );
+		$reusable_Blocks = array_filter(
+			$reusable_Blocks,
+			function ( $v ) {
+				return ! empty( $v );
+			}
+		);
+		unset( $recursive_response['reusableBlocks'] );
 		$style       = CSSParser::blocks_to_style_array( $recursive_response );
 		$reusableIds = $reusable_Blocks ? array_keys( $reusable_Blocks ) : [];
 		if ( ! empty( $reusableIds ) ) {
@@ -129,9 +136,9 @@ final class StyleHandler {
 	public function after_save_widget( $id, $sidebar_id, $request, $creating ) {
 		$parsed_content = isset( $request['instance']['raw']['content'] ) ? parse_blocks( $request['instance']['raw']['content'] ) : [];
 		if ( is_array( $parsed_content ) && ! empty( $parsed_content ) ) {
-			$betterdocs_blocks          = [];
+			$betterdocs_blocks  = [];
 			$recursive_response = CSSParser::betterdocs_block_style_recursive( $parsed_content, $betterdocs_blocks );
-			unset( $recursive_response["reusableBlocks"] );
+			unset( $recursive_response['reusableBlocks'] );
 			$style = CSSParser::blocks_to_style_array( $recursive_response );
 			//Write CSS file for Widget
 			$this->single_file_css_generator( $style, $this->style_dir, $this->prefix . '-widget.min.css' );
@@ -282,16 +289,14 @@ final class StyleHandler {
 	 */
 	private function write_block_css( $block_styles, $post ) {
 		//Write CSS for FSE
-		if ( isset( $post->post_type ) && ( $post->post_type === "wp_template_part" || $post->post_type === "wp_template" && ! empty( $block_styles ) ) ) {
+		if ( isset( $post->post_type ) && ( $post->post_type === 'wp_template_part' || $post->post_type === 'wp_template' && ! empty( $block_styles ) ) ) {
 			$this->single_file_css_generator( $block_styles, $this->style_dir, $this->prefix . '-edit-site.min.css' );
 		} // Write CSS for Page/Posts
-		else {
-			if ( ! empty( $css = CSSParser::build_css( $block_styles ) ) ) {
-				if ( ! file_exists( $this->style_dir ) ) {
-					mkdir( $this->style_dir );
-				}
-				file_put_contents( $this->style_dir . $this->prefix . '-' . abs( $post->ID ) . '.min.css', $css );
+		elseif ( ! empty( $css = CSSParser::build_css( $block_styles ) ) ) {
+			if ( ! file_exists( $this->style_dir ) ) {
+				mkdir( $this->style_dir );
 			}
+				file_put_contents( $this->style_dir . $this->prefix . '-' . abs( $post->ID ) . '.min.css', $css );
 		}
 	}
 
@@ -321,16 +326,16 @@ final class StyleHandler {
 		$editSiteCssPath = $upload_dir . $filename;
 		if ( file_exists( $editSiteCssPath ) ) {
 			$existingCss = file_get_contents( $editSiteCssPath );
-			$pattern     = "~\/\*(.*?)\*\/~";
+			$pattern     = '~\/\*(.*?)\*\/~';
 			preg_match_all( $pattern, $existingCss, $result, PREG_PATTERN_ORDER );
 			$allComments  = $result[0];
 			$seperatedIds = [];
 			foreach ( $allComments as $comment ) {
 				$id = preg_replace( '/[^A-Za-z0-9\-]|Ends|Starts/', '', $comment );
 
-				if ( strpos( $comment, "Starts" ) ) {
+				if ( strpos( $comment, 'Starts' ) ) {
 					$seperatedIds[ $id ]['start'] = $comment;
-				} else if ( strpos( $comment, "Ends" ) ) {
+				} elseif ( strpos( $comment, 'Ends' ) ) {
 					$seperatedIds[ $id ]['end'] = $comment;
 				}
 			}
@@ -349,14 +354,12 @@ final class StyleHandler {
 
 				file_put_contents( $editSiteCssPath, $css );
 			}
-		} else {
-			if ( ! empty( $css = CSSParser::build_css( $block_styles ) ) ) {
-				if ( ! file_exists( $this->style_dir ) ) {
-					mkdir( $this->style_dir );
-				}
+		} elseif ( ! empty( $css = CSSParser::build_css( $block_styles ) ) ) {
+			if ( ! file_exists( $this->style_dir ) ) {
+				mkdir( $this->style_dir );
+			}
 
 				file_put_contents( $editSiteCssPath, $css );
-			}
 		}
 	}
 
@@ -367,6 +370,6 @@ final class StyleHandler {
 		global $wpdb;
 		$sql = $wpdb->prepare( "SELECT ID FROM {$wpdb->prefix}posts WHERE post_name = %s", $post_name );
 
-		return $wpdb->get_results( $sql, ARRAY_A );
+		return $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 }

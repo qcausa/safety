@@ -1,0 +1,407 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyPress Group Tabs Creator Pro\n"
+"POT-Creation-Date: 2023-07-20 03:09+0530\n"
+"PO-Revision-Date: 2023-07-20 03:09+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_x:1,2c;_n:1,2;_n_noop:1,2;"
+"_nx_noop:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendors\n"
+"X-Poedit-SearchPathExcluded-1: assets\n"
+
+#: src/admin/class-admin-loader.php:49
+msgid "View Tabs"
+msgstr ""
+
+#: src/admin/class-admin-loader.php:50
+msgid "Documentation"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:60
+msgid "Do Not Modify(only applies when modifying existing tab or subnav)"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:61
+msgid "Anyone"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:62
+msgid "Logged In"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:63
+msgid "Members Only"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:64
+msgid "Group Admin Only"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:65
+msgid "Group Moderators Only"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:71
+msgid "Tab Settings"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:79
+#: src/admin/class-admin-metabox-helper.php:213
+msgid "Need help?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:80
+#, php-format
+msgid "Get started with the <a href=\"%s\">new tab options</a>"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:86
+#: src/admin/class-admin-metabox-helper.php:231
+msgid "Is enabled?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:90
+msgid "Only enabled tabs will be visible."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:95
+msgid "Tab Label"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:99
+msgid ""
+"Tab label. If Tab label is not provided, the entry title will be used as "
+"label."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:105
+msgid "Tab Slug"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:109
+msgid ""
+"Preferably unique tab slug. If tab slug is not provided, the entry slug will "
+"be used as label."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:115
+#: src/admin/class-admin-metabox-helper.php:118
+msgid "Set it as default component?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:122
+msgid "Are we modifying predefined tab?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:125
+msgid "Are we modifying a tab added by BuddyPress or some other plugin?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:130
+msgid "Update label?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:136
+msgid "Should we update the tab label with new label?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:141
+msgid "Site admin only?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:145
+msgid "Is this tab visible to site admin only?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:149
+#: src/admin/class-admin-metabox-helper.php:270
+msgid "Enabled for?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:155
+#: src/admin/class-admin-metabox-helper.php:275
+msgid "All"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:156
+#: src/admin/class-admin-metabox-helper.php:276
+msgid "Public Groups"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:157
+#: src/admin/class-admin-metabox-helper.php:277
+msgid "Private Groups"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:158
+#: src/admin/class-admin-metabox-helper.php:278
+msgid "Hidden Groups"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:159
+msgid "None(Removes existing tab)"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:161
+msgid ""
+"Tab will be available to these group. If None is selected, the existing tab "
+"will be removed."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:165
+msgid "Tab Visibility"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:171
+msgid "Tab will be visible to these users when they visit the group"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:175
+#: src/admin/class-admin-metabox-helper.php:253
+#: src/admin/class-post-type-list-helper.php:70
+msgid "Position"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:178
+msgid "Number, Required. Determines position of tab."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:182
+msgid "Tab Link"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:185
+msgid ""
+"Optional. Only use if you need dynamic url or link to absolute urls. See our "
+"<a href=\"https://buddydev.com/docs/buddypress-group-tabs-creator-pro/"
+"buddypress-group-tab-link-configuration/\">documentation</a> about this."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:196
+msgid "Item CSS ID"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:199
+msgid "Optional. CSS id for the nav item."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:205
+msgid "Subnav"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:214
+#, php-format
+msgid "Get started with the <a href=\"%s\">sub nav options</a>"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:223
+msgid "Subnav {#}"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:224
+msgid "New"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:225
+msgid "Remove"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:235
+msgid "Only enabled sub navs are visible."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:239
+#: src/admin/class-post-type-list-helper.php:64
+msgid "Label"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:242
+msgid "Required. Label for the sub nav item."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:246
+#: src/admin/class-post-type-list-helper.php:69
+msgid "Slug"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:249
+msgid "Required. Unique slug for this sub nav."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:256
+msgid "Required. Please specify a position for the sub nav."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:261
+msgid "Site Admin Only"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:266
+msgid "Is this sub nav visible to site admin only?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:281
+msgid "Tab will be available to these groups"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:285
+msgid "Visible for?"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:291
+msgid "Tab will be visible to these users."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:295
+msgid "Url"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:298
+msgid "(Optional), if you want to link to some other page."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:302
+msgid "CSS ID"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:305
+msgid "Optional, CSS id for the sub nav item."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:309
+msgid "Content"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:313
+#, php-format
+msgid ""
+"Any type of content( shortcodes too ) will work. Please see <a "
+"href=\"%s\">documentation</a> for more details."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:325
+msgid "Tab Scope"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:371
+msgid ""
+"You can limit the scope of this tab/modification to selectd groups and/or "
+"group types here."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:374
+msgid ""
+"If you select some groups or group types, the tab settings will only apply "
+"to the groups satisfying these criteria."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:377
+msgid "Associated Groups:"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:379
+#: src/admin/class-admin-metabox-helper.php:420
+msgid "You can select one or more group by typing the group name."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:391
+#: src/admin/class-admin-metabox-helper.php:432
+msgid "Type group name."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:395
+msgid "Associated Group Types:"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:397
+msgid ""
+"If ateast one group type is checked, the tab settings will only apply to "
+"groups belonging to this group type."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:410
+msgid "Excluded Groups:"
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:412
+msgid "You can exclude this tab/modification from selected groups here."
+msgstr ""
+
+#: src/admin/class-admin-metabox-helper.php:415
+msgid ""
+"If you select some groups , the tab settings will only not apply to the "
+"groups satisfying these criteria."
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:71
+msgid "Active?"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:72
+msgid "Is New Tab?"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:73
+msgid "Is Default Component?"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:112
+#: src/admin/class-post-type-list-helper.php:136
+#: src/admin/class-post-type-list-helper.php:147
+msgid "Yes"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:114
+#: src/admin/class-post-type-list-helper.php:138
+#: src/admin/class-post-type-list-helper.php:145
+msgid "No"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:124
+msgid "N/A"
+msgstr ""
+
+#: src/admin/class-post-type-list-helper.php:126
+msgid "Random"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:357
+#: src/buddypress/groups/class-group-tabs-actions.php:359
+#: src/buddypress/groups/class-group-tabs-actions.php:361
+msgid "Group Tabs"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:360
+msgid "Group Tab"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:362
+#: src/buddypress/groups/class-group-tabs-actions.php:363
+msgid "New Group Tab"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:364
+msgid "Edit Group Tab"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:365
+msgid "Search Group Tabs"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:366
+msgid "No Group tab found in trash"
+msgstr ""
+
+#: src/buddypress/groups/class-group-tabs-actions.php:367
+msgid "No Group found"
+msgstr ""

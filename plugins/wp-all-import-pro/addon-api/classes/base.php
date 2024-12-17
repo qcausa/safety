@@ -33,14 +33,14 @@ abstract class PMXI_Addon_Base {
         $this->initEed();
 
         $this->hints = [
-            'time'        => __( 'Use any format supported by the PHP strtotime function.', 'wp_all_import_plugin' ),
-            'date'        => __( 'Use any format supported by the PHP strtotime function.', 'wp_all_import_plugin' ),
-            'datetime'    => __( 'Use any format supported by the PHP strtotime function.', 'wp_all_import_plugin' ),
-            'iconpicker'  => __( 'Specify the icon class name - e.g. fa-user.', 'wp_all_import_plugin' ),
-            'colorpicker' => __( 'Specify the hex code the color preceded with a # - e.g. #ea5f1a.', 'wp_all_import_plugin' ),
-            'media'       => __( 'Specify the URL to the image or file.', 'wp_all_import_plugin' ),
-            'post'        => __( 'Enter the ID, slug, or Title. Separate multiple entries with separator character.', 'wp_all_import_plugin' ),
-            'user'        => __( 'Enter the ID, username, or email for the existing user.', 'wp_all_import_plugin' ),
+            'time'        => __( 'Use any format supported by the PHP strtotime function.', 'wp-all-import-pro' ),
+            'date'        => __( 'Use any format supported by the PHP strtotime function.', 'wp-all-import-pro' ),
+            'datetime'    => __( 'Use any format supported by the PHP strtotime function.', 'wp-all-import-pro' ),
+            'iconpicker'  => __( 'Specify the icon class name - e.g. fa-user.', 'wp-all-import-pro' ),
+            'colorpicker' => __( 'Specify the hex code the color preceded with a # - e.g. #ea5f1a.', 'wp-all-import-pro' ),
+            'media'       => __( 'Specify the URL to the image or file.', 'wp-all-import-pro' ),
+            'post'        => __( 'Enter the ID, slug, or Title. Separate multiple entries with separator character.', 'wp-all-import-pro' ),
+            'user'        => __( 'Enter the ID, username, or email for the existing user.', 'wp-all-import-pro' ),
 	        'map'         => __( 'WP All Import will first try to get your Google Maps API key from the add-on you\'re using. If that fails you must enter the key under \'Google Maps Settings\' below.')
         ];
 
@@ -518,7 +518,7 @@ trait HasError {
     public function getMissingDependencyError( $pluginName, $pluginUrl ) {
         return new \WP_Error( 'missing_dependency', __(
             sprintf( "<b>%s Plugin</b>: <a target=\"_blank\" href=\"%s\">%s</a> must be installed", $this->name(), $pluginUrl, $pluginName ),
-            'wp_all_import_plugin'
+            'wp-all-import-pro'
         ) );
     }
 }

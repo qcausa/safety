@@ -7,12 +7,8 @@
   <?php wcpt_pro_radio('select', 'Dropdown (select field)', 'display_type'); ?>
 </div>
 
-<div
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="display_type"
-  wcpt-condition-val="select"
->
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="display_type"
+  wcpt-condition-val="select">
   <!-- max quantity -->
   <div class="wcpt-editor-row-option">
     <label>
@@ -31,12 +27,8 @@
 
 </div>
 
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="display_type"
-  wcpt-condition-val="input"
->
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="display_type"
+  wcpt-condition-val="input">
 
   <!-- controls -->
   <div class="wcpt-editor-row-option">
@@ -50,13 +42,9 @@
     <?php wcpt_pro_radio('edges', 'Edges', 'controls'); ?>
   </div>
 
-  <div 
-    class="wcpt-editor-row-option"
-    wcpt-panel-condition="prop"
-    wcpt-condition-prop="controls"
-    wcpt-condition-val="left_edge||right_edge||edges"
-  >
-    <!-- initial value -->  
+  <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="controls"
+    wcpt-condition-val="left_edge||right_edge||edges">
+    <!-- initial value -->
     <div class="wcpt-editor-row-option">
       <label>
         Initial value
@@ -64,30 +52,28 @@
       <label><input type="radio" value="min" wcpt-model-key="initial_value" /> Minimum quantity</label>
       <?php wcpt_pro_radio('0', '0', 'initial_value'); ?>
       <?php wcpt_pro_radio('empty', 'Empty', 'initial_value'); ?>
-    </div>  
+    </div>
 
     <!-- return to initial value after add to cart -->
     <div class="wcpt-editor-row-option">
       <label>
-        <input type="checkbox" wcpt-model-key="return_to_initial"> Return to initial value after add to cart (also clears checkbox)
+        <input type="checkbox" wcpt-model-key="return_to_initial"> Return to initial value after add to cart (also
+        clears checkbox)
       </label>
     </div>
 
-    <div 
-      class="wcpt-editor-row-option"
-      wcpt-panel-condition="prop"
-      wcpt-condition-prop="initial_value"
-      wcpt-condition-val="min"
-    >
+    <div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="initial_value"
+      wcpt-condition-val="min">
       <!-- return to minimum value when variation changes -->
       <div class="wcpt-editor-row-option">
         <label>
-          <input type="checkbox" wcpt-model-key="reset_on_variation_change"> Reset to minimum quantity when variation is changed 
+          <input type="checkbox" wcpt-model-key="reset_on_variation_change"> Reset to minimum quantity when variation is
+          changed
         </label>
-      </div>  
-    </div>      
+      </div>
+    </div>
 
-  </div>  
+  </div>
 
   <!-- max warning -->
   <div class="wcpt-editor-row-option">
@@ -96,7 +82,7 @@
       <small>Use placeholder: [max]</small>
     </label>
     <input type="text" wcpt-model-key="qty_warning" />
-  </div>  
+  </div>
 
   <!-- min warning -->
   <div class="wcpt-editor-row-option">
@@ -105,7 +91,7 @@
       <small>Use placeholder: [min]</small>
     </label>
     <input type="text" wcpt-model-key="min_qty_warning" />
-  </div>  
+  </div>
 
   <!-- step warning -->
   <div class="wcpt-editor-row-option">
@@ -114,7 +100,7 @@
       <small>Use placeholder: [step]</small>
     </label>
     <input type="text" wcpt-model-key="qty_step_warning" />
-  </div>      
+  </div>
 
 </div>
 
@@ -123,16 +109,11 @@
   <?php wcpt_pro_checkbox('true', 'Hide if only 1 allowed per order', 'hide_if_sold_individually'); ?>
 </div>
 
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="display_type"
-  wcpt-condition-val="input"
->
-  <div
-    wcpt-model-key="style"
-  >
-    <div class="wcpt-editor-row-option wcpt-toggle-options wcpt-row-accordion" wcpt-model-key="[id].wcpt-display-type-input">
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="display_type"
+  wcpt-condition-val="input">
+  <div wcpt-model-key="style">
+    <div class="wcpt-editor-row-option wcpt-toggle-options wcpt-row-accordion"
+      wcpt-model-key="[id].wcpt-display-type-input">
 
       <span class="wcpt-toggle-label">
         Style for Element
@@ -148,13 +129,13 @@
       <!-- font-color -->
       <div class="wcpt-editor-row-option">
         <label>Font color</label>
-        <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker" >
+        <input type="text" wcpt-model-key="color" placeholder="#000" class="wcpt-color-picker">
       </div>
 
       <!-- background-color -->
       <div class="wcpt-editor-row-option">
         <label>Background color</label>
-        <input type="text" wcpt-model-key="background-color" class="wcpt-color-picker" >
+        <input type="text" wcpt-model-key="background-color" class="wcpt-color-picker">
       </div>
 
       <!-- border -->
@@ -168,6 +149,12 @@
           <option value="none">None</option>
         </select>
         <input type="text" wcpt-model-key="border-color" class="wcpt-color-picker" placeholder="color">
+      </div>
+
+      <!-- border-color on hover -->
+      <div class="wcpt-editor-row-option">
+        <label>↳ color on hover</label>
+        <input type="text" wcpt-model-key="border-color:hover" class="wcpt-color-picker" placeholder="color">
       </div>
 
       <!-- width -->
@@ -206,15 +193,9 @@
   </div>
 </div>
 
-<div 
-  class="wcpt-editor-row-option"
-  wcpt-panel-condition="prop"
-  wcpt-condition-prop="display_type"
-  wcpt-condition-val="select"
->
-  <div
-    wcpt-model-key="style"
-  >
+<div class="wcpt-editor-row-option" wcpt-panel-condition="prop" wcpt-condition-prop="display_type"
+  wcpt-condition-val="select">
+  <div wcpt-model-key="style">
     <div class="wcpt-editor-row-option wcpt-toggle-options wcpt-row-accordion" wcpt-model-key="[id] > .wcpt-qty-select">
 
       <span class="wcpt-toggle-label">
@@ -259,4 +240,4 @@
 </div>
 
 <!-- condition -->
-<?php include( 'condition/outer.php' ); ?>
+<?php include ('condition/outer.php'); ?>

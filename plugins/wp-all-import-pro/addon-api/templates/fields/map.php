@@ -25,7 +25,7 @@ $search_by = $field_value['search_logic'] ?? 'by_address';
                    value="manual" <?php echo 'manual' == $search_by ? 'checked="checked"' : ''; ?> />
             <span>Manual</span>
             <a href="#help" class="wpallimport-help" style="top: -1px;"
-               title="<?php _e( "Don't geocode the value, leave it as is.", 'wp_all_import_plugin' ); ?>">?</a>
+               title="<?php _e( "Don't geocode the value, leave it as is.", 'wp-all-import-pro' ); ?>">?</a>
         </label>
     </div>
 
@@ -117,7 +117,7 @@ $search_by = $field_value['search_logic'] ?? 'by_address';
                 <div class="pmxi-addon-input-wrap">
                     <label for="<?php echo $html_id . '_custom_region'; ?>">Region</label>
                     <a href="#help" class="wpallimport-help" style="top: -1px;"
-                       title="<?php _e( "The region code, specified as a ccTLD (top-level domain) two-character value.", 'wp_all_import_plugin' ); ?>">?</a>
+                       title="<?php _e( "The region code, specified as a ccTLD (top-level domain) two-character value.", 'wp-all-import-pro' ); ?>">?</a>
 
                     <input type="text" name="<?php echo $html_name; ?>[custom_region]"
                            value="<?php echo $field_value['custom_region'] ?? ''; ?>"
@@ -127,7 +127,7 @@ $search_by = $field_value['search_logic'] ?? 'by_address';
                 <div class="pmxi-addon-input-wrap">
                     <label for="<?php echo $html_id . '_custom_language'; ?>">Language</label>
                     <a href="#help" class="wpallimport-help" style="top: -1px;"
-                       title="<?php _e( "The language in which to return results, specified as a two-letter language code.", 'wp_all_import_plugin' ); ?>">?</a>
+                       title="<?php _e( "The language in which to return results, specified as a two-letter language code.", 'wp-all-import-pro' ); ?>">?</a>
                     <input type="text" name="<?php echo $html_name; ?>[custom_language]"
                            value="<?php echo $field_value['custom_language'] ?? ''; ?>"
                            class="text widefat rad4 ui-droppable" id="<?php echo $html_id . '_custom_language'; ?>">

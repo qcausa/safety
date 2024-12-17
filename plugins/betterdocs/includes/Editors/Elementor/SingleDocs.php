@@ -2,7 +2,7 @@
 namespace WPDeveloper\BetterDocs\Editors\Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+	exit; // Exit if accessed directly
 }
 
 use ElementorPro\Plugin;
@@ -19,129 +19,131 @@ use ElementorPro\Modules\ThemeBuilder\Documents\Single_Base;
  * @author     WPDeveloper <support@wpdeveloper.com>
  */
 class SingleDocs extends Single_Base {
-    public static function get_properties() {
-        $properties = parent::get_properties();
+	public static function get_properties() {
+		$properties = parent::get_properties();
 
-        $properties['location']       = 'single';
-        $properties['condition_type'] = 'docs';
+		$properties['location']       = 'single';
+		$properties['condition_type'] = 'docs';
 
-        return $properties;
-    }
+		return $properties;
+	}
 
-    protected static function get_site_editor_type() {
-        return 'docs';
-    }
+	protected static function get_site_editor_type() {
+		return 'docs';
+	}
 
-    public static function get_type() {
-        return 'docs';
-    }
+	public static function get_type() {
+		return 'docs';
+	}
 
-    public static function get_title() {
-        return __( 'Single Doc', 'betterdocs' );
-    }
+	public static function get_title() {
+		return __( 'Single Doc', 'betterdocs' );
+	}
 
-    public static function get_editor_panel_config() {
-        $config = parent::get_editor_panel_config();
+	public static function get_editor_panel_config() {
+		$config = parent::get_editor_panel_config();
 
-        $config['widgets_settings']['betterdocs-elements'] = [
-            'show_in_panel' => true
-        ];
+		$config['widgets_settings']['betterdocs-elements'] = [
+			'show_in_panel' => true
+		];
 
-        return $config;
-    }
+		return $config;
+	}
 
-    public function get_depended_widget() {
-        return Plugin::elementor()->widgets_manager->get_widget_types( 'betterdocs-content' );
-    }
+	public function get_depended_widget() {
+		return Plugin::elementor()->widgets_manager->get_widget_types( 'betterdocs-content' );
+	}
 
-    public function get_container_attributes() {
-        $attributes = parent::get_container_attributes();
+	public function get_container_attributes() {
+		$attributes = parent::get_container_attributes();
 
-        $attributes['class'] .= ' betterdocs';
+		$attributes['class'] .= ' betterdocs';
 
-        return $attributes;
-    }
+		return $attributes;
+	}
 
-    public function filter_body_classes( $body_classes ) {
-        $body_classes = parent::filter_body_classes( $body_classes );
+	public function filter_body_classes( $body_classes ) {
+		$body_classes = parent::filter_body_classes( $body_classes );
 
-        if ( get_the_ID() === $this->get_main_id() || Plugin::elementor()->preview->is_preview_mode( $this->get_main_id() ) ) {
-            $body_classes[] = 'betterdocs-elementor-single';
-        }
+		if ( get_the_ID() === $this->get_main_id() || Plugin::elementor()->preview->is_preview_mode( $this->get_main_id() ) ) {
+			$body_classes[] = 'betterdocs-elementor-single';
+		}
 
-        return $body_classes;
-    }
+		return $body_classes;
+	}
 
-    public function before_get_content() {
-        parent::before_get_content();
+	public function before_get_content() {
+		parent::before_get_content();
 
-        do_action( 'betterdocs_before_single_product' );
-    }
+		do_action( 'betterdocs_before_single_product' );
+	}
 
-    public function after_get_content() {
-        parent::after_get_content();
+	public function after_get_content() {
+		parent::after_get_content();
 
-        do_action( 'betterdocs_after_single_product' );
-    }
+		do_action( 'betterdocs_after_single_product' );
+	}
 
-    public function print_content() {
-        if ( post_password_required() ) {
-            echo get_the_password_form();
-            return;
-        }
+	public function print_content() {
+		if ( post_password_required() ) {
+			echo wp_kses_post( get_the_password_form() );
+			return;
+		}
 
-        parent::print_content();
-    }
+		parent::print_content();
+	}
 
-    public function __construct( array $data = [] ) {
-        parent::__construct( $data );
-    }
+	public function __construct( array $data = [] ) {
+		parent::__construct( $data );
+	}
 
-    protected static function get_editor_panel_categories() {
-        $categories = [
-            // Move to top as active.
-            'betterdocs-elements-single' => [
-                'title'  => __( 'BetterDocs', 'betterdocs' ),
-                'active' => true
-            ]
-        ];
+	protected static function get_editor_panel_categories() {
+		$categories = [
+			// Move to top as active.
+			'betterdocs-elements-single' => [
+				'title'  => __( 'BetterDocs', 'betterdocs' ),
+				'active' => true
+			]
+		];
 
-        $categories += parent::get_editor_panel_categories();
-        unset( $categories['theme-elements-single'] );
-        return $categories;
-    }
+		$categories += parent::get_editor_panel_categories();
+		unset( $categories['theme-elements-single'] );
+		return $categories;
+	}
 
-    protected function register_controls() {
-        parent::register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
-        $this->update_control(
-            'preview_type',
-            [
-                'type'    => Controls_Manager::HIDDEN,
-                'default' => 'single/docs'
-            ]
-        );
+		$this->update_control(
+			'preview_type',
+			[
+				'type'    => Controls_Manager::HIDDEN,
+				'default' => 'single/docs'
+			]
+		);
 
-        $latest_posts = get_posts( [
-            'posts_per_page' => 1,
-            'post_type'      => 'docs'
-        ] );
+		$latest_posts = get_posts(
+			[
+				'posts_per_page' => 1,
+				'post_type'      => 'docs'
+			]
+		);
 
-        if ( ! empty( $latest_posts ) ) {
-            $this->update_control(
-                'preview_id',
-                [
-                    'default' => $latest_posts[0]->ID
-                ]
-            );
-        }
-    }
+		if ( ! empty( $latest_posts ) ) {
+			$this->update_control(
+				'preview_id',
+				[
+					'default' => $latest_posts[0]->ID
+				]
+			);
+		}
+	}
 
-    protected function get_remote_library_config() {
-        $config = parent::get_remote_library_config();
+	protected function get_remote_library_config() {
+		$config = parent::get_remote_library_config();
 
-        $config['category'] = 'Single Docs';
+		$config['category'] = 'Single Docs';
 
-        return $config;
-    }
+		return $config;
+	}
 }

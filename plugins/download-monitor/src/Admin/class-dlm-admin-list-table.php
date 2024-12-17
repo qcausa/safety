@@ -1012,7 +1012,7 @@ class DLM_Admin_List_Table extends WP_List_Table {
 				 */
 				$is_locked = apply_filters( 'dlm_download_is_locked', $item->is_members_only(), $item );
 				if ( $is_locked ) {
-					echo '<span class="yes" ' . ( $item->is_members_only() ? 'data-members_only="Yes"' : '' ) . '>' . esc_html__( 'Yes', 'download-monitor' ) . '</span>';
+					echo '<span class="yes" ' . ( $item->is_members_only() ? 'data-members_only="Yes"' : '' ) . ' ' . ( DLM_TC_Access_Manager::is_tc_locked( $item->get_id() ) ? 'data-_dlm_tc_locked="Yes"' : '' ) . '>' . esc_html__( 'Yes', 'download-monitor' ) . '</span>';
 				} else {
 					echo '<span class="na">&ndash;</span>';
 				}
@@ -1068,8 +1068,9 @@ class DLM_Admin_List_Table extends WP_List_Table {
 			case 'file_type':
 				$file = $item->get_version();
 				$type = $file->get_filetype();
-
-				echo '<span class="dlm_file_type_info "><span class="file filetype-icon filetype-' . esc_attr( sanitize_title( $type ) ) . '"></span>' . strtoupper( esc_html( $type ) ) . '</span>';
+				if ( ! empty( $type ) ) {
+					echo '<span class="dlm_file_type_info "><span class="file filetype-icon filetype-' . esc_attr( sanitize_title( $type ) ) . '"></span>' . strtoupper( esc_html( $type ) ) . '</span>';
+				}
 				break;
 		}
 	}

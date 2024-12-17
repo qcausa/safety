@@ -1,10 +1,10 @@
 <div class="wpallimport-collapsed closed wpallimport-section scheduling">
 	<div class="wpallimport-content-section">
 		<div class="wpallimport-collapsed-header <?php if(!$import->canBeScheduled()) { ?> disabled<?php } ?>"
-        <?php if(!$import->canBeScheduled()) { ?> title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' options in Step 1.", PMXI_Plugin::LANGUAGE_DOMAIN);?>" <?php }?>>
-			<h3 id="scheduling-title"><?php _e('Scheduling Options','wp_all_import_plugin');?>
+        <?php if(!$import->canBeScheduled()) { ?> title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' options in Step 1.", 'wp-all-import-pro');?>" <?php }?>>
+			<h3 id="scheduling-title"><?php _e('Scheduling Options','wp-all-import-pro');?>
                 <?php if(!$import->canBeScheduled()) { ?>
-                <a href="#help" class="wpallimport-help" style="position: relative; top: -2px; margin-left: 0; width: 20px; height: 20px;"  title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' option on the Import Settings page.", PMXI_Plugin::LANGUAGE_DOMAIN);?>">?</a>
+                <a href="#help" class="wpallimport-help" style="position: relative; top: -2px; margin-left: 0; width: 20px; height: 20px;"  title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' option on the Import Settings page.", 'wp-all-import-pro');?>">?</a>
                 <?php } ?>
             </h3>
         </div>
@@ -55,13 +55,13 @@
 								<div style="margin-bottom: 11px;">
 									<label>
 										<input type="radio" name="scheduling_enable" value="0" <?php if(!$post['scheduling_enable']) { ?> checked="checked" <?php } ?>/>
-										<h4 style="display: inline-block; margin: 0;"><?php _e('Do Not Schedule'); ?></h4>
+										<h4 style="display: inline-block; margin: 0;"><?php _e('Do Not Schedule', 'wp-all-import-pro'); ?></h4>
 									</label>
 								</div>
 								<div style="margin-bottom: 2px;">
 									<label style="margin-bottom: -4px !important;">
 										<input type="radio" name="scheduling_enable" value="1" <?php if($post['scheduling_enable'] == 1) {?> checked="checked" <?php }?>/>
-										<h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+										<h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', 'wp-all-import-pro'); ?>
 											<span class="connection-icon" style="margin-left: 8px; height: 16px;">
 															<?php include_once('_connection_icon.php'); ?>
 														</span>
@@ -76,7 +76,7 @@
 									<label style="width: 100%; font-size: 13px;">
 										<?php printf(
                                                 /* translators: 1: Import ID */
-                                                esc_html__('Run import ID %d on a schedule.', PMXI_Plugin::LANGUAGE_DOMAIN), (int)$import_id); ?>
+                                                esc_html__('Run import ID %d on a schedule.', 'wp-all-import-pro'), (int)$import_id); ?>
 									</label>
 								</div>
 								<div id="automatic-scheduling"
@@ -87,7 +87,7 @@
 												<input
 													type="radio" <?php if ($post['scheduling_run_on'] != 'monthly') { ?> checked="checked" <?php } ?>
 													name="scheduling_run_on" value="weekly"
-													checked="checked"/> <?php _e('Every week on...', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+													checked="checked"/> <?php _e('Every week on...', 'wp-all-import-pro'); ?>
 											</label>
 										</div>
 										<input type="hidden" style="width: 500px;" name="scheduling_weekly_days"
@@ -130,7 +130,7 @@
 												<input
 													type="radio" <?php if ($post['scheduling_run_on'] == 'monthly') { ?> checked="checked" <?php } ?>
 													name="scheduling_run_on"
-													value="monthly"/> <?php _e('Every month on the first...', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+													value="monthly"/> <?php _e('Every month on the first...', 'wp-all-import-pro'); ?>
 											</label>
 										</div>
 										<input type="hidden" name="scheduling_monthly_days" value="<?php if(isset($post['scheduling_monthly_days'])) echo $post['scheduling_monthly_days']; ?>" id="monthly_days"/>
@@ -170,7 +170,7 @@
 
 									<div id="times-container" style="margin-left: 5px;">
 										<div style="margin-top: 4px; margin-bottom: 5px; font-size: 12px;">
-											What times do you want this import to run?
+											<?php _e('What times do you want this import to run?', 'wp-all-import-pro'); ?>
 										</div>
 
 										<div id="times" style="margin-bottom: 10px;">
@@ -231,17 +231,17 @@
 														</div>
 
 														<span class="subscribe-button-text">
-																		<?php _e('Subscribe', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+																		<?php _e('Subscribe', 'wp-all-import-pro'); ?>
 																	</span>
 													</div>
 												</a>
 											</div>
 											<div class="text-container" style="position: absolute; left: 151px; top: 1px;">
-												<p><?php _e('Get automatic scheduling for unlimited sites, just $19/mo.'); ?></p>
-												<p><?php _e('Have a license?'); ?>
-													<a href="javascript:void(0);" id="add-subscription"><?php _e('Register this site.'); ?></a> <?php _e('Questions?', PMXI_Plugin::LANGUAGE_DOMAIN); ?> <a href="javascript:void(0);" class="help_scheduling">Read more.</a></p>
-												<input type="password" id="add-subscription-field" style="position: absolute; z-index: 2; font-size:14px;" placeholder="<?php _e('Enter your license', PMXI_Plugin::LANGUAGE_DOMAIN); ?>" />
-												<div style="position: absolute;" id="find-subscription-link"><a href="https://www.wpallimport.com/portal/scheduling-service/" target="_blank"><?php _e('Find your license.', PMXI_Plugin::LANGUAGE_DOMAIN);?></a></div>
+												<p><?php _e('Get automatic scheduling for unlimited sites, just $19/mo.', 'wp-all-import-pro'); ?></p>
+												<p><?php _e('Have a license?', 'wp-all-import-pro'); ?>
+													<a href="javascript:void(0);" id="add-subscription"><?php _e('Register this site.', 'wp-all-import-pro'); ?></a> <?php _e('Questions?', 'wp-all-import-pro'); ?> <a href="javascript:void(0);" class="help_scheduling">Read more.</a></p>
+												<input type="password" id="add-subscription-field" style="position: absolute; z-index: 2; font-size:14px;" placeholder="<?php _e('Enter your license', 'wp-all-import-pro'); ?>" />
+												<div style="position: absolute;" id="find-subscription-link"><a href="https://www.wpallimport.com/portal/scheduling-service/" target="_blank"><?php _e('Find your license.', 'wp-all-import-pro');?></a></div>
 											</div>
 										</div>
 										<?php
@@ -263,7 +263,7 @@
 							<fieldset class="optionsset column rad4 wp-all-import-scheduling-help">
 
 								<div class="title">
-									<span style="font-size:1.5em;" class="wpallimport-add-row-title"><?php _e('Automatic Scheduling', PMXI_Plugin::LANGUAGE_DOMAIN); ?></span>
+									<span style="font-size:1.5em;" class="wpallimport-add-row-title"><?php _e('Automatic Scheduling', 'wp-all-import-pro'); ?></span>
 								</div>
 
 								<?php include_once('_scheduling_help.php'); ?>
