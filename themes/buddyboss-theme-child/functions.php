@@ -1795,24 +1795,38 @@ add_action( 'elementor/query/bp_group_posts', 'custom_elementor_query_buddypress
 
 
 
+// function rename_bp_group_feed_to_collaboration() {
+//     // Ensure we are on a BuddyPress group page
+//     if ( ! bp_is_group() || ! bp_is_active( 'groups' ) ) {
+//         return; // Exit if we're not on a group page or groups are inactive
+//     }
+
+//     // Get the current group object
+//     $group = groups_get_current_group();
+//     if ( empty( $group ) || ! isset( $group->id ) ) {
+//         return; // Exit if no valid group object is found
+//     }
+
+//     // Rename the "Activity" tab to "Collaboration"
+//     global $bp;
+//     $bp->groups->nav->edit_nav(
+//         array( 'name' => __( 'Collaboration', 'textdomain' ) ),
+//         'activity', // Slug for the "Feed/Activity" tab
+//         'groups'
+//     );
+// }
+// add_action( 'bp_setup_nav', 'rename_bp_group_feed_to_collaboration', 15 );
 
 
-function rename_bp_group_feed_to_collaboration() {
-    global $bp;
-
-    // Rename the "Activity" group tab to "Collaboration"
-    bp_core_new_subnav_item( array(
-        'name'            => __( 'Collaboration', 'textdomain' ), // New tab label
-        'slug'            => 'feed', // Slug for the "Feed/Activity" tab
-        'parent_slug'     => bp_get_current_group_slug(),
-        'parent_url'      => bp_get_group_permalink( groups_get_current_group() ),
-        'screen_function' => 'groups_screen_group_home', // Retain existing screen function
-        'position'        => 10, // Default tab position
-    ) );
+function ps_rename_group_tabs() {
+ 
+    // if ( ! bp_is_group() ) {
+    //     return;
+    // }
+    
+    buddypress()->groups->nav->edit_nav( array( 'name' => __( 'Collaboration', 'buddypress' ) ), 'feed', bp_current_item() );
 }
-add_action( 'bp_setup_nav', 'rename_bp_group_feed_to_collaboration', 15 );
-
-
+add_action( 'bp_actions', 'ps_rename_group_tabs' );
 
 
 ?>
