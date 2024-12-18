@@ -1818,15 +1818,15 @@ add_action( 'elementor/query/bp_group_posts', 'custom_elementor_query_buddypress
 // add_action( 'bp_setup_nav', 'rename_bp_group_feed_to_collaboration', 15 );
 
 
-function ps_rename_group_tabs() {
+// function ps_rename_group_tabs() {
  
-    // if ( ! bp_is_group() ) {
-    //     return;
-    // }
+//     // if ( ! bp_is_group() ) {
+//     //     return;
+//     // }
     
-    buddypress()->groups->nav->edit_nav( array( 'name' => __( 'Collaboration', 'buddypress' ) ), 'feed', bp_current_item() );
-}
-add_action( 'bp_actions', 'ps_rename_group_tabs' );
+//     buddypress()->groups->nav->edit_nav( array( 'name' => __( 'Collaboration', 'buddypress' ) ), 'feed', bp_current_item() );
+// }
+// add_action( 'bp_actions', 'ps_rename_group_tabs' );
 
 
 ?>
