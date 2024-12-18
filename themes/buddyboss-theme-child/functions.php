@@ -459,7 +459,7 @@ function custom_bp_group_new_tab() {
 
     // Register a new sub-navigation item (tab) for each group
     bp_core_new_subnav_item( array(
-        'name'            => __( 'Custom Landing', 'textdomain' ), // Tab Name
+        'name'            => __( 'Dashboard', 'textdomain' ), // Tab Name
         'slug'            => 'custom-landing', // Unique Slug for the Tab
         'parent_url'      => bp_get_group_permalink( $current_group ), // Parent Group URL
         'parent_slug'     => bp_get_current_group_slug(), // Parent Slug
@@ -1449,8 +1449,8 @@ add_action( 'elementor/query/bp_activity_query', function( $query ) {
 
 
 add_action( 'elementor/query/query_results', function( $query, $widget ) {
-    BugFu::log("elementor/query/query_results");
-    BugFu::log($query);
+    // BugFu::log("elementor/query/query_results");
+    // BugFu::log($query);
 
     
     }, 10, 2 );
@@ -1743,6 +1743,38 @@ function mens_world_champions_query( $query ) {
 add_action( 'elementor/query/related_posts_query', 'mens_world_champions_query' );
 
 
+function custom_elementor_query_buddypress_group( $query ) {
+    // Check if BuddyPress is active
+    if ( ! function_exists( 'buddypress' ) || ! bp_is_group() ) {
+        return;
+    }
+
+    // Get the current group ID
+    $group_id = bp_get_current_group_id();
+    BugFu::log($group_id);
+
+    if ( empty( $group_id ) ) {
+        // If no group ID is found, prevent results
+        $query->set( 'post__in', [ 0 ] );
+        return;
+    }
+
+    // Find a category where the name matches the group ID
+    $category = get_term_by( 'name', $group_id, 'category' );
+    BugFu::log($category);
+
+    if ( $category && ! is_wp_error( $category ) ) {
+        BugFu::log("PASS 1");
+        // Set the query to fetch posts in the matched category
+        $query->set( 'cat', $category->term_id ); // Set the category ID dynamically
+        $query->set( 'posts_per_page', -1 ); // Fetch all posts in the category
+    } else {
+        // If no matching category is found, prevent results
+        $query->set( 'post__in', [ 0 ] );
+    }
+}
+
+add_action( 'elementor/query/bp_group_posts', 'custom_elementor_query_buddypress_group' );
 
 
 
