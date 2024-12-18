@@ -39,7 +39,7 @@ add_filter( 'bp_get_group_description_excerpt', 'bb_get_group_description_excerp
 
 	// Map of group IDs to Elementor template IDs
 	$group_to_template_map = array(
-		12 => 1756, // Group ID 1 -> Template ID 1756
+		8 => 1756, // Group ID 1 -> Template ID 1756
 	);
 
 	// Get current group ID

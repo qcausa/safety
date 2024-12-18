@@ -500,7 +500,7 @@ function custom_bp_group_tab_content() {
 
         // Map of group IDs to Elementor template IDs
         $group_to_template_map = array(
-            12    => 1253, // Group ID 1 -> Template ID 1253
+            8    => 1253, // Group ID 1 -> Template ID 1253
             // Add more mappings as needed
         );
 

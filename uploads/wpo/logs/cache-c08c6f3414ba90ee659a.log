@@ -124,3 +124,23 @@
 [2024-12-18 19:52:48 : INFO] - Cache for URL: http://safety.abc/document-submission/submissions/ has been purged, triggered by action: save_post 
 [2024-12-18 19:52:49 : INFO] - Cache for URL: http://safety.abc/document-submission/submissions/ has been purged, triggered by action: save_post 
 [2024-12-18 19:52:49 : INFO] - Cache for URL: http://safety.abc/document-submission/submissions/ has been purged, triggered by action: save_post 
+[2024-12-18 19:58:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 19:58:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 19:58:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 19:58:20 : INFO] - Cache for URL: http://safety.abc/?elementor_library=buddypress-group-slider has been purged, triggered by action: save_post 
+[2024-12-18 19:58:20 : INFO] - Cache for URL: http://safety.abc/?elementor_library=buddypress-group-slider has been purged, triggered by action: save_post 
+[2024-12-18 19:58:20 : INFO] - Cache for URL: http://safety.abc/?elementor_library=buddypress-group-slider has been purged, triggered by action: save_post 
+[2024-12-18 19:58:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 19:58:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 19:58:54 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:12 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:13 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:00:13 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-18 has been purged, triggered by action: save_post 
+[2024-12-18 20:02:09 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:02:09 : INFO] - Cache for URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/ has been purged, triggered by action: save_post 
+[2024-12-18 20:02:09 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Welcome to D5 Office of Safety  Resource Portal" and URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/, triggered by action: save_post 
+[2024-12-18 20:02:09 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-the-central-office-of-safety-resource-portal/) adjacent to post with id: 2526 has been purged, triggered by action: save_post 
+[2024-12-18 20:02:09 : INFO] - Cache for all archives page associated with post_type: post and Title: "Welcome to D5 Office of Safety  Resource Portal" have been purged, triggered by action: save_post 
