@@ -1336,6 +1336,414 @@ add_filter( 'wpforms_dynamic_choice_taxonomy_args', 'wpf_dev_dynamic_choices_inc
 
 
 
+// ----------------------------------------------------------------
+
+/**
+ * Register a virtual custom post type for BuddyPress Activity
+ */
+function register_bp_activity_post_type() {
+    register_post_type( 'bp_activity_post', array(
+        'labels' => array(
+            'name' => __( 'BuddyPress Activity', 'textdomain' ),
+            'singular_name' => __( 'Activity', 'textdomain' ),
+        ),
+        'public' => true,
+        'show_ui' => false, // Hide from WordPress admin
+        'exclude_from_search' => true,
+        'supports' => array( 'title', 'editor' ),
+    ) );
+}
+add_action( 'init', 'register_bp_activity_post_type' );
+
+
+/**
+ * Modify Elementor query to fetch BuddyPress Activity records
+ */
+add_action( 'elementor/query/bp_activity_query', function( $query ) {
+    global $wpdb;
+
+    // Fetch BuddyPress activity data
+    $activity_table = $wpdb->prefix . 'bp_activity';
+    $results = $wpdb->get_results( "
+        SELECT id, user_id, content, date_recorded
+        FROM {$activity_table}
+        WHERE type = 'last_activity'
+        ORDER BY date_recorded DESC
+        LIMIT 10
+    " );
+
+    // If no results, stop here
+    if ( empty( $results ) ) {
+        $query->set( 'post__in', [0] );
+        return;
+    }
+
+    // Directly override query results with custom posts
+    add_filter( 'posts_results', function( $posts, $query_instance ) use ( $results ) {
+        BugFu::log("posts_results");
+        if ( $query_instance->get( 'post_type' ) !== 'bp_activity_post' ) {
+            return $posts;
+        }
+        BugFu::log("PASS 1");
+
+        // Inject fake posts directly
+        $fake_posts = [];
+        foreach ( $results as $index => $activity ) {
+            $post = new stdClass();
+
+            $post->ID = $index + 1000; // Ensure unique ID
+            $post->post_author = $activity->user_id;
+            $post->post_date = $activity->date_recorded;
+            $post->post_title = 'Activity by User ' . $activity->user_id;
+            $post->post_content = $activity->content;
+            $post->post_status = 'any';
+            $post->post_type = 'bp_activity_post';
+            $post->guid = home_url( '/?post_type=bp_activity_post&p=' . ( $index + 1000 ) );
+            $post->post_name = sanitize_title( 'activity-' . $index );
+
+            $fake_posts[] = new WP_Post( $post );
+        }
+
+        return $fake_posts;
+    }, 10, 2 );
+
+    // Set post type to prevent normal WP_Query
+    $query->set( 'post_type', 'bp_activity_post' );
+    $query->set( 'post__in', [] ); // Empty to bypass wp_posts
+} );
+
+
+
+
+
+
+
+
+
+/**
+ * Override post meta requests to fetch data from bp_activity_meta
+ */
+// add_filter( 'get_post_metadata', function( $value, $post_id, $meta_key, $single ) {
+//     global $wpdb;
+
+//     // Check if we are handling BuddyPress activity fake posts
+//     $post = get_post( $post_id );
+//     if ( $post && $post->post_type === 'bp_activity_post' ) {
+
+//         // Fetch meta data from bp_activity_meta table
+//         $meta_table = $wpdb->prefix . 'bp_activity_meta';
+//         $meta_value = $wpdb->get_var( $wpdb->prepare( "
+//             SELECT meta_value FROM {$meta_table}
+//             WHERE activity_id = %d AND meta_key = %s
+//         ", $post_id, $meta_key ) );
+
+//         if ( ! is_null( $meta_value ) ) {
+//             return maybe_unserialize( $meta_value );
+//         }
+//     }
+
+//     return $value;
+// }, 10, 4 );
+
+
+
+
+add_action( 'elementor/query/query_results', function( $query, $widget ) {
+    BugFu::log("elementor/query/query_results");
+    BugFu::log($query);
+
+    
+    }, 10, 2 );
+
+
+
+
+// add_action( 'template_redirect', function() {
+//     global $wp_query;
+
+//     if ( is_post_type_archive( 'dlm_download' ) ) {
+//         BugFu::log( 'We are on the dlm_download archive page' );
+//     }
+
+//     if ( is_404() ) {
+//         BugFu::log( '404 triggered' );
+//     }
+
+//     if ( wp_redirect( '' ) ) {
+//         BugFu::log( 'Redirection is happening here' );
+//     }
+// }, 1 );
+
+
+
+// ----------------------------------------------------------------
+    
+// add_filter('template_include', 'dlm_downloads_template');
+
+// function dlm_downloads_template( $template ) {
+//     BugFu::log("dlm_downloads");
+//     if ( is_post_type_archive('dlm_downloads') ) {
+//         BugFu::log("is dlm_downloads archive");
+//     } else {
+//         BugFu::log("is NOT dlm_downloads archive");
+//     }
+//   }
+
+
+
+function display_posts_by_category_and_tag_shortcode( $atts ) {
+    // Extract shortcode attributes
+    $atts = shortcode_atts( array(
+        'term_id' => '', // Passed category term_id
+    ), $atts );
+
+    // Debugging with BugFu
+    BugFu::log( $atts );
+
+    // Ensure term_id is valid
+    if ( empty( $atts['term_id'] ) ) {
+        return 'No downloads found for this category.';
+    }
+
+    // Query downloads with 'dlm_download_category' = term_id
+    $query_args = array(
+        'post_type'      => 'dlm_download', // Download Monitor post type
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'dlm_download_category', // Taxonomy for downloads
+                'field'    => 'term_id',
+                'terms'    => $atts['term_id'], // Term ID passed to the shortcode
+            ),
+        ),
+        'posts_per_page' => -1, // Retrieve all matching posts
+    );
+
+    $query = new WP_Query( $query_args );
+
+    // Check if any posts were found
+    if ( ! $query->have_posts() ) {
+        return 'No downloads found for this category.';
+    }
+
+    // Group downloads by tags
+    $grouped_downloads = array();
+    $has_tags = false;
+
+    foreach ( $query->posts as $post ) {
+        $tags = get_the_terms( $post->ID, 'dlm_download_tag' ); // Get tags for the post
+
+        if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) {
+            $tag_name = $tags[0]->name; // Group by first tag
+            $has_tags = true;
+        } else {
+            $tag_name = 'Untagged';
+        }
+
+        $grouped_downloads[ $tag_name ][] = $post;
+    }
+
+    // Start output buffering
+    ob_start();
+    ?>
+    <div class="downloads-by-category">
+        <?php if ( $has_tags ) : ?>
+            <?php foreach ( $grouped_downloads as $tag_name => $posts ) : ?>
+                <?php if ( $tag_name === 'Untagged' && $has_tags ) continue; ?> <!-- Skip 'Untagged' if tagged items exist -->
+
+                <div class="accordion-item">
+                    <h5 class="accordion-trigger" style="cursor: pointer; margin: 0;" 
+                        onclick="toggleAccordion(this)">
+                        <?php echo esc_html( $tag_name ); ?>
+                        <span>(Click to expand)</span>
+                    </h5>
+                    <div class="accordion-body" style="display: none;">
+                        <ul class="downloads-list">
+                            <?php foreach ( $posts as $post ) : ?>
+                                <li class="download-item">
+                                    <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
+                                        <?php 
+                                        // Display the large featured image
+                                        if ( has_post_thumbnail( $post->ID ) ) {
+                                            echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
+                                        }
+                                        ?>
+                                        <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <!-- Directly list downloads if no tags exist -->
+            <ul class="downloads-list">
+                <?php foreach ( $query->posts as $post ) : ?>
+                    <li class="download-item">
+                        <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
+                            <?php 
+                            // Display the large featured image
+                            if ( has_post_thumbnail( $post->ID ) ) {
+                                echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
+                            }
+                            ?>
+                            <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+
+    <script>
+    // Initialize Masonry (ensure this runs on page load)
+    var $grid = $('#resource-loop').masonry();
+
+    // Simple accordion toggle functionality
+    function toggleAccordion(trigger) {
+        var content = trigger.nextElementSibling;
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+        }
+
+        // Trigger Masonry re-layout after accordion toggles
+        setTimeout(function() {
+            $grid.masonry('layout');
+        }, 300); // Add slight delay to ensure content is fully visible
+    }
+</script>
+
+    <?php
+    wp_reset_postdata();
+
+    return ob_get_clean();
+}
+add_shortcode( 'posts_by_category_and_tag', 'display_posts_by_category_and_tag_shortcode' );
+
+
+
+function display_category_image_shortcode( $atts ) {
+    // Extract shortcode attributes
+    $atts = shortcode_atts( array(
+        'term_id' => '', // Term ID for the category
+    ), $atts );
+
+    // Return a blank image if no term_id is provided
+    // if ( empty( $atts['term_id'] ) || ! is_numeric( $atts['term_id'] ) ) {
+    //     return '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Blank Image" style="max-width:100%; height:auto;">';
+    // }
+
+    // Check if Pods is installed
+    if ( ! class_exists( 'Pods' ) ) {
+        return '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Blank Image" style="max-width:100%; height:auto;">';
+    }
+
+    // Get the term
+    $term = get_term( $atts['term_id'], 'dlm_download_category' );
+
+    // if ( ! $term || is_wp_error( $term ) ) {
+    //     return '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Blank Image" style="max-width:100%; height:auto;">';
+    // }
+
+    // Get the category image using Pods
+    $image_id = get_term_meta( $atts['term_id'], 'dlm_download_category_image', true );
+    BugFu::log($image_id);
+
+
+    // Validate the image ID
+    if ( empty( $image_id ) ) {
+        return;
+    }
+
+    // Get the image URL
+    $image_data = wp_get_attachment_image_src( $image_id, 'large' ); // Specify the desired size
+    $image_url = $image_data ? $image_data[0] : '';
+
+    if ( ! $image_url ) {
+        return;
+    }
+
+    // Output the image
+    ob_start();
+    ?>
+    <div class="category-image">
+        <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $term->name ); ?>" style="width:100%; height:auto;">
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'category_image', 'display_category_image_shortcode' );
+
+
+
+
+
+function redirect_category_to_latest_post() {
+    // Check if we're on a category archive page
+    if ( is_category( 'tips-tuesday' ) ) {
+
+        // Query the latest post in the 'tips-tuesday' category
+        $latest_post = new WP_Query( array(
+            'category_name'  => 'tips-tuesday', // Category slug
+            'posts_per_page' => 1,              // Only fetch the latest post
+            'order'          => 'DESC',
+            'orderby'        => 'date'
+        ) );
+
+        // Check if a post exists
+        if ( $latest_post->have_posts() ) {
+            $latest_post->the_post(); // Set up post data
+            $latest_post_url = get_permalink(); // Get the URL of the latest post
+
+            // Redirect to the latest post
+            wp_redirect( $latest_post_url );
+            exit;
+        }
+
+        // Reset post data
+        wp_reset_postdata();
+    }
+}
+add_action( 'template_redirect', 'redirect_category_to_latest_post' );
+
+
+
+function mens_world_champions_query( $query ) {
+    // Check if Pods Framework is installed and active
+    if ( ! class_exists('Pods') ) {
+        return; // Exit early if Pods is not available
+    }
+
+    // Get the Pods object for the current post
+    $pod = pods( 'post', get_the_ID() );
+
+    // Ensure the Pods object is valid and fetch the 'post_downloads' relationship field
+    if ( $pod ) {
+        $downloads = $pod->field( 'post_downloads' );
+
+        // Extract IDs or set to an empty array
+        $post_ids = ! empty( $downloads ) ? wp_list_pluck( $downloads, 'ID' ) : [];
+
+        // If there are valid post IDs, set them in the query
+        if ( ! empty( $post_ids ) ) {
+            $query->set( 'post__in', $post_ids );
+            $query->set( 'orderby', 'post__in' );
+        } else {
+            // If no related downloads are found, set an invalid post__in to prevent results
+            $query->set( 'post__in', [ 0 ] ); // No results will be returned
+        }
+    } else {
+        // If Pods object is invalid, prevent any results
+        $query->set( 'post__in', [ 0 ] );
+    }
+}
+add_action( 'elementor/query/related_posts_query', 'mens_world_champions_query' );
+
+
+
 
 
 ?>

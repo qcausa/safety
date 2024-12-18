@@ -1,0 +1,147 @@
+.dynamic-shortcodes-demo code {
+  background: transparent;
+  padding: 0;
+}
+.dynamic-shortcodes-demo p.error-message {
+  color: red;
+  font-weight: bold;
+}
+.dynamic-shortcodes-demo .copy-button {
+  background: #efefef;
+  color: #7a7a7a;
+  border-color: #7a7a7a;
+  margin-left: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.dynamic-shortcodes-demo table {
+  width: 100%;
+  -webkit-margin-after: 15px;
+  margin-block-end: 15px;
+  font-size: 0.9em;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.dynamic-shortcodes-demo table td,
+.dynamic-shortcodes-demo table th {
+  padding: 15px;
+  line-height: 1.5;
+  vertical-align: top;
+  border: 1px solid grey;
+}
+.dynamic-shortcodes-demo td.code small a {
+  color: #7a7a7a;
+  text-decoration: underline;
+}
+.dynamic-shortcodes-demo .inline-element {
+  display: inline-block;
+}
+.dynamic-shortcodes-demo table {
+  width: 100%;
+}
+.dynamic-shortcodes-demo table.examples {
+  margin-top: 20px;
+}
+.dynamic-shortcodes-demo select {
+  width: 200px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.dynamic-shortcodes-demo table span.notice {
+  color: #e52600;
+  border: 1px solid #e52600;
+  padding: 3px;
+}
+.dynamic-shortcodes-demo button {
+  float: right;
+  font-size: 10px;
+  color: #7a7a7a;
+  border-color: #7a7a7a;
+  background-color: #efefef;
+  padding: 10px;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+.dynamic-shortcodes-demo button:hover,
+.dynamic-shortcodes-demo button:focus {
+  opacity: 0.8;
+}
+.dynamic-shortcodes-demo table td,
+.dynamic-shortcodes-demo table th {
+  background: #ededed;
+  border-left: 1px solid #f6f6f6;
+  border-right: 1px solid #f6f6f6;
+  border-top: none;
+  border-bottom: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+.dynamic-shortcodes-demo table td.what {
+  width: 18%;
+}
+.dynamic-shortcodes-demo table td.code {
+  width: 30%;
+  position: relative;
+}
+.dynamic-shortcodes-demo table thead > tr > th {
+  background: #ededed;
+  text-align: left;
+}
+.dynamic-shortcodes-demo table tbody > tr:nth-child(odd) > td {
+  background-color: #fff;
+}
+.dynamic-shortcodes-demo table tbody > tr:nth-child(even) > td {
+  background-color: #f6f6f6;
+}
+.dynamic-shortcodes-demo .odd-row > td {
+  background-color: #fff !important;
+}
+.dynamic-shortcodes-demo .even-row > td {
+  background-color: #f6f6f6 !important;
+}
+.dynamic-shortcodes-demo td.what {
+  vertical-align: middle;
+}
+.dynamic-shortcodes-demo td.code {
+  vertical-align: middle;
+}
+.dynamic-shortcodes-demo table tbody > tr > td.result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dynamic-shortcodes-demo table tbody > tr.highlighted-row > td {
+  background: #ededed;
+}
+.dynamic-shortcodes-demo table tbody > tr.highlighted-row table tr > th,
+.dynamic-shortcodes-demo table tbody > tr.highlighted-row table tr > td {
+  border-left: 1px solid #e4e4e4 !important;
+  border-right: 1px solid #e4e4e4 !important;
+  border-top: none;
+  border-bottom: none;
+}
+.dynamic-shortcodes-demo
+  table
+  tbody
+  > tr.highlighted-row
+  table
+  tr:nth-child(odd) {
+  background-color: #e4e4e4;
+}
+.dynamic-shortcodes-demo
+  table
+  tbody
+  > tr.highlighted-row
+  table
+  tr:nth-child(even) {
+  background-color: #ededed;
+}
+.dynamic-shortcodes-demo table thead > tr.highlighted-row table tr > th {
+  background-color: #d2d2d2;
+}
+.dynamic-shortcodes-demo .spinner {
+  margin: 0 auto;
+  padding: 50px 0;
+  font-size: 30px;
+}

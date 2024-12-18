@@ -87,6 +87,7 @@ class WalkerCheckbox extends \Walker
      * @param int     $id       Optional. ID of the current category. Default 0.
      */
     public function start_el( &$output, $term, $depth = 0, $args = array(), $id = 0 ) {
+        BugFu::log( "start_el" );
 
         $term_name      = esc_attr( $term->name );
         $url_manager    = $args['url_manager'];
@@ -120,6 +121,7 @@ class WalkerCheckbox extends \Walker
         }
 
         $link =  apply_filters( 'wpc_filters_checkbox_term_html', '<a'.$attributes.'>'.$term->name.'</a>', $attributes, $term, $filter );
+        BugFu::log( $link );
 
         if ( isset( $args['set']['show_count']['value'] ) && $args['set']['show_count']['value'] === 'yes' ) {
             $link .= '&nbsp;'. flrt_filter_get_count( $term );
@@ -129,7 +131,7 @@ class WalkerCheckbox extends \Walker
         $cross_count = isset( $term->cross_count ) ? esc_attr( $term->cross_count ) : '';
 
         $css_classes = array(
-            0 => 'wpc-checkbox-item',
+            0 => 'wpc-checkbox-item2',
             1 => 'wpc-term-item',
             3 => 'wpc-term-count-' . $cross_count,
             4 => 'wpc-term-id-'.$id

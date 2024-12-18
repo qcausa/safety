@@ -1,0 +1,40 @@
+.notice {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.notice img.dynamic-ooo-logo {
+  width: 36px;
+  height: 36px;
+}
+body:not(.rtl) .notice img.dynamic-ooo-logo {
+  float: left;
+  margin: 0 15px 0 0;
+}
+body.rtl .notice img.dynamic-ooo-logo {
+  float: right;
+  margin: 0 0 0 15px;
+}
+.dynamic-shortcodes-notice {
+  background: #fff;
+  border-left: 4px solid #fff;
+  border-left-color: rgb(255, 255, 255);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 1px 12px;
+}
+.dynamic-shortcodes-notice-success {
+  border-left-color: #46b450;
+}
+.dynamic-shortcodes-notice-error {
+  border-left-color: #dc3232;
+}
+.dynamic-shortcodes-notice-warning {
+  border-left-color: #f0ad4e;
+}
+.dynamic-shortcodes-notice-info {
+  border-left-color: #17a2b8;
+}
+.dynamic-shortcodes-generic-notice {
+  display: flex;
+  align-items: center;
+}
