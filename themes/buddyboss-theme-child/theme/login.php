@@ -287,7 +287,7 @@ function buddyboss_login_scripts() {
 						$enable_private_network = bp_get_option( 'bp-enable-private-network' );
 						if ( '0' === $enable_private_network ) {
 							?>
-							$this.addClass('bb-login-title').append( '<span class="bs-cs-login-title12 private-on" style="font-weight:600;">Welcome to the Target Zero Resource Portal</span>' );
+							$this.addClass('bb-login-title').append( '<span class="bs-cs-login-title22222 private-on"><?php echo $rx_title; ?></span>' );
 							jQuery('#login h1 a span').unwrap();
 							<?php
 						} else {
