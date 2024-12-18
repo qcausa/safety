@@ -51,7 +51,7 @@ add_filter( 'bp_get_group_description_excerpt', 'bb_get_group_description_excerp
 	?>
 
 	<div id="header-cover-image" class="<?php echo esc_attr( 'cover-' . $group_cover_height . ' width-' . $group_cover_width . $has_cover_image_position . $has_cover_image . $has_default_cover ); ?>" 
-		<?php if ( class_exists( '\Elementor\Plugin' ) ) : ?>
+		<?php if ( class_exists( '\Elementor\Plugin' ) && ! empty( $template_id ) ) : ?>
 			style="height:auto;"
 		<?php endif; ?>
 	>
