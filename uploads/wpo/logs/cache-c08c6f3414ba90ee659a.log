@@ -144,3 +144,100 @@
 [2024-12-18 20:02:09 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Welcome to D5 Office of Safety  Resource Portal" and URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/, triggered by action: save_post 
 [2024-12-18 20:02:09 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-the-central-office-of-safety-resource-portal/) adjacent to post with id: 2526 has been purged, triggered by action: save_post 
 [2024-12-18 20:02:09 : INFO] - Cache for all archives page associated with post_type: post and Title: "Welcome to D5 Office of Safety  Resource Portal" have been purged, triggered by action: save_post 
+[2024-12-18 20:05:22 : INFO] - Cache for URL: http://safety.abc/?p=2777 has been purged, triggered by action: save_post 
+[2024-12-18 20:05:22 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=2777, triggered by action: save_post 
+[2024-12-18 20:05:22 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/) adjacent to post with id: 2777 has been purged, triggered by action: save_post 
+[2024-12-18 20:05:22 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-18 20:06:50 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-18 20:10:22 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:10:23 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-qualities-employers-want/ has been purged, triggered by action: save_post 
+[2024-12-18 20:10:23 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Top Qualities Employers Want" has been purged, triggered by action: save_post 
+[2024-12-18 20:11:23 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:11:23 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-excuse-for-being-late/ has been purged, triggered by action: save_post 
+[2024-12-18 20:11:23 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Top Excuse for Being Late" has been purged, triggered by action: save_post 
+[2024-12-18 20:12:16 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:12:16 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-time-management/ has been purged, triggered by action: save_post 
+[2024-12-18 20:12:16 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Time Management" has been purged, triggered by action: save_post 
+[2024-12-18 20:12:29 : INFO] - Cache for URL: http://safety.abc/?post_type=product&p=2786 has been purged, triggered by action: save_post 
+[2024-12-18 20:12:29 : INFO] - Cache for archive page associated with post_type: product and Title: "AUTO-DRAFT" has been purged, triggered by action: save_post 
+[2024-12-18 20:13:01 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:13:01 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-target-zero-playlists/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:13:01 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-target-zero-playlists/ has been purged, triggered by action: save_post 
+[2024-12-18 20:13:01 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Target Zero Playlists" has been purged, triggered by action: save_post 
+[2024-12-18 20:13:12 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:13:12 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-target-zero-playlists/ has been purged, triggered by action: save_post 
+[2024-12-18 20:13:12 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Target Zero Playlists" has been purged, triggered by action: save_post 
+[2024-12-18 20:13:35 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:13:35 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-target-zero-playlists/ has been purged, triggered by action: save_post 
+[2024-12-18 20:13:35 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Target Zero Playlists" has been purged, triggered by action: save_post 
+[2024-12-18 20:13:53 : INFO] - Cache for URL: http://safety.abc/?post_type=product&p=2789 has been purged, triggered by action: save_post 
+[2024-12-18 20:13:53 : INFO] - Cache for archive page associated with post_type: product and Title: "AUTO-DRAFT" has been purged, triggered by action: save_post 
+[2024-12-18 20:15:01 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:15:01 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-stress-management/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:15:01 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-stress-management/ has been purged, triggered by action: save_post 
+[2024-12-18 20:15:01 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Stress Management" has been purged, triggered by action: save_post 
+[2024-12-18 20:15:13 : INFO] - Cache for URL: http://safety.abc/?post_type=product&p=2792 has been purged, triggered by action: save_post 
+[2024-12-18 20:15:13 : INFO] - Cache for archive page associated with post_type: product and Title: "AUTO-DRAFT" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:06 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:06 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-strategies-to-ace-tests/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:16:06 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-strategies-to-ace-tests/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:06 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Strategies to Ace Tests" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:51 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:51 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-strategies-to-ace-tests/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:51 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Strategies to Ace Tests" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-stress-management/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Stress Management" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-target-zero-playlists/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Target Zero Playlists" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/product-bundle/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "Product Bundle" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/product-bundle/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-time-management/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Time Management" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-time-management/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-excuse-for-being-late/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Top Excuse for Being Late" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-excuse-for-being-late/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:16:52 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-qualities-employers-want/ has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for archive page associated with post_type: product and Title: "TZ TIP Card &#8211; Top Qualities Employers Want" has been purged, triggered by action: save_post 
+[2024-12-18 20:16:52 : INFO] - Cache for URL: http://safety.abc/product/tz-tip-card-top-qualities-employers-want/ has been purged, triggered by action: woocommerce_product_set_stock 
+[2024-12-18 20:17:33 : INFO] - Cache for URL: http://safety.abc/?post_type=elementor_library&p=2796 has been purged, triggered by action: save_post 
+[2024-12-18 20:20:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:20:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:20:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:20:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:20:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:20:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:24:09 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:24:09 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:24:09 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:01 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:24 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:24 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:25:24 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:27:58 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:27:58 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:27:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:28:36 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:28:36 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:28:36 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:29:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:29:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:29:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:30:42 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:30:42 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:30:42 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:14 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:14 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:31 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:31 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-18 20:31:31 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
