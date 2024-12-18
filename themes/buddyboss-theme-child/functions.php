@@ -1795,6 +1795,26 @@ add_action( 'elementor/query/bp_group_posts', 'custom_elementor_query_buddypress
 
 
 
+
+
+function rename_bp_group_feed_to_collaboration() {
+    global $bp;
+
+    // Rename the "Activity" group tab to "Collaboration"
+    bp_core_new_subnav_item( array(
+        'name'            => __( 'Collaboration', 'textdomain' ), // New tab label
+        'slug'            => 'feed', // Slug for the "Feed/Activity" tab
+        'parent_slug'     => bp_get_current_group_slug(),
+        'parent_url'      => bp_get_group_permalink( groups_get_current_group() ),
+        'screen_function' => 'groups_screen_group_home', // Retain existing screen function
+        'position'        => 10, // Default tab position
+    ) );
+}
+add_action( 'bp_setup_nav', 'rename_bp_group_feed_to_collaboration', 15 );
+
+
+
+
 ?>
 
 
