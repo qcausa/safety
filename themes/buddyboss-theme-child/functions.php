@@ -1699,32 +1699,36 @@ add_shortcode( 'category_image', 'display_category_image_shortcode' );
 
 
 function redirect_category_to_latest_post() {
-    // Check if we're on a category archive page
+    // Check if we are on a category archive page and target the 'tips-tuesday' category
     if ( is_category( 'tips-tuesday' ) ) {
 
-        // Query the latest post in the 'tips-tuesday' category
-        $latest_post = new WP_Query( array(
+        // Prevent redirect loops
+        if ( is_admin() || wp_doing_ajax() ) {
+            return;
+        }
+
+        // Query for the latest post in the 'tips-tuesday' category
+        $latest_post = get_posts( array(
             'category_name'  => 'tips-tuesday', // Category slug
-            'posts_per_page' => 1,              // Only fetch the latest post
+            'posts_per_page' => 1,              // Fetch only the latest post
             'order'          => 'DESC',
             'orderby'        => 'date'
         ) );
 
-        // Check if a post exists
-        if ( $latest_post->have_posts() ) {
-            $latest_post->the_post(); // Set up post data
-            $latest_post_url = get_permalink(); // Get the URL of the latest post
+        // If we found a post, redirect to its permalink
+        if ( ! empty( $latest_post ) && isset( $latest_post[0] ) ) {
+            $latest_post_url = get_permalink( $latest_post[0]->ID );
 
-            // Redirect to the latest post
-            wp_redirect( $latest_post_url );
-            exit;
+            // Make sure headers aren't already sent before redirecting
+            if ( ! headers_sent() ) {
+                wp_safe_redirect( $latest_post_url );
+                exit;
+            }
         }
-
-        // Reset post data
-        wp_reset_postdata();
     }
 }
 add_action( 'template_redirect', 'redirect_category_to_latest_post' );
+
 
 
 
