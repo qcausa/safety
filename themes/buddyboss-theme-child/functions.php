@@ -494,28 +494,37 @@ function custom_bp_group_tab_screen() {
  */
 function custom_bp_group_tab_content() {
     echo '<div id="custom-landing-tab">';
-    // echo '<h2>' . __( 'Custom Group Landing Page', 'textdomain' ) . '</h2>';
 
-    // Check if Elementor Pro is active and the condition is met
+    // Check if we are on a BuddyPress group landing tab
     if ( function_exists( 'bp_is_group' ) && bp_is_group() && bp_current_action() === 'custom-landing' ) {
 
-        // Elementor Template ID (replace with your template ID)
-        $template_id = 1253; // Replace 123 with the actual Elementor template ID
+        // Map of group IDs to Elementor template IDs
+        $group_to_template_map = array(
+            8    => 1253, // Group ID 1 -> Template ID 1253
+            // Add more mappings as needed
+        );
 
-        if ( class_exists( '\Elementor\Plugin' ) ) {
+        // Get the current group ID
+        $group_id = bp_get_current_group_id();
+
+        // Determine the template ID for the current group
+        $template_id = isset( $group_to_template_map[ $group_id ] ) ? $group_to_template_map[ $group_id ] : null;
+
+        if ( $template_id && class_exists( '\Elementor\Plugin' ) ) {
             // Render the Elementor template dynamically
             echo Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $template_id );
-        } else {
-            // Fallback if Elementor is not active
-            echo '<p>' . __( 'Elementor is not active or the template is missing.', 'textdomain' ) . '</p>';
-        }
+        } 
+        // else {
+        //     // Fallback message if no template is found or Elementor is not active
+        //     echo '<p>' . __( 'No template found for this group or Elementor is inactive.', 'textdomain' ) . '</p>';
+        // }
     }
 
     echo '</div>';
 }
 
-
 define( 'BP_GROUPS_DEFAULT_EXTENSION', 'custom-landing' );
+
 
 /**
  * Redirect BuddyPress Group Root to the Custom Landing Tab

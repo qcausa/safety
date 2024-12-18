@@ -1,11 +1,8 @@
 <?php
 /**
- * BuddyBoss - Groups Cover Photo Header.
+ * BuddyBoss - Groups Cover Photo Header with Elementor template support.
  *
  * This template can be overridden by copying it to yourtheme/buddypress/groups/single/cover-image-header.php.
- *
- * @since   BuddyPress 3.0.0
- * @version 1.0.0
  */
 
 $group_link               = bp_get_group_permalink();
@@ -26,6 +23,7 @@ $has_cover_image_position = '';
 $has_default_cover        = bb_attachment_get_cover_image_class( bp_get_group_id(), 'group' );
 
 add_filter( 'bp_get_group_description_excerpt', 'bb_get_group_description_excerpt_view_more', 99, 2 );
+
 ?>
 
 <div id="cover-image-container" class="<?php echo esc_attr( bb_platform_group_header_style() ); ?>">
@@ -38,27 +36,42 @@ add_filter( 'bp_get_group_description_excerpt', 'bb_get_group_description_excerp
 			$has_cover_image_position = ' has-position';
 		}
 	}
+
+	// Map of group IDs to Elementor template IDs
+	$group_to_template_map = array(
+		8 => 1756, // Group ID 1 -> Template ID 1756
+	);
+
+	// Get current group ID
+	$current_group_id = bp_get_current_group_id();
+	$template_id = isset( $group_to_template_map[ $current_group_id ] ) ? $group_to_template_map[ $current_group_id ] : null;
+
 	?>
 
-		<div id="header-cover-image" class="<?php echo esc_attr( 'cover-' . $group_cover_height . ' width-' . $group_cover_width . $has_cover_image_position . $has_cover_image . $has_default_cover ); ?>" 
-			<?php if ( class_exists( '\Elementor\Plugin' ) ) : ?>
-				style="height:auto;"
-			<?php endif; ?>
-		>
-		<?php
-		if ( bp_group_use_cover_image_header() ) {
+	<div id="header-cover-image" class="<?php echo esc_attr( 'cover-' . $group_cover_height . ' width-' . $group_cover_width . $has_cover_image_position . $has_cover_image . $has_default_cover ); ?>" 
+		<?php if ( class_exists( '\Elementor\Plugin' ) ) : ?>
+			style="height:auto;"
+		<?php endif; ?>
+	>
+	<?php
+	if ( bp_group_use_cover_image_header() ) {
 
-			// Check if Elementor plugin is active
-			if ( class_exists( '\Elementor\Plugin' ) ) {
-				echo do_shortcode( '[elementor-template id="1756"]' ); // Render Elementor Template ID 1252
-			} else {
-				// Fallback to the default image if Elementor is not available
-				if ( ! empty( $group_cover_image ) ) {
-					?>
-					<img class="header-cover-img" src="<?php echo esc_url( $group_cover_image ); ?>" <?php echo ( '' !== $group_cover_position ) ? ' data-top="' . esc_attr( $group_cover_position ) . '"' : ''; ?> <?php echo ( '' !== $group_cover_position ) ? ' style="top: ' . esc_attr( $group_cover_position ) . 'px"' : ''; ?> alt="" />
-					<?php
+				// Check if Elementor plugin is active
+				if ( class_exists( '\Elementor\Plugin' ) && ! empty( $template_id ) ) {
+					// Render the Elementor template dynamically
+					echo do_shortcode( '[elementor-template id="' . esc_attr( $template_id ) . '"]' );
+				} else {
+					// Fallback to the default image if Elementor is not available or no template ID is found
+					if ( ! empty( $group_cover_image ) ) {
+						?>
+						<img class="header-cover-img" src="<?php echo esc_url( $group_cover_image ); ?>" 
+							<?php echo ( '' !== $group_cover_position ) ? ' data-top="' . esc_attr( $group_cover_position ) . '"' : ''; ?> 
+							<?php echo ( '' !== $group_cover_position ) ? ' style="top: ' . esc_attr( $group_cover_position ) . 'px"' : ''; ?> 
+							alt="" />
+						<?php
+					}
 				}
-			}
+			
 			?>
 
 			<?php if ( bp_is_item_admin() && ! class_exists( '\Elementor\Plugin' ) ) { ?>
