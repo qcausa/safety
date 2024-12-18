@@ -39,12 +39,14 @@ add_filter( 'bp_get_group_description_excerpt', 'bb_get_group_description_excerp
 
 	// Map of group IDs to Elementor template IDs
 	$group_to_template_map = array(
-		8 => 1756, // Group ID 1 -> Template ID 1756
+		12 => 1756, // Group ID 1 -> Template ID 1756
 	);
 
 	// Get current group ID
 	$current_group_id = bp_get_current_group_id();
+	BugFu::log( $current_group_id );
 	$template_id = isset( $group_to_template_map[ $current_group_id ] ) ? $group_to_template_map[ $current_group_id ] : null;
+	BugFu::log( $template_id );
 
 	?>
 
