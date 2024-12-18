@@ -1509,14 +1509,22 @@ function display_posts_by_category_and_tag_shortcode( $atts ) {
     $query_args = array(
         'post_type'      => 'dlm_download', // Download Monitor post type
         'tax_query'      => array(
+            'relation' => 'AND',
             array(
                 'taxonomy' => 'dlm_download_category', // Taxonomy for downloads
                 'field'    => 'term_id',
                 'terms'    => $atts['term_id'], // Term ID passed to the shortcode
             ),
+            array(
+                'taxonomy' => 'dlm_download_tag', // Taxonomy for tags
+                'field'    => 'term_id',
+                'terms'    => 217, // Exclude tag with ID 217
+                'operator' => 'NOT IN', // Exclude posts with this tag
+            ),
         ),
         'posts_per_page' => -1, // Retrieve all matching posts
     );
+
 
     $query = new WP_Query( $query_args );
 

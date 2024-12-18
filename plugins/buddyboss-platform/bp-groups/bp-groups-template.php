@@ -439,8 +439,8 @@ function bp_has_groups( $args = '' ) {
 		$args,
 		array(
 			'type'               => $type,
-			'order'              => 'DESC',
-			'orderby'            => 'last_activity',
+			'order'              => 'ASC',
+			'orderby'            => 'date',
 			'page'               => 1,
 			'per_page'           => 20,
 			'max'                => false,
