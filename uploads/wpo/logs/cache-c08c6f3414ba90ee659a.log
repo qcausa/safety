@@ -466,3 +466,6 @@
 [2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
 [2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
 [2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:51:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-footer has been purged, triggered by action: save_post 
+[2024-12-19 00:51:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-footer has been purged, triggered by action: save_post 
+[2024-12-19 00:51:54 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-footer has been purged, triggered by action: save_post 
