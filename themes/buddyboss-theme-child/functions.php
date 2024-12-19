@@ -1878,6 +1878,50 @@ add_filter( 'tribe_event_label_plural', function() { return 'Campaigns'; } );
 add_filter( 'tribe_event_label_plural_lowercase', function() { return 'campaigns'; } );
 
 
+
+// function redirect_subadministrator_to_home( $redirect_to, $request, $user ) {
+//     // Check if user is logged in and has the 'subadministrator' role
+//     if ( isset( $user->roles ) && in_array( 'subadministrator', $user->roles ) ) {
+//         return home_url( '/' ); // Redirect to the frontend home page
+//     }
+    
+//     // Default redirect for all other users
+//     return $redirect_to;
+// }
+// add_filter( 'login_redirect', 'redirect_subadministrator_to_home', 10, 3 );
+
+
+function remove_admin_bar_items_for_subadministrator( $wp_admin_bar ) {
+    BugFu::log("remove_admin_bar_items_for_subadministrator");
+    // Check if the user is logged in and has the 'subadministrator' role
+    if ( ! current_user_can( 'subadministrator' ) ) {
+        return;
+    }
+
+    // List of admin bar nodes to remove
+    $items_to_remove = [
+        'wp-logo',          // WordPress logo
+        // 'site-name',        // Site name link
+        'updates',          // Updates
+        'comments',         // Comments
+        'customize',         // Comments
+        'new-content',      // Add New
+        'elementor_edit_page',     // Edit Profile
+        'bugfu-console-debugger',     // Edit Profile
+        'tribe-events',     // Edit Profile
+        'dsh-bar-top',       // User account menu
+        'wpforms-menu',       // User account menu
+        'search-filter-debug',
+    ];
+
+    // Remove each item
+    foreach ( $items_to_remove as $item ) {
+        $wp_admin_bar->remove_node( $item );
+    }
+}
+add_action( 'admin_bar_menu', 'remove_admin_bar_items_for_subadministrator', 999 );
+
+
 ?>
 
 
