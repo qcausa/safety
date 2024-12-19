@@ -1764,6 +1764,40 @@ function mens_world_champions_query( $query ) {
 add_action( 'elementor/query/related_posts_query', 'mens_world_champions_query' );
 
 
+function docs_downloads( $query ) {
+    // Check if Pods Framework is installed and active
+    if ( ! class_exists('Pods') ) {
+        return; // Exit early if Pods is not available
+    }
+
+    // Get the Pods object for the current post
+    $pod = pods( 'docs', get_the_ID() );
+    BugFu::log($pod);
+
+    // Ensure the Pods object is valid and fetch the 'post_downloads' relationship field
+    if ( $pod ) {
+        $downloads = $pod->field( 'doc_downloads' );
+        BugFu::log($downloads);
+
+        // Extract IDs or set to an empty array
+        $post_ids = ! empty( $downloads ) ? wp_list_pluck( $downloads, 'ID' ) : [];
+
+        // If there are valid post IDs, set them in the query
+        if ( ! empty( $post_ids ) ) {
+            $query->set( 'post__in', $post_ids );
+            $query->set( 'orderby', 'post__in' );
+        } else {
+            // If no related downloads are found, set an invalid post__in to prevent results
+            $query->set( 'post__in', [ 0 ] ); // No results will be returned
+        }
+    } else {
+        // If Pods object is invalid, prevent any results
+        $query->set( 'post__in', [ 0 ] );
+    }
+}
+add_action( 'elementor/query/docs_downloads', 'docs_downloads' );
+
+
 function custom_elementor_query_buddypress_group( $query ) {
     // Check if BuddyPress is active
     if ( ! function_exists( 'buddypress' ) || ! bp_is_group() ) {

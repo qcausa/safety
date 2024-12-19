@@ -441,3 +441,28 @@
 [2024-12-18 23:26:45 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-16 has been purged, triggered by action: save_post 
 [2024-12-18 23:26:46 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-16 has been purged, triggered by action: save_post 
 [2024-12-18 23:26:46 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-16 has been purged, triggered by action: save_post 
+[2024-12-19 00:40:39 : INFO] - Cache for URL: http://safety.abc/docs/how-do-i-reset-my-password-2/ has been purged, triggered by action: save_post 
+[2024-12-19 00:40:39 : INFO] - Cache for archive page associated with post_type: docs and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:40:39 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 00:41:10 : INFO] - Cache for URL: http://safety.abc/docs/how-do-i-reset-my-password/ has been purged, triggered by action: wp_trash_post 
+[2024-12-19 00:41:10 : INFO] - Cache for URL: http://safety.abc/?post_type=docs&p=1651 has been purged, triggered by action: save_post 
+[2024-12-19 00:41:10 : INFO] - Cache for archive page associated with post_type: docs and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:42:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:42:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:42:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:44:27 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=2970 has been purged, triggered by action: save_post 
+[2024-12-19 00:44:27 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 00:45:14 : INFO] - Cache for URL: http://safety.abc/downloads/how-do-i-reset-my-password/ has been purged, triggered by action: save_post 
+[2024-12-19 00:45:14 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:45:15 : INFO] - Cache for URL: http://safety.abc/downloads/how-do-i-reset-my-password/ has been purged, triggered by action: save_post 
+[2024-12-19 00:45:15 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:45:26 : INFO] - Cache for URL: http://safety.abc/downloads/how-do-i-reset-my-password/ has been purged, triggered by action: save_post 
+[2024-12-19 00:45:26 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:45:27 : INFO] - Cache for URL: http://safety.abc/downloads/how-do-i-reset-my-password/ has been purged, triggered by action: save_post 
+[2024-12-19 00:45:27 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "How do I reset my password?" has been purged, triggered by action: save_post 
+[2024-12-19 00:49:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:49:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:49:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
+[2024-12-19 00:50:00 : INFO] - Cache for URL: http://safety.abc/?elementor_library=docs-single has been purged, triggered by action: save_post 
