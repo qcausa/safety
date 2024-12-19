@@ -1563,56 +1563,60 @@ function display_posts_by_category_and_tag_shortcode( $atts ) {
     ob_start();
     ?>
     <div class="downloads-by-category">
-        <?php if ( $has_tags ) : ?>
-            <?php foreach ( $grouped_downloads as $tag_name => $posts ) : ?>
-                <?php if ( $tag_name === 'Untagged' && $has_tags ) continue; ?> <!-- Skip 'Untagged' if tagged items exist -->
-
-                <div class="accordion-item">
-                    <h5 class="accordion-trigger" style="cursor: pointer; margin: 0;" 
-                        onclick="toggleAccordion(this)">
-                        <?php echo esc_html( $tag_name ); ?>
-                        <span style="font-family: 'Nunito Sans' ;display: block;font-size:.8rem;text-transform:lowercase;">(Click to expand)</span>
-                    </h5>
-                    <div class="accordion-body" style="display: none;">
-                        <ul class="downloads-list">
-                            <?php foreach ( $posts as $post ) : ?>
-                                <li class="download-item">
-                                    <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
-                                        <?php 
-                                        // Display the large featured image
-                                        if ( has_post_thumbnail( $post->ID ) ) {
-                                            echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
-                                        }
-                                        ?>
-                                        <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
+    <?php 
+    // Display untagged downloads first
+    if ( isset( $grouped_downloads['Untagged'] ) ) : ?>
+        <ul class="downloads-list">
+            <?php foreach ( $grouped_downloads['Untagged'] as $post ) : ?>
+                <li class="download-item">
+                    <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
+                        <?php 
+                        // Display the large featured image
+                        if ( has_post_thumbnail( $post->ID ) ) {
+                            echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
+                        }
+                        ?>
+                        <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
+                    </a>
+                </li>
             <?php endforeach; ?>
-        <?php else : ?>
-            <!-- Directly list downloads if no tags exist -->
-            <ul class="downloads-list">
-                <?php foreach ( $query->posts as $post ) : ?>
-                    <li class="download-item">
-                        <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
-                            <?php 
-                            // Display the large featured image
-                            if ( has_post_thumbnail( $post->ID ) ) {
-                                echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
-                            }
-                            ?>
-                            <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </div>
+        </ul>
+    <?php 
+    endif;
 
-    <script>
+    // Display tagged downloads in accordions
+    foreach ( $grouped_downloads as $tag_name => $posts ) :
+        if ( $tag_name === 'Untagged' ) {
+            continue; // Skip 'Untagged' group as we already displayed it
+        }
+        ?>
+        <div class="accordion-item">
+            <h5 class="accordion-trigger" style="cursor: pointer; margin: 0;" 
+                onclick="toggleAccordion(this)">
+                <?php echo esc_html( $tag_name ); ?>
+                <span style="font-family: 'Nunito Sans'; display: block; font-size: .8rem; text-transform: lowercase;">(Click to expand)</span>
+            </h5>
+            <div class="accordion-body" style="display: none;">
+                <ul class="downloads-list">
+                    <?php foreach ( $posts as $post ) : ?>
+                        <li class="download-item">
+                            <a href="<?php echo get_permalink( $post->ID ); ?>" target="_blank">
+                                <?php 
+                                if ( has_post_thumbnail( $post->ID ) ) {
+                                    echo get_the_post_thumbnail( $post->ID, 'large', array( 'class' => 'download-thumbnail-large' ) );
+                                }
+                                ?>
+                                <span class="download-title"><?php echo esc_html( $post->post_title ); ?></span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<script>
     // Initialize Masonry (ensure this runs on page load)
     var $grid = $('#resource-loop').masonry();
 
