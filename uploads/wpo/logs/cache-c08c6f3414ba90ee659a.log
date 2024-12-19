@@ -495,3 +495,42 @@
 [2024-12-19 01:08:01 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "NHTSA Traffic Safety Marketing" has been purged, triggered by action: save_post 
 [2024-12-19 01:08:02 : INFO] - Cache for URL: http://safety.abc/downloads/nhtsa-traffic-safety-marketing/ has been purged, triggered by action: save_post 
 [2024-12-19 01:08:02 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "NHTSA Traffic Safety Marketing" has been purged, triggered by action: save_post 
+[2024-12-19 01:22:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 01:22:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 01:22:33 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 01:28:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:28:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:28:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:29:02 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:29:02 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:29:02 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:34 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:34 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:30:34 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:35:29 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 01:36:03 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 01:37:07 : INFO] - Cache for archive page associated with post_type: dflip and Title: "FDOT Safety Central Newsletter_Nov 2024" has been purged, triggered by action: save_post 
+[2024-12-19 01:37:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:37:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:37:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:51:19 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:51:19 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:51:19 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:52:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:52:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:52:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:53:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:55:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:55:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:55:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 01:56:41 : INFO] - Cache for URL: http://safety.abc/events/ has been purged, triggered by action: save_post 
+[2024-12-19 01:56:41 : INFO] - Cache for URL: http://safety.abc/events/ has been purged, triggered by action: save_post 
+[2024-12-19 01:56:41 : INFO] - Cache for URL: http://safety.abc/events/ has been purged, triggered by action: save_post 

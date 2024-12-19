@@ -619,7 +619,7 @@ add_action( 'after_setup_theme', 'custom_register_post_tag_for_products', 0 );
 
 
 
-
+// ------------------------------------------------
 
  
 add_action('bp_setup_nav', function()
@@ -1869,6 +1869,13 @@ add_action( 'elementor/query/bp_group_posts', 'custom_elementor_query_buddypress
 //     buddypress()->groups->nav->edit_nav( array( 'name' => __( 'Collaboration', 'buddypress' ) ), 'feed', bp_current_item() );
 // }
 // add_action( 'bp_actions', 'ps_rename_group_tabs' );
+
+
+
+add_filter( 'tribe_event_label_singular', function() { return 'Campaign'; } );
+add_filter( 'tribe_event_label_singular_lowercase', function() { return 'campaign'; } );
+add_filter( 'tribe_event_label_plural', function() { return 'Campaigns'; } );
+add_filter( 'tribe_event_label_plural_lowercase', function() { return 'campaigns'; } );
 
 
 ?>
