@@ -6,19 +6,23 @@
 /*    list-style: none;*/
 /*    margin: 0px;*/
 /*}*//* End custom CSS */
-/* Start custom CSS for shortcode, class: .elementor-element-5c014e5 */.elementor-2187 .elementor-element.elementor-element-5c014e5 .accordion-trigger{
-    padding: 5px 0px;
-}
+/* Start custom CSS for shortcode, class: .elementor-element-5c014e5 *//*.elementor-2187 .elementor-element.elementor-element-5c014e5 .accordion-trigger{*/
+/*    padding: 5px 0px;*/
+/*}*/
 
-.elementor-2187 .elementor-element.elementor-element-5c014e5 li + li {
-  margin-top: 10px;
-}
+/*.elementor-2187 .elementor-element.elementor-element-5c014e5 li + li {*/
+/*  margin-top: 10px;*/
+/*}*/
 
-.elementor-2187 .elementor-element.elementor-element-5c014e5 .download-item > a, .elementor-2187 .elementor-element.elementor-element-5c014e5 .download-title {
-    line-height: 1rem !important;
-}
+/*.elementor-2187 .elementor-element.elementor-element-5c014e5 .download-item > a, .elementor-2187 .elementor-element.elementor-element-5c014e5 .download-title {*/
+/*    line-height: 1rem !important;*/
+/*}*/
 
 /*.elementor-2187 .elementor-element.elementor-element-5c014e5 .downloads-by-category > ul{*/
 /*    list-style: none;*/
 /*    margin: 0px;*/
+/*}*/
+
+/*.elementor-2187 .elementor-element.elementor-element-5c014e5 .accordion-trigger > span{*/
+/*    text-transform: lowercase;*/
 /*}*//* End custom CSS */

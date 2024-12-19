@@ -1571,7 +1571,7 @@ function display_posts_by_category_and_tag_shortcode( $atts ) {
                     <h5 class="accordion-trigger" style="cursor: pointer; margin: 0;" 
                         onclick="toggleAccordion(this)">
                         <?php echo esc_html( $tag_name ); ?>
-                        <span>(Click to expand)</span>
+                        <span style="font-family: 'Nunito Sans' ;display: block;font-size:.8rem;text-transform:lowercase;">(Click to expand)</span>
                     </h5>
                     <div class="accordion-body" style="display: none;">
                         <ul class="downloads-list">
