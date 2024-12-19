@@ -551,3 +551,258 @@
 [2024-12-19 02:59:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-header has been purged, triggered by action: save_post 
 [2024-12-19 02:59:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-header has been purged, triggered by action: save_post 
 [2024-12-19 02:59:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=primary-header has been purged, triggered by action: save_post 
+[2024-12-19 04:52:45 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:52:45 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:52:45 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:41 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:41 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:41 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:54 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:54 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 04:53:54 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 07:07:50 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3018 has been purged, triggered by action: save_post 
+[2024-12-19 07:07:50 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 07:08:25 : INFO] - Cache for URL: http://safety.abc/downloads/2024-safety-holiday-poster-24x36/ has been purged, triggered by action: save_post 
+[2024-12-19 07:08:25 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "2024 Safety Holiday Poster 24&#215;36" has been purged, triggered by action: save_post 
+[2024-12-19 07:08:26 : INFO] - Cache for URL: http://safety.abc/downloads/2024-safety-holiday-poster-24x36/ has been purged, triggered by action: save_post 
+[2024-12-19 07:08:26 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "2024 Safety Holiday Poster 24&#215;36" has been purged, triggered by action: save_post 
+[2024-12-19 07:09:30 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3022 has been purged, triggered by action: save_post 
+[2024-12-19 07:09:30 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 07:11:54 : INFO] - Cache for URL: http://safety.abc/downloads/tz-2024-holiday-safety-moment-slide-2/ has been purged, triggered by action: save_post 
+[2024-12-19 07:11:54 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "TZ 2024 Holiday Safety Moment Slide" has been purged, triggered by action: save_post 
+[2024-12-19 07:11:55 : INFO] - Cache for URL: http://safety.abc/downloads/tz-2024-holiday-safety-moment-slide-2/ has been purged, triggered by action: save_post 
+[2024-12-19 07:11:55 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "TZ 2024 Holiday Safety Moment Slide" has been purged, triggered by action: save_post 
+[2024-12-19 07:12:39 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3026 has been purged, triggered by action: save_post 
+[2024-12-19 07:12:39 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 07:13:30 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3027 has been purged, triggered by action: save_post 
+[2024-12-19 07:13:30 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 07:13:44 : INFO] - Cache for URL: http://safety.abc/downloads/safe-mobility-for-life-teams-background/ has been purged, triggered by action: save_post 
+[2024-12-19 07:13:44 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Safe Mobility for Life Teams Background" has been purged, triggered by action: save_post 
+[2024-12-19 07:13:45 : INFO] - Cache for URL: http://safety.abc/downloads/safe-mobility-for-life-teams-background/ has been purged, triggered by action: save_post 
+[2024-12-19 07:13:45 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Safe Mobility for Life Teams Background" has been purged, triggered by action: save_post 
+[2024-12-19 07:17:56 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:17:56 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:17:56 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:18 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:19 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:19 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:18:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:21:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:21:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:21:53 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:22:02 : INFO] - Cache for URL: http://safety.abc/?p=3036 has been purged, triggered by action: save_post 
+[2024-12-19 07:22:02 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=3036, triggered by action: save_post 
+[2024-12-19 07:22:02 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/) adjacent to post with id: 3036 has been purged, triggered by action: save_post 
+[2024-12-19 07:22:02 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-19 07:22:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:22:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:22:25 : INFO] - Cache for URL: http://safety.abc/?elementor_library=global-kit-styles has been purged, triggered by action: save_post 
+[2024-12-19 07:23:53 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 07:23:53 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 07:23:53 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 07:23:53 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 07:23:53 : INFO] - Cache for URL: http://safety.abc/tips-tuesday-november-26-2024/ has been purged, triggered by action: save_post 
+[2024-12-19 07:23:53 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Tips Tuesday &#8211; November 26, 2024" and URL: http://safety.abc/tips-tuesday-november-26-2024/, triggered by action: save_post 
+[2024-12-19 07:23:53 : INFO] - Cache for next post (with URL: http://safety.abc/tips-tuesday-december-3-2024/) adjacent to post with id: 1775 has been purged, triggered by action: save_post 
+[2024-12-19 07:23:53 : INFO] - Cache for all archives page associated with post_type: post and Title: "Tips Tuesday &#8211; November 26, 2024" have been purged, triggered by action: save_post 
+[2024-12-19 07:23:53 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 07:25:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:25:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:25:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:26:59 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 07:33:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:33:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:33:33 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:34:40 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:34:40 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:34:40 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:35:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:35:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:35:28 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:39:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:39:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:39:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:41:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:41:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:41:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:44:15 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:44:16 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:44:16 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:45:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:45:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:45:32 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:51:51 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:51:51 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:51:51 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:52:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:52:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:52:29 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:54:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:54:05 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:54:06 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 07:55:39 : INFO] - Cache for URL: http://safety.abc/?post_type=elementor_library&p=3055 has been purged, triggered by action: save_post 
+[2024-12-19 07:58:02 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 07:58:46 : INFO] - Cache for archive page associated with post_type: dflip and Title: "" has been purged, triggered by action: save_post 
+[2024-12-19 07:59:08 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Target Zero Recruitment" has been purged, triggered by action: save_post 
+[2024-12-19 08:05:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 08:05:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 08:05:44 : INFO] - Cache for URL: http://safety.abc/?elementor_library=test has been purged, triggered by action: save_post 
+[2024-12-19 08:11:36 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3061 has been purged, triggered by action: save_post 
+[2024-12-19 08:11:36 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:13:37 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:13:38 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:13:38 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:14:38 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:21:21 : INFO] - Cache for URL: http://safety.abc/?p=3062 has been purged, triggered by action: save_post 
+[2024-12-19 08:21:21 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=3062, triggered by action: save_post 
+[2024-12-19 08:21:21 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/) adjacent to post with id: 3062 has been purged, triggered by action: save_post 
+[2024-12-19 08:21:21 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-19 08:24:13 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 08:24:13 : INFO] - Cache for URL: http://safety.abc/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:24:13 : INFO] - Cache for blog post has been purged due to updates to post with Title: "April 2024 Target Zero Internal Update" and URL: http://safety.abc/april-2024-target-zero-internal-update/, triggered by action: save_post 
+[2024-12-19 08:24:13 : INFO] - Cache for previous post (with URL: http://safety.abc/welcome-to-d5-office-of-safety-resource-portal/) adjacent to post with id: 3062 has been purged, triggered by action: save_post 
+[2024-12-19 08:24:13 : INFO] - Cache for all archives page associated with post_type: post and Title: "April 2024 Target Zero Internal Update" have been purged, triggered by action: save_post 
+[2024-12-19 08:28:48 : INFO] - Cache for URL: http://safety.abc/?p=3064 has been purged, triggered by action: save_post 
+[2024-12-19 08:28:48 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=3064, triggered by action: save_post 
+[2024-12-19 08:28:48 : INFO] - Cache for previous post (with URL: http://safety.abc/april-2024-target-zero-internal-update/) adjacent to post with id: 3064 has been purged, triggered by action: save_post 
+[2024-12-19 08:28:48 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-19 08:28:59 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 08:28:59 : INFO] - Cache for URL: http://safety.abc/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:28:59 : INFO] - Cache for blog post has been purged due to updates to post with Title: "August 2024 Target Zero Internal Update" and URL: http://safety.abc/august-2024-target-zero-internal-update/, triggered by action: save_post 
+[2024-12-19 08:28:59 : INFO] - Cache for previous post (with URL: http://safety.abc/april-2024-target-zero-internal-update/) adjacent to post with id: 3064 has been purged, triggered by action: save_post 
+[2024-12-19 08:28:59 : INFO] - Cache for all archives page associated with post_type: post and Title: "August 2024 Target Zero Internal Update" have been purged, triggered by action: save_post 
+[2024-12-19 08:29:05 : INFO] - Cache for URL: http://safety.abc/?p=3066 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:05 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=3066, triggered by action: save_post 
+[2024-12-19 08:29:05 : INFO] - Cache for previous post (with URL: http://safety.abc/august-2024-target-zero-internal-update/) adjacent to post with id: 3066 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:05 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-19 08:29:19 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 08:29:19 : INFO] - Cache for URL: http://safety.abc/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:29:19 : INFO] - Cache for blog post has been purged due to updates to post with Title: "January 2024 Target Zero Internal Update" and URL: http://safety.abc/january-2024-target-zero-internal-update/, triggered by action: save_post 
+[2024-12-19 08:29:19 : INFO] - Cache for previous post (with URL: http://safety.abc/august-2024-target-zero-internal-update/) adjacent to post with id: 3066 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:19 : INFO] - Cache for all archives page associated with post_type: post and Title: "January 2024 Target Zero Internal Update" have been purged, triggered by action: save_post 
+[2024-12-19 08:29:30 : INFO] - Cache for URL: http://safety.abc/?p=3068 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:30 : INFO] - Cache for blog post has been purged due to updates to post with Title: "Auto Draft" and URL: http://safety.abc/?p=3068, triggered by action: save_post 
+[2024-12-19 08:29:30 : INFO] - Cache for previous post (with URL: http://safety.abc/january-2024-target-zero-internal-update/) adjacent to post with id: 3068 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:30 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2024-12-19 08:29:43 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 08:29:43 : INFO] - Cache for URL: http://safety.abc/october-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:29:43 : INFO] - Cache for blog post has been purged due to updates to post with Title: "October 2024 Target Zero Internal Update" and URL: http://safety.abc/october-2024-target-zero-internal-update/, triggered by action: save_post 
+[2024-12-19 08:29:43 : INFO] - Cache for previous post (with URL: http://safety.abc/january-2024-target-zero-internal-update/) adjacent to post with id: 3068 has been purged, triggered by action: save_post 
+[2024-12-19 08:29:43 : INFO] - Cache for all archives page associated with post_type: post and Title: "October 2024 Target Zero Internal Update" have been purged, triggered by action: save_post 
+[2024-12-19 08:31:20 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:31:34 : INFO] - Cache for archive page associated with post_type: dflip and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:31:37 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:31:49 : INFO] - Cache for archive page associated with post_type: dflip and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:31:56 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:32:07 : INFO] - Cache for archive page associated with post_type: dflip and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:32:10 : INFO] - Cache for archive page associated with post_type: dflip and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:32:25 : INFO] - Cache for archive page associated with post_type: dflip and Title: "October 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:39:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 08:39:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 08:39:08 : INFO] - Cache for URL: http://safety.abc/?elementor_library=single-post has been purged, triggered by action: save_post 
+[2024-12-19 08:41:25 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3082 has been purged, triggered by action: save_post 
+[2024-12-19 08:41:25 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:41:54 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:41:54 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:41:55 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:41:55 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:42:56 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:42:56 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:42:57 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:42:57 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:43:08 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:43:08 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:43:08 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:43:08 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:43:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 08:43:49 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 08:43:50 : INFO] - Cache for URL: http://safety.abc/?elementor_library=downloads-archive has been purged, triggered by action: save_post 
+[2024-12-19 08:44:13 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3086 has been purged, triggered by action: save_post 
+[2024-12-19 08:44:13 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:44:28 : INFO] - Cache for URL: http://safety.abc/downloads/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:44:28 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:44:29 : INFO] - Cache for URL: http://safety.abc/downloads/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:44:29 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:44:35 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3089 has been purged, triggered by action: save_post 
+[2024-12-19 08:44:35 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:44:45 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:44:45 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:44:46 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:44:46 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:03 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:03 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:04 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:04 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:10 : INFO] - Cache for URL: http://safety.abc/?post_type=dlm_download&p=3092 has been purged, triggered by action: save_post 
+[2024-12-19 08:45:10 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Auto Draft" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:26 : INFO] - Cache for URL: http://safety.abc/downloads/october-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:26 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "October 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:27 : INFO] - Cache for URL: http://safety.abc/downloads/october-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:27 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "October 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:44 : INFO] - Cache for URL: http://safety.abc/downloads/october-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:44 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "October 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for URL: http://safety.abc/downloads/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:45:45 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:46:47 : INFO] - Cache for URL: http://safety.abc/?post_type=elementor_library&p=3055 has been purged, triggered by action: save_post 
+[2024-12-19 08:46:47 : INFO] - Cache for URL: http://safety.abc/?post_type=elementor_library&p=3055 has been purged, triggered by action: save_post 
+[2024-12-19 08:46:47 : INFO] - Cache for URL: http://safety.abc/?post_type=elementor_library&p=3055 has been purged, triggered by action: save_post 
+[2024-12-19 08:46:52 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 08:46:52 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 08:46:52 : INFO] - Cache for URL: http://safety.abc/?elementor_library=elementor-loop-item-10 has been purged, triggered by action: save_post 
+[2024-12-19 08:48:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=target-zero-dashboard has been purged, triggered by action: save_post 
+[2024-12-19 08:48:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=target-zero-dashboard has been purged, triggered by action: save_post 
+[2024-12-19 08:48:04 : INFO] - Cache for URL: http://safety.abc/?elementor_library=target-zero-dashboard has been purged, triggered by action: save_post 
+[2024-12-19 08:49:04 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:04 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:49:05 : INFO] - Cache for URL: http://safety.abc/downloads/january-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:05 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "January 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:49:13 : INFO] - Cache for URL: http://safety.abc/downloads/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:13 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:49:14 : INFO] - Cache for URL: http://safety.abc/downloads/august-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:14 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "August 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:49:17 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:17 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:49:17 : INFO] - Cache for URL: http://safety.abc/downloads/april-2024-target-zero-internal-update/ has been purged, triggered by action: save_post 
+[2024-12-19 08:49:17 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "April 2024 Target Zero Internal Update" has been purged, triggered by action: save_post 
+[2024-12-19 08:52:11 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:56:38 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:58:04 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 08:59:32 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 09:01:39 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:01:39 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:01:39 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:02:07 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 09:02:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:02:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:02:21 : INFO] - Cache for URL: http://safety.abc/?elementor_library=products-archive has been purged, triggered by action: save_post 
+[2024-12-19 09:03:08 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 09:05:24 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 09:05:44 : INFO] - Cache for multiple term taxonomy have been purged due to post terms update, triggered by action: set_object_terms 
+[2024-12-19 09:05:44 : INFO] - Cache for URL: http://safety.abc/product/product-bundle/ has been purged, triggered by action: save_post 
+[2024-12-19 09:05:44 : INFO] - Cache for archive page associated with post_type: product and Title: "Product Bundle" has been purged, triggered by action: save_post 
+[2024-12-19 09:07:46 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2024-12-19 09:08:45 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:08:52 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:18 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:18 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:18 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:51 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:52 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:14:52 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:15:14 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:15:17 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:15:55 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:16:01 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:19:03 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2024-12-19 09:19:11 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 

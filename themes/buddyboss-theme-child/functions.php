@@ -104,8 +104,8 @@ function bbloomer_update_item_quantity_checkout( $post_data ) {
  * @community     https://businessbloomer.com/club/
  */
  
- add_filter( 'woocommerce_checkout_redirect_empty_cart', '__return_false' );
- add_filter( 'woocommerce_checkout_update_order_review_expired', '__return_false' );
+//  add_filter( 'woocommerce_checkout_redirect_empty_cart', '__return_false' );
+//  add_filter( 'woocommerce_checkout_update_order_review_expired', '__return_false' );
 
 
 
@@ -177,66 +177,66 @@ function custom_woocommerce_order_update( $post_id, $post, $update ) {
 }
 
 
-/**
- * Register custom shortcode after all plugins are loaded to ensure Download Monitor is available.
- */
-function custom_register_download_page_shortcode() {
-   if ( function_exists( 'download_monitor' ) ) {
+// /**
+//  * Register custom shortcode after all plugins are loaded to ensure Download Monitor is available.
+//  */
+// function custom_register_download_page_shortcode() {
+//    if ( function_exists( 'download_monitor' ) ) {
 
-       /**
-        * Wrapper for [download_page] shortcode to add a 'division' argument and filter downloads by post meta.
-        */
-       function custom_download_page_shortcode( $atts ) {
-           // Parse shortcode arguments
-           $atts = shortcode_atts( array(
-               'division' => '', // Custom attribute
-           ), $atts, 'custom_download_page' );
+//        /**
+//         * Wrapper for [download_page] shortcode to add a 'division' argument and filter downloads by post meta.
+//         */
+//        function custom_download_page_shortcode( $atts ) {
+//            // Parse shortcode arguments
+//            $atts = shortcode_atts( array(
+//                'division' => '', // Custom attribute
+//            ), $atts, 'custom_download_page' );
 
-           // Debug to confirm shortcode execution
-           error_log( 'Shortcode Executed: Division = ' . $atts['division'] );
+//            // Debug to confirm shortcode execution
+//            error_log( 'Shortcode Executed: Division = ' . $atts['division'] );
 
-           // Sanitize the division value
-           $division_filter = sanitize_text_field( $atts['division'] );
-           BugFu::log($division_filter);
+//            // Sanitize the division value
+//            $division_filter = sanitize_text_field( $atts['division'] );
+//            BugFu::log($division_filter);
 
-           // Hook into the Download Monitor query to add the division filter
-           add_filter( 'dlm_page_addon_download_retrieve_args', function( $query_args, $category ) use ( $division_filter ) {
-               if ( ! empty( $division_filter ) ) {
-                   $query_args['meta_query'][] = array(
-                       'key'     => 'download_divisions',
-                       'value'   => $division_filter,
-                       'compare' => 'LIKE',
-                   );
-               }
-               return $query_args;
-           }, 10, 2 );
+//            // Hook into the Download Monitor query to add the division filter
+//            add_filter( 'dlm_page_addon_download_retrieve_args', function( $query_args, $category ) use ( $division_filter ) {
+//                if ( ! empty( $division_filter ) ) {
+//                    $query_args['meta_query'][] = array(
+//                        'key'     => 'download_divisions',
+//                        'value'   => $division_filter,
+//                        'compare' => 'LIKE',
+//                    );
+//                }
+//                return $query_args;
+//            }, 10, 2 );
 
-           // Safely call the original download_page function
-           // Ensure Download Monitor is active
-            if ( function_exists( 'download_monitor' ) ) {
-               $download_page_service = download_monitor()->service( 'download_page' );
+//            // Safely call the original download_page function
+//            // Ensure Download Monitor is active
+//             if ( function_exists( 'download_monitor' ) ) {
+//                $download_page_service = download_monitor()->service( 'download_page' );
 
-               if ( $download_page_service && method_exists( $download_page_service, 'download_page' ) ) {
-                  // Safely call the original download_page() function
-                  return $download_page_service->download_page( $atts );
-               }
-            }
+//                if ( $download_page_service && method_exists( $download_page_service, 'download_page' ) ) {
+//                   // Safely call the original download_page() function
+//                   return $download_page_service->download_page( $atts );
+//                }
+//             }
   
 
-           return __( 'Unable to display downloads. Please try again.', 'text-domain' );
-       }
+//            return __( 'Unable to display downloads. Please try again.', 'text-domain' );
+//        }
 
-       // Register the custom shortcode
-       add_shortcode( 'custom_download_page', 'custom_download_page_shortcode' );
+//        // Register the custom shortcode
+//        add_shortcode( 'custom_download_page', 'custom_download_page_shortcode' );
 
-   } else {
-       // Fallback message if Download Monitor is inactive
-       add_shortcode( 'custom_download_page', function() {
-           return __( 'Download Monitor plugin is not active.', 'text-domain' );
-       } );
-   }
-}
-add_action( 'wp_loaded', 'custom_register_download_page_shortcode', 9999 );
+//    } else {
+//        // Fallback message if Download Monitor is inactive
+//        add_shortcode( 'custom_download_page', function() {
+//            return __( 'Download Monitor plugin is not active.', 'text-domain' );
+//        } );
+//    }
+// }
+// add_action( 'wp_loaded', 'custom_register_download_page_shortcode', 9999 );
 
 
 
@@ -501,6 +501,7 @@ function custom_bp_group_tab_content() {
         // Map of group IDs to Elementor template IDs
         $group_to_template_map = array(
             8    => 1253, // Group ID 1 -> Template ID 1253
+            12    => 3055, // Group ID 1 -> Template ID 1253
             // Add more mappings as needed
         );
 
@@ -592,14 +593,14 @@ add_action( 'wpforms_post_submissions_process_complete', 'custom_change_post_sta
 /**
  * Allow WooCommerce products and posts to use the same 'post_tag' taxonomy.
  */
-function custom_share_tags_between_posts_and_products() {
-    // Unregister WooCommerce's default 'product_tag' taxonomy
-    unregister_taxonomy( 'product_tag' );
+// function custom_share_tags_between_posts_and_products() {
+//     // Unregister WooCommerce's default 'product_tag' taxonomy
+//     unregister_taxonomy( 'product_tag' );
 
-    // Register 'post_tag' taxonomy for WooCommerce products
-    register_taxonomy_for_object_type( 'post_tag', 'product' );
-}
-add_action( 'init', 'custom_share_tags_between_posts_and_products', 11 );
+//     // Register 'post_tag' taxonomy for WooCommerce products
+//     register_taxonomy_for_object_type( 'post_tag', 'product' );
+// }
+// add_action( 'init', 'custom_share_tags_between_posts_and_products', 11 );
 
 
 /**
@@ -1920,6 +1921,74 @@ function remove_admin_bar_items_for_subadministrator( $wp_admin_bar ) {
     }
 }
 add_action( 'admin_bar_menu', 'remove_admin_bar_items_for_subadministrator', 999 );
+
+
+
+/**
+ * Modify the 'dlm_download' custom post type arguments.
+ *
+ * @param array $args The original arguments for the post type.
+ * @param string $post_type The post type slug.
+ * @return array Modified post type arguments.
+ */
+function modify_dflip_post_type_args( $args, $post_type ) {
+    if ( 'dflip' === $post_type ) { 
+        // Enable REST API and show in navigation menus
+        $args['show_in_rest'] = true; 
+        $args['show_in_nav_menus'] = true;
+        $args['public'] = true;
+        $args['publicly_queryable'] = true;
+        $args['show_ui'] = true;
+        $args['capability_type'] = 'page';
+        $args['query_var'] = true;
+        $args['has_archive'] = true;
+        $args['rewrite'] = array( 'slug' => 'dflip', 'with_front' => true, 'pages' => true, 'feeds' => true);
+
+        // Add Elementor and Page Attributes support
+        $args['supports'] = array_merge( (array) $args['supports'], array( 'elementor', 'page-attributes' ) );
+
+        // Add 'dlm_download_category' to taxonomies
+        if ( isset( $args['taxonomies'] ) && is_array( $args['taxonomies'] ) ) {
+            $args['taxonomies'][] = 'dlm_download_category';
+        } else {
+            $args['taxonomies'] = array( 'dlm_download_category' );
+        }
+    }
+    return $args;
+}
+add_filter( 'register_post_type_args', 'modify_dflip_post_type_args', 100, 2 );
+
+
+	
+add_filter( 'cfw_get_billing_checkout_fields', 'remove_checkout_fields', 100 );
+
+function remove_checkout_fields( $fields ) {
+	unset( $fields['billing_company'] );
+	unset( $fields['billing_city'] );
+	unset( $fields['billing_postcode'] );
+	unset( $fields['billing_country'] );
+	unset( $fields['billing_state'] );
+	unset( $fields['billing_address_1'] );
+	unset( $fields['billing_address_2'] );
+	return $fields;
+}
+
+// Set billing address fields to not required
+add_filter( 'woocommerce_checkout_fields', 'unrequire_checkout_fields' );
+
+function unrequire_checkout_fields( $fields ) {
+	$fields['billing']['billing_company']['required']   = false;
+	$fields['billing']['billing_city']['required']      = false;
+	$fields['billing']['billing_postcode']['required']  = false;
+	$fields['billing']['billing_country']['required']   = false;
+	$fields['billing']['billing_state']['required']     = false;
+	$fields['billing']['billing_address_1']['required'] = false;
+	$fields['billing']['billing_address_2']['required'] = false;
+	return $fields;
+}
+
+
+
 
 
 ?>
