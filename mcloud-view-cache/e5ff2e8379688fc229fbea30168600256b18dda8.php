@@ -1,0 +1,1 @@
+<p>Add in the settings from the tutorial here.  Clicking on <strong>Next</strong> will verify your settings.</p><?php /**PATH F:\Users\desit\Local Sites\safety\app\public\wp-content\plugins\ilab-media-tools-premium\views/wizard/cloud-storage/providers/cloudflare/form.blade.php ENDPATH**/ ?>

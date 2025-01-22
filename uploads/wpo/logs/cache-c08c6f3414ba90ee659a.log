@@ -806,3 +806,120 @@
 [2024-12-19 09:16:01 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
 [2024-12-19 09:19:03 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
 [2024-12-19 09:19:11 : INFO] - Cache for URL: http://safety.abc/checkout/ has been purged, triggered by action: save_post 
+[2025-01-22 17:44:59 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:44:59 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 17:45:00 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:45:00 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 17:45:48 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:45:48 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 17:45:49 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:45:49 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 17:49:51 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:49:51 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 17:49:51 : INFO] - Cache for URL: http://safety.abc/downloads/target-zero-brand-guidelines-pdf/ has been purged, triggered by action: save_post 
+[2025-01-22 17:49:51 : INFO] - Cache for archive page associated with post_type: dlm_download and Title: "Target Zero Brand Guidelines (PDF)" has been purged, triggered by action: save_post 
+[2025-01-22 18:07:10 : INFO] - Cache for URL: http://safety.abc/?post_type=tribe_venue&p=3113 has been purged, triggered by action: save_post 
+[2025-01-22 18:07:23 : INFO] - Cache for URL: http://safety.abc/venue/base/ has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for URL: http://safety.abc/event/new-years-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "New Year&#8217;s Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for URL: http://safety.abc/event/law-enforcement-appreciation-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Law Enforcement Appreciation Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for URL: http://safety.abc/event/human-trafficking-awareness-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:12:59 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Human Trafficking Awareness Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:00 : INFO] - Cache for URL: http://safety.abc/event/martin-luther-king-jr-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:00 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Martin Luther King Jr. Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:00 : INFO] - Cache for URL: http://safety.abc/event/florida-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:00 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Florida Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:01 : INFO] - Cache for URL: http://safety.abc/event/florida-school-crossing-guard-appreciation-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:01 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Florida School Crossing Guard Appreciation Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for URL: http://safety.abc/event/national-engineers-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Engineers Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for URL: http://safety.abc/event/women-in-construction-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Women in Construction Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for URL: http://safety.abc/event/vehicle-safety-recalls-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Vehicle Safety Recalls Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for URL: http://safety.abc/event/employee-appreciation-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:02 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Employee Appreciation Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:17 : INFO] - Cache for URL: http://safety.abc/event/national-surveyors-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:17 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Surveyors Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for URL: http://safety.abc/event/st-patricks-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "St. Patrick’s Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for URL: http://safety.abc/event/fl-govt-finance-professionals-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "FL Govt. Finance Professionals Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for URL: http://safety.abc/event/national-walking-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Walking Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for URL: http://safety.abc/event/administrative-professionals-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Administrative Professionals Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for URL: http://safety.abc/event/work-zone-awareness-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Work Zone Awareness Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for URL: http://safety.abc/event/take-your-kid-to-work-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Take Your Kid to Work Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for URL: http://safety.abc/event/hurricane-preparedness-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Hurricane Preparedness Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for URL: http://safety.abc/event/national-space-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Space Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for URL: http://safety.abc/event/public-service-recognition-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:22 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Public Service Recognition Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for URL: http://safety.abc/event/national-train-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Train Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for URL: http://safety.abc/event/fl-511-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "FL 511 Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for URL: http://safety.abc/event/memorial-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Memorial Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for URL: http://safety.abc/event/national-secure-your-load-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Secure Your Load Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for URL: http://safety.abc/event/national-trails-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Trails Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:34 : INFO] - Cache for URL: http://safety.abc/event/right-of-way-professionals-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:34 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Right of Way Professionals Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for URL: http://safety.abc/event/independence-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Independence Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for URL: http://safety.abc/event/operation-safe-driver-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Operation Safe Driver Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for URL: http://safety.abc/event/operation-southern-slow-down/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Operation Southern Slow Down" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for URL: http://safety.abc/event/stop-on-red-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:35 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Stop on Red Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for URL: http://safety.abc/event/national-aviation-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "National Aviation Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for URL: http://safety.abc/event/labor-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Labor Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for URL: http://safety.abc/event/fls-drowsy-driving-prevention-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "FL’s Drowsy Driving Prevention Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for URL: http://safety.abc/event/truck-driver-appreciation-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Truck Driver Appreciation Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for URL: http://safety.abc/event/it-professionals-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:13:48 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "IT Professionals Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for URL: http://safety.abc/event/child-passenger-safety-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Child Passenger Safety Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for URL: http://safety.abc/event/hr-professionals-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "HR Professionals Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for URL: http://safety.abc/event/seat-check-saturday/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Seat Check Saturday" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for URL: http://safety.abc/event/walk-roll-to-school-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:03 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Walk &amp; Roll to School Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:04 : INFO] - Cache for URL: http://safety.abc/event/white-cane-safety-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:04 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "White Cane Safety Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for URL: http://safety.abc/event/teen-driver-safety-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Teen Driver Safety Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for URL: http://safety.abc/event/school-bus-safety-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "School Bus Safety Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for URL: http://safety.abc/event/buckle-up-phones-down-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Buckle Up, Phones Down Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for URL: http://safety.abc/event/halloween/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Halloween" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for URL: http://safety.abc/event/veterans-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:18 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Veterans Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for URL: http://safety.abc/event/seatbelt-safety-day/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Seatbelt Safety Day" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for URL: http://safety.abc/event/thanksgiving/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Thanksgiving" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for URL: http://safety.abc/event/older-driver-safety-awareness-week/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Older Driver Safety Awareness Week" has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for URL: http://safety.abc/event/holiday-season/ has been purged, triggered by action: save_post 
+[2025-01-22 18:14:32 : INFO] - Cache for archive page associated with post_type: tribe_events and Title: "Holiday Season" has been purged, triggered by action: save_post 
+[2025-01-22 18:17:36 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2025-01-22 19:46:48 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2025-01-22 19:48:01 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2025-01-22 19:48:01 : INFO] - Full Cache Purge triggered by: WPO_Page_Cache::disable 
+[2025-01-22 19:48:01 : INFO] - Full Cache Purge triggered by: WP_Optimize_Minify_Cache_Functions::purge_others 

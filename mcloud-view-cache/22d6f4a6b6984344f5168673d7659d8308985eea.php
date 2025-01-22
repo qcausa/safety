@@ -1,0 +1,1 @@
+DigitalOcean spaces is a solid choice and perhaps the easiest to setup.<?php /**PATH F:\Users\desit\Local Sites\safety\app\public\wp-content\plugins\ilab-media-tools-premium\views/wizard/cloud-storage/providers/do/description.blade.php ENDPATH**/ ?>

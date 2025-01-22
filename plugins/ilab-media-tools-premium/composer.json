@@ -1,0 +1,31 @@
+{
+  "name" : "ilab/ilab-media-tools",
+  "description": "Tools for cropping, uploading to S3, serving through Imgix",
+  "type": "wordpress-plugin",
+  "license": "LGPL-3.0-or-later",
+  "keywords": ["s3","imgix","cropping", "wordpress"],
+  "repositories": [
+  ],
+  "authors": [
+    {
+      "name": "Jon Gilkison",
+      "email": "jon@interfacelab.com"
+    }
+  ],
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "require" : {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "MediaCloud\\Plugin\\": "classes"
+    },
+    "files": [
+      "classes/Utilities/Helpers.php"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+<p>Enter your credentials, the name of your bucket and pick the custom endpoint you are using for your space.  Clicking on <strong>Next</strong> will verify your settings.</p><?php /**PATH F:\Users\desit\Local Sites\safety\app\public\wp-content\plugins\ilab-media-tools-premium\views/wizard/cloud-storage/providers/dreamhost/form.blade.php ENDPATH**/ ?>

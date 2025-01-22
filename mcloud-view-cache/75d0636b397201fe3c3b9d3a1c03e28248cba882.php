@@ -1,0 +1,1 @@
+<p>Media Cloud will now run a series of tests to verify that Media Cloud can access your cloud storage provider and that everything is setup correctly.</p><?php /**PATH F:\Users\desit\Local Sites\safety\app\public\wp-content\plugins\ilab-media-tools-premium\views/wizard/cloud-storage/providers/backblaze-s3/test.blade.php ENDPATH**/ ?>

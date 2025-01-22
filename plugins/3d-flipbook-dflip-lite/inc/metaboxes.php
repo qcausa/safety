@@ -665,7 +665,7 @@ class DFlip_Meta_boxes {
     $sanitized_data['auto_thumbnail'] = sanitize_text_field( $_POST['_dflip']['auto_thumbnail'] );
     $sanitized_data['overwrite_outline'] = sanitize_text_field( $_POST['_dflip']['overwrite_outline'] );
 
-    $sanitized_data['outline'] = isset( $_POST['_dflip']['outline'] ) ? $this->array_text_sanitize( $_POST['_dflip']['outline'] ) : array();
+    $sanitized_data['outline'] = isset( $_POST['_dflip']['outline'] ) ? $this->array_outline_sanitize( $_POST['_dflip']['outline'] ) : array();
     $sanitized_data['outline'] = $this->array_val($sanitized_data['outline'],'items');
 
     $settings = get_post_meta( $post_id, '_dflip_data', true );
@@ -719,7 +719,41 @@ class DFlip_Meta_boxes {
     return $arr;
 
   }
-
+  
+  /**
+   * Sanitizes and returns values of an outline array. The values should be text, number and urls only
+   *
+   * @param array $arr Array to be sanitized
+   *
+   * @return array sanitized array
+   * @since 2.3.53
+   *
+   */
+  private function array_outline_sanitize( $arr = array() ) {
+    
+    if ( is_null( $arr ) ) {
+      return array();
+    }
+    foreach ( (array) $arr as $k => $val ) {
+      if ( is_array( $val ) ) {
+        $arr[ $k ] = $this->array_outline_sanitize( $val );
+      } else if ( $k == "title" ) {
+        $arr[ $k ] = sanitize_text_field( $val );
+      } else if ( $k == "dest" ) {
+        if ( is_numeric( $arr[ $k ] ) ) {
+          $arr[ $k ] = sanitize_text_field( $val );
+        } else {
+          $arr[ $k ] = sanitize_url( $val );
+        }
+      }else{
+        return "";
+      }
+    }
+    
+    return $arr;
+    
+  }
+  
   /**
    * Removes index of array and returns only values array
    *
