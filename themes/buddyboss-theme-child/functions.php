@@ -1532,8 +1532,11 @@ function display_posts_by_category_and_tag_shortcode( $atts ) {
                 'operator' => 'NOT IN', // Exclude posts with this tag
             ),
         ),
-        'posts_per_page' => -1, // Retrieve all matching posts
+        'posts_per_page' => -1,   // Retrieve all matching posts
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC', // or 'ASC'
     );
+    
 
 
     $query = new WP_Query( $query_args );
@@ -1597,7 +1600,7 @@ function display_posts_by_category_and_tag_shortcode( $atts ) {
                 <?php echo esc_html( $tag_name ); ?>
                 <span style="font-family: 'Nunito Sans'; display: block; font-size: .8rem; text-transform: lowercase;">(Click to expand)</span>
             </h5>
-            <div class="accordion-body" style="display: none;">
+            <div class="accordion-body" style="display: block;">
                 <ul class="downloads-list">
                     <?php foreach ( $posts as $post ) : ?>
                         <li class="download-item">
