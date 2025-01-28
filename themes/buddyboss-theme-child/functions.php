@@ -1893,7 +1893,7 @@ add_filter( 'tribe_event_label_plural_lowercase', function() { return 'campaigns
 
 
 function remove_admin_bar_items_for_subadministrator( $wp_admin_bar ) {
-    BugFu::log("remove_admin_bar_items_for_subadministrator");
+
     // Check if the user is logged in and has the 'subadministrator' role
     if ( ! current_user_can( 'subadministrator' ) ) {
         return;
@@ -1986,6 +1986,87 @@ function unrequire_checkout_fields( $fields ) {
 	$fields['billing']['billing_address_2']['required'] = false;
 	return $fields;
 }
+
+
+/**
+ * Add Menu Order field to BuddyPress Group Creation Form
+ */
+function bp_add_group_menu_order_field() {
+    ?>
+    <div class="bp-widget">
+        <label for="group-menu-order"><?php _e( 'Menu Order', 'your-text-domain' ); ?></label>
+        <input type="number" name="group_menu_order" id="group-menu-order" value="0" min="0" />
+        <p class="description"><?php _e( 'Specify the order in which this group should appear. Lower numbers appear first.', 'your-text-domain' ); ?></p>
+    </div>
+    <?php
+}
+add_action( 'bp_after_group_details_creation_step', 'bp_add_group_menu_order_field' );
+
+
+// /**
+//  * Register custom metaboxes for BuddyPress/BuddyBoss Groups.
+//  */
+// function bp_register_custom_group_metaboxes($group) {
+    
+//     // Get the group type post type.
+//     $group_type_post_type = bp_groups_get_group_type_post_type();
+
+//     // Check if the function exists to prevent errors.
+//     if ( ! $group_type_post_type ) {
+//         return;
+//     }
+
+//     // Add the Menu Order metabox.
+//     add_meta_box(
+//         'bp-group-menu-order',                     // Metabox ID
+//         __( 'Menu Order', 'your-text-domain' ),    // Title
+//         'bp_group_menu_order_metabox_callback',    // Callback function
+//         null,                     // Screen (post type)
+//         'side',                                    // Context (side, normal, advanced)
+//         'default'                                  // Priority (default, high, low)
+//     );
+    
+// }
+
+// add_action( 'bp_groups_admin_meta_boxes', 'bp_register_custom_group_metaboxes' , 1);
+
+// /**
+//  * Callback function to render the Menu Order metabox.
+//  *
+//  * @param WP_Post $post The current post object.
+//  */
+// function bp_group_menu_order_metabox_callback( $post ) {
+//     BugFu::log("bp_group_menu_order_metabox_callback");
+//     BugFu::log($post->ID);
+//     // Add a nonce field for security.
+//     wp_nonce_field( 'bp_save_group_menu_order', 'bp_group_menu_order_nonce' );
+
+//     // Retrieve the existing menu_order value, if any.
+//     $menu_order = groups_get_groupmeta( $post->ID, 'menu_order' );
+//     if ( empty( $menu_order ) ) {
+//         $menu_order = 0; // Default value
+//     }
+
+// }
+
+
+
+
+
+
+/**
+ * Save Menu Order field on BuddyPress Group Creation
+ */
+function bp_save_group_menu_order_field( $group_id, $group_meta ) {
+    if ( isset( $_POST['group_menu_order'] ) && is_numeric( $_POST['group_menu_order'] ) ) {
+        $menu_order = intval( $_POST['group_menu_order'] );
+        groups_update_groupmeta( $group_id, 'menu_order', $menu_order );
+    }
+}
+add_action( 'groups_create_group', 'bp_save_group_menu_order_field', 10, 2 );
+
+
+
 
 
 

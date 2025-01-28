@@ -370,6 +370,7 @@ function bp_nouveau_member_activity_widget_overrides( $args = array() ) {
  * @return array The Groups Template arguments.
  */
 function bp_nouveau_member_groups_widget_overrides( $args = array() ) {
+	\BugFu::log("bp_nouveau_member_groups_widget_overrides");
 	return array_merge( $args, array(
 		'user_id' => bp_displayed_user_id(),
 	) );

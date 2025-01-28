@@ -1108,6 +1108,7 @@ function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
  * @return array The Groups Template arguments.
  */
 function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
+	\BugFu::log("bp_nouveau_group_groups_widget_overrides");
 	return array_merge( $args, array(
 		'include' => bp_get_current_group_id(),
 	) );

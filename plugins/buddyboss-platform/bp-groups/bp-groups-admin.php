@@ -197,6 +197,7 @@ function bp_groups_admin_load() {
 		 *
 		 * @since BuddyPress 1.7.0
 		 */
+
 		do_action( 'bp_groups_admin_meta_boxes' );
 
 		// Enqueue JavaScript files.
@@ -1915,8 +1916,9 @@ add_action( 'bp_loaded', 'bp_register_group_type_sections_filters_actions' );
  * @since BuddyBoss 1.0.0
  */
 function bp_register_group_type_sections_filters_actions() {
-
+	BugFu::log("bp_register_group_type_sections_filters_actions");
 	if ( true === bp_disable_group_type_creation() ) {
+		BugFu::log("bp_disable_group_type_creation");
 
 		// Action for opening the groups tab while on group types add/edit page.
 		add_action( 'admin_head', 'bp_group_type_show_correct_current_menu', 50 );
@@ -1951,6 +1953,7 @@ function bp_register_group_type_sections_filters_actions() {
  * @since BuddyBoss 1.0.0
  */
 function bp_group_type_show_correct_current_menu() {
+	BugFu::log("bp_group_type_show_correct_current_menu");
 	$screen = get_current_screen();
 	if ( isset( $screen->id ) ) {
 		if ( $screen->id == 'bp-group-type' || $screen->id == 'edit-bp-group-type' ) {
@@ -1972,6 +1975,7 @@ function bp_group_type_show_correct_current_menu() {
  * @since BuddyBoss 1.0.0
  */
 function bp_group_type_custom_meta_boxes() {
+	BugFu::log("bp_group_type_custom_meta_boxes");
 	$screen = get_current_screen();
 	add_meta_box( 'bp-group-type-label-box', __( 'Labels', 'buddyboss' ), 'bp_group_type_labels_meta_box', null, 'normal', 'high' );
 	add_meta_box( 'bp-group-type-permissions', __( 'Permissions', 'buddyboss' ), 'bp_group_type_permissions_meta_box', null, 'normal', 'high' );

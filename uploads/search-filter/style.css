@@ -4,7 +4,13 @@
 .search-filter-field.search-filter-field--id-1, .search-filter-field__popup.search-filter-field__popup--id-1{--search-filter-count-justification:flex-start}
 /* Field: Category */
 .search-filter-field.search-filter-field--id-2, .search-filter-field__popup.search-filter-field__popup--id-2{--search-filter-count-justification:flex-start}
+/* Field: Tips Tuesday Type */
+.search-filter-field.search-filter-field--id-4, .search-filter-field__popup.search-filter-field__popup--id-4{--search-filter-count-justification:flex-start}
+/* Field: Type Tuesday Year */
+.search-filter-field.search-filter-field--id-5, .search-filter-field__popup.search-filter-field__popup--id-5{--search-filter-count-justification:flex-start}
 /* Query: Downloads Query */
 .search-filter-query--id-1{--search-filter-spinner-scale:3;--search-filter-spinner-margin:12px 0 0 0;--search-filter-spinner-padding:12px 12px 12px 12px;--search-filter-spinner-h-position:center;--search-filter-spinner-v-position:flex-start;--search-filter-spinner-border-width:;--search-filter-spinner-border-style:;--search-filter-spinner-border-color:;--search-filter-spinner-border-radius:4px}
 /* Query: Products Query */
 .search-filter-query--id-2{--search-filter-spinner-scale:3;--search-filter-spinner-margin:12px 0 0 0;--search-filter-spinner-padding:12px 12px 12px 12px;--search-filter-spinner-h-position:center;--search-filter-spinner-v-position:flex-start;--search-filter-spinner-border-width:;--search-filter-spinner-border-style:;--search-filter-spinner-border-color:;--search-filter-spinner-border-radius:4px}
+/* Query: Tips Tuesday */
+.search-filter-query--id-3{--search-filter-spinner-scale:3;--search-filter-spinner-margin:12px 0 0 0;--search-filter-spinner-padding:12px 12px 12px 12px;--search-filter-spinner-h-position:center;--search-filter-spinner-v-position:flex-start;--search-filter-spinner-border-width:;--search-filter-spinner-border-style:;--search-filter-spinner-border-color:;--search-filter-spinner-border-radius:4px}
