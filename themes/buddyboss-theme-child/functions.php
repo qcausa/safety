@@ -1706,36 +1706,53 @@ add_shortcode( 'category_image', 'display_category_image_shortcode' );
 
 
 
-function redirect_category_to_latest_post() {
-    // Check if we are on a category archive page and target the 'tips-tuesday' category
-    if ( is_category( 'tips-tuesday' ) ) {
+// function redirect_category_to_latest_post() {
+//     // Check if we are on a category archive page and target the 'tips-tuesday' category
+//     if ( is_category( 'tips-tuesday' ) ) {
 
-        // Prevent redirect loops
-        if ( is_admin() || wp_doing_ajax() ) {
-            return;
-        }
+//         // Prevent redirect loops
+//         if ( is_admin() || wp_doing_ajax() ) {
+//             return;
+//         }
 
-        // Query for the latest post in the 'tips-tuesday' category
-        $latest_post = get_posts( array(
-            'category_name'  => 'tips-tuesday', // Category slug
-            'posts_per_page' => 1,              // Fetch only the latest post
-            'order'          => 'DESC',
-            'orderby'        => 'date'
+//         // Query for the latest post in the 'tips-tuesday' category
+//         $latest_post = get_posts( array(
+//             'category_name'  => 'tips-tuesday', // Category slug
+//             'posts_per_page' => 1,              // Fetch only the latest post
+//             'order'          => 'DESC',
+//             'orderby'        => 'date'
+//         ) );
+
+//         // If we found a post, redirect to its permalink
+//         if ( ! empty( $latest_post ) && isset( $latest_post[0] ) ) {
+//             $latest_post_url = get_permalink( $latest_post[0]->ID );
+
+//             // Make sure headers aren't already sent before redirecting
+//             if ( ! headers_sent() ) {
+//                 wp_safe_redirect( $latest_post_url );
+//                 exit;
+//             }
+//         }
+//     }
+// }
+// add_action( 'template_redirect', 'redirect_category_to_latest_post' );
+
+function wpa_latest_in_category_redirect( $request ){
+    if( isset( $_GET['latest'] )
+        && isset( $request->query_vars['category_name'] ) ){
+
+        $latest = new WP_Query( array(
+            'category_name' => $request->query_vars['category_name'],
+            'posts_per_page' => 1
         ) );
-
-        // If we found a post, redirect to its permalink
-        if ( ! empty( $latest_post ) && isset( $latest_post[0] ) ) {
-            $latest_post_url = get_permalink( $latest_post[0]->ID );
-
-            // Make sure headers aren't already sent before redirecting
-            if ( ! headers_sent() ) {
-                wp_safe_redirect( $latest_post_url );
-                exit;
-            }
+        if( $latest->have_posts() ){
+            wp_redirect( get_permalink( $latest->post->ID ) );
+            exit;
         }
+
     }
 }
-add_action( 'template_redirect', 'redirect_category_to_latest_post' );
+add_action( 'parse_request', 'wpa_latest_in_category_redirect' );
 
 
 
@@ -2071,6 +2088,46 @@ add_action( 'groups_create_group', 'bp_save_group_menu_order_field', 10, 2 );
 
 
 
+/**
+ * Add BuddyPress group select to WooCommerce shipping fields.
+ */
+function myprefix_add_buddypress_group_to_shipping( $fields ) {
+    BugFu::log("myprefix_add_buddypress_group_to_shipping");
+    // Fetch BuddyPress groups (example: all public groups).
+    // Adjust arguments as needed to filter by user membership or group visibility.
+    $bp_groups = groups_get_groups(
+        array(
+            'show_hidden' => false,      // Exclude hidden groups, if desired
+            'per_page'    => 9999,       // Fetch as many as you need
+            // 'user_id'  => get_current_user_id(), // Uncomment if you only want current user's groups
+        )
+    );
+    
+
+    // Build an array of "group_id => group_name" to use as select options
+    $group_options = array(); // Default empty option
+    if ( ! empty( $bp_groups['groups'] ) ) {
+        foreach ( $bp_groups['groups'] as $group ) {
+            $group_options[ $group->id ] = $group->name;
+        }
+    }
+    BugFu::log($group_options);
+
+    // Add a custom field in the shipping section
+    $fields['shipping']['buddy_group'] = array(
+        'type'     => 'select',
+        'label'    => __( 'District', 'woocommerce' ),
+        'required' => false, // set true if you want to force selection
+        'options'  => $group_options,
+        'placeholder' => '— Select a District —',
+        'priority' => 1,
+        'required' => true,
+        // 'default' => '',   // optionally pre-select a value
+    );
+
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'myprefix_add_buddypress_group_to_shipping' , 5);
 
 
 
