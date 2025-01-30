@@ -52,15 +52,17 @@ class Index_Table extends \Search_Filter\Database\Engine\Table {
 	 * @since 1.0.0
 	 * @var   mixed
 	 */
-	protected $version = '3.0.0';
+	protected $version = '3.0.1';
 
 	/**
 	 * Key => value array of versions => methods.
 	 *
-	 * @since 3.0.0
+	 * @since 1.0.0
 	 * @var   array
 	 */
-	protected $upgrades = array();
+	protected $upgrades = array(
+		'3.0.1' => 'upgrade_3_0_1',
+	);
 
 	/**
 	 * Setup this database table.
@@ -73,7 +75,7 @@ class Index_Table extends \Search_Filter\Database\Engine\Table {
 			object_id             bigint(20)   NOT NULL default '0',
 			object_parent_id      bigint(20)   NOT NULL default '0',
 			field_id              bigint(20)   NOT NULL,
-			value                 varchar(50)  NOT NULL,
+			value                 varchar(200)  NOT NULL,
 			date_modified         datetime     NOT NULL default CURRENT_TIMESTAMP,
 			PRIMARY KEY (id),
 			KEY value (value(50)),
@@ -93,5 +95,20 @@ class Index_Table extends \Search_Filter\Database\Engine\Table {
 		parent::drop();
 
 		Data_Store::flush( 'index' );
+	}
+
+	/**
+	 * Add context and integration columns to table.
+	 *
+	 * @return bool
+	 */
+	public function upgrade_3_0_1() {
+
+		// Alter the table so the `value` column is changed from varchar(50) to varchar(200).
+		$result = $this->get_db()->query(
+			"ALTER TABLE {$this->table_name} MODIFY COLUMN `value` varchar(200) NOT NULL;"
+		);
+		
+		return $this->is_success( $result );
 	}
 }

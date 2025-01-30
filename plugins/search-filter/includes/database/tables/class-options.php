@@ -1,7 +1,6 @@
 <?php
 namespace Search_Filter\Database\Tables;
 
-use Error;
 use Search_Filter\Core\Data_Store;
 
 if ( ! defined( 'ABSPATH' ) ) {

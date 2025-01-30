@@ -84,7 +84,6 @@ class Relevanssi {
 
 		add_filter( 'search-filter/query/query_args', array( __CLASS__, 'disable_relevanssi_query' ), 10, 2 );
 		add_filter( 'search-filter/field/search/wp_query_args', array( __CLASS__, 'get_search_wp_query_args' ), 10, 2 );
-		// TODO - add ordering option to the query to order by relevance (or just use `relevance`??)
 	}
 
 	/**

@@ -113,6 +113,8 @@ class Query extends Record_Base {
 		}
 
 		$this->init_tax_archive_render_data();
+
+		do_action( 'search-filter/queries/query/init_render_config_values', $this );
 	}
 	/**
 	 * Setup the data related to taxonomy archives when using post type
@@ -147,7 +149,7 @@ class Query extends Record_Base {
 
 			// Build the term archive URL.
 			$queried_object = get_queried_object();
-			// Get the postType taxonomies
+			// Get the postType taxonomies.
 			$taxonomies      = get_object_taxonomies( $archive_post_type );
 			$tax_archive_url = '';
 			$tax_slug        = '';
@@ -363,8 +365,7 @@ class Query extends Record_Base {
 					return get_home_url();
 
 				} elseif ( is_singular() ) {
-					global $post;
-					$permalink = get_permalink( $post->ID );
+					$permalink = get_permalink( get_queried_object()->ID );
 					if ( $permalink ) {
 						return $permalink;
 					}
@@ -405,6 +406,28 @@ class Query extends Record_Base {
 
 		$query_args = apply_filters( 'search-filter/queries/query/apply_wp_query_args', $query_args, $this );
 
+		return $query_args;
+	}
+
+	/**
+	 * Loop through the fields and add their query args.
+	 *
+	 * @param array $query_args The query args.
+	 * @param array $fields     The fields to apply the query args to.
+	 *
+	 * @return array The updated query args.
+	 */
+	public function apply_fields_wp_query_args( $query_args = array() ) {
+		$fields = $this->get_fields();
+		foreach ( $fields as $field ) {
+			if ( is_wp_error( $field ) ) {
+				continue;
+			}
+			if ( $field->get_query_type() !== 'wp_query' ) {
+				continue;
+			}
+			$query_args = $field->apply_wp_query_args( $query_args );
+		}
 		return $query_args;
 	}
 
@@ -488,6 +511,167 @@ class Query extends Record_Base {
 		return $query_args;
 	}
 
+	/**
+	 * Check if the query has any active fields.
+	 *
+	 * @return bool
+	 */
+	public function has_active_fields() {
+		$fields = $this->get_fields();
+		foreach ( $fields as $field ) {
+			if ( is_wp_error( $field ) ) {
+				continue;
+			}
+			if ( ! empty( $field->get_values() ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function get_fields_taxonomy_archives() {
+		$fields            = $this->get_fields();
+		$taxonomy_archives = array();
+		foreach ( $fields as $field ) {
+			if ( is_wp_error( $field ) ) {
+				continue;
+			}
+			if ( $field->get_attribute( 'type' ) !== 'choice' ) {
+				continue;
+			}
+			// Only choice fields have the function `filters_taxonomy_archives`.
+			if ( $field->filters_taxonomy_archives() ) {
+				$taxonomy_archives[] = $field->get_attribute( 'taxonomy' );
+			}
+		}
+		return $taxonomy_archives;
+	}
+
+	/**
+	 * Checks if we are on an archive of one of the passed in taxonomy names.
+	 */
+	private function is_tax_archive( $taxonomies ) {
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( $taxonomy === 'category' && is_category() ) {
+				return true;
+			}
+			if ( $taxonomy === 'post_tag' && is_tag() ) {
+				return true;
+			}
+			if ( is_tax( $taxonomy ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public function can_apply_at_current_location() {
+		$location = $this->get_attribute( 'integrationType' );
+
+		// Get the queried object.
+		$queried_object = get_queried_object();
+
+		// Dynamic will always be true because its wherever the field/query is placed.
+		if ( $location === 'dynamic' ) {
+			return true;
+		}
+		// If the location is a single location, we need to check if the current location is the same as the single location.
+		if ( $location === 'single' ) {
+			$single_location_post_id = absint( $this->get_attribute( 'singleLocation' ) );
+			if ( ! is_singular() ) {
+				return false;
+			}
+			if ( ! is_a( $queried_object, 'WP_Post' ) ) {
+				return false;
+			}
+			// Get the post ID.
+			$post_id = $queried_object->ID;
+			return $post_id === $single_location_post_id;
+		}
+
+		// If the location is an archive then check if it matches.
+		if ( $location === 'archive' ) {
+			$archive_type = $this->get_attribute( 'archiveType' );
+			if ( $archive_type === 'post_type' ) {
+				$post_type = $this->get_attribute( 'postType' );
+
+				if ( $post_type === 'post' ) {
+					if ( is_home() ) {
+						return true;
+					}
+				} elseif ( is_post_type_archive( $post_type ) ) {
+					return true;
+				}
+
+				if ( $this->get_attribute( 'taxonomyFilterArchive' ) !== 'yes' ) {
+					return false;
+				}
+
+				// Look for any fields that are set to filter the tax archive and collect their
+				// taxonomies.
+				$taxonomy_archives = $this->get_fields_taxonomy_archives();
+				if ( empty( $taxonomy_archives ) ) {
+					return false;
+				}
+
+				// Check if the current archive matches any of the taxonomies.
+				if ( $this->is_tax_archive( $taxonomy_archives ) ) {
+					return true;
+				}
+			}
+			if ( $archive_type === 'taxonomy' ) {
+				$taxonomy = $this->get_attribute( 'taxonomy' );
+
+				if ( $taxonomy === 'category' ) {
+					return is_category();
+				}
+				if ( $taxonomy === 'post_tag' ) {
+					return is_tag();
+				}
+				return is_tax( $taxonomy );
+			}
+		}
+
+		// Notice - this might return a false positive in certain locations, we
+		// want to specifically check that we're on the main search, not just if
+		// `?s=...` is in the URL.
+		if ( $location === 'search' ) {
+			return is_search() && ! is_archive() && ! is_tax() && ! is_singular() && ! is_home() && ! is_category() && ! is_tag();
+		}
+
+		return apply_filters( 'search-filter/queries/query/can_apply_at_current_location', false, $this );
+	}
+
+
+	/**
+	 * Has a search query.
+	 */
+	public function has_search() {
+		$fields = $this->get_fields();
+
+		foreach ( $fields as $field ) {
+			if ( is_wp_error( $field ) ) {
+				continue;
+			}
+			$type = $field->get_attribute( 'type' );
+
+			if ( $type !== 'search' ) {
+				continue;
+			}
+			$values = $field->get_values();
+			if ( ! empty( $values ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Get the order direction for a given order.
+	 *
+	 * @param string $order The order to get the direction for.
+	 * @return string
+	 */
 	private static function get_order_direction( $order ) {
 		if ( $order === 'desc' ) {
 			return 'DESC';
@@ -495,6 +679,12 @@ class Query extends Record_Base {
 		return 'ASC';
 	}
 
+	/**
+	 * Get the sort params from a sort setting.
+	 *
+	 * @param array $sort_setting The sort setting to get the params for.
+	 * @return array
+	 */
 	public static function get_sort_params_from_setting( $sort_setting ) {
 		$order_by                   = $sort_setting['orderBy'];
 		$order_direction            = $sort_setting['order'];
@@ -560,6 +750,12 @@ class Query extends Record_Base {
 		);
 	}
 
+	/**
+	 * Get the sort order args for a query.
+	 *
+	 * @param array $query_args The query args to get the sort order args for.
+	 * @return array
+	 */
 	public function get_sort_order_args( $query_args ) {
 
 		// Just in case our updater didn't upgrade the sortOrder field, lets make
@@ -616,9 +812,18 @@ class Query extends Record_Base {
 		return $query_args;
 	}
 
+	/**
+	 * Exclude the current post from the query args.
+	 *
+	 * @param array $query_args The query args to exclude the current post from.
+	 * @return array
+	 */
 	public function exclude_current_post_args( $query_args ) {
-
 		if ( $this->get_attribute( 'excludeCurrentPost' ) !== 'yes' ) {
+			return $query_args;
+		}
+
+		if ( ! is_singular() ) {
 			return $query_args;
 		}
 
@@ -639,7 +844,7 @@ class Query extends Record_Base {
 	/**
 	 * Sets the Query context (single, archive etc)
 	 *
-	 * @param string $context The context to set
+	 * @param string $context The context to set.
 	 */
 	public function set_context( $context ) {
 		$this->context = $context;
@@ -672,29 +877,31 @@ class Query extends Record_Base {
 	 *
 	 * @return array The fields.
 	 */
-	public function get_fields() {
-		$fields = Fields::find(
-			array(
-				'query_id' => $this->get_id(),
-				'status'   => 'enabled',
-				'number'   => 0,
-			)
-		);
+	public function get_fields( $args = array() ) {
 
+		$defaults = array(
+			'query_id' => $this->get_id(),
+			'status'   => 'enabled',
+			'number'   => 0,
+		);
+		$args     = wp_parse_args( $args, $defaults );
+
+		if ( $args['status'] === 'any' ) {
+			unset( $args['status'] );
+		}
+
+		$fields = Fields::find( $args );
 		return $fields;
 	}
 
-
 	/**
-	 * Sets the Query context path - eg 'post/123'
+	 * Sets the integration.
 	 *
-	 * @param string $context The context to set.
-	 * @param string $path The path of the context.
+	 * @param string $integration The path of the context.
 	 */
-	public function set_integration( $path ) {
-		$this->integration = $path;
+	public function set_integration( $integration ) {
+		$this->integration = $integration;
 	}
-
 
 	/**
 	 * Gets the Query integration path
@@ -703,10 +910,8 @@ class Query extends Record_Base {
 		return $this->integration;
 	}
 	/**
-	 * Sets the Query context from attributes
-	 *
-	 * @param string $context The context to set.
-	 * @param string $path The path of the context.
+	 * Generate the query context from the attributes
+	 * and set the integration.
 	 */
 	public function generate_context() {
 		$integration_type = $this->attributes['integrationType'];
@@ -722,6 +927,8 @@ class Query extends Record_Base {
 
 	/**
 	 * Saves the query
+	 *
+	 * @param array $args Additional arguments to save the query with.
 	 *
 	 * @return int The saved query ID.
 	 */
@@ -837,6 +1044,9 @@ class Query extends Record_Base {
 	}
 	/**
 	 * Sets any additional data relevant to rendering.
+	 *
+	 * @param string $key   The key to set.
+	 * @param mixed  $value The value to set.
 	 */
 	public function set_render_config_value( $key, $value ) {
 		Query_Render_Store::set_render_data_value( $this->get_id(), $key, $value );
@@ -850,7 +1060,6 @@ class Query extends Record_Base {
 	public function get_render_config_value( $key ) {
 		return Query_Render_Store::get_render_data_value( $this->get_id(), $key );
 	}
-
 
 	/**
 	 * Gets the render data.

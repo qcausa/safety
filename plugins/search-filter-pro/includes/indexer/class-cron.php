@@ -92,8 +92,8 @@ class Cron {
 		if ( ! Dependencies::is_search_filter_enabled() ) {
 			return;
 		}
-		// Maybe spawn a new process.
 		Indexer::validate_process();
+		// Maybe spawn a new process.
 		Async::hook_dispatch_request();
 	}
 
@@ -116,7 +116,7 @@ class Cron {
 			// This means our scheduled event has been missed by more then 5 minutes.
 			// So lets run manually and reschedule.
 			self::run_task();
-			Util::error_log( 'Expired indexer cron job found, re-running and rescheduling.' );
+			Util::error_log( 'Expired indexer cron job found, re-running and rescheduling.', 'error' );
 			wp_clear_scheduled_hook( self::CRON_HOOK );
 			wp_schedule_event( time(), self::CRON_INTERVAL_NAME, self::CRON_HOOK );
 		}

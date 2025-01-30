@@ -104,7 +104,7 @@ class Rest_API {
 					),
 					'permission_callback' => '__return_true',
 				),
-			),
+			)
 		);
 	}
 
@@ -153,14 +153,15 @@ class Rest_API {
 		$progress = Indexer::get_progress_data();
 
 		$indexer_data = array(
-			'status'       => $status,
-			'type'         => $task_type,
-			'message'      => '',
-			'progress'     => $progress,
-			'postTypes'    => array(),
-			'objectsCount' => 0,
-			'rowsCount'    => 0,
-			'time'         => time(),
+			'status'                  => $status,
+			'type'                    => $task_type,
+			'message'                 => '',
+			'progress'                => $progress,
+			'postTypes'               => array(),
+			'objectsCount'            => 0,
+			'rowsCount'               => 0,
+			'time'                    => time(),
+			'canBackgroundProcess'    => Indexer::can_use_background_processing(),
 		);
 
 		if ( $status === 'error' ) {
@@ -211,7 +212,7 @@ class Rest_API {
 		// Only if we're doing background processing should we launch the process.
 		// otherwise, lets just return the updated indexer data and wait for the next tick
 		// to start the processing.
-		if ( Indexer::get_method() === 'background' ) {
+		if ( Indexer::get_processing_method() === 'background' ) {
 			// Then run the process.
 			Indexer::run_processing();
 		} else {

@@ -322,9 +322,7 @@ class Styles {
 		$section_record = Style::find( array( 'id' => $id ) );
 		// Bail if nothing found.
 		if ( is_wp_error( $section_record ) ) {
-
 			return $section_record;
-			// return rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.' ) );
 		}
 		return $section_record->get_record();
 	}
@@ -362,7 +360,7 @@ class Styles {
 
 		// Bail if nothing found.
 		if ( is_wp_error( $instance ) ) {
-			return rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.' ) );
+			return rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.', array( 'status' => 404 ) ) );
 		}
 
 		// Create the field using its attributes.

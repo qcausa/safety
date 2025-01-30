@@ -369,7 +369,7 @@ class Queries {
 
 		// Bail if nothing found.
 		if ( is_wp_error( $instance ) ) {
-			return \rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.' ) );
+			return \rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.', array( 'status' => 404 ) ) );
 		}
 
 		$item = $instance->get_record();

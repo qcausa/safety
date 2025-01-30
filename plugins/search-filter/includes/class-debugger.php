@@ -1,13 +1,90 @@
 <?php
+/**
+ * Debugger class.
+ *
+ * @link       https://searchandfilter.com
+ * @since      3.0.0
+ * @package    Search_Filter
+ */
 namespace Search_Filter;
 
-class Debug_Bar {
+use Search_Filter\Database\Queries\Logs as Logs_Query;
+use Search_Filter\Debugger\Settings as Debugger_Settings;
+use Search_Filter\Debugger\Settings_Data;
 
+/**
+ * Debugger class.
+ */
+class Debugger {
+
+	/**
+	 * The current page template name.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @var string
+	 */
 	private static $template_name = '';
-
+	/**
+	 * Initialises the debugger.
+	 *
+	 * @since 3.0.0
+	 */
 	public static function init() {
+
+		// Register settings.
+		add_action( 'init', array( __CLASS__, 'register_settings' ), 2 );
+
+		// Add menu item to frontend.
 		add_action( 'init', array( __CLASS__, 'add_debug_menu_item' ) );
 	}
+
+	/**
+	 * Gets the value of a setting.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $setting_name The name of the setting.
+	 *
+	 * @return string|null
+	 */
+	public static function get_setting_value( $setting_name ) {
+		$defaults               = array(
+			'logLevel'      => 'errors',
+			'logToDatabase' => 'yes',
+		);
+		$debugger_options_value = Options::get_option_value( 'debugger' );
+		if ( $debugger_options_value && isset( $debugger_options_value[ $setting_name ] ) ) {
+			return $debugger_options_value[ $setting_name ];
+		}
+		if ( isset( $defaults[ $setting_name ] ) ) {
+			return $defaults[ $setting_name ];
+		}
+		return null;
+	}
+
+	/**
+	 * Creates a log in the database.
+	 *
+	 * @param array $data The log data.
+	 */
+	public static function create_log( $data ) {
+		$query = new Logs_Query();
+		$query->add_item( $data );
+	}
+	/**
+	 * Initialises and registers the settings.
+	 *
+	 * @since    3.0.0
+	 */
+	public static function register_settings() {
+		// Register settings.
+		Debugger_Settings::init( Settings_Data::get(), Settings_Data::get_groups() );
+	}
+
+	/**
+	 * Adds the debug menu item to the admin bar.
+	 */
 	public static function add_debug_menu_item() {
 		if ( ! Features::is_enabled( 'debugMode' ) ) {
 			return;
@@ -109,10 +186,10 @@ class Debug_Bar {
 			'is_user_logged_in'                 => is_user_logged_in() ? 'true' : 'false',
 			'is_main_query'                     => is_main_query() ? 'true' : 'false',
 			'wp_doing_ajax'                     => wp_doing_ajax() ? 'true' : 'false',
-			// 'is_day'               => is_day() ? 'true' : 'false',
-			// 'is_month'             => is_month() ? 'true' : 'false',
-			// 'is_year'              => is_year() ? 'true' : 'false',
-			// 'is_new_day'           => is_new_day() ? 'true' : 'false',
+			// 'is_day'                           => is_day() ? 'true' : 'false',
+			// 'is_month'                         => is_month() ? 'true' : 'false',
+			// 'is_year'                          => is_year() ? 'true' : 'false',
+			// 'is_new_day'                       => is_new_day() ? 'true' : 'false',
 
 		);
 		$data['template'] = $template_data;

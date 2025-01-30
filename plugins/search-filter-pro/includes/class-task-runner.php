@@ -11,7 +11,9 @@
 namespace Search_Filter_Pro;
 
 use Search_Filter\Options;
+use Search_Filter_Pro\Task_Runner\Cron;
 use Search_Filter_Pro\Task_Runner\Database\Tasks_Query;
+use Search_Filter_Pro\Task_Runner\Rest_API;
 use Search_Filter_Pro\Task_Runner\Task;
 
 // If this file is called directly, abort.
@@ -36,14 +38,14 @@ abstract class Task_Runner {
 	 *
 	 * @var int
 	 */
-	private static $batch_size = -1;
+	protected static $batch_size = -1;
 
 	/**
 	 * Start time for the task runner.
 	 *
 	 * @var int
 	 */
-	private static $process_start_time = 0;
+	protected static $process_start_time = 0;
 
 	/**
 	 * Has init tasks.
@@ -119,12 +121,22 @@ abstract class Task_Runner {
 	public static $stop_statuses = array( 'error', 'finished', 'paused' );
 
 	/**
+	 * Test background processing option name.
+	 *
+	 * @since 3.1.2
+	 *
+	 * @var int
+	 */
+	public static $can_background_process_option_name = 'task-runner-can-background-process';
+	
+	/**
 	 * Init the task runner.
 	 *
 	 * @since    3.0.0
 	 */
 	public static function init() {
-		do_action( 'search-filter/task_runner/init' );
+		Rest_API::init();
+		Cron::init();
 	}
 
 	/**
@@ -151,6 +163,7 @@ abstract class Task_Runner {
 			'status'    => $task_data['status'],
 			'object_id' => $task_data['object_id'],
 		);
+
 		if ( isset( $task_data['meta'] ) ) {
 			foreach ( $task_data['meta'] as $key => $value ) {
 				$task_query_data['meta_query'][] = array(
@@ -160,6 +173,7 @@ abstract class Task_Runner {
 				);
 			}
 		}
+
 		$query = new Tasks_Query( $task_query_data );
 		if ( count( $query->items ) > 0 ) {
 			return;
@@ -346,7 +360,7 @@ abstract class Task_Runner {
 			if ( $task->get_status() === 'complete' ) {
 				self::complete_next_task();
 			} elseif ( $task->get_status() === 'error' ) {
-				// TODO - lets log the errors using our debugging tools.
+				Util::error_log( 'Task runner: error running task: ' . $task->get_action(), 'error' );
 				self::complete_next_task();
 			}
 
@@ -548,7 +562,7 @@ abstract class Task_Runner {
 			$error_count = self::error_count();
 			$error_count++;
 			self::set_error_count( $error_count );
-			Util::error_log( esc_html__( 'Task runner: lock expired.', 'search-filter' ) );
+			Util::error_log( __( 'Task runner: lock expired.', 'search-filter-pro' ), 'error' );
 
 			if ( $error_count < self::$error_count_limit ) {
 				// Reset the process key so we can try again.
@@ -556,7 +570,7 @@ abstract class Task_Runner {
 				do_action( 'search-filter/task_runner/process_expired' );
 			} else {
 				// Reached the limit of errors, need to display a message to the user.
-				Util::error_log( esc_html__( 'Task runner: error count limit reached.', 'search-filter' ) );
+				Util::error_log( __( 'Task runner: error count limit reached.', 'search-filter-pro' ), 'error' );
 				do_action( 'search-filter/task_runner/process_stalled' );
 			}
 		}
@@ -886,5 +900,71 @@ abstract class Task_Runner {
 			return;
 		}
 		self::clear_status();
+	}
+
+
+	/**
+	 * Check if we can use background processing.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @return bool    True if we can use background processing.
+	 */
+	public static function can_use_background_processing() {
+		$can_background_process = Options::get_option_value( self::$can_background_process_option_name );
+		if ( $can_background_process === false ) {
+			// Then the test has not init yet, so lets assume yes.
+			return true;
+		}
+		if ( $can_background_process === 'yes' ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Test if we can use background processing.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @return bool    True if we can use background processing.
+	 */
+	public static function test_background_process() {
+		$headers = array(
+			'Cache-Control' => 'no-cache',
+		);
+
+		// Try get and pass any http auth credentials if they exist to send in our rest api request.
+		$credentials = \Search_Filter_Pro\Core\Authentication::get_http_auth_credentials();
+		if ( ! empty( $credentials ) ) {
+			// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+			$headers['Authorization'] = 'Basic ' . base64_encode( $credentials['username'] . ':' . $credentials['password'] );
+		}
+
+		$options = array(
+			'method'    => 'GET',
+			'headers'   => $headers,
+			'timeout'   => 10,
+			'blocking'  => true,
+			'cookies'   => $_COOKIE,
+			'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
+		);
+
+		$rest_url = get_rest_url( null, 'search-filter-pro/v1/task-runner/endpoint' );
+		$result   = wp_remote_post( $rest_url, $options );
+
+		$can_use_background_processing = 'no';
+		// Check the result for valid status code
+		$response_code = 0;
+		if ( ! is_wp_error( $result ) ) {
+			$response_code = wp_remote_retrieve_response_code( $result );
+			if ( $response_code >= 200 && $response_code < 300 ) {
+				$can_use_background_processing = 'yes';
+			}
+		}
+
+		Options::update_option_value( Task_Runner::$can_background_process_option_name, $can_use_background_processing );
+
+		return $can_use_background_processing;
 	}
 }

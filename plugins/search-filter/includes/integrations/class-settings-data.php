@@ -59,7 +59,7 @@ class Settings_Data {
 				'default'              => true,
 				'type'                 => 'string',
 				'inputType'            => 'FeatureToggle',
-				'link'                 => 'https://searchandfilter.com/documentation/integrations/woocommerce/',
+				'link'                 => 'https://searchandfilter.com/documentation/woocommerce/',
 				'icon'                 => 'woocommerce',
 				'iconColor'            => '#0073aa',
 				'isPluginInstalled'    => false,
@@ -123,7 +123,7 @@ class Settings_Data {
 			array(
 				'name'                 => 'wpml',
 				'label'                => __( 'WPML', 'search-filter' ),
-				'description'          => __( 'Add multilingual support with the WPML plugin. Enables translation of the strings used across the user interface.', 'search-filter' ),
+				'description'          => __( 'Add multilingual support with the WPML plugin. Enables translation of fields and supports queries in multiple languages.', 'search-filter' ),
 				'default'              => true,
 				'type'                 => 'string',
 				'inputType'            => 'FeatureToggle',

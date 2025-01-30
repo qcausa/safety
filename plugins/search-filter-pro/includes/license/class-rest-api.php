@@ -2,6 +2,7 @@
 namespace Search_Filter_Pro\License;
 
 use Search_Filter\Options;
+use Search_Filter_Pro\Core\License_Server;
 use Search_Filter_Pro\Util;
 use WP_REST_Response;
 use WP_Error;
@@ -18,9 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Rest_API {
 
-	const PLUGIN_ITEM_NAME = 'Search & Filter Pro (beta)';
 	const PLUGIN_ITEM_ID   = 526297;
-	const PLUGIN_STORE_URL = 'https://searchandfilter.com';
 	/**
 	 * Init the cron class.
 	 *
@@ -94,6 +93,19 @@ class Rest_API {
 				),
 			)
 		);
+
+		register_rest_route(
+			'search-filter-pro/v1',
+			'/license/test-connection',
+			array(
+				'args' => array(),
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( __CLASS__, 'test_connection' ),
+					'permission_callback' => array( __CLASS__, 'permissions' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -135,8 +147,6 @@ class Rest_API {
 		} else {
 			$license_data = $default_license_data;
 		}
-
-		// 9be824d93c66bc655f4684f2101f971a
 
 		return $license_data;
 	}
@@ -196,7 +206,7 @@ class Rest_API {
 
 		// Call the custom API.
 		$response = wp_remote_get(
-			add_query_arg( $api_params, self::PLUGIN_STORE_URL ),
+			add_query_arg( $api_params, License_Server::get_endpoint() ),
 			array(
 				'timeout'   => 15,
 				'sslverify' => false,
@@ -262,13 +272,12 @@ class Rest_API {
 			'edd_action' => 'deactivate_license',
 			'license'    => $license,
 			'item_id'    => self::PLUGIN_ITEM_ID,
-			// 'item_name'  => urlencode( self::PLUGIN_ITEM_NAME ), // the name of our product in EDD
 			'url'        => home_url(),
 		);
 
 		// Call the custom API.
 		$response = wp_remote_get(
-			add_query_arg( $api_params, self::PLUGIN_STORE_URL ),
+			add_query_arg( $api_params, License_Server::get_endpoint() ),
 			array(
 				'timeout'   => 15,
 				'sslverify' => false,
@@ -343,5 +352,15 @@ class Rest_API {
 
 		$obfuscated_key = '************' . substr( $key, $length - 4 );
 		return $obfuscated_key;
+	}
+
+	/**
+	 * Test the license server connection.
+	 *
+	 * @since 3.0.0
+	 */
+	public static function test_connection() {
+		$result = License_Server::check_server_health();
+		return rest_ensure_response( $result );
 	}
 }
