@@ -1,0 +1,6 @@
+[submodule "plugins/pods-bp-groups"]
+	path = plugins/pods-bp-groups
+	url = ac2.github.com:qcausa/pods-bp-groups.git
+[submodule "plugins/woocommerce-checkout-custom"]
+	path = plugins/woocommerce-checkout-custom
+	url = ac2.github.com:qcausa/woocommerce-checkout-custom.git
