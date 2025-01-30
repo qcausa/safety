@@ -1,0 +1,118 @@
+name: Update dev branch with dev-sm Submodule Contents.
+
+permissions:
+  actions: write
+  contents: write
+
+on:
+  push:
+    branches:
+      - dev-sm
+
+jobs:
+  update_dev_push_wpe:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dev-sm
+        uses: actions/checkout@v3
+        with:
+          submodules: false # Disable submodule checkout initially
+
+      - name: Set up SSH configuration
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ACTIONS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          # Create an SSH config file to ensure SSH uses github.com with the specified key
+          cat <<EOT >> ~/.ssh/config
+          Host github.com
+            HostName github.com
+            PreferredAuthentications publickey
+            IdentityFile ~/.ssh/id_ed25519
+            User git
+          EOT
+
+          # Add GitHub's public key to known_hosts to avoid SSH prompts
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Print GITHUB_WORKSPACE
+        run: |
+          echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
+
+      - name: Rewrite Submodule URLs in .gitmodules
+        run: |
+          # Replace ac2.github.com with github.com in the .gitmodules file, if needed
+          sed -i 's/ac2.github.com/github.com/g' .gitmodules
+          git submodule sync --recursive
+
+      - name: Initialize and update submodules
+        run: |
+          git submodule update --init --recursive
+
+      # - name: Verify Submodule Contents
+      #   run: |
+      #     # Verify that the submodule directory has contents
+      #     ls -la /home/runner/work/floridaroadjobs/floridaroadjobs/public/wp-content/plugins/wp-fusion-monday
+
+      - name: Detach and convert submodules to regular folders
+        run: |
+          # Capture the list of submodule paths in a variable
+          submodules=$(git config --file .gitmodules --get-regexp path | awk '{ print $2 }')
+
+          # Loop over each submodule path
+          for sm_path in $submodules; do
+            FULL_PATH="$GITHUB_WORKSPACE/$sm_path"
+            
+            echo "Converting submodule at $FULL_PATH to a regular directory"
+            
+            # Remove the submodule reference from Git
+            git add .gitmodules
+            echo "Remove the submodule reference from Git"
+            git rm --cached "$sm_path" || true
+
+            # # Delete the .git directory inside the submodule path to fully detach it
+            rm -rf "$FULL_PATH/.git"
+            echo "Detached submodule at $FULL_PATH and removed .git directory"
+
+            # Force-add the contents of the submodule as regular files
+            git add --force "$sm_path"
+          done
+
+          # Remove .gitmodules 
+          rm -f .gitmodules
+          echo ".gitmodules file removed"
+
+      - name: Print Git Config Contents
+        run: |
+          echo "Contents of .git/config:"
+          cat .git/config
+
+      - name: Commit changes for dev
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "desmond.tatilian+githubactions@qcausa.com"
+
+          # Check if there are changes to commit
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git checkout -B dev
+            git add .
+            git commit -m "Update dev with contents of submodules from dev-sm push"
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Push to dev
+        run: |
+          git push origin dev --force
+
+      # - name: Deploy to WP Engine
+      #   uses: wpengine/github-action-wpe-site-deploy@v3
+      #   with:
+      #     WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+      #     WPE_ENV: floridaroaddev
+      #     SRC_PATH: "public/wp-content/"
+      #     REMOTE_PATH: "wp-content/"
+      #     CACHE_CLEAR: TRUE
