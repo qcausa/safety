@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@wordpress/scripts": "^30.1.0"
+  },
+  "dependencies": {
+    "gpt-po": "^1.1.1"
+  }
+}
