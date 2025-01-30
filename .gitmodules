@@ -4,3 +4,6 @@
 [submodule "plugins/woocommerce-checkout-custom"]
 	path = plugins/woocommerce-checkout-custom
 	url = ac2.github.com:qcausa/woocommerce-checkout-custom.git
+[submodule "plugins/wp-fusion-post-types"]
+	path = plugins/wp-fusion-post-types
+	url = ac2.github.com:qcausa/wp-fusion-post-types.git
