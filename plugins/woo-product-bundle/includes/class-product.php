@@ -512,7 +512,7 @@ if ( ! class_exists( 'WC_Product_Woosb' ) && class_exists( 'WC_Product' ) ) {
 							}
 
 							if ( isset( $data[1] ) ) {
-								if ( is_numeric( $data[1] ) ) {
+								if ( is_numeric( $data[1] ) && ! isset( $data[2] ) ) {
 									$key = WPCleverWoosb_Helper()->generate_key();
 									$qty = (float) $data[1];
 								} else {

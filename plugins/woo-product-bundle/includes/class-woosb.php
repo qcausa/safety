@@ -92,7 +92,7 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 
 			// Add to cart
 			add_filter( 'woocommerce_add_to_cart_sold_individually_found_in_cart', [ $this, 'found_in_cart' ], 10, 2 );
-			add_filter( 'woocommerce_add_to_cart_validation', [ $this, 'add_to_cart_validation' ], 10, 2 );
+			add_filter( 'woocommerce_add_to_cart_validation', [ $this, 'add_to_cart_validation' ], 10, 3 );
 			add_filter( 'woocommerce_add_cart_item_data', [ $this, 'add_cart_item_data' ], 10, 2 );
 			add_action( 'woocommerce_add_to_cart', [ $this, 'add_to_cart' ], 10, 6 );
 			add_filter( 'woocommerce_get_cart_item_from_session', [ $this, 'get_cart_item_from_session' ], 10, 2 );
@@ -1292,7 +1292,7 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 			return $found_in_cart;
 		}
 
-		function add_to_cart_validation( $passed, $product_id ) {
+		function add_to_cart_validation( $passed, $product_id, $qty ) {
 			if ( ! apply_filters( 'woosb_add_to_cart_validation', true ) || isset( $_REQUEST['order_again'] ) ) {
 				return $passed;
 			}
@@ -1313,7 +1313,6 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 
 				if ( ( $items = $product->get_items() ) && ! empty( $items ) ) {
 					$count                 = $total = $purchasable = 0;
-					$qty                   = (float) ( $_REQUEST['quantity'] ?? 1 );
 					$min_whole             = (float) ( get_post_meta( $product_id, 'woosb_limit_whole_min', true ) ?: 1 );
 					$max_whole             = (float) ( get_post_meta( $product_id, 'woosb_limit_whole_max', true ) ?: - 1 );
 					$total_min             = (float) ( get_post_meta( $product_id, 'woosb_total_limits_min', true ) ?: 0 );
@@ -1678,13 +1677,15 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 
 					// set price zero, calculate later
 					if ( isset( $cart_item['woosb_discount_amount'] ) && $cart_item['woosb_discount_amount'] ) {
-						$cart_item['data']->set_price( - (float) $cart_item['woosb_discount_amount'] );
+						$bundles_price = - (float) $cart_item['woosb_discount_amount'];
 					} else {
-						$cart_item['data']->set_price( 0 );
+						$bundles_price = 0;
 					}
 
+					$cart_item['data']->set_price( apply_filters( 'woosb_bundles_price', $bundles_price, $cart_item ) );
+
 					if ( ! empty( $cart_item['woosb_keys'] ) ) {
-						$bundles_price = 0;
+						$bundles_display_price = 0;
 
 						foreach ( $cart_item['woosb_keys'] as $key ) {
 							if ( isset( $cart_contents[ $key ], $cart_contents[ $key ]['data'] ) ) {
@@ -1710,17 +1711,19 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 									] );
 								}
 
-								$bundles_price += WPCleverWoosb_Helper()->round_price( $_price );
+								$bundles_display_price += WPCleverWoosb_Helper()->round_price( $_price );
 							}
 						}
 
 						if ( ! empty( $cart_item['woosb_discount_amount'] ) ) {
-							$bundles_price -= (float) $cart_item['woosb_discount_amount'];
+							$bundles_display_price -= (float) $cart_item['woosb_discount_amount'];
 						}
+
+						$bundles_display_price = apply_filters( 'woosb_bundles_display_price', $bundles_display_price, $cart_item );
 
 						if ( $cart_item['quantity'] > 0 ) {
 							// store bundles total
-							WC()->cart->cart_contents[ $cart_item_key ]['woosb_price'] = WPCleverWoosb_Helper()->round_price( $bundles_price );
+							WC()->cart->cart_contents[ $cart_item_key ]['woosb_price'] = WPCleverWoosb_Helper()->round_price( $bundles_display_price );
 						}
 					}
 				}
@@ -3164,7 +3167,7 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 							$item_class .= ' woosb-product-hidden';
 						}
 
-						if ( ! $product->is_type( 'variable' ) && ( ! $product->is_in_stock() || ! $product->has_enough_stock( $item_qty ) || ! $product->is_purchasable() ) ) {
+						if ( ( ! $product->is_type( 'variable' ) && ( ! $product->is_in_stock() || ! $product->has_enough_stock( $item_qty ) || ! $product->is_purchasable() ) ) || ( $product->is_type( 'variable' ) && ! $product->child_is_in_stock() ) ) {
 							if ( ! apply_filters( 'woosb_allow_unpurchasable_qty', false ) ) {
 								$item_qty = 0;
 							}
@@ -3179,6 +3182,7 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 							'price'        => WPCleverWoosb_Helper()->get_price_to_display( $product ),
 							'o_price'      => WPCleverWoosb_Helper()->get_price_to_display( $product ),
 							'price-suffix' => htmlentities( $product->get_price_suffix() ),
+							'stock'        => $product->get_max_purchase_quantity(),
 							'qty'          => $item_qty,
 							'order'        => $order,
 						], $product, $global_product, $order );
@@ -3519,7 +3523,7 @@ if ( ! class_exists( 'WPCleverWoosb' ) && class_exists( 'WC_Product' ) ) {
 							$id   = rawurldecode( $data[0] ?? 0 );
 
 							if ( isset( $data[1] ) ) {
-								if ( is_numeric( $data[1] ) ) {
+								if ( is_numeric( $data[1] ) && ! isset( $data[2] ) ) {
 									$key = WPCleverWoosb_Helper()->generate_key();
 									$qty = (float) $data[1];
 								} else {

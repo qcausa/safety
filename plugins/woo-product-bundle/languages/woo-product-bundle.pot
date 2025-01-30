@@ -1,15 +1,15 @@
-# Copyright (C) 2024 WPClever
+# Copyright (C) 2025 WPClever
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPC Product Bundles for WooCommerce 8.1.5\n"
+"Project-Id-Version: WPC Product Bundles for WooCommerce 8.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-product-bundle\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-25T16:16:10+00:00\n"
+"POT-Creation-Date: 2025-01-06T23:27:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: woo-product-bundle\n"
@@ -160,7 +160,7 @@ msgstr ""
 #. translators: dynamic price
 #: includes/class-woosb.php:362
 #: includes/class-woosb.php:363
-#: includes/class-woosb.php:2836
+#: includes/class-woosb.php:2839
 msgid "before %s after"
 msgstr ""
 
@@ -188,9 +188,9 @@ msgstr ""
 #: includes/class-woosb.php:381
 #: includes/class-woosb.php:786
 #: includes/class-woosb.php:789
-#: includes/class-woosb.php:1855
-#: includes/class-woosb.php:1873
-#: includes/class-woosb.php:2258
+#: includes/class-woosb.php:1858
+#: includes/class-woosb.php:1876
+#: includes/class-woosb.php:2261
 msgid "Bundled products"
 msgstr ""
 
@@ -236,30 +236,30 @@ msgid "Choose the position to show the bundled products list."
 msgstr ""
 
 #: includes/class-woosb.php:400
-#: includes/class-woosb.php:2495
+#: includes/class-woosb.php:2498
 msgid "Layout"
 msgstr ""
 
 #: includes/class-woosb.php:403
-#: includes/class-woosb.php:2500
+#: includes/class-woosb.php:2503
 msgid "List"
 msgstr ""
 
 #: includes/class-woosb.php:404
 #: includes/class-woosb.php:429
-#: includes/class-woosb.php:2501
+#: includes/class-woosb.php:2504
 msgid "Grid - 2 columns"
 msgstr ""
 
 #: includes/class-woosb.php:405
 #: includes/class-woosb.php:430
-#: includes/class-woosb.php:2502
+#: includes/class-woosb.php:2505
 msgid "Grid - 3 columns"
 msgstr ""
 
 #: includes/class-woosb.php:406
 #: includes/class-woosb.php:431
-#: includes/class-woosb.php:2503
+#: includes/class-woosb.php:2506
 msgid "Grid - 4 columns"
 msgstr ""
 
@@ -268,8 +268,8 @@ msgid "Variations selector"
 msgstr ""
 
 #: includes/class-woosb.php:415
-#: includes/class-woosb.php:2487
-#: includes/class-woosb.php:2499
+#: includes/class-woosb.php:2490
+#: includes/class-woosb.php:2502
 msgid "Default"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 #: includes/class-woosb.php:1043
 #: includes/class-woosb.php:1053
 #: includes/class-woosb.php:1088
-#: includes/class-woosb.php:2488
+#: includes/class-woosb.php:2491
 msgid "Yes"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr ""
 #: includes/class-woosb.php:1044
 #: includes/class-woosb.php:1054
 #: includes/class-woosb.php:1089
-#: includes/class-woosb.php:2489
+#: includes/class-woosb.php:2492
 msgid "No"
 msgstr ""
 
@@ -439,7 +439,7 @@ msgstr ""
 #: includes/class-woosb.php:526
 #: includes/class-woosb.php:778
 #: includes/class-woosb.php:781
-#: includes/class-woosb.php:2266
+#: includes/class-woosb.php:2269
 msgid "Bundles"
 msgstr ""
 
@@ -481,7 +481,7 @@ msgid "Exclude un-purchasable products"
 msgstr ""
 
 #: includes/class-woosb.php:568
-#: includes/class-woosb.php:2491
+#: includes/class-woosb.php:2494
 msgid "Make the bundle still purchasable when one of the bundled products is un-purchasable. These bundled products are excluded from the orders."
 msgstr ""
 
@@ -541,7 +541,7 @@ msgid "Hide bundled products, just show the main product on order details (order
 msgstr ""
 
 #: includes/class-woosb.php:625
-#: includes/class-woosb.php:2339
+#: includes/class-woosb.php:2342
 msgid "Search"
 msgstr ""
 
@@ -644,15 +644,15 @@ msgstr ""
 #. translators: bundled products
 #: includes/class-woosb.php:795
 #: includes/class-woosb.php:799
-#: includes/class-woosb.php:2015
-#: includes/class-woosb.php:2040
+#: includes/class-woosb.php:2018
+#: includes/class-woosb.php:2043
 msgid "Bundled products: %s"
 msgstr ""
 
 #. translators: bundled in
 #: includes/class-woosb.php:805
 #: includes/class-woosb.php:809
-#: includes/class-woosb.php:2044
+#: includes/class-woosb.php:2047
 msgid "Bundled in: %s"
 msgstr ""
 
@@ -807,330 +807,330 @@ msgstr ""
 msgid "Community support"
 msgstr ""
 
-#: includes/class-woosb.php:1340
+#: includes/class-woosb.php:1339
 msgid "One of the bundled products is unavailable."
 msgstr ""
 
-#: includes/class-woosb.php:1341
-#: includes/class-woosb.php:1360
-#: includes/class-woosb.php:1372
-#: includes/class-woosb.php:1378
-#: includes/class-woosb.php:1388
-#: includes/class-woosb.php:1396
-#: includes/class-woosb.php:1404
-#: includes/class-woosb.php:1423
-#: includes/class-woosb.php:1434
-#: includes/class-woosb.php:1440
-#: includes/class-woosb.php:1446
-#: includes/class-woosb.php:1459
-#: includes/class-woosb.php:1465
-#: includes/class-woosb.php:1471
+#: includes/class-woosb.php:1340
+#: includes/class-woosb.php:1359
+#: includes/class-woosb.php:1371
+#: includes/class-woosb.php:1377
+#: includes/class-woosb.php:1387
+#: includes/class-woosb.php:1395
+#: includes/class-woosb.php:1403
+#: includes/class-woosb.php:1422
+#: includes/class-woosb.php:1433
+#: includes/class-woosb.php:1439
+#: includes/class-woosb.php:1445
+#: includes/class-woosb.php:1458
+#: includes/class-woosb.php:1464
+#: includes/class-woosb.php:1470
 msgid "You cannot add this bundle to the cart."
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:1387
+#: includes/class-woosb.php:1386
 msgid "\"%s\" is un-purchasable."
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:1395
+#: includes/class-woosb.php:1394
 msgid "You cannot add another \"%s\" to the cart."
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:1403
+#: includes/class-woosb.php:1402
 msgid "\"%s\" is protected and cannot be purchased."
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:1422
+#: includes/class-woosb.php:1421
 msgid "\"%s\" has not enough stock."
 msgstr ""
 
 #. translators: keyword
-#: includes/class-woosb.php:2182
+#: includes/class-woosb.php:2185
 msgid "No results found for \"%s\""
 msgstr ""
 
-#: includes/class-woosb.php:2229
+#: includes/class-woosb.php:2232
 msgid "Smart bundle"
 msgstr ""
 
-#: includes/class-woosb.php:2236
+#: includes/class-woosb.php:2239
 msgid "Bundled Products"
 msgstr ""
 
-#: includes/class-woosb.php:2299
+#: includes/class-woosb.php:2302
 msgid "Product wasn't returned."
 msgstr ""
 
-#: includes/class-woosb.php:2324
+#: includes/class-woosb.php:2327
 msgid "Search settings"
 msgstr ""
 
-#: includes/class-woosb.php:2331
+#: includes/class-woosb.php:2334
 msgid "Update Options"
 msgstr ""
 
-#: includes/class-woosb.php:2339
+#: includes/class-woosb.php:2342
 msgid "settings"
 msgstr ""
 
-#: includes/class-woosb.php:2343
+#: includes/class-woosb.php:2346
 msgid "searching..."
 msgstr ""
 
-#: includes/class-woosb.php:2344
+#: includes/class-woosb.php:2347
 msgid "Type any keyword to search"
 msgstr ""
 
-#: includes/class-woosb.php:2350
+#: includes/class-woosb.php:2353
 msgid "Selected"
 msgstr ""
 
-#: includes/class-woosb.php:2391
+#: includes/class-woosb.php:2394
 msgid "+ Add heading/paragraph"
 msgstr ""
 
-#: includes/class-woosb.php:2393
+#: includes/class-woosb.php:2396
 msgid "Bulk actions"
 msgstr ""
 
-#: includes/class-woosb.php:2394
+#: includes/class-woosb.php:2397
 msgid "Enable \"Custom quantity\""
 msgstr ""
 
-#: includes/class-woosb.php:2395
+#: includes/class-woosb.php:2398
 msgid "Disable \"Custom quantity\""
 msgstr ""
 
-#: includes/class-woosb.php:2396
+#: includes/class-woosb.php:2399
 msgid "Set default quantity"
 msgstr ""
 
-#: includes/class-woosb.php:2397
+#: includes/class-woosb.php:2400
 msgid "Set min quantity"
 msgstr ""
 
-#: includes/class-woosb.php:2398
+#: includes/class-woosb.php:2401
 msgid "Set max quantity"
 msgstr ""
 
-#: includes/class-woosb.php:2404
+#: includes/class-woosb.php:2407
 msgid "Regular price"
 msgstr ""
 
-#: includes/class-woosb.php:2410
+#: includes/class-woosb.php:2413
 msgid "Fixed price"
 msgstr ""
 
-#: includes/class-woosb.php:2414
+#: includes/class-woosb.php:2417
 msgid "Disable auto calculate price."
 msgstr ""
 
 #. translators: set price link
-#: includes/class-woosb.php:2416
+#: includes/class-woosb.php:2419
 msgid "If checked, %1$s click here to set price %2$s by manually."
 msgstr ""
 
-#: includes/class-woosb.php:2420
+#: includes/class-woosb.php:2423
 msgid "Discount"
 msgstr ""
 
-#: includes/class-woosb.php:2422
+#: includes/class-woosb.php:2425
 msgid "% or amount"
 msgstr ""
 
-#: includes/class-woosb.php:2424
+#: includes/class-woosb.php:2427
 msgid "If you fill both, the amount will be used."
 msgstr ""
 
-#: includes/class-woosb.php:2428
+#: includes/class-woosb.php:2431
 msgid "Quantity limits"
 msgstr ""
 
-#: includes/class-woosb.php:2430
-#: includes/class-woosb.php:2448
-#: includes/class-woosb.php:2617
+#: includes/class-woosb.php:2433
+#: includes/class-woosb.php:2451
+#: includes/class-woosb.php:2620
 msgid "Min"
 msgstr ""
 
-#: includes/class-woosb.php:2434
-#: includes/class-woosb.php:2449
-#: includes/class-woosb.php:2617
+#: includes/class-woosb.php:2437
+#: includes/class-woosb.php:2452
+#: includes/class-woosb.php:2620
 msgid "Max"
 msgstr ""
 
-#: includes/class-woosb.php:2438
+#: includes/class-woosb.php:2441
 msgid "Limit the total quantity when the bundle includes optional products."
 msgstr ""
 
-#: includes/class-woosb.php:2442
+#: includes/class-woosb.php:2445
 msgid "Total limits"
 msgstr ""
 
-#: includes/class-woosb.php:2445
+#: includes/class-woosb.php:2448
 msgid "Configure total limits for the current bundle."
 msgstr ""
 
-#: includes/class-woosb.php:2446
+#: includes/class-woosb.php:2449
 msgid "When a bundle includes variable or optional products, bundle's price will vary depending on the item selection. Thus, this option can be enabled to limit the bundle total's min-max."
 msgstr ""
 
-#: includes/class-woosb.php:2454
+#: includes/class-woosb.php:2457
 msgid "Shipping fee"
 msgstr ""
 
-#: includes/class-woosb.php:2458
+#: includes/class-woosb.php:2461
 msgid "Apply to the whole bundle"
 msgstr ""
 
-#: includes/class-woosb.php:2459
+#: includes/class-woosb.php:2462
 msgid "Apply to each bundled product"
 msgstr ""
 
-#: includes/class-woosb.php:2465
+#: includes/class-woosb.php:2468
 msgid "Manage stock"
 msgstr ""
 
-#: includes/class-woosb.php:2468
+#: includes/class-woosb.php:2471
 msgid "Enable stock management at bundle level."
 msgstr ""
 
-#: includes/class-woosb.php:2469
+#: includes/class-woosb.php:2472
 msgid "By default, the bundle' stock was calculated automatically from bundled products. After enabling, please press \"Update\" then you can change the stock settings on the \"Inventory\" tab."
 msgstr ""
 
-#: includes/class-woosb.php:2474
+#: includes/class-woosb.php:2477
 msgid "Custom display price"
 msgstr ""
 
 #. translators: dynamic price
-#: includes/class-woosb.php:2479
+#: includes/class-woosb.php:2482
 msgid "You can use %s to show the dynamic price between your custom text."
 msgstr ""
 
-#: includes/class-woosb.php:2483
+#: includes/class-woosb.php:2486
 msgid "Exclude un-purchasable"
 msgstr ""
 
-#: includes/class-woosb.php:2508
+#: includes/class-woosb.php:2511
 msgid "Above text"
 msgstr ""
 
-#: includes/class-woosb.php:2518
+#: includes/class-woosb.php:2521
 msgid "Under text"
 msgstr ""
 
-#: includes/class-woosb.php:2605
+#: includes/class-woosb.php:2608
 msgid "Default quantity"
 msgstr ""
 
-#: includes/class-woosb.php:2605
+#: includes/class-woosb.php:2608
 msgid "sold individually"
 msgstr ""
 
-#: includes/class-woosb.php:2608
+#: includes/class-woosb.php:2611
 msgid "Add"
 msgstr ""
 
-#: includes/class-woosb.php:2610
-#: includes/class-woosb.php:2661
+#: includes/class-woosb.php:2613
+#: includes/class-woosb.php:2664
 msgid "Remove"
 msgstr ""
 
-#: includes/class-woosb.php:2616
+#: includes/class-woosb.php:2619
 msgid "Custom quantity"
 msgstr ""
 
-#: includes/class-woosb.php:2913
-#: includes/class-woosb.php:2948
+#: includes/class-woosb.php:2916
+#: includes/class-woosb.php:2951
 msgid "From"
 msgstr ""
 
 #. translators: bundle name
-#: includes/class-woosb.php:3668
+#: includes/class-woosb.php:3672
 msgid "Bundle (%s)"
 msgstr ""
 
-#: includes/class-woosb.php:3684
+#: includes/class-woosb.php:3688
 msgid "Create a Smart bundle"
 msgstr ""
 
 #. translators: count
-#: includes/class-woosb.php:3702
+#: includes/class-woosb.php:3706
 msgid "Added %s product(s) to this bundle."
 msgstr ""
 
-#: includes/class-woosb.php:3712
+#: includes/class-woosb.php:3716
 msgid "Bundle(s) out of stock"
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:3717
-#: includes/class-woosb.php:3720
+#: includes/class-woosb.php:3721
+#: includes/class-woosb.php:3724
 msgid "%s is out of stock."
 msgstr ""
 
-#: includes/class-woosb.php:3738
+#: includes/class-woosb.php:3742
 msgid "Bundle(s) low in stock"
 msgstr ""
 
 #. translators: bundle name
-#: includes/class-woosb.php:3743
+#: includes/class-woosb.php:3747
 msgid "%s is low in stock."
 msgstr ""
 
 #. translators: product name
-#: includes/class-woosb.php:3746
+#: includes/class-woosb.php:3750
 msgid "%1$s is low in stock. There are %2$d left."
 msgstr ""
 
-#: includes/class-woosb.php:3770
+#: includes/class-woosb.php:3774
 msgid "Before bundled products"
 msgstr ""
 
-#: includes/class-woosb.php:3771
+#: includes/class-woosb.php:3775
 msgid "After bundled products"
 msgstr ""
 
-#: includes/class-woosb.php:3772
+#: includes/class-woosb.php:3776
 msgid "Before bundled products table"
 msgstr ""
 
-#: includes/class-woosb.php:3773
+#: includes/class-woosb.php:3777
 msgid "After bundled products table"
 msgstr ""
 
-#: includes/class-woosb.php:3774
+#: includes/class-woosb.php:3778
 msgid "Before bundled product"
 msgstr ""
 
-#: includes/class-woosb.php:3775
+#: includes/class-woosb.php:3779
 msgid "After bundled product"
 msgstr ""
 
-#: includes/class-woosb.php:3776
+#: includes/class-woosb.php:3780
 msgid "Before bundled product name"
 msgstr ""
 
-#: includes/class-woosb.php:3777
+#: includes/class-woosb.php:3781
 msgid "After bundled product name"
 msgstr ""
 
-#: includes/class-woosb.php:3778
+#: includes/class-woosb.php:3782
 msgid "Before bundled product price"
 msgstr ""
 
-#: includes/class-woosb.php:3779
+#: includes/class-woosb.php:3783
 msgid "After bundled product price"
 msgstr ""
 
-#: includes/class-woosb.php:3780
+#: includes/class-woosb.php:3784
 msgid "Before bundles"
 msgstr ""
 
-#: includes/class-woosb.php:3781
+#: includes/class-woosb.php:3785
 msgid "After bundles"
 msgstr ""
