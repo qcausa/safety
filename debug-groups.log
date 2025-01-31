@@ -1,0 +1,162 @@
+2025-01-31 02:48:55 | === START SORTING ===
+2025-01-31 02:48:55 | Has groups: 1
+2025-01-31 02:48:55 | Groups template exists: yes
+2025-01-31 02:48:55 | Found groups to sort:: 10
+2025-01-31 02:48:55 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:48:55 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:48:55 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:48:55 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:48:55 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:48:55 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:48:55 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:48:55 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:48:55 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:48:55 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:48:55 | === AFTER SORTING ===
+2025-01-31 02:48:55 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:48:55 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:48:55 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:48:55 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:48:55 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:48:55 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:48:55 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:48:55 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:48:55 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:48:55 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:48:55 | === END SORTING ===
+
+2025-01-31 02:48:55 | === START SORTING ===
+2025-01-31 02:48:55 | Has groups: 1
+2025-01-31 02:48:55 | Groups template exists: yes
+2025-01-31 02:48:55 | Found groups to sort:: 10
+2025-01-31 02:48:55 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:48:55 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:48:55 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:48:55 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:48:55 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:48:55 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:48:55 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:48:55 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:48:55 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:48:55 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:48:55 | === AFTER SORTING ===
+2025-01-31 02:48:55 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:48:55 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:48:55 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:48:55 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:48:55 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:48:55 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:48:55 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:48:55 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:48:55 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:48:55 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:48:55 | === END SORTING ===
+
+2025-01-31 02:49:36 | === START SORTING ===
+2025-01-31 02:49:36 | Has groups: 1
+2025-01-31 02:49:36 | Groups template exists: yes
+2025-01-31 02:49:36 | Found groups to sort:: 10
+2025-01-31 02:49:36 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:49:36 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:49:36 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:49:36 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:49:36 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:49:36 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:49:36 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:49:36 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:49:36 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:49:36 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:49:36 | === AFTER SORTING ===
+2025-01-31 02:49:36 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:49:36 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:49:36 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:49:36 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:49:36 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:49:36 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:49:36 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:49:36 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:49:36 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:49:36 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:49:36 | === END SORTING ===
+
+2025-01-31 02:49:37 | === START SORTING ===
+2025-01-31 02:49:37 | Has groups: 1
+2025-01-31 02:49:37 | Groups template exists: yes
+2025-01-31 02:49:37 | Found groups to sort:: 10
+2025-01-31 02:49:37 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:49:37 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:49:37 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:49:37 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:49:37 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:49:37 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:49:37 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:49:37 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:49:37 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:49:37 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:49:37 | === AFTER SORTING ===
+2025-01-31 02:49:37 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:49:37 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:49:37 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:49:37 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:49:37 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:49:37 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:49:37 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:49:37 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:49:37 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:49:37 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:49:37 | === END SORTING ===
+
+2025-01-31 02:50:45 | === START SORTING ===
+2025-01-31 02:50:45 | Has groups: 1
+2025-01-31 02:50:45 | Groups template exists: yes
+2025-01-31 02:50:45 | Found groups to sort:: 10
+2025-01-31 02:50:45 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:50:45 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:50:45 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:50:45 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:50:45 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:50:45 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:50:45 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:50:45 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:50:45 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:50:45 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:50:45 | === AFTER SORTING ===
+2025-01-31 02:50:45 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:50:45 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:50:45 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:50:45 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:50:45 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:50:45 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:50:45 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:50:45 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:50:45 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:50:45 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:50:45 | === END SORTING ===
+
+2025-01-31 02:50:45 | === START SORTING ===
+2025-01-31 02:50:45 | Has groups: 1
+2025-01-31 02:50:45 | Groups template exists: yes
+2025-01-31 02:50:45 | Found groups to sort:: 10
+2025-01-31 02:50:45 | Pre-sort group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:50:45 | Pre-sort group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:50:45 | Pre-sort group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:50:45 | Pre-sort group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:50:45 | Pre-sort group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:50:45 | Pre-sort group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:50:45 | Pre-sort group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:50:45 | Pre-sort group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:50:45 | Pre-sort group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:50:45 | Pre-sort group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:50:45 | === AFTER SORTING ===
+2025-01-31 02:50:45 | Sorted group: ID: 4 | Name: Central Office | Order: 1
+2025-01-31 02:50:45 | Sorted group: ID: 1 | Name: District 1 | Order: 2
+2025-01-31 02:50:45 | Sorted group: ID: 5 | Name: District 2 | Order: 5
+2025-01-31 02:50:45 | Sorted group: ID: 6 | Name: District 3 | Order: 6
+2025-01-31 02:50:45 | Sorted group: ID: 7 | Name: District 4 | Order: 7
+2025-01-31 02:50:45 | Sorted group: ID: 8 | Name: District 5 | Order: 8
+2025-01-31 02:50:45 | Sorted group: ID: 9 | Name: District 6 | Order: 9
+2025-01-31 02:50:45 | Sorted group: ID: 10 | Name: District 7 | Order: 10
+2025-01-31 02:50:45 | Sorted group: ID: 11 | Name: Turnpike | Order: 11
+2025-01-31 02:50:45 | Sorted group: ID: 12 | Name: Target Zero Team | Order: 12
+2025-01-31 02:50:45 | === END SORTING ===
+

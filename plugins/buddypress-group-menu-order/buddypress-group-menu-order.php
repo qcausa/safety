@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: BuddyPress/BuddyBoss Group Menu Order
  * Description: Automatically assigns and manages menu order for BuddyPress/BuddyBoss groups.
@@ -8,22 +9,17 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
 /**
  * Bulk Assign 'menu_order' to Existing Groups on Plugin Activation
- *
- * This function assigns the group's ID as the 'menu_order' for all groups
- * that do not already have a 'menu_order' meta key set.
- *
- * @return void
  */
-function bp_bulk_assign_menu_order_to_existing_groups() {
-    // Retrieve all groups without a 'menu_order' meta key
-    $groups = groups_get_groups( array(
-        'per_page'   => 0, // Retrieve all groups
+function bp_bulk_assign_menu_order_to_existing_groups()
+{
+    $groups = groups_get_groups(array(
+        'per_page'   => 0,
         'type'       => 'all',
         'meta_query' => array(
             array(
@@ -31,88 +27,81 @@ function bp_bulk_assign_menu_order_to_existing_groups() {
                 'compare' => 'NOT EXISTS',
             ),
         ),
-    ) );
+    ));
 
-    if ( ! empty( $groups['groups'] ) ) {
-        foreach ( $groups['groups'] as $group ) {
-            groups_update_groupmeta( $group->id, 'menu_order', $group->id );
+    if (!empty($groups['groups'])) {
+        foreach ($groups['groups'] as $group) {
+            groups_update_groupmeta($group->id, 'menu_order', $group->id);
         }
-        // Optionally, notify admins that the operation is complete
-        error_log( 'Menu Order assigned to existing groups.' );
     }
 }
+register_activation_hook(__FILE__, 'bp_bulk_assign_menu_order_to_existing_groups');
 
 /**
- * Register Plugin Activation Hook
- *
- * Ensures that 'menu_order' is assigned to existing groups upon plugin activation.
+ * Add Menu Order field to Group Editing Form
  */
-register_activation_hook( __FILE__, 'bp_bulk_assign_menu_order_to_existing_groups' );
-
-/**
- * Add Menu Order field to BuddyPress/BuddyBoss Group Editing Form
- *
- * @param BP_Groups_Group $group The group object being edited.
- */
-function bp_add_group_menu_order_field_edit( $group ) {
-    // Ensure the BugFu class exists for logging (optional)
-    if ( class_exists( 'BugFu' ) ) {
-        BugFu::log("bp_add_group_menu_order_field_edit");
-        BugFu::log($group->id); // Log the group ID for debugging
-    }
-
-    // Retrieve existing menu_order value or set default to 0
-    $group_menu_order = groups_get_groupmeta( $group->id, 'menu_order' );
-    if ( empty( $group_menu_order ) ) {
+function bp_add_group_menu_order_field_edit($group)
+{
+    $group_menu_order = groups_get_groupmeta($group->id, 'menu_order');
+    if (empty($group_menu_order)) {
         $group_menu_order = 0;
     }
-
-    // Output the Menu Order field within a styled div to appear in the right column
-    ?>
+?>
     <div class="bp-admin-side-section" style="padding: 15px; border: 1px solid #ddd; background-color: #f9f9f9;">
-        <h3><?php esc_html_e( 'Menu Order', 'your-text-domain' ); ?></h3>
+        <h3><?php esc_html_e('Menu Order', 'your-text-domain'); ?></h3>
         <p>
-            <label for="bp-group-menu-order"><?php esc_html_e( 'Menu Order:', 'your-text-domain' ); ?></label><br/>
-            <input type="number" name="bp_group_menu_order" id="bp-group-menu-order" value="<?php echo esc_attr( $group_menu_order ); ?>" min="0" style="width: 100%;" />
+            <label for="bp-group-menu-order"><?php esc_html_e('Menu Order:', 'your-text-domain'); ?></label><br />
+            <input type="number" name="bp_group_menu_order" id="bp-group-menu-order" value="<?php echo esc_attr($group_menu_order); ?>" min="0" style="width: 100%;" />
         </p>
-        <p class="description"><?php esc_html_e( 'Specify the order in which this group should appear. Lower numbers appear first.', 'your-text-domain' ); ?></p>
+        <p class="description"><?php esc_html_e('Specify the order in which this group should appear. Lower numbers appear first.', 'your-text-domain'); ?></p>
     </div>
-    <?php
+<?php
 }
-add_action( 'bp_groups_admin_edit', 'bp_add_group_menu_order_field_edit', 10, 1 );
-
+add_action('bp_groups_admin_edit', 'bp_add_group_menu_order_field_edit', 10, 1);
 
 /**
- * Modify BuddyPress Group Queries to Order by Menu Order
+ * Sort groups on frontend display
  */
-function bp_order_groups_by_menu_order( $args ) {
-    BugFu::log("bp_order_groups_by_menu_order");
-    BugFu::log($args);
-    // Only modify the query on specific contexts if needed
-    // For example, only on the groups directory or specific group loops
-    // Here, we'll apply it universally. Adjust as necessary.
+function bp_sort_groups_by_menu_order($has_groups)
+{
+    global $groups_template;
 
-    // Ensure that we order by menu_order meta
-    $args['meta_key'] = 'menu_order';
-    $args['orderby']  = 'meta_value';
-    $args['order']    = 'ASC'; // or 'DESC' based on preference
-    BugFu::log($args);
+    if (!isset($groups_template) || empty($groups_template->groups)) {
+        return $has_groups;
+    }
 
-    return $args;
+    // Get all menu orders first
+    $menu_orders = array();
+    foreach ($groups_template->groups as $group) {
+        $menu_orders[$group->id] = (int) groups_get_groupmeta($group->id, 'menu_order');
+    }
+
+    // Sort the groups
+    usort($groups_template->groups, function ($a, $b) use ($menu_orders) {
+        $a_order = isset($menu_orders[$a->id]) ? $menu_orders[$a->id] : 0;
+        $b_order = isset($menu_orders[$b->id]) ? $menu_orders[$b->id] : 0;
+
+        if ($a_order === $b_order) {
+            return strcmp($a->name, $b->name);
+        }
+        return $a_order - $b_order;
+    });
+
+    return $has_groups;
 }
-add_filter( 'bp_after_has_groups_parse_args', 'bp_order_groups_by_menu_order' , 999);
 
-
+// Remove existing filters and add our sorting
+remove_all_filters('bp_has_groups');
+add_filter('bp_has_groups', 'bp_sort_groups_by_menu_order', 999);
 
 /**
- * Save Menu Order field on BuddyPress Group Update
+ * Save Menu Order field
  */
-function bp_save_group_menu_order_field_edit( $group_id, $group_meta ) {
-    BugFu::log("groups_details_updated");
-    BugFu::log($_POST['bp_group_menu_order'] );
-    if ( isset( $_POST['bp_group_menu_order'] ) && is_numeric( $_POST['bp_group_menu_order'] ) ) {
-        $menu_order = intval( $_POST['bp_group_menu_order'] );
-        groups_update_groupmeta( $group_id, 'menu_order', $menu_order );
+function bp_save_group_menu_order_field_edit($group_id)
+{
+    if (isset($_POST['bp_group_menu_order']) && is_numeric($_POST['bp_group_menu_order'])) {
+        $menu_order = intval($_POST['bp_group_menu_order']);
+        groups_update_groupmeta($group_id, 'menu_order', $menu_order);
     }
 }
-add_action( 'groups_details_updated', 'bp_save_group_menu_order_field_edit', 10, 2 );
+add_action('groups_details_updated', 'bp_save_group_menu_order_field_edit', 10, 1);
