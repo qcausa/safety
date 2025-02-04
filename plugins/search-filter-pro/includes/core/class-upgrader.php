@@ -100,9 +100,6 @@ class Upgrader {
 			}
 		}
 		update_option( 'search-filter-pro-version', SEARCH_FILTER_PRO_VERSION );
-
-		// Clear caches for all S&F plugins & extensions.
-		Update_Manager::invalidate_updater_caches();
 	}
 	/**
 	 * Checks to see if we're on a pre beta-12 version.

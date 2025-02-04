@@ -78,7 +78,7 @@ class Settings_Data {
 			),
 			array(
 				'name'      => 'archiveType',
-				'label'     => __( 'Archive Type', 'search-filter' ),
+				'label'     => __( 'Archive type', 'search-filter' ),
 				'group'     => 'location',
 				'type'      => 'string',
 				'default'   => 'post_type',
@@ -105,15 +105,15 @@ class Settings_Data {
 				),
 			),
 			array(
-				'name'         => 'postType',
-				'label'        => __( 'Post Type', 'search-filter' ),
-				'help'         => __( "If you don't see your post type, check that `public` and `has_archive` are enabled.", 'search-filter' ),
-				'type'         => 'string',
-				'group'        => 'location',
-				'inputType'    => 'Select',
-				'default'      => 'post',
-				'options'      => array(),
-				'dependsOn'    => array(
+				'name'      => 'postType',
+				'label'     => __( 'Post type', 'search-filter' ),
+				'help'      => __( "If you don't see your post type, check that `public` and `has_archive` are enabled.", 'search-filter' ),
+				'type'      => 'string',
+				'group'     => 'location',
+				'inputType' => 'Select',
+				'default'   => 'post',
+				'options'   => array(),
+				'dependsOn' => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -128,14 +128,14 @@ class Settings_Data {
 						),
 					),
 				),
-				'dataProvider' => array(
+				'store'     => array(
 					'route' => '/settings/options/post-types',
 				),
 			),
 
 			array(
 				'name'      => 'archiveFilterTaxonomies',
-				'label'     => __( 'Include Taxonomy Archives', 'search-filter' ),
+				'label'     => __( 'Include taxonomy archives', 'search-filter' ),
 				'help'      => __( 'Enables filtering in the related taxonomy archives.', 'search-filter' ),
 				'type'      => 'string',
 				'group'     => 'location',
@@ -152,35 +152,30 @@ class Settings_Data {
 					),
 				),
 				'dependsOn' => array(
-					'relation' => 'OR',
+					'relation' => 'AND',
 					'rules'    => array(
 						array(
-							'relation' => 'AND',
-							'rules'    => array(
-								array(
-									'option'  => 'integrationType',
-									'compare' => '=',
-									'value'   => 'archive',
-								),
-								array(
-									'option'  => 'archiveType',
-									'compare' => '=',
-									'value'   => 'post_type',
-								),
-							),
+							'option'  => 'integrationType',
+							'compare' => '=',
+							'value'   => 'archive',
+						),
+						array(
+							'option'  => 'archiveType',
+							'compare' => '=',
+							'value'   => 'post_type',
 						),
 					),
 				),
 			),
 			array(
-				'name'         => 'taxonomy',
-				'label'        => __( 'Taxonomy', 'search-filter' ),
-				'help'         => __( "If you don't see your taxonomy, ensure `public` is enabled", 'search-filter' ),
-				'default'      => 'category',
-				'type'         => 'string',
-				'group'        => 'location',
-				'inputType'    => 'Select',
-				'dependsOn'    => array(
+				'name'      => 'taxonomy',
+				'label'     => __( 'Taxonomy', 'search-filter' ),
+				'help'      => __( "If you don't see your taxonomy, ensure `public` is enabled", 'search-filter' ),
+				'default'   => 'category',
+				'type'      => 'string',
+				'group'     => 'location',
+				'inputType' => 'Select',
+				'dependsOn' => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -195,7 +190,7 @@ class Settings_Data {
 						),
 					),
 				),
-				'dataProvider' => array(
+				'store'     => array(
 					'route' => '/settings/options/taxonomies',
 				),
 			),
@@ -221,17 +216,17 @@ class Settings_Data {
 			),
 
 			array(
-				'name'      => 'queryIntegration',
-				'label'     => __( 'Query', 'search-filter' ),
-				'help'      => __( 'Unlock more methods with the Pro add-on', 'search-filter' ),
-				'group'     => 'location',
-				'type'      => 'string',
-				'default'   => '',
-				'inputType' => 'Select',
-				'options'   => array(
+				'name'        => 'queryIntegration',
+				'label'       => __( 'Query', 'search-filter' ),
+				'help'        => __( 'Unlock more methods with the Pro add-on', 'search-filter' ),
+				'group'       => 'location',
+				'type'        => 'string',
+				'default'     => '',
+				'inputType'   => 'Select',
+				'options'     => array(
 					array(
 						'value'     => 'main_query',
-						'label'     => __( 'Main query', 'search-filter' ),
+						'label'     => __( 'Main query', 'search-filter-pro' ),
 						'dependsOn' => array(
 							'relation' => 'OR',
 							'rules'    => array(
@@ -278,15 +273,21 @@ class Settings_Data {
 						),
 					),
 				),
-				'supports'  => array(
+				'supports'    => array(
 					'dependantOptions' => true,
 					'hideWhenEmpty'    => true,
+				),
+				'updateValue' => array(
+					'integrationType',
+					'archiveType',
+					'postType',
+					'taxonomy',
 				),
 			),
 
 			array(
 				'name'      => 'queryLoopAutodetect',
-				'label'     => __( 'Autodetect Query Loop', 'search-filter' ),
+				'label'     => __( 'Autodetect query loop', 'search-filter' ),
 				'group'     => 'location',
 				'type'      => 'string',
 				'help'      => __( 'Attempts to auto detect any query loops on the current page.', 'search-filter' ),
@@ -306,33 +307,28 @@ class Settings_Data {
 					'relation' => 'OR',
 					'rules'    => array(
 						array(
-							'relation' => 'AND',
-							'rules'    => array(
-								array(
-									'option'  => 'queryIntegration',
-									'compare' => '=',
-									'value'   => 'query_block',
-								),
-							),
+							'option'  => 'queryIntegration',
+							'compare' => '=',
+							'value'   => 'query_block',
 						),
 					),
 				),
 			),
 
 			array(
-				'name'         => 'postTypes',
-				'label'        => __( 'Post Types', 'search-filter' ),
-				'type'         => 'array',
-				'items'        => array(
+				'name'      => 'postTypes',
+				'label'     => __( 'Posts Types', 'search-filter' ),
+				'type'      => 'array',
+				'items'     => array(
 					'type' => 'string',
 				),
-				'options'      => array(),
-				'default'      => array( 'post' ),
-				'help'         => __( 'The post types to use for this query.', 'search-filter' ),
+				'options'   => array(),
+				'default'   => array( 'post' ),
+				'help'      => __( 'The post types to use for this query.', 'search-filter' ),
 
-				'inputType'    => 'MultiSelect',
-				'group'        => 'query',
-				'dataProvider' => array(
+				'inputType' => 'MultiSelect',
+				'group'     => 'query',
+				'store'     => array(
 					'route' => '/settings/options/query_post_types',
 					'args'  => array(
 						'integrationType',
@@ -342,19 +338,27 @@ class Settings_Data {
 						'taxonomy',
 					),
 				),
+				'supports'  => array(
+					'updateValue' => array(
+						'integrationType',
+						'archiveType',
+						'postType',
+						'taxonomy',
+					),
+				),
 			),
 			array(
-				'name'         => 'postStatus',
-				'label'        => __( 'Post Status', 'search-filter' ),
-				'type'         => 'array',
-				'items'        => array(
+				'name'      => 'postStatus',
+				'label'     => __( 'Post Status', 'search-filter' ),
+				'type'      => 'array',
+				'items'     => array(
 					'type' => 'string',
 				),
-				'group'        => 'query',
-				'inputType'    => 'MultiSelect',
-				'options'      => array(),
-				'default'      => array( 'publish' ),
-				'dataProvider' => array(
+				'group'     => 'query',
+				'inputType' => 'MultiSelect',
+				'options'   => array(),
+				'default'   => array( 'publish' ),
+				'store'     => array(
 					'route' => '/settings/options/post-stati',
 				),
 			),
@@ -498,21 +502,6 @@ class Settings_Data {
 						'label' => __( 'No', 'search-filter' ),
 					),
 				),
-				'dependsOn' => array(
-					'relation' => 'OR',
-					'rules'    => array(
-						array(
-							'option'  => 'integrationType',
-							'compare' => '=',
-							'value'   => 'single',
-						),
-						array(
-							'option'  => 'integrationType',
-							'compare' => '=',
-							'value'   => 'dynamic',
-						),
-					),
-				),
 			),
 			array(
 				'name'      => 'taxonomyQuery',
@@ -533,17 +522,17 @@ class Settings_Data {
 			),
 
 			array(
-				'name'         => 'resultsUrlPostTypeArchive',
-				'type'         => 'info',
-				'default'      => '',
-				'group'        => 'location',
-				'inputType'    => 'Info',
+				'name'        => 'resultsUrlPostTypeArchive',
+				'type'        => 'info',
+				'default'     => '',
+				'group'       => 'location',
+				'inputType'   => 'Info',
 
-				'label'        => __( 'Results Link', 'search-filter' ),
-				'help'         => __( 'This is where the results will be shown', 'search-filter' ),
-				'loadingText'  => __( 'Fetching...', 'search-filter' ),
+				'label'       => __( 'Results link', 'search-filter' ),
+				'help'        => __( 'This is where the results will be shown', 'search-filter' ),
+				'loadingText' => __( 'Fetching...', 'search-filter' ),
 
-				'dataProvider' => array(
+				'store'       => array(
 					'route' => '/settings/results-url',
 					'args'  => array(
 						'integrationType',
@@ -551,7 +540,7 @@ class Settings_Data {
 						'postType',
 					),
 				),
-				'dependsOn'    => array(
+				'dependsOn'   => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -568,14 +557,14 @@ class Settings_Data {
 				),
 			),
 			array(
-				'name'         => 'resultsUrlTaxonomyArchive',
-				'type'         => 'info',
-				'group'        => 'location',
-				'label'        => __( 'Term link', 'search-filter' ),
-				'help'         => __( 'Taxonomy term archives use this base URL.', 'search-filter' ),
-				'loadingText'  => __( 'Fetching...', 'search-filter' ),
-				'inputType'    => 'Info',
-				'dataProvider' => array(
+				'name'        => 'resultsUrlTaxonomyArchive',
+				'type'        => 'info',
+				'group'       => 'location',
+				'label'       => __( 'Term link', 'search-filter' ),
+				'help'        => __( 'Taxonomy term archives use this base URL.', 'search-filter' ),
+				'loadingText' => __( 'Fetching...', 'search-filter' ),
+				'inputType'   => 'Info',
+				'store'       => array(
 					'route' => '/settings/results-url',
 					'args'  => array(
 						'integrationType',
@@ -583,7 +572,7 @@ class Settings_Data {
 						'taxonomy',
 					),
 				),
-				'dependsOn'    => array(
+				'dependsOn'   => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -600,20 +589,20 @@ class Settings_Data {
 				),
 			),
 			array(
-				'name'         => 'resultsUrlSearch',
-				'type'         => 'info',
-				'group'        => 'location',
-				'label'        => __( 'Results Link', 'search-filter' ),
-				'help'         => __( 'This is where the results will be shown', 'search-filter' ),
-				'loadingText'  => __( 'Fetching...', 'search-filter' ),
-				'inputType'    => 'Info',
-				'dataProvider' => array(
+				'name'        => 'resultsUrlSearch',
+				'type'        => 'info',
+				'group'       => 'location',
+				'label'       => __( 'Results link', 'search-filter' ),
+				'help'        => __( 'This is where the results will be shown', 'search-filter' ),
+				'loadingText' => __( 'Fetching...', 'search-filter' ),
+				'inputType'   => 'Info',
+				'store'       => array(
 					'route' => '/settings/results-url',
 					'args'  => array(
 						'integrationType',
 					),
 				),
-				'dependsOn'    => array(
+				'dependsOn'   => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -625,21 +614,21 @@ class Settings_Data {
 				),
 			),
 			array(
-				'name'         => 'resultsUrlSingle',
-				'type'         => 'info',
-				'group'        => 'location',
-				'label'        => __( 'Results Link', 'search-filter' ),
-				'help'         => __( 'This is where the results will be shown', 'search-filter' ),
-				'loadingText'  => __( 'Fetching...', 'search-filter' ),
-				'inputType'    => 'Info',
-				'dataProvider' => array(
+				'name'        => 'resultsUrlSingle',
+				'type'        => 'info',
+				'group'       => 'location',
+				'label'       => __( 'Results link', 'search-filter' ),
+				'help'        => __( 'This is where the results will be shown', 'search-filter' ),
+				'loadingText' => __( 'Fetching...', 'search-filter' ),
+				'inputType'   => 'Info',
+				'store'       => array(
 					'route' => '/settings/results-url',
 					'args'  => array(
 						'integrationType',
 						'singleLocation',
 					),
 				),
-				'dependsOn'    => array(
+				'dependsOn'   => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(

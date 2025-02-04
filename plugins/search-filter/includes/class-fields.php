@@ -15,6 +15,7 @@ use Search_Filter\Fields\Field;
 use Search_Filter\Database\Queries\Fields as Field_Query;
 use Search_Filter\Core\SVG_Loader;
 use Search_Filter\Fields\Field_Factory;
+use Search_Filter\Queries\Query;
 use Search_Filter\Fields\Settings as Fields_Settings;
 use Search_Filter\Fields\Settings_Data;
 
@@ -35,12 +36,6 @@ class Fields {
 	 * @var array
 	 */
 	private static $active_fields = array();
-	/**
-	 * Keeps track of which fields are active on page load so we can load their data on page load
-	 *
-	 * @var array
-	 */
-	private static $active_field_configs = array();
 
 	/**
 	 * Initialize the class
@@ -53,7 +48,7 @@ class Fields {
 		add_action( 'search-filter/record/save', array( __CLASS__, 'save_css' ), 10, 2 );
 
 		// Register settings.
-		add_action( 'init', array( __CLASS__, 'register_settings' ), 2 );
+		self::register_settings();
 	}
 
 	/**
@@ -72,6 +67,7 @@ class Fields {
 	public static function register_settings() {
 		// Register settings.
 		Fields_Settings::init( Settings_Data::get(), Settings_Data::get_groups() );
+		do_action( 'search-filter/settings/register/fields' );
 	}
 	/**
 	 * The main `[searchandfilter]` shortcode.
@@ -139,10 +135,9 @@ class Fields {
 	 *
 	 * @param array $config The field render config.
 	 */
-	public static function register_active_field( $field ) {
-		self::$active_fields[] = $field;
-		// self::$active_field_configs[ 'field_' . $config['id'] ] = $config;
-		SVG_Loader::enqueue_array( $field->get_icons() );
+	public static function register_active_field( $config ) {
+		self::$active_fields[ 'field_' . $config['id'] ] = $config;
+		SVG_Loader::enqueue_array( $config['icons'] );
 	}
 	/**
 	 * Keep track of active fields to preload their data.
@@ -150,10 +145,7 @@ class Fields {
 	 * @return array $active_fields Array of active fields.
 	 */
 	public static function get_active_fields() {
-		foreach ( self::$active_fields as $field ) {
-			self::$active_field_configs[ 'field_' . $field->get_id() ] = $field->get_render_data();
-		}
-		return self::$active_field_configs;
+		return self::$active_fields;
 	}
 
 	/**
@@ -163,17 +155,16 @@ class Fields {
 	 * find() functions across our other apis.
 	 *
 	 * @param array $conditions Column name => value pairs.
-	 * @param bool  $return_as Return the query, object, or record.
+	 * @param bool  $return Return the query, object, or record.
 	 *
 	 * @return array
 	 */
-	public static function find( $conditions, $return_as = 'objects' ) {
+	public static function find( $conditions, $return = 'objects' ) {
 		$query_args = array(
 			'number'  => 10,
 			'orderby' => 'date_published',
 			'order'   => 'asc',
 		);
-
 		$query_args = wp_parse_args( $conditions, $query_args );
 		/**
 		 * TODO - we probably want to wrap this in our settings API
@@ -182,13 +173,13 @@ class Fields {
 		 * query ID)
 		 */
 		$query = new Field_Query( $query_args );
-		if ( $return_as === 'query' ) {
+		if ( $return === 'query' ) {
 			return $query;
 		}
 
 		$fields = array();
 		if ( $query ) {
-			if ( $return_as === 'objects' ) {
+			if ( $return === 'objects' ) {
 				foreach ( $query->items as $record ) {
 					try {
 						$fields[] = Field_Factory::create_from_record( $record );
@@ -196,7 +187,7 @@ class Fields {
 						$fields[] = new \WP_Error( 'invalid_field', $e->getMessage(), array( 'status' => 400 ) );
 					}
 				}
-			} elseif ( $return_as === 'records' ) {
+			} elseif ( $return === 'records' ) {
 				$fields = $query->items;
 			}
 		}

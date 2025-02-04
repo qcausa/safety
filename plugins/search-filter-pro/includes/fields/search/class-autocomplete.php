@@ -230,7 +230,7 @@ class Autocomplete extends Search {
 		);
 		$this->set_render_escape_callbacks( $esc_callbacks );
 
-		// TODO - we might need to move where we do this, depends if
+		// TODO - we might need to move where we do this, depeds if
 		// we want to regenerate the link when attributes change.
 		$this->set_api_url();
 	}

@@ -10,7 +10,6 @@
 
 namespace Search_Filter_Pro;
 
-use Search_Filter\Admin\Screens;
 use Search_Filter_Pro\Core\Dependencies;
 use Search_Filter_Pro\Core\Plugin_Installer;
 use Search_Filter_Pro\Core\Scripts;
@@ -150,7 +149,7 @@ class Admin {
 
 		$registered_styles = array(
 			$this->plugin_name . '-admin' => array(
-				'src'     => Scripts::get_admin_assets_url() . 'css/admin/app.css',
+				'src'     => Scripts::get_admin_assets_url() . 'css/admin/admin.css',
 				// 'deps'    => array( 'search-filter-admin', 'wp-components' ),
 				'deps'    => array( 'search-filter', 'wp-components' ),
 				'version' => $this->version,
@@ -186,14 +185,10 @@ class Admin {
 	 * @since    3.0.0
 	 */
 	public function enqueue_scripts() {
-		
-		if ( ! Screens::is_search_filter_screen() ) {
-			return;
-		}
-
+		// TODO - need to re-implement dynamic file extension.
 		$registered_scripts = array(
 			'search-filter-pro-admin' => array(
-				'src'     => Scripts::get_admin_assets_url() . 'js/admin/app.js',
+				'src'     => Scripts::get_admin_assets_url() . 'js/admin/admin.js',
 				// Currently does not need 'search-filter-admin' because we're loading the admin script on block editor and admin screens.
 				// Need seperate dependencies if we build a seperate admin script.
 				'deps'    => array( 'search-filter', 'wp-element', 'wp-components', 'wp-date', 'wp-compose', 'wp-data', 'wp-editor', 'wp-api-fetch', 'wp-dom-ready' ),
@@ -302,7 +297,7 @@ class Admin {
 			return;
 		}
 		?>
-		<div class="notice notice-error">
+		<div class="notice notice-error is-dismissible">
 			<p>
 				<?php
 					echo sprintf(
@@ -339,6 +334,7 @@ class Admin {
 
 		$is_search_filter_installed        = Dependencies::is_search_filter_installed();
 		$is_search_filter_enabled          = Dependencies::is_search_filter_enabled();
+		$is_search_filter_required_version = Dependencies::is_search_filter_required_version();
 
 		global $pagenow;
 		$actions_url = admin_url( 'index.php' );
@@ -347,7 +343,7 @@ class Admin {
 		// - If its installed but not activated, we want to show an activate link.
 		// - If the verion is outdated, show a notice about which version is required.
 		?>
-		<div class="notice notice-warning">
+		<div class="notice notice-warning is-dismissible">
 			<p>
 				<?php
 					echo sprintf(
@@ -405,7 +401,7 @@ class Admin {
 		// If the verion is outdated, show a notice about which version is required.
 		if ( $is_search_filter_enabled && ! $is_search_filter_required_version ) {
 			?>
-			<div class="notice notice-error">
+			<div class="notice notice-error is-dismissible">
 				<p>
 					<?php
 					printf(
@@ -424,43 +420,6 @@ class Admin {
 					<?php
 				}
 				?>
-			</div>
-			<?php
-		}
-	}
-	/**
-	 * Display a notice if the free version is outdated or missing or not activated.
-	 *
-	 * @since 3.0.0
-	 */
-	public function search_filter_outdated_recommended_notice() {
-
-		// Only show on the dashboard and plugins screen.
-		$current_screen = \get_current_screen();
-		$screen_name    = $current_screen->id;
-		if ( $screen_name !== 'dashboard' && $screen_name !== 'plugins' ) {
-			return;
-		}
-
-		$is_search_filter_enabled          = Dependencies::is_search_filter_enabled();
-		$is_search_filter_recommended_version = Dependencies::is_search_filter_recommended_version();
-
-		global $pagenow;
-		// If the verion is outdated, show a notice about which version is required.
-		if ( $is_search_filter_enabled && ! $is_search_filter_recommended_version ) {
-			?>
-			<div class="notice notice-error">
-				<p>
-					<?php
-					printf(
-						/* translators: %1$s: Search & Filter Pro plugin name, %2$s: Search & Filter Pro plugin version */
-						esc_html__( 'The %1$s plugin recommends %2$s version %3$s or higher.', 'search-filter-pro' ),
-						'<strong>' . esc_html__( 'Search & Filter Pro', 'search-filter-pro' ) . '</strong>',
-						'<strong>' . esc_html__( 'Search & Filter', 'search-filter-pro' ) . '</strong>',
-						'<strong>' . esc_html( SEARCH_FILTER_PRO_RECOMMENDED_BASE_VERSION ) . '</strong>'
-					);
-					?>
-				</p>
 			</div>
 			<?php
 		}

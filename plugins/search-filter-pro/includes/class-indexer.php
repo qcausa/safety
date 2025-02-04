@@ -15,7 +15,6 @@ use Search_Filter\Features;
 use Search_Filter\Fields\Field;
 use Search_Filter\Options;
 use Search_Filter\Queries\Query as Search_Filter_Query;
-use Search_Filter\Queries as Search_Filter_Queries;
 use Search_Filter_Pro\Task_Runner\Task;
 use Search_Filter_Pro\Indexer\Database\Index_Query;
 use Search_Filter_Pro\Indexer\Database\Index_Table;
@@ -1820,6 +1819,51 @@ final class Indexer extends Task_Runner {
 		// Try to spawn a new process.
 		self::run_processing();
 	}
+	/**
+	 * Get the indexer progress for a given action.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $action The action to get the progress for.
+	 * @param bool   $refresh    Whether to refresh the progress.
+	 * @return array    The indexer progress.
+	 */
+	public static function get_progress( $action, $refresh = false ) {
+		/*
+		 * Checking progress on large installs can be expensive so better
+		 * to cache the value for a short period of time.
+		 */
+
+		// We've reached the max time, then we need to recalculate the progress.
+
+		// TODO - I don't think we need this anymore?
+
+		// Get number of completed tasks.
+		$query_args      = array(
+			'count'  => true,
+			'type'   => static::$type,
+			'status' => 'complete',
+			'action' => $action,
+		);
+		$completed_query = new Tasks_Query( $query_args );
+
+		// Get number of pending tasks.
+		$query_args    = array(
+			'count'  => true,
+			'type'   => static::$type,
+			'status' => 'pending',
+			'action' => $action,
+		);
+		$pending_query = new Tasks_Query( $query_args );
+
+		$progress = array(
+			'current' => $completed_query->items,
+			'total'   => $pending_query->items + $completed_query->items,
+			'time'    => time(),
+		);
+
+		return $progress;
+	}
 
 	/**
 	 * Is calculating returns whether the indexer is currently calculating
@@ -1955,9 +1999,6 @@ final class Indexer extends Task_Runner {
 				continue;
 			}
 
-
-			Search_Filter_Queries::register_active_query( $query->get_id() );
-
 			$indexer_query = Query_Store::get_query( $query->get_id() );
 
 			if ( $indexer_query === null ) {
@@ -1966,6 +2007,7 @@ final class Indexer extends Task_Runner {
 				// Add to the store.
 				Query_Store::add_query( $indexer_query );
 			}
+
 			// Apply the query args.
 			$wp_query_args = wp_parse_args( $indexer_query->get_query_args(), $wp_query_args );
 		}

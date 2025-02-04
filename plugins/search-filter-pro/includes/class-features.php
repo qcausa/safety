@@ -13,6 +13,8 @@ namespace Search_Filter_Pro;
 use Search_Filter\Features\Settings as Features_Settings;
 
 use Search_Filter_Pro\Features\Shortcodes;
+use Search_Filter_Pro\Features\Shortcodes\Settings as Shortcodes_Settings;
+use Search_Filter_Pro\Features\Shortcodes\Settings_Data as Shortcodes_Settings_Data;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

@@ -226,8 +226,8 @@ class Query_Cache {
 
 		$query->delete_items( $delete_where );
 
-		// TODO - this won't work unless all the args are supplied the same.
-		// Might need to rethink this when when only the field_id is supplied.
+		// TODO - this won't work unless all the args are supplied the same...
+		// Might need to rethink this when local items when only the field_id is supplied.
 		self::delete_local_item( $delete_where );
 	}
 

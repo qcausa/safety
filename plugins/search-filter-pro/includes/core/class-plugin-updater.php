@@ -736,22 +736,6 @@ class Plugin_Updater {
 	}
 
 	/**
-	 * Fetch updates and add them to the cache.
-	 * 
-	 */
-	public function refresh_cache() {
-		$version_info = $this->api_request(
-			'plugin_latest_version',
-			array(
-				'slug' => $this->slug,
-				'beta' => $this->beta,
-			)
-		);
-
-		$this->set_version_info_cache( $version_info );
-	}
-
-	/**
 	 * Returns if the SSL of the store should be verified.
 	 *
 	 * @since  1.6.13

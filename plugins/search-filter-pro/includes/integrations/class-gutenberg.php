@@ -9,10 +9,7 @@
 
 namespace Search_Filter_Pro\Integrations;
 
-use Search_Filter\Admin\Screens;
 use Search_Filter\Queries\Settings as Queries_Settings;
-use Search_Filter_Pro\Core\Scripts;
-use Search_Filter_Pro\Util;
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -37,31 +34,7 @@ class Gutenberg {
 		add_action( 'search-filter/settings/queries/init', array( __CLASS__, 'register_settings' ), 2 );
 		add_filter( 'search-filter/queries/query/get_attributes', array( __CLASS__, 'update_query_attributes' ), 2, 2 );
 		add_filter( 'render_block', array( __CLASS__, 'render_query_block' ), 10, 3 );
-		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'editor_assets' ), 20 );
-
 	}
-
-	public static function editor_assets() {
-
-		if ( Screens::is_search_filter_screen() ) {
-			// For some reason, using some FSE / block editor themes, the `enqueue_block_editor_assets`
-			// hook is called on our screens.
-			// If we're on one of our admin screens, then we don't need to load the assets.
-			return;
-		}
-
-		$asset_file = SEARCH_FILTER_PRO_PATH . 'assets/js/admin/gutenberg.asset.php';
-		if ( file_exists( $asset_file ) ) {
-			$asset               = require $asset_file;
-			$script_dependencies = array_merge( array( 'search-filter-gutenberg' ), $asset['dependencies'] );
-			wp_enqueue_script( 'search-filter-pro-gutenberg', Scripts::get_admin_assets_url() . 'js/admin/gutenberg.js', $script_dependencies, $asset['version'], false );
-			wp_enqueue_style( 'search-filter-pro-gutenberg', Scripts::get_admin_assets_url() . 'css/admin/gutenberg.css', array( 'search-filter-gutenberg' ), $asset['version'] );
-		} else {
-			Util::error_log( 'Block Editor script asset file not found: ' . $asset_file, 'error' );
-		}
-	}
-
-	
 
 	/**
 	 * Modify the query block and add a classname if our query is attached.
@@ -183,6 +156,7 @@ class Gutenberg {
 		// Get the object for the data_type setting so we can grab its options.
 		$query_container = Queries_Settings::get_setting( 'queryContainer' );
 		if ( $query_container ) {
+			// TODO - when we choose WC block, we still don't see the queryContainer option in the list.
 			$query_container->add_depends_condition( $depends_conditions );
 		}
 

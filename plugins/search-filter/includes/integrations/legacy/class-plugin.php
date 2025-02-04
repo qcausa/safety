@@ -21,7 +21,7 @@ if ( ! defined( 'SEARCHANDFILTER_PLUGIN_DIR' ) ) {
 }
 
 if ( ! defined( 'SEARCHANDFILTER_PLUGIN_URL' ) ) {
-	define( 'SEARCHANDFILTER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+	define( 'SEARCHANDFILTER_PLUGIN_URL', WP_PLUGIN_URL . '/' . SEARCHANDFILTER_PLUGIN_NAME );
 }
 
 if ( ! defined( 'SEARCHANDFILTER_BASENAME' ) ) {
@@ -81,12 +81,12 @@ class Plugin {
 	}
 
 	public function of_enqueue_styles() {
-		wp_enqueue_style( 'searchandfilter', SEARCHANDFILTER_PLUGIN_URL . '/style.css', array(), '1.0', 'all' );
+		wp_enqueue_style( 'searchandfilter', SEARCHANDFILTER_PLUGIN_URL . '/style.css', false, 1.0, 'all' );
 	}
 	public function of_enqueue_admin_ss( $hook ) {
 		if ( 'toplevel_page_searchandfilter-settings' == $hook ) {
-			wp_enqueue_style( 'of_syntax_style', SEARCHANDFILTER_PLUGIN_URL . '/admin/github.css', array(), '1.0', 'all' );
-			wp_enqueue_style( 'of_style', SEARCHANDFILTER_PLUGIN_URL . '/admin/style.css', array(), '1.0', 'all' );
+			wp_enqueue_style( 'of_syntax_style', SEARCHANDFILTER_PLUGIN_URL . '/admin/github.css', false, 1.0, 'all' );
+			wp_enqueue_style( 'of_style', SEARCHANDFILTER_PLUGIN_URL . '/admin/style.css', false, 1.0, 'all' );
 		}
 	}
 
@@ -203,14 +203,27 @@ class Plugin {
 
 		// Init `labels`.
 		$labels = explode( ',', $headings );
+
+		if ( ! is_array( $labels ) ) {
+			$labels = array();
+		}
+
 		// Init `all_items_labels`.
 		$all_items_labels = explode( ',', $all_items_labels );
 
+		if ( ! is_array( $all_items_labels ) ) {
+			$all_items_labels = array();
+		}
+
 		// Init `types`.
-		if ( ! empty( $types ) ) {
+		if ( $types != null ) {
 			$types = explode( ',', $types );
 		} else {
 			$types = explode( ',', $type );
+		}
+
+		if ( ! is_array( $types ) ) {
+			$types = array();
 		}
 
 		// Loop through Fields and set up default vars.
@@ -223,9 +236,11 @@ class Plugin {
 						// If not expected value use default.
 						$types[ $i ] = 'date';
 					}
-				} elseif ( ( $types[ $i ] !== 'select' ) && ( $types[ $i ] !== 'checkbox' ) && ( $types[ $i ] !== 'radio' ) && ( $types[ $i ] !== 'list' ) && ( $types[ $i ] !== 'multiselect' ) ) {
+				} else {
 					// Everything else can use a standard form input - checkbox/radio/dropdown/list/multiselect.
-					$types[ $i ] = 'select'; // Use default.
+					if ( ( $types[ $i ] !== 'select' ) && ( $types[ $i ] !== 'checkbox' ) && ( $types[ $i ] !== 'radio' ) && ( $types[ $i ] !== 'list' ) && ( $types[ $i ] !== 'multiselect' ) ) {
+						$types[ $i ] = 'select'; // Use default.
+					}
 				}
 			} else {
 				// Omitted, so set default.
@@ -295,9 +310,11 @@ class Plugin {
 				$search_all = false;
 
 				$post_types = explode( ',', esc_attr( $wp_query->query['post_types'] ) );
-				if ( count( $post_types ) === 1 ) {
-					if ( $post_types[0] === 'all' ) {
-						$search_all = true;
+				if ( isset( $post_types[0] ) ) {
+					if ( count( $post_types ) == 1 ) {
+						if ( $post_types[0] == 'all' ) {
+							$search_all = true;
+						}
 					}
 				}
 				if ( $search_all ) {
@@ -320,8 +337,8 @@ class Plugin {
 
 		if ( count( $post_date ) > 1 && $post_date[0] !== $post_date[1] ) {
 			$date_query = array();
-			$from_date  = \DateTime::createFromFormat( 'Y-m-d', $post_date[0] );
-			$to_date    = \DateTime::createFromFormat( 'Y-m-d', $post_date[1] );
+			$from_date  = DateTime::createFromFormat( 'Y-m-d', $post_date[0] );
+			$to_date    = DateTime::createFromFormat( 'Y-m-d', $post_date[1] );
 
 			if ( ! empty( $post_date[0] ) ) {
 				$date_query['after'] = $from_date->format( 'Y-m-d 00:00:00' );

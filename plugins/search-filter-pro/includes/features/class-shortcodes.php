@@ -27,6 +27,9 @@ class Shortcodes {
 			return;
 		}
 
+		// TODO - this is essentially only handling if the results shortcode setting is enabled,
+		// but we should also include the logic for the regular shortcodes.
+
 		Rest_API::init();
 
 		// Hook into the shortcode and display the results if the `results` attribute is set.
@@ -143,8 +146,8 @@ class Shortcodes {
 		}
 
 		$attributes['queryContainer'] = '.search-filter-query--id-' . $id;
+		// TODO - check pagination class name.
 		$attributes['queryPaginationSelector'] = '.search-filter-query--id-' . $id . ' a.page-numbers';
-		
 		if ( empty( $attributes['queryPostsContainer'] ) ) {
 			$attributes['queryPostsContainer'] = '.search-filter-query--id-' . $id . ' .search-filter-query-posts';
 		}

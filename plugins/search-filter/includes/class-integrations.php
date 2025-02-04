@@ -14,9 +14,8 @@ use Search_Filter\Core\Dependants;
 use Search_Filter\Core\Notices;
 use Search_Filter\Integrations\Gutenberg;
 use Search_Filter\Integrations\Legacy;
-use Search_Filter\Integrations\Woocommerce;
+use Search_Filter\Integrations\WooCommerce;
 use Search_Filter\Integrations\Themes;
-use Search_Filter\Integrations\Wpml;
 use Search_Filter\Integrations\Settings as Integrations_Settings;
 use Search_Filter\Integrations\Settings_Data;
 
@@ -60,10 +59,11 @@ class Integrations {
 	 */
 	public static function init() {
 		// Register settings.
-		add_action( 'init', array( __CLASS__, 'register_settings' ), 2 );
+		self::register_settings();
 
 		// Run the integrations.
 		self::init_integrations();
+		do_action( 'search-filter/integrations/init' );
 
 		add_action( 'shutdown', array( __CLASS__, 'validate_integrations' ) );
 		add_action( 'search-filter/core/notices/get_notices', array( __CLASS__, 'add_notices' ) );
@@ -77,6 +77,7 @@ class Integrations {
 	public static function register_settings() {
 		// Register settings.
 		Integrations_Settings::init( Settings_Data::get(), Settings_Data::get_groups() );
+		do_action( 'search-filter/settings/register/integrations' );
 	}
 	/**
 	 * Init the individual integrations.
@@ -86,9 +87,8 @@ class Integrations {
 	public static function init_integrations() {
 		Legacy::init();
 		Gutenberg::init();
-		Woocommerce::init();
+		WooCommerce::init();
 		Themes::init();
-		Wpml::init();
 	}
 
 	/**
@@ -265,23 +265,23 @@ class Integrations {
 			$integration_label = $integration_setting->get_prop( 'label' );
 
 			// Add notice to our admin screen.
-			$manage_plugins_link = sprintf( '<a href="%s">%s</a>.', esc_url( admin_url( 'plugins.php' ) ), esc_html__( 'Manage plugins', 'search-filter' ) );
+			$manage_plugins_link = sprintf( '<a href="%s">%s</a>.', esc_url( admin_url( 'plugins.php' ) ), esc_html__( 'Manage plugins', 'search-filter-pro' ) );
 
 			$notice_text = sprintf(
 				// Translators: 1: Integration name, ie "WooCommerce".
-				esc_html__( "Looks like you're using %s, enable the integration?", 'search-filter' ),
+				esc_html__( "Looks like you're using %s, enable the integration?", 'search-filter-pro' ),
 				'<strong>' . $integration_label . '</strong>'
 			);
 
 			$actions = array(
 				'enable'  => array(
-					'label'         => esc_html__( 'Enable', 'search-filter' ),
+					'label'         => esc_html__( 'Enable', 'search-filter-pro' ),
 					'type'          => 'enable_integration',
 					'integration'   => $integration_slug,
 					'shouldDismiss' => true,
 				),
 				'manage'  => array(
-					'label'    => esc_html__( 'Manage integrations', 'search-filter' ),
+					'label'    => esc_html__( 'Manage integrations', 'search-filter-pro' ),
 					'type'     => 'navigate',
 					'location' => '?page=search-filter&section=integrations',
 					'variant'  => 'tertiary',

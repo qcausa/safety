@@ -39,18 +39,6 @@ class Radio extends Choice {
 		'inputColor',
 		'inputActiveIconColor',
 		'inputInactiveIconColor',
-
-		'labelColor',
-		'labelBackgroundColor',
-		'labelPadding',
-		'labelMargin',
-		'labelScale',
-
-		'descriptionColor',
-		'descriptionBackgroundColor',
-		'descriptionPadding',
-		'descriptionMargin',
-		'descriptionScale',
 	);
 
 	/**

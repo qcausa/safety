@@ -156,7 +156,6 @@ class Query {
 	 */
 	public function __construct( $query ) {
 
-		do_action( 'search-filter-pro/indexer/query/init/start', $query );
 		// Disable caching for admins.
 		// TODO - we should use S&F roles to handle this.
 		if ( current_user_can( 'administrator' ) ) {
@@ -181,12 +180,11 @@ class Query {
 			$combine_type = 'intersect';
 		}
 
-
 		$field_cache_args = array();
 		foreach ( $this->fields as $field ) {
 
 			$this->fields_by_id[ $field->get_id() ] = $field;
-			
+
 			if ( count( $field->get_values() ) === 0 ) {
 				continue;
 			}
@@ -199,8 +197,6 @@ class Query {
 				$post__in = self::combine_arrays( $post__in, $field_post_ids, $combine_type );
 			}
 		}
-
-
 		if ( is_array( $post__in ) && empty( $post__in ) ) {
 			// Add a post ID of 0 to force the query to return no results.
 			$post__in = array( 0 );
@@ -265,8 +261,6 @@ class Query {
 
 		// Convert any object IDs to their parents.
 		$this->query_args['post__in'] = $this->resolve_parents( $results_post__in );
-
-		do_action( 'search-filter-pro/indexer/query/init/finish', $query );
 	}
 
 	/**
@@ -407,8 +401,9 @@ class Query {
 			return $post__in;
 		}
 
-		// TODO - can we make this faster - we could mark their positions when
-		// we combine the arrays so we don't have to loop through it all again.
+		// TODO - can we make this faster?
+		// Maybe mark their positions when we combine the arrays so
+		// we don't have to loop through it all again?
 		$resolved_post__in = array();
 		foreach ( $post__in as $post_id ) {
 			$resolved_post__in[] = isset( $this->object_parents[ $post_id ] ) ? $this->object_parents[ $post_id ] : $post_id;
@@ -869,7 +864,6 @@ class Query {
 	 * @return array  The transformed field values.
 	 */
 	private function get_choice_field_values( $field ) {
-
 		$field_values = $field->get_values();
 		// We might need to transform the url values to a DB stored format.
 

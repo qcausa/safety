@@ -42,24 +42,6 @@ class Dependencies {
 		}
 		return true;
 	}
-	/**
-	 * Check if the parent plugin is required version.
-	 *
-	 * @since    3.0.0
-	 *
-	 * @return   boolean
-	 */
-	public static function is_search_filter_recommended_version() {
-		if ( ! self::is_search_filter_enabled() ) {
-			return false;
-		}
-		// We use this hook on plugins_loaded, so we can't use get_plugins to find the version
-		// of an inactive plugin.
-		if ( version_compare( SEARCH_FILTER_VERSION, SEARCH_FILTER_PRO_RECOMMENDED_BASE_VERSION, '<' ) ) {
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * Check if the plugin is installed.

@@ -93,11 +93,10 @@ class Query {
 			// Other queries might try the same, so lets try to get the paged variable by various.
 
 			// First, lets check if the query is paged, if so lets use the variable.
-
 			if ( $wp_query->is_paged() ) {
 				$page = $wp_query->get( 'paged' );
-			} elseif ( ! empty( $page_key ) && Util::get_request_var( $page_key ) !== null ) {
-				$page = (int) Util::get_request_var( $page_key );
+			} elseif ( ! empty( $page_key ) && isset( $_GET[ $page_key ] ) ) {
+				$page = (int) $_GET[ $page_key ];
 			} else {
 				$offset         = $wp_query->get( 'offset' );
 				$posts_per_page = $wp_query->get( 'posts_per_page' );

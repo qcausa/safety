@@ -38,7 +38,7 @@ class License_Server {
      * The license server will return an error if it doesn't contain `edd_action`.
      */
     const TEST_SERVER_ENDPOINTS = array(
-        'license' => 'https://license.searchandfilter.com/?edd_action=check_license',
+        'license' => 'https://searchandfilter.com/?edd_action=check_license',
         'main'    => 'https://searchandfilter.com/?edd_action=check_license',
     );
 

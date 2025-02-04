@@ -10,14 +10,12 @@
 
 namespace Search_Filter_Pro;
 
-use Search_Filter\Core\Data_Store;
 use Search_Filter\Core\WP_Data;
 use Search_Filter\Fields\Field_Factory;
 use Search_Filter\Database\Queries\Fields as Fields_Query;
 use Search_Filter\Fields\Choice;
 use Search_Filter\Fields\Field;
 use Search_Filter\Fields\Settings as Fields_Settings;
-use Search_Filter\Queries;
 use Search_Filter\Queries\Query;
 use Search_Filter_Pro\Indexer\Async;
 use Search_Filter_Pro\Indexer\Query_Cache;
@@ -109,17 +107,6 @@ class Fields {
 	);
 
 	/**
-	 * The query tracking for defaults.
-	 *
-	 * Before we update the query values based on defaults, we need to track
-	 * the query ID to make sure it matches.
-	 * 
-	 * @var integer
-	 */
-	private static $defaults_query_tracking = 0;
-
-
-	/**
 	 * All field types.
 	 *
 	 * TODO - this needs to be dynamic.
@@ -150,7 +137,7 @@ class Fields {
 		add_filter( 'search-filter/field/advanced/wp_query_args', array( __CLASS__, 'get_custom_field_advanced_wp_query_args' ), 10, 2 );
 
 		// Enable the various input types for when a custom field is selected.
-		add_filter( 'search-filter/field/get_data_support', array( __CLASS__, 'get_field_custom_field_data_support' ), 10, 3 );
+		add_filter( 'search-filter/field/get_data_support', array( __CLASS__, 'get_field_data_support' ), 10, 3 );
 		add_filter( 'search-filter/field/get_setting_support', array( __CLASS__, 'get_field_setting_support' ), 10, 3 );
 		// Update a fields registered icons.
 		add_filter( 'search-filter/fields/field/get_icons', array( __CLASS__, 'add_field_icons' ), 10, 2 );
@@ -158,22 +145,11 @@ class Fields {
 		add_action( 'search-filter/settings/fields/init', array( __CLASS__, 'add_data_type_to_search' ), 10 );
 		add_action( 'search-filter/settings/fields/init', array( __CLASS__, 'add_context_to_data_types' ), 10 );
 		add_action( 'search-filter/settings/fields/init', array( __CLASS__, 'register_field_settings' ), 10 );
-
-		// Handle indexer queries.
-		add_filter( 'search-filter-pro/indexer/query/init/start', array( __CLASS__, 'apply_defaults_to_query' ), 10, 1 );
-		add_filter( 'search-filter-pro/indexer/query/init/finish', array( __CLASS__, 'remove_defaults_from_query' ), 10, 1 );
-		// Handle wp_query queries.
-		add_filter( 'search-filter/query/apply_query/start', array( __CLASS__, 'apply_defaults_to_query' ), 10, 1 );
-		add_filter( 'search-filter/query/apply_query/finish', array( __CLASS__, 'remove_defaults_from_query' ), 10, 1 );
-		// Add default values to the fields.
-		add_filter( 'search-filter/fields/field/render_data', array( __CLASS__, 'add_default_values' ), 20, 2 );
-
-		
 		add_action( 'search-filter/settings/init', array( __CLASS__, 'register_url_arg_setting' ), 20 );
 		add_filter( 'search-filter/field/url_name', array( __CLASS__, 'add_url_arg_name' ), 20, 2 );
 		add_filter( 'search-filter/fields/field/render/html_classes', array( __CLASS__, 'add_html_render_classes' ), 20, 2 );
 		add_filter( 'search-filter/fields/field/render/html_attributes', array( __CLASS__, 'add_html_render_attributes' ), 20, 2 );
-		add_filter( 'search-filter/fields/field/render_data', array( __CLASS__, 'apply_hidden_field_attributes' ), 20, 2 );
+		add_filter( 'search-filter/fields/field/render_data', array( __CLASS__, 'update_field_render_data' ), 20, 2 );
 
 		// Author attributes and settings.
 		add_action( 'search-filter/settings/fields/init', array( __CLASS__, 'add_author_attributes_and_settings' ), 10 );
@@ -186,6 +162,7 @@ class Fields {
 		add_action( 'search-filter/settings/fields/init', array( __CLASS__, 'add_default_data_attribute_type' ), 10 );
 
 		// Add block editor attributes for settings.
+		// TODO - need to come up with a better system to do this.
 		add_action( 'search-filter/integrations/gutenberg/add_attributes', '\\Search_Filter_Pro\\Fields::add_block_attributes', 10 );
 
 		// Register the default values for the field/input type combinations.
@@ -210,7 +187,7 @@ class Fields {
 	 * @param    string $input_type    The input type to get the data support for.
 	 * @return   array    The data support.
 	 */
-	public static function get_field_custom_field_data_support( $data_support, $type, $input_type ) {
+	public static function get_field_data_support( $data_support, $type, $input_type ) {
 		$supported_matrix = array(
 			'choice'   => array( 'select', 'radio', 'checkbox', 'button' ),
 			'search'   => array( 'text', 'autocomplete' ),
@@ -278,6 +255,7 @@ class Fields {
 			$setting_support['hideEmpty'] = array(
 				'conditions' => Field::add_setting_support_condition( $setting_support, 'hideEmpty', $indexed_fields_conditions, false ),
 			);
+
 		}
 
 		return $setting_support;
@@ -326,7 +304,6 @@ class Fields {
 		return $attributes;
 	}
 
-	
 	/**
 	 * Add the data type to the search field.
 	 *
@@ -843,7 +820,16 @@ class Fields {
 				'group'     => 'advanced',
 			),
 		);
-		
+		Fields_Settings::add_group(
+			array(
+				'name'  => 'behaviour',
+				'label' => __(
+					'Behaviour',
+					'search-filter-pro'
+				),
+			),
+			$group_args
+		);
 		$add_setting_args = array(
 			'extend_block_types' => self::$all_field_types,
 		);
@@ -940,7 +926,6 @@ class Fields {
 		);
 
 		Fields_Settings::add_setting( $setting, $add_setting_args );
- 		*/
 
 		Fields_Settings::add_group(
 			array(
@@ -951,199 +936,21 @@ class Fields {
 				),
 			),
 			$group_args
-		);
-		
-		$setting = array(
-			'name'      => 'defaultValueType',
+		); */
+
+		/*
+		 $setting = array(
+			'name'      => 'defaultValue',
 			'label'     => __( 'Default value', 'search-filter' ),
-			'help'      => __( 'Enter a default value for this field.', 'search-filter' ),
-			'group'     => 'default',
-			'tab'       => 'settings',
-			'type'      => 'string',
-			'inputType' => 'Select',
-			'options'   => array(
-				array(
-					'value' => 'none',
-					'label' => __( 'None', 'search-filter' ),
-				),
-				array(
-					'value' => 'inherit',
-					'label' => __( 'Inherit from current location', 'search-filter' ),
-					'dependsOn' => array(
-						'relation' => 'OR',
-						'action'   => 'hide',
-						'rules'    => array(
-							array(
-								'option'  => 'type',
-								'value'   => 'search',
-								'compare' => '=',
-							),
-							array(
-								'option'  => 'type',
-								'value'   => 'choice',
-								'compare' => '=',
-							),
-						),
-					),
-				),
-				array(
-					'value' => 'custom',
-					'label' => __( 'Custom', 'search-filter' ),
-				),
-			),
-			'dependsOn' => array(
-				'relation' => 'AND',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'type',
-						'value'   => 'range',
-						'compare' => '!=',
-					),
-					
-				),
-			),
-			'context'   => array( 'admin/field', 'block/field/search', 'admin/field/search', 'admin/field/choice', 'block/field/choice', 'admin/field/advanced', 'block/field/advanced' ),
-			'supports'  => array(
-				'dependantOptions' => true,
-			),
-		);
-
-		Fields_Settings::add_setting( $setting, $add_setting_args );
-
-		$setting = array(
-			'name'      => 'defaultValueInheritArchive',
-			'label'     => __( 'Inherit from archives', 'search-filter' ),
-			'help'      => __( 'Inherit the default value from an archive.', 'search-filter' ),
-			'group'     => 'default',
-			'tab'       => 'settings',
-			'type'      => 'string',
-			'inputType' => 'Toggle',
-			'context'   => array( 'admin/field', 'block/field/search', 'admin/field/search', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
-			'default'   => 'yes',
-			'options'   => array(
-				array(
-					'value' => 'yes',
-					'label' => __( 'Yes', 'search-filter' ),
-				),
-				array(
-					'value' => 'no',
-					'label' => __( 'No', 'search-filter' ),
-				),
-			),
-			'dependsOn' => array(
-				'relation' => 'AND',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'defaultValueType',
-						'value'   => 'inherit',
-						'compare' => '=',
-					),
-				),
-			),
-		);
-
-		Fields_Settings::add_setting( $setting, $add_setting_args );
-
-		$setting = array(
-			'name'      => 'defaultValueInheritPost',
-			'label'     => __( 'Inherit from posts', 'search-filter' ),
-			'help'      => __( 'Inherit the default value from single posts, pages or CPTs.', 'search-filter' ),
-			'group'     => 'default',
-			'tab'       => 'settings',
-			'type'      => 'string',
-			'inputType' => 'Toggle',
-			'context'   => array( 'admin/field', 'block/field/search', 'admin/field/search', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
-			'default'   => 'no',
-			'options'   => array(
-				array(
-					'value' => 'yes',
-					'label' => __( 'Yes', 'search-filter' ),
-				),
-				array(
-					'value' => 'no',
-					'label' => __( 'No', 'search-filter' ),
-				),
-			),
-			'dependsOn' => array(
-				'relation' => 'AND',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'defaultValueType',
-						'value'   => 'inherit',
-						'compare' => '=',
-					),
-				),
-			),
-		);
-
-		Fields_Settings::add_setting( $setting, $add_setting_args );
-
-		$setting = array(
-			'name'      => 'defaultValueCustom',
-			'label'     => __( 'Custom default value', 'search-filter' ),
-			'help'      => __( 'Enter a custom default value for this field.', 'search-filter' ),
+			'help'      => __( 'Enter a default value for this field.  Seperate multiple values with a comma.', 'search-filter' ),
 			'group'     => 'default',
 			'tab'       => 'settings',
 			'type'      => 'string',
 			'inputType' => 'Text',
 			'context'   => array( 'admin/field', 'block/field/search', 'admin/field/search', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
-			'dependsOn' => array(
-				'relation' => 'AND',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'defaultValueType',
-						'value'   => 'custom',
-						'compare' => '=',
-					),
-				),
-			),
 		);
 
-		Fields_Settings::add_setting( $setting, $add_setting_args );
-
-		$setting = array(
-			'name'      => 'defaultValueApplyToQuery',
-			'label'     => __( 'Initially apply to query', 'search-filter' ),
-			'help'      => __( 'Pre-apply the default value to the query when first loading the page.', 'search-filter' ),
-			'group'     => 'default',
-			'tab'       => 'settings',
-			'type'      => 'string',
-			'inputType' => 'Toggle',
-			'default'   => 'no',
-			'options'   => array(
-				array(
-					'value' => 'yes',
-					'label' => __( 'Yes', 'search-filter' ),
-				),
-				array(
-					'value' => 'no',
-					'label' => __( 'No', 'search-filter' ),
-				),
-			),
-			'context'   => array( 'admin/field', 'block/field/search', 'admin/field/search', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
-			'dependsOn' => array(
-				'relation' => 'OR',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'defaultValueType',
-						'value'   => 'custom',
-						'compare' => '=',
-					),
-					array(
-						'option'  => 'defaultValueType',
-						'value'   => 'inherit',
-						'compare' => '=',
-					),
-				),
-			),
-		);
-
-		Fields_Settings::add_setting( $setting, $add_setting_args );
+		Fields_Settings::add_setting( $setting, $add_setting_args ); */
 
 		$setting = array(
 			'name'        => 'labelToggleVisibility',
@@ -1348,7 +1155,7 @@ class Fields {
 	 * @param Field $field       The field to update the render data for.
 	 * @return array The updated render data.
 	 */
-	public static function apply_hidden_field_attributes( $render_data, $field ) {
+	public static function update_field_render_data( $render_data, $field ) {
 
 		if ( ! self::should_hide_field( $field ) ) {
 			return $render_data;
@@ -1871,15 +1678,7 @@ class Fields {
 		if ( ! $query_id ) {
 			return null;
 		}
-
-		// Try to get the query from the Data_Store first.
-		$query = Data_Store::get( 'query', $query_id );
-		if ( $query ) {
-			return $query;
-		}
-
-		// Else look it up.
-		$query = Query::find( array( 'id' => $query_id ), 'record' );
+		$query = Query::find( array( 'id' => $query_id ) );
 		if ( is_wp_error( $query ) ) {
 			return null;
 		}
@@ -1904,7 +1703,7 @@ class Fields {
 	}
 
 	/**
-	 * Check if the field is set to use the indexer.
+	 * Check if the field should be indexed.
 	 *
 	 * @since 3.0.0
 	 *
@@ -2076,266 +1875,5 @@ class Fields {
 		}
 
 		return 'ignore';
-	}
-
-	/**
-	 * Apply defaults to the fields when a query is run.
-	 *
-	 * @since 3.0.0
-	 */
-	public static function apply_defaults_to_query( $query ) {
-		self::$defaults_query_tracking = $query->get_id();
-		add_filter( 'search-filter/fields/field/values', array( __CLASS__, 'set_default_values_for_query' ), 10, 2 );
-	}
-	
-	/**
-	 * Remove defaults from the fields when a query is finished.
-	 *
-	 * @since 3.0.0
-	 */
-	public static function remove_defaults_from_query() {
-		self::$defaults_query_tracking = 0;
-		remove_filter( 'search-filter/fields/field/values', array( __CLASS__, 'set_default_values_for_query' ), 10, 2 );
-	}
-
-	public static function query_can_apply_at_current_location( $query ) {
-		// Remove the current filter when checking for active fields & values as we
-		// don't wanth the defaults to get applied.
-		self::remove_defaults_from_query();
-		$can_apply_at_location = false;
-		if ( method_exists( $query, 'can_apply_at_current_location' ) ) {
-			$can_apply_at_location = $query->can_apply_at_current_location();
-		}
-		self::apply_defaults_to_query( $query );
-		return $can_apply_at_location;
-	}
-	
-	public static function set_default_values_for_query( $values, $field ) {
-
-		// If the query ID doesn't match, then we don't want to apply the defaults.
-		// Note - this check might not be necessary if we're filtering a specific field
-		// then it's already likely being called by its own query via `get_fields()`.
-		if ( $field->get_query_id() !== self::$defaults_query_tracking ) {
-			return $values;
-		}
-
-		// If the field already has values, then don't override them.
-		if ( ! empty( $values ) ) {
-			return $values;
-		}
-	
-		// Check if the field is setup to use a default value.
-		if ( ! self::can_use_default_value( $field ) ) {
-			return $values;
-		}
-		
-		$field_query_record = self::get_field_query( $field );
-		$field_query = Query::create_from_record( $field_query_record );
-	
-		// If the field is not set to apply to the query, and we're on a location with the query then bail.
-		if ( $field->get_attribute( 'defaultValueApplyToQuery' ) !== 'yes' && self::query_can_apply_at_current_location( $field_query ) ) {
-			return $values;
-		}
-		
-		// If the query param is applied, it means we don't want to set a default
-		// because the query has been interacted with already.
-		$query_param = '~' . $field->get_query_id();
-		if ( isset( $_GET[ $query_param ] ) ) {
-			return $values;
-		}
-
-		// Otherwise, set the default value.
-		$default_value = self::get_default_value( $field );
-		if ( $default_value === null ) {
-			return $values;
-		}
-		return array( $default_value );
-	}
-	public static function get_default_value( $field ) {
-		
-		// Use custom value.
-		if ( $field->get_attribute( 'defaultValueType' ) === 'custom' ) {
-
-			// Use the custom value that was set in the field.
-			return $field->get_attribute( 'defaultValueCustom' );
-
-		} else if ( $field->get_attribute( 'defaultValueType' ) === 'inherit' ) {
-			// Inherit the values from the current location.
-
-			// Get the queried object.
-			$queried_object = get_queried_object();
-
-			// Ensure the connected query is ready otherwise return early.
-			$query = self::get_field_query( $field );
-			if ( ! $query ) {
-				return null;
-			}
-			
-			// Note - we don't check to see the option is available in the field before setting
-			// the default.  It could be very expensive to generate all optins (especially if a field
-			// has a restrcition on the number of options) but it might cause issue in the future.
-
-			// Special case when the archive is a blog and the we're inheriting the post type.
-			if ( is_home() && $field->get_attribute( 'defaultValueInheritArchive' ) === 'yes' ) {
-				if ( $field->get_attribute( 'dataType' ) === 'post_attribute' ) {
-					$data_post_attribute = $field->get_attribute( 'dataPostAttribute' );
-					if ( $data_post_attribute === 'post_type' ) {
-						return 'post';
-					}
-				}
-			} elseif ( is_archive() && $field->get_attribute( 'defaultValueInheritArchive' ) === 'yes' ) {
-				if ( is_archive() ) {
-					// Check to see what type of archive the field would apply to.
-					$data_type = $field->get_attribute( 'dataType' );
-					if ( $data_type === 'taxonomy' && is_a( $queried_object, 'WP_Term' ) ) {
-						return $queried_object->slug;
-					} else if ( $data_type === 'post_attribute' ) {
-						$data_post_attribute = $field->get_attribute( 'dataPostAttribute' );
-
-						if ( $data_post_attribute === 'post_type' && is_a( $queried_object, 'WP_Post_Type' ) ) {
-							$query_post_types = self::get_post_types_from_query( $query );
-							if ( ! $query_post_types ) {
-								return null;
-							}
-							if ( in_array( $queried_object->name, $query_post_types, true ) ) {
-								return $queried_object->name;
-							}
-							return null;
-						} elseif ( $data_post_attribute === 'post_author' && is_a( $queried_object, 'WP_User' ) ) {
-							return $queried_object->user_nicename;
-						}
-						// TODO - support date archives.
-					}
-				}
-			} elseif ( is_singular() && $field->get_attribute( 'defaultValueInheritPost' ) === 'yes' ) {
-				// If we're only a single post, extract the values from the post to potentially
-				// use a default value.
-				
-				$data_type = $field->get_attribute( 'dataType' );
-				if ( ! is_a( $queried_object, 'WP_Post' ) ) {
-					return null;
-				}
-				// Get the post ID.
-				$post_id = $queried_object->ID;
-
-				// Lets make sure the post author and post type matches the current post.
-				$query = self::get_field_query( $field );
-				if ( ! $query ) {
-					return null;
-				}
-
-				$post_type = $queried_object->post_type;
-				$post_status = $queried_object->post_status;
-
-				if ( $data_type === 'taxonomy' ) {
-					$taxonomy = $field->get_attribute( 'dataTaxonomy' );
-					$terms = get_the_terms( $post_id, $taxonomy );
-					if ( ! is_array( $terms ) ) {
-						return null;
-					}
-					if ( count( $terms ) === 0 ) {
-						return null;
-					}
-					// Pick the first term and return its slug.
-					return $terms[0]->slug;
-
-				} else if ( $data_type === 'post_attribute' ) {
-					
-					$data_post_attribute = $field->get_attribute( 'dataPostAttribute' );
-
-					if ( $data_post_attribute === 'post_type' ) {
-						$query_post_types = $query->get_attribute( 'postTypes' );
-						if ( ! $query_post_types ) {
-							return null;
-						}
-
-						if ( ! in_array( $post_type, $query_post_types, true ) ) {
-							return null;
-						}
-						return $post_type;
-
-					} elseif ( $data_post_attribute === 'post_status' ) {
-						$query_post_statuses = $query->get_attribute( 'postStatus' );
-						if ( ! $query_post_statuses ) {
-							return null;
-						}
-
-						if ( ! in_array( $post_status, $query_post_statuses, true ) ) {
-							return null;
-						}
-						return $post_status;
-						
-					} elseif ( $data_post_attribute === 'post_author' ) {
-						$post_author_id = $queried_object->post_author;
-						$post_author_nicename = get_the_author_meta( 'user_nicename', $post_author_id );
-						return $post_author_nicename;
-					}
-					// TODO - need to support date archives.
-				}
-			}
-		}
-
-		return null;
-	}
-
-	private static function get_post_types_from_query( $query ) {
-		if ( ! $query ) {
-			return null;
-		}
-		if ( ! $query->get_attribute( 'postTypes' ) ) {
-			return null;
-		}
-		if ( count( $query->get_attribute( 'postTypes' ) ) === 0 ) {
-			return null;
-		}
-		return $query->get_attribute( 'postTypes' );
-	}
-	
-	private static function can_use_default_value( $field ) {
-		if ( ! $field->get_attribute( 'defaultValueType' ) ) {
-			return false;
-		}
-		if ( $field->get_attribute( 'defaultValueType' ) === 'none' ) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Add default values for fields that have them enabled.
-	 *
-	 * @param array $render_data The render data to update.
-	 * @param Field $field       The field to update the render data for.
-	 * @return array The updated render data.
-	 */
-	public static function add_default_values( $render_data, $field ) {
-		if ( ! self::can_use_default_value( $field ) ) {
-			return $render_data;
-		}
-
-		// If a field is set to use default values, add them to the
-		// render attributes.
-		$default_value = self::get_default_value( $field );
-		if ( $default_value === null ) {
-			return $render_data;
-		}
-		
-		$render_data['defaultValues'] = array( $default_value );
-		return $render_data;
-	}
-
-	/**
-	 * Figure out whether a fields query is actually run at the
-	 * current location.
-	 * 
-	 * @param mixed $field 
-	 * @return void 
-	 */
-	private static function current_location_has_field_query( $field ) {
-
-		// This is not really working.
-		// We are using this after modifying the url values,
-		$active_queries = Queries::get_active_query_ids();
-		return in_array( $field->get_query_id(), $active_queries, true );
 	}
 }

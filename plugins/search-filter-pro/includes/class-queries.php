@@ -415,7 +415,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'resultsDynamicUpdate',
-			'label'     => __( 'Live Search', 'search-filter' ),
+			'label'     => __( 'Live search', 'search-filter' ),
 			'help'      => __( 'Loads new results without refreshing the page.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -481,7 +481,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'resultsShowSpinner',
-			'label'     => __( 'Show Loading Icon', 'search-filter' ),
+			'label'     => __( 'Show loading icon', 'search-filter' ),
 			'help'      => __( 'Show the loading icon when fetching new results.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -514,7 +514,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'resultsFadeResults',
-			'label'     => __( 'Fade Results', 'search-filter' ),
+			'label'     => __( 'Fade results', 'search-filter' ),
 			'help'      => __( 'Fade out the results when loading.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -546,7 +546,7 @@ class Queries {
 		Queries_Settings::add_setting( $setting );
 
 		/*
-			array(
+				/* array(
 				'name'      => 'offset',
 				'label'     => __( 'Offset', 'search-filter' ),
 				'type'      => 'number',
@@ -579,7 +579,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'queryContainer',
-			'label'     => __( 'Results Container', 'search-filter' ),
+			'label'     => __( 'Results container', 'search-filter' ),
 			'help'      => __( 'The CSS selector that contains your results.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -600,8 +600,8 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'dynamicSections',
-			'label'     => __( 'Dynamic Sections', 'search-filter' ),
-			'help'      => __( 'Additional CSS selector(s) that also need to be updated dynamically.  Must be unique.', 'search-filter' ),
+			'label'     => __( 'Dynamic sections', 'search-filter' ),
+			'help'      => __( 'Additional CSS selector(s) that that also needs to be updated dynamically.  Must be unique.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
 			'inputType' => 'Text',
@@ -622,7 +622,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'additionalDynamicSections',
-			'label'     => __( 'Additional Dynamic Sections', 'search-filter' ),
+			'label'     => __( 'Additional Dynamic sections', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
 			'inputType' => 'hidden',
@@ -643,7 +643,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'resultsScrollTo',
-			'label'     => __( 'Scroll To', 'search-filter' ),
+			'label'     => __( 'Scroll to', 'search-filter' ),
 			'help'      => __( 'Scroll the window after fetching new results.', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -665,7 +665,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'resultsPaginationType',
-			'label'     => __( 'Pagination Type', 'search-filter' ),
+			'label'     => __( 'Pagination type', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
 			'inputType' => 'Select',
@@ -701,7 +701,7 @@ class Queries {
 
 		$setting = array(
 			'name'      => 'queryPostsContainer',
-			'label'     => __( 'Posts Container', 'search-filter' ),
+			'label'     => __( 'Posts container', 'search-filter' ),
 			'help'      => __( 'The container that only contains the posts (no other query data).', 'search-filter' ),
 			'group'     => 'results',
 			'type'      => 'string',
@@ -1120,8 +1120,10 @@ class Queries {
 		if ( $scroll_parts[0] === 'top' ) {
 			$scroll_to_selector = 'body';
 		} elseif ( $scroll_parts[0] === 'query' ) {
+			// TODO - finalise these class names.
 			$scroll_to_selector = '.search-filter-query--id-' . absint( $record->get_id() );
 		} elseif ( $scroll_parts[0] === 'field' ) {
+			// TODO - finalise these class names.
 			$scroll_to_selector = '.search-filter-field--id-' . absint( $scroll_parts[1] );
 		} elseif ( $scroll_parts[0] === 'custom' ) {
 			$scroll_to_selector = $scroll_parts[1];

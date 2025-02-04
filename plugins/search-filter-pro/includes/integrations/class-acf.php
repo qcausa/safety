@@ -1143,10 +1143,7 @@ class Acf {
 		}
 
 		if ( isset( $acf_field['choices'] ) ) {
-			$options_data = array(
-				'options' => array(),
-				'labels'  => array(),
-			);
+			$options_data = array();
 
 			// Sort according to the order direction.
 			$acf_choices     = $acf_field['choices'];
@@ -1154,19 +1151,18 @@ class Acf {
 			$order_direction = $field->get_attribute( 'inputOptionsOrderDir' ) ? $field->get_attribute( 'inputOptionsOrderDir' ) : 'asc';
 
 			$acf_choices = Util::sort_assoc_array( $acf_choices, $order, $order_direction );
+
 			foreach ( $acf_choices as $key => $value ) {
 				Choice::add_option_to_array(
 					$options_data['options'],
 					array(
-						'value' => (string) $key,
-						'label' => (string) $value,
+						'value' => $key,
+						'label' => $value,
 					),
 					$field->get_id()
 				);
-				$options_data['labels'][ (string) $key ] = (string) $value;
+				$options_data['labels'][ $key ] = $value;
 			}
-
-			
 			return $options_data;
 		}
 

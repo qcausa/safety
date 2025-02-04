@@ -13,7 +13,6 @@ namespace Search_Filter_Pro;
 use Search_Filter_Pro\Integrations\Acf;
 use Search_Filter_Pro\Integrations\Beaver_Builder;
 use Search_Filter_Pro\Integrations\Elementor;
-use Search_Filter_Pro\Integrations\Wpml;
 use Search_Filter_Pro\Integrations\Gutenberg;
 use Search_Filter_Pro\Integrations\Relevanssi;
 use Search_Filter_Pro\Integrations\Woocommerce;
@@ -55,6 +54,5 @@ class Integrations {
 		Relevanssi::init();
 		Elementor::init();
 		Beaver_Builder::init();
-		Wpml::init();
 	}
 }

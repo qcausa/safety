@@ -57,15 +57,18 @@ class WP_Data {
 	 *
 	 * @return array
 	 */
-	public static function get_post_types( $args = array(), $operator = 'and' ) {
+	public static function get_post_types() {
 
-		$default_args = array( 'public' => true );
-		$args         = wp_parse_args( $args, $default_args );
-		$key          = md5( serialize( $args ) ) . '_' . $operator;
-		if ( ! isset( self::$post_types[ $key ] ) ) {
-			self::$post_types[ $key ] = get_post_types( $args, 'objects', $operator );
+		if ( empty( self::$post_types ) ) {
+			$args = array();
+			if ( ! SEARCH_FILTER_SHOW_ALL_POST_TYPES ) {
+				$args['public'] = true;
+			}
+			// 'publicly_queryable ' => true,
+			self::$post_types = get_post_types( $args, 'objects' );
 		}
-		return self::$post_types[ $key ];
+
+		return self::$post_types;
 	}
 	/**
 	 * A wrapper for the WP function `get_post_stati`

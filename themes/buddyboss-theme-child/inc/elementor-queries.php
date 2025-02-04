@@ -87,3 +87,37 @@ function custom_elementor_query_buddypress_activity($query)
     $query->set('post__in', array()); // Empty to bypass wp_posts
 }
 add_action('elementor/query/bp_activity_query', 'custom_elementor_query_buddypress_activity');
+
+
+
+function related_posts_query($query)
+{
+    // Check if Pods Framework is installed and active
+    if (! class_exists('Pods')) {
+        return; // Exit early if Pods is not available
+    }
+
+    // Get the Pods object for the current post
+    $pod = pods('post', get_the_ID());
+
+    // Ensure the Pods object is valid and fetch the 'post_downloads' relationship field
+    if ($pod) {
+        $downloads = $pod->field('post_downloads');
+
+        // Extract IDs or set to an empty array
+        $post_ids = ! empty($downloads) ? wp_list_pluck($downloads, 'ID') : [];
+
+        // If there are valid post IDs, set them in the query
+        if (! empty($post_ids)) {
+            $query->set('post__in', $post_ids);
+            $query->set('orderby', 'post__in');
+        } else {
+            // If no related downloads are found, set an invalid post__in to prevent results
+            $query->set('post__in', [0]); // No results will be returned
+        }
+    } else {
+        // If Pods object is invalid, prevent any results
+        $query->set('post__in', [0]);
+    }
+}
+add_action('elementor/query/related_posts_query', 'related_posts_query');

@@ -360,7 +360,7 @@ abstract class Task_Runner {
 			if ( $task->get_status() === 'complete' ) {
 				self::complete_next_task();
 			} elseif ( $task->get_status() === 'error' ) {
-				Util::error_log( 'Task runner: error running task: ' . $task->get_action(), 'error' );
+				// TODO - lets log the errors using our debugging tools.
 				self::complete_next_task();
 			}
 

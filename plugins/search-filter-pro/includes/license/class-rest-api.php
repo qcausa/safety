@@ -148,6 +148,8 @@ class Rest_API {
 			$license_data = $default_license_data;
 		}
 
+		// 9be824d93c66bc655f4684f2101f971a
+
 		return $license_data;
 	}
 

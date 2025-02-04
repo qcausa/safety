@@ -83,11 +83,6 @@ class Schema {
 		if ( ! $this->tables['options']->exists() ) {
 			$this->tables['options']->install();
 		}
-
-		$this->tables['logs'] = new \Search_Filter\Database\Tables\Logs();
-		if ( ! $this->tables['logs']->exists() ) {
-			$this->tables['logs']->install();
-		}
 	}
 
 	/**

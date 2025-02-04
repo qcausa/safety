@@ -41,7 +41,7 @@ class Cron {
 		if ( ! isset( $schedules['search_filter_2days'] ) ) {
 			$schedules['search_filter_2days'] = array(
 				'interval' => DAY_IN_SECONDS * 2,
-				'display'  => __( 'Once every 2 days', 'search-filter' ),
+				'display'  => __( 'Once every 2 days', 'rm-codes' ),
 			);
 		}
 		return $schedules;
@@ -94,7 +94,7 @@ class Cron {
 			// This means our scheduled event has been missed by more then 3 days.
 			// So lets run manually and reschedule.
 			self::run_task();
-			Util::error_log( 'Expired cron job found, re-running and rescheduling.', 'error' );
+			Util::error_log( 'Expired cron job found, re-running and rescheduling.' );
 			wp_clear_scheduled_hook( 'search-filter/integrations/gutenberg/cron' );
 			wp_schedule_event( time(), 'search_filter_2days', 'search-filter/integrations/gutenberg/cron' );
 		}

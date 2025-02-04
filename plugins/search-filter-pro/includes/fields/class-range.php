@@ -713,7 +713,6 @@ class Range extends \Search_Filter\Fields\Range {
 	public function parse_url_value() {
 		$url_param_name = self::url_prefix() . $this->get_url_name();
 
-		// Compat
 		if ( ! method_exists( '\Search_Filter\Util', 'get_request_var' ) ) {
 			return;
 		}

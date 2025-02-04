@@ -35,18 +35,6 @@ class Sort extends Control {
 		'inputInteractiveHoverColor',
 		'inputClearColor',
 		'inputClearHoverColor',
-
-		'labelColor',
-		'labelBackgroundColor',
-		'labelPadding',
-		'labelMargin',
-		'labelScale',
-
-		'descriptionColor',
-		'descriptionBackgroundColor',
-		'descriptionPadding',
-		'descriptionMargin',
-		'descriptionScale',
 	);
 
 	public static $setting_support = array(

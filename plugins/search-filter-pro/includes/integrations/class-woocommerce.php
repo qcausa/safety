@@ -530,7 +530,7 @@ class Woocommerce {
 				 * - If we start on a page with no results and reset the form, the layout is broken because the CSS is not loaded,
 				 *   there is strategy for this in the Elementor plugin.
 				 *
-				 * TODO - we should only do this (and other related logic) if dynamic update is actually enabled.
+				 * // TODO - we should only do this (and other related logic) if dynamic update is actually enabled.
 				 */
 				$query_class                  = '.search-filter-query--id-' . absint( $id );
 				$attributes['queryContainer'] = $query_class;
@@ -706,7 +706,7 @@ class Woocommerce {
 			return $suggestions;
 		}
 
-		// TODO add options to autocomplete.
+		// TODO...
 		/*
 		 if ( $data_wc === 'stock_status' ) {
 			Choice::add_option_to_array(
@@ -1188,11 +1188,19 @@ class Woocommerce {
 			return $values;
 		}
 
+		Util::error_log( 'index_product_values '. $object_id );
+
 		// For variable products, handle everything on the variations
 		// unless the variation doesn't have any children yet.
 		if ( $product->is_type( 'variable' ) && ! empty( $product->get_children() ) ) {
 			return $values;
 		}
+
+		
+		Util::error_log( 'index_product_values.. continuing '. $object_id );
+
+		// We used to return early with $product->is_type( 'variable' ), however
+		// variable products can exist without variations, so always add a parent product.
 
 		if ( $wc_data === 'stock_status' ) {
 			$values   = array();
@@ -1378,7 +1386,7 @@ class Woocommerce {
 			}
 
 			$values = array();
-			// TODO - this function does not exist yet, but likely will later: https://github.com/woocommerce/woocommerce/issues/52991.
+			// TODO - does this function exist?
 			if ( ! method_exists( $parent_product, 'get_brand_ids' ) ) {
 				return $values;
 			}

@@ -4,7 +4,7 @@ Tags: search, filter, taxonomy, tag, category, product, shop, post type
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 3.1.4
+Stable tag: 3.1.3
 
 Create powerful search and filtering experiences for your users and customers.
 
@@ -21,15 +21,6 @@ Create powerful search and filtering experiences for your users and customers.
 
 
 == Changelog ==
-
-= 3.1.4 =
-* New - set field defaults and autodetect default values from archives or posts.
-* Improvement - better compatibility with block editor layouts and query loops.
-* Change - renamed the query and fields Javascript `remove()` function to `unload()`.
-* Fix - regression with ACF fields not generating their options properly.
-* Fix - issues when using WooCommerce Collections in the block editor.
-* Fix - script errors in the block editor.
-* Fix - update the indexer table to support longer values, matching the max length of taxonomy slugs.
 
 = 3.1.3 =
 * Fix - issues with indexing some ACF fields.

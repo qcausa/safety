@@ -401,7 +401,7 @@ class Fields {
 
 		// Bail if nothing found.
 		if ( is_wp_error( $instance ) ) {
-			return rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.', array( 'status' => 404 ) ) );
+			return rest_convert_error_to_response( new \WP_Error( 'not_found', 'Not found.' ) );
 		}
 
 		// Create the field using its attributes.

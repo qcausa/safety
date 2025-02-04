@@ -16,7 +16,6 @@ use Search_Filter\Fields\Settings as Fields_Settings;
 use Search_Filter\Integrations\WooCommerce\Rest_API;
 use Search_Filter\Integrations\Settings as Integrations_Settings;
 use Search_Filter\Queries\Query;
-use Search_Filter\Query\Template_Data;
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * All WooCommerce integration functionality
  * Add options to admin, integrate with frontend queries
  */
-class Woocommerce {
+class WooCommerce {
 
 	/**
 	 * Keeps track of the active query ID (which is currently being modified).
@@ -45,7 +44,7 @@ class Woocommerce {
 	 */
 	public static function init() {
 
-		add_action( 'search-filter/settings/init', array( __CLASS__, 'update_integration' ), 1 );
+		add_action( 'search-filter/settings/init', array( __CLASS__, 'update_integration' ), 10 );
 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
@@ -55,7 +54,7 @@ class Woocommerce {
 		add_action( 'search-filter/settings/init', array( __CLASS__, 'setup' ), 1 );
 
 		// Need to update field support before field settings are setup.
-		add_action( 'search-filter/settings/integrations/init', array( __CLASS__, 'hook_into_field_support' ), 10 );
+		add_action( 'search-filter/integrations/init', array( __CLASS__, 'hook_into_field_support' ), 10 );
 	}
 	/**
 	 * Update the WooCommerce integration in the integrations section.
@@ -99,9 +98,6 @@ class Woocommerce {
 
 		// Add support for taxonomy related settings.
 		add_filter( 'search-filter/field/get_setting_support', array( __CLASS__, 'get_field_setting_support' ), 10, 3 );
-
-		// Filter the setting early to add our depends conditions for tax archive support.
-		add_filter( 'search-filter/fields/settings/prepare_setting/before', array( __CLASS__, 'add_use_taxonomy_archive_support' ), 10, 1 );
 	}
 
 	/**
@@ -123,7 +119,7 @@ class Woocommerce {
 		add_filter( 'search-filter/queries/query/get_results_url/override_url', array( __CLASS__, 'get_results_url' ), 10, 2 );
 		add_filter( 'search-filter/rest-api/get_query_post_types', array( __CLASS__, 'get_query_post_types' ), 10, 2 );
 		add_filter( 'search-filter/query/selector/should_attach', array( __CLASS__, 'attach_query' ), 10, 3 );
-		add_filter( 'search-filter/field/choice/options_data', array( __CLASS__, 'choice_options_data' ), 10, 2 );
+		add_filter( 'search-filter/field/choice/options', array( __CLASS__, 'choice_options' ), 10, 2 );
 		add_filter( 'search-filter/integrations/gutenberg/add_attributes', array( __CLASS__, 'add_block_attributes' ), 10 );
 		add_filter( 'search-filter/field/url_name', array( __CLASS__, 'field_url_name' ), 10, 2 );
 		add_filter( 'search-filter/field/choice/wp_query_args', array( __CLASS__, 'choice_wp_query_args' ), 10, 2 );
@@ -138,205 +134,10 @@ class Woocommerce {
 		add_action( 'woocommerce_shortcode_after_products_loop', array( __CLASS__, 'finish_shortcode_loop' ), 21 );
 		add_action( 'woocommerce_shortcode_products_loop_no_results', array( __CLASS__, 'finish_shortcode_loop' ), 21 );
 
-		// Add support for taxonomy filter archive.
-		add_filter( 'search-filter/field/url_template', array( __CLASS__, 'field_url_template' ), 10, 2 );
-		add_action( 'search-filter/queries/query/init_render_config_values', array( __CLASS__, 'init_render_config_values' ), 10, 1 );
-		add_filter( 'search-filter/field/parse_url_value', array( __CLASS__, 'parse_url_value' ), 10, 2 );
-		add_filter( 'search-filter/fields/field/connected_data', array( __CLASS__, 'add_taxonomy_archive_connected_data' ), 10, 2 );
-		add_filter( 'search-filter/queries/query/can_apply_at_current_location', array( __CLASS__, 'can_apply_query_at_current_location' ), 10, 2 );
 		Rest_API::init();
 	}
 
-	public static function field_url_template( $url_template, $field ) {
-		if ( $field->get_attribute( 'type' ) !== 'choice' ) {
-			return $url_template;
-		}
 
-		if ( $field->get_attribute( 'dataType' ) !== 'woocommerce' ) {
-			return $url_template;
-		}
-
-		// Bail early if the attribute on the field is not enabled.
-		if ( $field->get_attribute( 'taxonomyFilterArchive' ) !== 'yes' ) {
-			return $url_template;
-		}
-		$taxonomy_name = self::get_taxonomy_name_from_data_source( $field->get_attribute( 'dataWoocommerce' ) );
-		if ( empty( $taxonomy_name ) ) {
-			return $url_template;
-		}
-
-		$query = Query::find( array( 'id' => $field->get_query_id() ) );
-		if ( is_wp_error( $query ) ) {
-			return $url_template;
-		}
-
-		// Ensure query has filtering taxonomy archives enabled.
-		if ( $query->get_attribute( 'archiveFilterTaxonomies' ) !== 'yes' ) {
-			return $url_template;
-		}
-
-		// Make sure the connected query is using the shop integration.
-		if ( $query->get_attribute( 'integrationType' ) !== 'woocommerce/shop' ) {
-			return $url_template;
-		}
-
-		// Usually we'd check to ensure the taxonomy is only associated with one
-		// post type, but its possible that the taxonomy is assigned to the `product`
-		// and `product_variation` post types.
-
-		// Now we can try to get the taxonomy url template.
-		return Template_Data::get_term_template_link( $taxonomy_name );
-	}
-	public static function init_render_config_values( $query ) {
-		if ( $query->get_attribute( 'integrationType' ) !== 'woocommerce/shop' ) {
-			return;
-		}
-
-		$filter_tax_archives = $query->get_attribute( 'archiveFilterTaxonomies' );
-		if ( $filter_tax_archives !== 'yes' ) {
-			return;
-		}
-
-		global $wp_query;
-		if ( ! $wp_query->is_archive() ) {
-			return;
-		}
-		if ( ! $wp_query->is_tax() ) {
-			return;
-		}
-
-		$query_post_types = $query->get_attribute( 'postTypes' );
-
-		// For some reason there are multiple post types, so bail.
-		if ( count( $query_post_types ) > 1 ) {
-			return;
-		}
-		$archive_post_type = $query_post_types[0];
-		// Build the term archive URL.
-		$queried_object = get_queried_object();
-		// Get the postType taxonomies.
-		$taxonomies = get_object_taxonomies( $archive_post_type );
-
-		$tax_archive_url = '';
-		$tax_slug        = '';
-		foreach ( $taxonomies as $taxonomy ) {
-			if ( $queried_object->taxonomy === $taxonomy ) {
-				$tax_archive_url = get_term_link( $queried_object->term_id );
-				$tax_slug        = $taxonomy;
-				break;
-			}
-		}
-		$query->set_render_config_value( 'currentTaxonomyArchive', $tax_slug );
-		$query->set_render_config_value( 'taxonomyArchiveUrl', $tax_archive_url );
-	}
-
-	public static function parse_url_value( $value, $field ) {
-
-		if ( $field->get_attribute( 'type' ) !== 'choice' ) {
-			return $value;
-		}
-
-		if ( $field->get_attribute( 'taxonomyFilterArchive' ) !== 'yes' ) {
-			return $value;
-		}
-		$taxonomy_name = self::get_taxonomy_name_from_data_source( $field->get_attribute( 'dataWoocommerce' ) );
-		if ( empty( $taxonomy_name ) ) {
-			return $value;
-		}
-
-		$query = Query::find( array( 'id' => $field->get_query_id() ) );
-		if ( is_wp_error( $query ) ) {
-			return $value;
-		}
-		// Ensure query has filtering taxonomy archives enabled.
-		if ( $query->get_attribute( 'archiveFilterTaxonomies' ) !== 'yes' ) {
-			return $value;
-		}
-
-		// Make sure the connected query is using the shop integration.
-		if ( $query->get_attribute( 'integrationType' ) !== 'woocommerce/shop' ) {
-			return $value;
-		}
-
-		// Check if we are on this tax archive.
-		if ( ! is_tax( $taxonomy_name ) ) {
-			return $value;
-		}
-
-		$term = get_queried_object();
-
-		// Check if $term is a term object.
-		if ( ! is_a( $term, 'WP_Term' ) ) {
-			return $value;
-		}
-
-		global $wp_query;
-		/*
-		 * We want to make sure that we don't detect anything here
-		 * if the archive has multiple terms, eg: yoursite.com/category/term1+term2
-		 */
-		if ( ! isset( $wp_query->tax_query->queried_terms[ $taxonomy_name ] ) ) {
-			return $value;
-		}
-
-		if ( count( $wp_query->tax_query->queried_terms[ $taxonomy_name ]['terms'] ) !== 1 ) {
-			return $value;
-		}
-
-		return $term->slug;
-	}
-
-	/**
-	 * Sets the necessary connected data for filters that filter taxonomy archives.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param array $connected_data The existing connected data.
-	 * @param Field $field          The field instance.
-	 *
-	 * @return array The updated connected data.
-	 */
-	public static function add_taxonomy_archive_connected_data( $connected_data, $field ) {
-		if ( $field->get_attribute( 'type' ) !== 'choice' ) {
-			return $connected_data;
-		}
-
-		if ( $field->get_attribute( 'taxonomyFilterArchive' ) !== 'yes' ) {
-			return $connected_data;
-		}
-
-		$taxonomy_name = self::get_taxonomy_name_from_data_source( $field->get_attribute( 'dataWoocommerce' ) );
-		if ( ! empty( $taxonomy_name ) ) {
-			$connected_data['filtersTaxonomyArchive'] = $taxonomy_name;
-		}
-		return $connected_data;
-	}
-
-
-	/**
-	 * Undocumented function
-	 *
-	 * @param [type] $data_support
-	 * @param [type] $type
-	 * @param [type] $input_type
-	 * @return void
-	 */
-	public static function can_apply_query_at_current_location( $can_apply, $query ) {
-		if ( $query->get_attribute( 'integrationType' ) !== 'woocommerce/shop' ) {
-			return $can_apply;
-		}
-		global $wp_query;
-		if ( self::is_shop( $wp_query ) ) {
-			return true;
-		}
-
-		if ( $query->get_attribute( 'taxonomyFilterArchive' ) !== 'yes' ) {
-			return $can_apply;
-		}
-
-		// Then check to see if we're on a product tax/attribute archive.
-		return self::is_taxonomy_archive();
-	}
 	/**
 	 * Update fields data support.
 	 *
@@ -419,14 +220,6 @@ class Woocommerce {
 	 */
 	public static function pre_render_products_block( $pre_render, $block ) {
 
-		// WC is moving to the new product collection block.
-		if ( $block['blockName'] === 'woocommerce/product-collection' ) {
-			\Search_Filter\Integrations\Gutenberg::try_connect_to_query_loop( $block, 'woocommerce/products_query_block', 'woocommerce/product-collection' );
-			return $pre_render;
-		}
-
-		// Support legacy versions based on the core/query block.
-
 		if ( $block['blockName'] !== 'core/query' ) {
 			return $pre_render;
 		}
@@ -441,8 +234,8 @@ class Woocommerce {
 		// We can get in here 2 ways - either via regular query block attached to the page and linked,
 		// or via the WC Shop page/archive, if we're using a block theme.
 		// This function will not try to connect to the shop page so we'll never know the ID of the query.
-		\Search_Filter\Integrations\Gutenberg::try_connect_to_query_loop( $block, 'woocommerce/products_query_block' );
-		\Search_Filter\Integrations\Gutenberg::try_connect_to_query_loop( $block, 'woocommerce/products_query_block' );
+		\Search_Filter\Integrations\Gutenberg::try_connect_to_query_loop( $block, 'woocommerce/products_query_block', 'woocommerce/product-query' );
+		\Search_Filter\Integrations\Gutenberg::try_connect_to_query_loop( $block, 'woocommerce/products_query_block', 'woocommerce/product-collection' );
 
 		return $pre_render;
 	}
@@ -508,8 +301,6 @@ class Woocommerce {
 			$taxonomy_name = 'product_cat';
 		} elseif ( $data_source === 'product_tag' ) {
 			$taxonomy_name = 'product_tag';
-		} elseif ( $data_source === 'product_brand' ) {
-			$taxonomy_name = 'product_brand';
 		}
 
 		// If data source starts with `attribute:`.
@@ -617,8 +408,6 @@ class Woocommerce {
 			return 'product_cat';
 		} elseif ( $data_source === 'product_tag' ) {
 			return 'product_tag';
-		} elseif ( $data_source === 'product_brand' ) {
-			$taxonomy_name = 'product_brand';
 		}
 
 		// If data source starts with `attribute:`.
@@ -636,19 +425,19 @@ class Woocommerce {
 	 *
 	 * @since    3.0.0
 	 *
-	 * @param array $options_data The existing options data.
+	 * @param array $options The existing options.
 	 * @param Field $field   The field instance.
 	 *
 	 * @return array The updated options.
 	 */
-	public static function choice_options_data( $options_data, $field ) {
+	public static function choice_options( $options, $field ) {
 
 		if ( $field->get_attribute( 'dataType' ) !== 'woocommerce' ) {
-			return $options_data;
+			return $options;
 		}
 
-		if ( count( $options_data['options'] ) > 0 ) {
-			return $options_data;
+		if ( count( $options ) > 0 ) {
+			return $options;
 		}
 
 		$data_source = $field->get_attribute( 'dataWoocommerce' );
@@ -658,7 +447,7 @@ class Woocommerce {
 
 		// Only support taxonomies.
 		if ( empty( $wc_taxonomy_name ) ) {
-			return $options_data;
+			return $options;
 		}
 
 		$order_dir = '';
@@ -667,7 +456,7 @@ class Woocommerce {
 		} elseif ( $field->get_attribute( 'woocommerceTaxOrderDir' ) === 'desc' ) {
 			$order_dir = 'DESC';
 		}
-		$args         = array(
+		$args    = array(
 			'order_by'            => $field->get_attribute( 'woocommerceTaxOrderBy' ) !== 'default' ? $field->get_attribute( 'woocommerceTaxOrderBy' ) : '',
 			'order_dir'           => $order_dir,
 			'hide_empty'          => $field->get_attribute( 'hideEmpty' ) === 'yes',
@@ -678,39 +467,8 @@ class Woocommerce {
 			'show_count'          => $field->get_attribute( 'showCount' ) === 'yes',
 			'show_count_brackets' => $field->get_attribute( 'showCountBrackets' ) === 'yes',
 		);
-		$options_data = $field->get_taxonomy_options_data( $wc_taxonomy_name, $args );
-		return $options_data;
-	}
-
-	private static function create_taxonomy_depends_conditions() {
-		// Build conditions for all taxonomy attributes.
-		$wc_tax_attributes   = \wc_get_attribute_taxonomies();
-		$taxonomy_conditions = array(
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_tag',
-				'compare' => '=',
-			),
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_cat',
-				'compare' => '=',
-			),
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_brand',
-				'compare' => '=',
-			),
-		);
-		foreach ( $wc_tax_attributes as $attribute ) {
-			$taxonomy_conditions[] = array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'attribute:' . $attribute->attribute_name,
-				'compare' => '=',
-			);
-		}
-
-		return $taxonomy_conditions;
+		$options = $field->get_taxonomy_options( $wc_taxonomy_name, $args );
+		return $options;
 	}
 	/**
 	 * Get the field setting support.
@@ -731,6 +489,28 @@ class Woocommerce {
 
 		if ( isset( $taxonomy_supported_matrix[ $type ] ) && in_array( $input_type, $taxonomy_supported_matrix[ $type ], true ) ) {
 
+			// Build conditions for all taxonomy attributes.
+			$wc_tax_attributes   = \wc_get_attribute_taxonomies();
+			$taxonomy_conditions = array(
+				array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'product_tag',
+					'compare' => '=',
+				),
+				array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'product_cat',
+					'compare' => '=',
+				),
+
+			);
+			foreach ( $wc_tax_attributes as $attribute ) {
+				$taxonomy_conditions[] = array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'attribute:' . $attribute->attribute_name,
+					'compare' => '=',
+				);
+			}
 			$taxonomy_field_conditions = array(
 				'relation' => 'AND',
 				'rules'    => array(
@@ -742,7 +522,7 @@ class Woocommerce {
 					array(
 						'relation' => 'OR',
 						'action'   => 'hide',
-						'rules'    => self::create_taxonomy_depends_conditions(),
+						'rules'    => $taxonomy_conditions,
 					),
 				),
 			);
@@ -767,6 +547,28 @@ class Woocommerce {
 
 		if ( isset( $taxonomy_ordering_supported_matrix[ $type ] ) && in_array( $input_type, $taxonomy_ordering_supported_matrix[ $type ], true ) ) {
 
+			// Build conditions for all taxonomy attributes.
+			$wc_tax_attributes   = \wc_get_attribute_taxonomies();
+			$taxonomy_conditions = array(
+				array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'product_tag',
+					'compare' => '=',
+				),
+				array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'product_cat',
+					'compare' => '=',
+				),
+
+			);
+			foreach ( $wc_tax_attributes as $attribute ) {
+				$taxonomy_conditions[] = array(
+					'option'  => 'dataWoocommerce',
+					'value'   => 'attribute:' . $attribute->attribute_name,
+					'compare' => '=',
+				);
+			}
 			$taxonomy_field_conditions = array(
 				'relation' => 'AND',
 				'rules'    => array(
@@ -778,7 +580,7 @@ class Woocommerce {
 					array(
 						'relation' => 'OR',
 						'action'   => 'hide',
-						'rules'    => self::create_taxonomy_depends_conditions(),
+						'rules'    => $taxonomy_conditions,
 					),
 				),
 			);
@@ -795,7 +597,6 @@ class Woocommerce {
 			$setting_support['woocommerceTaxTerms']           = array(
 				'conditions' => Field::add_setting_support_condition( $setting_support, 'woocommerceTaxTerms', $taxonomy_field_conditions, true ),
 			);
-
 		}
 
 		return $setting_support;
@@ -868,44 +669,11 @@ class Woocommerce {
 			return $should_attach;
 		}
 		if ( self::is_shop( $query ) ) {
-			self::$active_query_id = $saved_query->get_id();
 			return true;
 		}
-		// Check if query is filtering taxonomy archives.
-		if ( $saved_query->get_attribute( 'archiveFilterTaxonomies' ) !== 'yes' ) {
-			return $should_attach;
-		}
-
-		// Then we want to get all product taxonomies and check if we are on their
-		// archive or not.
-		if ( self::is_taxonomy_archive() ) {
-			self::$active_query_id = $saved_query->get_id();
-			return true;
-		}
-
 		return $should_attach;
 	}
 
-	public static function is_taxonomy_archive() {
-		// Then we want to get all product taxonomies and check if we are on their
-		// archive or not.
-		$wc_taxonomy_slugs = array( 'product_tag', 'product_cat', 'product_brand' );
-		foreach ( $wc_taxonomy_slugs as $slug ) {
-			if ( is_tax( $slug ) ) {
-				return true;
-			}
-		}
-
-		// Check attribute taxonomies.
-		$wc_tax_attributes = \wc_get_attribute_taxonomies();
-		foreach ( $wc_tax_attributes as $attribute ) {
-			if ( is_tax( $attribute->attribute_name ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 	/**
 	 * Conditional to check if we are on the shop page.
 	 *
@@ -974,14 +742,14 @@ class Woocommerce {
 	 */
 	public static function add_results_setting() {
 		$setting = array(
-			'name'         => 'resultsUrlWoocommerce',
-			'type'         => 'info',
-			'group'        => 'location',
-			'label'        => __( 'Shop Link', 'search-filter' ),
-			'help'         => __( 'This is your WooCommerce shop URL', 'search-filter' ),
-			'loadingText'  => __( 'Fetching...', 'search-filter' ),
-			'inputType'    => 'Info',
-			'dataProvider' => array(
+			'name'        => 'resultsUrlWoocommerce',
+			'type'        => 'info',
+			'group'       => 'location',
+			'label'       => __( 'Shop link', 'search-filter' ),
+			'help'        => __( 'This is your WooCommerce shop URL', 'search-filter' ),
+			'loadingText' => __( 'Fetching...', 'search-filter' ),
+			'inputType'   => 'Info',
+			'store'       => array(
 				'route' => '/settings/results-url',
 				'args'  => array(
 					'integrationType',
@@ -990,7 +758,7 @@ class Woocommerce {
 					'resultsUrlSingle',
 				),
 			),
-			'dependsOn'    => array(
+			'dependsOn'   => array(
 				'relation' => 'AND',
 				'rules'    => array(
 					array(
@@ -1080,7 +848,7 @@ class Woocommerce {
 
 			array(
 				'name'      => 'woocommerceTaxTermsConditions',
-				'label'     => __( 'Options Conditions', 'search-filter' ),
+				'label'     => __( 'Options conditions', 'search-filter' ),
 				'type'      => 'string',
 				'inputType' => 'Select',
 				'group'     => 'data',
@@ -1106,19 +874,19 @@ class Woocommerce {
 				),
 			),
 			array(
-				'name'         => 'woocommerceTaxTerms',
-				'label'        => __( 'Options', 'search-filter' ),
-				'type'         => 'array',
-				'items'        => array(
+				'name'      => 'woocommerceTaxTerms',
+				'label'     => __( 'Options', 'search-filter' ),
+				'type'      => 'array',
+				'items'     => array(
 					'type' => 'number',
 				),
-				'inputType'    => 'MultiSelect',
-				'group'        => 'data',
-				'tab'          => 'settings',
-				'options'      => array(),
-				'default'      => array(),
-				'context'      => array( 'admin/field', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
-				'dependsOn'    => array(
+				'inputType' => 'MultiSelect',
+				'group'     => 'data',
+				'tab'       => 'settings',
+				'options'   => array(),
+				'default'   => array(),
+				'context'   => array( 'admin/field', 'admin/field/choice', 'block/field/choice', 'admin/field/range', 'block/field/range', 'admin/field/advanced', 'block/field/advanced' ),
+				'dependsOn' => array(
 					'relation' => 'AND',
 					'rules'    => array(
 						array(
@@ -1138,13 +906,13 @@ class Woocommerce {
 						),
 					),
 				),
-				'dataProvider' => array(
+				'store'     => array(
 					'route' => '/settings/options/woocommerce/taxonomy-terms',
 					'args'  => array(
 						'dataWoocommerce',
 					),
 				),
-				'supports'     => array(
+				'supports'  => array(
 					'previewAPI' => true,
 				),
 			),
@@ -1170,22 +938,6 @@ class Woocommerce {
 				'value' => 'woocommerce/shop',
 			);
 			$integration_type_setting->add_option( $wc_integration_type_option );
-		}
-		// Add tax archive filter capability.
-		$archive_filter_taxonomies_setting = Queries_Settings::get_setting( 'archiveFilterTaxonomies' );
-		if ( $archive_filter_taxonomies_setting ) {
-			$depends_conditions = array(
-				'relation' => 'AND',
-				'action'   => 'hide',
-				'rules'    => array(
-					array(
-						'option'  => 'integrationType',
-						'compare' => '=',
-						'value'   => 'woocommerce/shop',
-					),
-				),
-			);
-			$archive_filter_taxonomies_setting->add_depends_condition( $depends_conditions );
 		}
 	}
 	/**
@@ -1216,7 +968,7 @@ class Woocommerce {
 		$integration_type_setting = Queries_Settings::get_setting( 'queryIntegration' );
 		if ( $integration_type_setting ) {
 			$wc_integration_type_option = array(
-				'label'     => __( 'WooCommerce Collections block', 'search-filter' ),
+				'label'     => __( 'WooCommerce Products block', 'search-filter' ),
 				'value'     => 'woocommerce/products_query_block',
 				'dependsOn' => array(
 					'relation' => 'OR',
@@ -1324,81 +1076,6 @@ class Woocommerce {
 		$setting_data['dependsOn'] = $depends_on;
 		$query_integration_setting->update( $setting_data );
 	}
-
-	/**
-	 * Add the taxonomy archive support.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param array $setting The setting.
-	 * @param array $args The args.
-	 *
-	 * @return array The setting.
-	 */
-	public static function add_use_taxonomy_archive_support( $setting ) {
-		if ( $setting['name'] !== 'taxonomyFilterArchive' ) {
-			return $setting;
-		}
-		if ( ! isset( $setting['dependsOn'] ) ) {
-			return $setting;
-		}
-		if ( ! isset( $setting['dependsOn']['rules'] ) ) {
-			return $setting;
-		}
-		// Also add the field support for taxonomy filter archive.
-
-		// Build conditions for all taxonomy attributes.
-		$wc_tax_attributes   = \wc_get_attribute_taxonomies();
-		$taxonomy_conditions = array(
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_tag',
-				'compare' => '=',
-			),
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_cat',
-				'compare' => '=',
-			),
-			array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'product_brand',
-				'compare' => '=',
-			),
-		);
-		foreach ( $wc_tax_attributes as $attribute ) {
-			$taxonomy_conditions[] = array(
-				'option'  => 'dataWoocommerce',
-				'value'   => 'attribute:' . $attribute->attribute_name,
-				'compare' => '=',
-			);
-		}
-
-		$depends_conditions = array(
-			'relation' => 'AND',
-			'rules'    => array(
-				array(
-					'relation' => 'OR',
-					'rules'    => $taxonomy_conditions,
-				),
-				array(
-					'store'   => 'query',
-					'option'  => 'integrationType',
-					'compare' => '=',
-					'value'   => 'woocommerce/shop',
-				),
-				array(
-					'store'   => 'query',
-					'option'  => 'archiveFilterTaxonomies',
-					'compare' => '=',
-					'value'   => 'yes',
-				),
-			),
-		);
-
-		$setting['dependsOn']['rules'][] = $depends_conditions;
-		return $setting;
-	}
 	/**
 	 * Gets the options for our data type field.
 	 *
@@ -1413,10 +1090,6 @@ class Woocommerce {
 			array(
 				'label' => __( 'Categories', 'search-filter' ),
 				'value' => 'product_cat',
-			),
-			array(
-				'label' => __( 'Brands', 'search-filter' ),
-				'value' => 'product_brand',
 			),
 		);
 		$wc_tax_attributes = \wc_get_attribute_taxonomies();

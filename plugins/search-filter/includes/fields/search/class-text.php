@@ -11,7 +11,6 @@
 namespace Search_Filter\Fields\Search;
 
 use Search_Filter\Fields\Search;
-use Search_Filter\Util;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -70,18 +69,6 @@ class Text extends Search {
 		'inputInactiveIconColor',
 		'inputClearColor',
 		'inputClearHoverColor',
-
-		'labelColor',
-		'labelBackgroundColor',
-		'labelPadding',
-		'labelMargin',
-		'labelScale',
-
-		'descriptionColor',
-		'descriptionBackgroundColor',
-		'descriptionPadding',
-		'descriptionMargin',
-		'descriptionScale',
 	);
 
 	/**
@@ -161,10 +148,7 @@ class Text extends Search {
 	 */
 	public function parse_url_value() {
 		$url_param_name = self::url_prefix() . $this->get_url_name();
-
-		// Notice: the request var has not been sanitized yet, its the raw value from the either $_GET or $_POST.
-		$request_var = Util::get_request_var( $url_param_name );
-		$value       = $request_var !== null ? sanitize_text_field( wp_unslash( $request_var ) ) : '';
+		$value          = isset( $_GET[ $url_param_name ] ) ? sanitize_text_field( wp_unslash( $_GET[ $url_param_name ] ) ) : '';
 		// Support multibyte space as a single space.
 		$value = str_replace( '　', ' ', $value );
 		// And trim any whitespace.
@@ -193,16 +177,6 @@ class Text extends Search {
 	 * @return array The updated WP_Query args.
 	 */
 	public function apply_wp_query_args( $query_args = array() ) {
-
-		if ( ! $this->has_init() ) {
-			return $this->return_apply_wp_query_args( $query_args );
-		}
-
-		// Only set post_type if a value is selected.
-		if ( ! $this->has_values() ) {
-			return $this->return_apply_wp_query_args( $query_args );
-		}
-
 		$is_default_search = false;
 		if ( empty( $this->get_attribute( 'dataType' ) ) || ( $this->get_attribute( 'dataType' ) === 'post_attribute' && $this->get_attribute( 'dataPostAttribute' ) === 'default' ) ) {
 			$is_default_search = true;

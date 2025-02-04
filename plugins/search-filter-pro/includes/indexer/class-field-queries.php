@@ -95,6 +95,7 @@ class Field_Queries {
 		$query_id = absint( $field->get_attribute( 'queryId' ) );
 
 		// Try to get the query in advance.
+		// TODO - we need to re-use queries...
 		$source_query = Data_Store::get( 'query', $query_id );
 		// Now we know we're using an indexer query, init the field.
 		self::$fields[ $field_id ] = array(
@@ -119,8 +120,8 @@ class Field_Queries {
 
 		if ( $indexer_query === null && $query_id !== 0 ) {
 
-			// TODO - this is inefficient, we need to store the queries
-			// in an object and reuse them.
+			// TODO - this is really inefficient, we need to store the queries
+			// in an object and reuse them...
 			$query = Query::find( array( 'id' => $query_id ) );
 			if ( is_wp_error( $query ) ) {
 				return;
@@ -410,6 +411,7 @@ class Field_Queries {
 		if ( $field_id === 0 ) {
 			// Then we're likely in a preview, so we'll have to generate
 			// random count numbers for now.
+			// TODO - can we improve this?
 			$count = wp_rand( 1, 100 );
 			if ( $can_hide && $count === 0 ) {
 				return null;

@@ -74,7 +74,7 @@ class Range extends Field {
 	protected function create_options() {
 
 		if ( ! $this->has_init() ) {
-			return;
+			return array();
 		}
 
 		do_action( 'search-filter/fields/range/create_options/start' );
@@ -87,6 +87,7 @@ class Range extends Field {
 		do_action( 'search-filter/fields/range/create_options/finish' );
 
 		$this->set_options( $options );
+		return $options;
 	}
 
 	/**

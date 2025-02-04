@@ -204,7 +204,7 @@ class Util {
 		$log_level       = 'errors';
 		$log_to_database = 'no';
 
-		if ( did_action( 'search-filter/settings/features/init' ) && Features::is_enabled( 'debugMode' ) && class_exists( '\Search_Filter\Debugger' ) ) {
+		if ( Features::is_enabled( 'debugMode' ) && class_exists( '\Search_Filter\Debugger' ) ) {
 			$log_level = \Search_Filter\Debugger::get_setting_value( 'logLevel' );
 			if ( $log_level === null ) {
 				$log_level = 'errors';
@@ -238,7 +238,7 @@ class Util {
 			error_log( $full_message );
 		}
 
-		if ( did_action( 'search-filter/settings/features/init' ) && Features::is_enabled( 'debugMode' ) && $log_to_database === 'yes' && class_exists( '\Search_Filter\Debugger' ) ) {
+		if ( Features::is_enabled( 'debugMode' ) && $log_to_database === 'yes' && class_exists( '\Search_Filter\Debugger' ) ) {
 			$full_message = sprintf( '%1$sSearch & Filter Pro: %2$s', $pid, $message );
 			\Search_Filter\Debugger::create_log(
 				array(

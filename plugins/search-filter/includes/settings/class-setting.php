@@ -172,7 +172,8 @@ class Setting {
 				$to_target[] = $option;
 
 			} else {
-				Util::error_log( sprintf( __( 'An option in the setting `%1$s` does not have valid values', 'search-filter' ), $this->data['name'] ), 'error' );
+				Util::error_log( sprintf( __( 'An option in the setting `%1$s` does not have valid values', 'search-filter' ), esc_html( $this->data['name'] ) ) );
+				// throw new Exception( sprintf( __( 'An option in the setting `%1$s` does not have valid values', 'search-filter' ), esc_html( $this->data['name'] ) ), SEARCH_FILTER_EXCEPTION_SETTING_INVALID_OPTION );
 			}
 		}
 	}

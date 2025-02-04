@@ -35,7 +35,7 @@ class Features {
 	 * @since 3.0.0
 	 */
 	public static function init() {
-		add_action( 'init', array( __CLASS__, 'register_settings' ), 2 );
+		self::register_settings();
 	}
 	/**
 	 * Register the settings.
@@ -45,6 +45,7 @@ class Features {
 	public static function register_settings() {
 		// Register settings.
 		Features_Settings::init( Settings_Data::get(), Settings_Data::get_groups() );
+		do_action( 'search-filter/settings/register/features' );
 	}
 	/**
 	 * Get the features.
