@@ -8,3 +8,11 @@
         #1a485d 100%         /* Solid color ends at 100% */
 /*    );*/
 /*}*//* End custom CSS */
+/* Start custom CSS */.search-filter-query .elementor-widget-container{ 
+    display: none !important;
+}
+
+.search-filter-results
+{
+    display:none;
+}/* End custom CSS */

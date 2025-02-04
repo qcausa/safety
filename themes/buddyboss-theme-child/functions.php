@@ -154,3 +154,12 @@ function remove_admin_bar_items_for_subadministrator($wp_admin_bar)
     }
 }
 add_action('admin_bar_menu', 'remove_admin_bar_items_for_subadministrator', 999);
+
+
+// function skip_to_checkout_on_add_to_cart($url)
+// {
+
+//     return wc_get_checkout_url();
+// }
+
+// add_filter('woocommerce_add_to_cart_redirect', 'skip_to_checkout_on_add_to_cart');
